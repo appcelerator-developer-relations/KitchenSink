@@ -24,20 +24,9 @@ cartoonGuy.start();
 
 cartoonGuy.addEventListener('touchstart', function(e)
 {
+	Ti.API.info('I WAS CLICKED');
 	cartoonGuy.stop();
 	cartoonGuy.images=_WhenMovingImgs;	
 	cartoonGuy.start();
 });
 
-cartoonGuy.addEventListener('touchmove', function(e)
-{
-	cartoonGuy.animate({center:{x:e.x,y:e.y}, duration:1});
-});
-
-cartoonGuy.addEventListener('touchend', function(e)
-{
-	Ti.API.info("touch stop called");
-	cartoonGuy.stop();
-	cartoonGuy.images=_WhenStillImgs;
-	cartoonGuy.start();	
-});

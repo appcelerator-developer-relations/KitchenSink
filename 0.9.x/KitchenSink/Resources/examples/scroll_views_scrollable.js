@@ -157,5 +157,40 @@ var flexSpace = Titanium.UI.createButton({
 	systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
 });
 
-// set toolbar
-win.setToolbar([flexSpace,left,change,add,jump,right,flexSpace]);
+if (Titanium.Platform.osname == 'iphone') 
+{
+	// set toolbar
+	win.setToolbar([flexSpace,left,change,add,jump,right,flexSpace]);
+} 
+else 
+{
+	var toolbar = Titanium.UI.createView({
+		bottom: 0,
+		height: 50,
+		backgroundColor: '#336699'
+	});
+	left.left = 25;
+	left.width = 30;
+
+	change.left = 50;
+	change.width = 70;
+	change.height = 35;
+	
+	add.left = 130;
+	add.width = 70;
+	add.height = 35;
+	
+	jump.left = 210;
+	jump.width = 70;
+	jump.height = 35;
+	
+	right.left = 280;
+	right.width = 30;
+	
+	toolbar.add(left);
+	toolbar.add(change);
+	toolbar.add(add);
+	toolbar.add(jump);
+	toolbar.add(right);
+	win.add(toolbar);
+}

@@ -80,7 +80,12 @@ tabGroup.addTab(tab1);
 tabGroup.addTab(tab2);  
 tabGroup.addTab(tab3);
 tabGroup.addTab(tab4);
-tabGroup.addTab(tab5);
+
+// add iphone specific tests
+if (Titanium.Platform.name == 'iPhone OS')
+{
+	tabGroup.addTab(tab5);
+}
 
 tabGroup.addEventListener('open',function()
 {
@@ -285,3 +290,5 @@ Ti.include("welcome.js");
 // test out logging to developer console
 Ti.API.info("Welcome to Kitchen Sink for Titanium/"+Titanium.version);
 Ti.API.debug("user agent set to "+Titanium.userAgent);
+
+
