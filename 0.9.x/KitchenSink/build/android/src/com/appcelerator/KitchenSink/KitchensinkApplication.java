@@ -1,7 +1,13 @@
-package com.appcelerator.KitchenSink;
+package com.appcelerator.kitchensink;
 
 import org.appcelerator.titanium.TiApplication;
 
 public class KitchensinkApplication extends TiApplication {
 
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		
+		appInfo = new KitchensinkAppInfo(this);
+	}
 }
