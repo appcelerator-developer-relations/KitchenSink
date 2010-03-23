@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
-<id>com.appcelerator.kitchensink</id>
+<id>com.lightrail.kitchensink</id>
 <name>KitchenSink</name>
 <version>1.0</version>
 <publisher>Appcelerator</publisher>
