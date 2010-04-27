@@ -110,7 +110,7 @@ button.addEventListener('click', function()
 			navActInd.hide();
 		};
 		// open the client and encode our URL
-		xhr.open('GET','http://api.foursquare.com/v1/venues.json?geolat='+latitude+'&geolong='+longitude);
+		xhr.open('GET','https://api.foursquare.com/v1/venues.json?geolat='+latitude+'&geolong='+longitude);
 		// base64 encode our Authorization header
 		xhr.setRequestHeader('Authorization','Basic '+Ti.Utils.base64encode(username.value+':'+password.value));
 

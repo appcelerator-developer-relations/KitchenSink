@@ -80,7 +80,9 @@ button.addEventListener('click', function()
 		scrollView.add(statusLabel);
 	};
 	// open the client
-	xhr.open('GET','http://'+username.value+':'+password.value+'@twitter.com/statuses/friends_timeline.json?count=5');
+	xhr.open('GET','https://twitter.com/statuses/friends_timeline.json?count=5');
+	// base64 encode our Authorization header
+	xhr.setRequestHeader('Authorization','Basic '+Ti.Utils.base64encode(username.value+':'+password.value));
 
 	// send the data
 	xhr.send();
