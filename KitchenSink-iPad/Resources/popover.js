@@ -50,8 +50,8 @@ Popover.init = function()
 
 		popover.show({
 			view:b1,
-			rect:{x:0,y:0,width:300,height:50},
-			animated:true,
+//			rect:{x:0,y:0,width:300,height:50},
+			animated:true
 		}); 
 
 	});
@@ -89,7 +89,7 @@ Popover.init = function()
 		popover.add(picker)
 		popover.show({
 			view:b2,
-			rect:{x:0,y:0,width:300,height:50},
+//			rect:{x:0,y:0,width:300,height:50},
 			animated:true,
 		}); 
 
@@ -159,7 +159,7 @@ Popover.init = function()
 
 		popover.show({
 			view:b3,
-			rect:{x:0,y:0,width:300,height:50}
+//			rect:{x:0,y:0,width:300,height:50}
 		}); 
 
 	});	
