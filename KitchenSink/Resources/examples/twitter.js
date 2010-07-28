@@ -44,14 +44,14 @@ function getTweets(screen_name){
 					bottom:5,
 					right:5,
 				});
-
+				
 				var av = Ti.UI.createImageView({
-					image:avatar,
-					left:0,
-					top:0,
-					height:48,
-					width:48
-				});
+						image:avatar,
+						left:0,
+						top:0,
+						height:48,
+						width:48
+					});
 				// Add the avatar image to the view
 				post_view.add(av);
 

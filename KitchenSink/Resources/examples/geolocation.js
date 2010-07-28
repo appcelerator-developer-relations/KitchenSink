@@ -1,6 +1,16 @@
 var win = Titanium.UI.currentWindow;
 win.backgroundColor = '#fff';
 
+Ti.include("version.js");
+
+if (isIPhone3_2_Plus())
+{
+	//NOTE: starting in 3.2+, you'll need to set the applications
+	//purpose property for using Location services on iPhone
+	Ti.Geolocation.purpose = "GPS demo";
+}
+
+
 var currentHeadingLabel = Titanium.UI.createLabel({
 	text:'Current Heading (One Shot)',
 	font:{fontSize:12, fontWeight:'bold'},
@@ -262,6 +272,8 @@ else
 	else
 	{
 		Titanium.API.info("No Compass on device");
+		currentHeading.text = 'No compass available';
+		updatedHeading.text = 'No compass available';
 	}
 
 	//
@@ -301,7 +313,7 @@ else
 		var speed = e.coords.speed;
 		var timestamp = e.coords.timestamp;
 		var altitudeAccuracy = e.coords.altitudeAccuracy;
-
+		Ti.API.info('speed ' + speed)
 		currentLocation.text = 'long:' + longitude + ' lat: ' + latitude;
 		
 		Titanium.API.info('geo - current location: ' + new Date(timestamp) + ' long ' + longitude + ' lat ' + latitude + ' accuracy ' + accuracy);
@@ -364,7 +376,7 @@ else
 
 	
 }
-var addr = "2065 Hamilton Avenue San Jose, California 95125";
+var addr = "2065 Hamilton Avenue San Jose California 95125";
 
 Titanium.Geolocation.forwardGeocoder(addr,function(evt)
 {
@@ -374,8 +386,9 @@ Titanium.Geolocation.forwardGeocoder(addr,function(evt)
 	{
 		var text = "";
 		for (var i = 0; i < evt.places.length; i++) {
-			text += "" + i + ") " + evt.places[i].displayAddress + "\n"; 
+			text += "" + i + ") " + evt.places[i].address + "\n"; 
 		}
+		Ti.API.info('Reversed forward: '+text);
 	});
 });
 

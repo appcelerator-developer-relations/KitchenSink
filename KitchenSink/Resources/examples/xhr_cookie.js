@@ -49,18 +49,24 @@ var gReader =
 	Username:null, 
 	Password:null,
 	Sid:null, 
+	Auth:null,
 	Token:null, 
 	getSid : function()
 	{
 		var requestUrl = 'https://www.google.com/accounts/ClientLogin?service=reader&Email=' + Username + '&Passwd=' + Password;
 		var MyRequest = Ti.Network.createHTTPClient(); 
 		MyRequest.open('GET', requestUrl);
+		MyRequest.onerror = function(e) {
+			Ti.API.info("Error: " + e.error);
+			label.text = "Error: " + e.error + "; (Http status " + this.status + ")";
+			navActInd.hide();
+		};
 		MyRequest.onload = function() 
 		{ 
 			try
 			{ 
 				var results = this.responseText; 
-				Ti.API.info(results);
+				Ti.API.info("Request result: "+results);
 				var tokens = results.split("\n");
 				for (var c=0;c<tokens.length;c++)
 				{
@@ -69,6 +75,9 @@ var gReader =
 					if (kv[0]=='SID')
 					{
 						gReader.Sid = kv[1];
+					}
+					if (kv[0]=='Auth') {
+						gReader.Auth = kv[1];
 					}
 				}
 				gReader.getToken(); //Get Token 
@@ -97,7 +106,7 @@ var gReader =
 				var results = this.responseText; 
 				gReader.Token=results; 
 								
-				label.text = /[a-zA-Z0-9-]+/.test(gReader.Token) ? ("Passed: "+results) : "Failed";
+				label.text = /^[a-zA-Z0-9-]+$/.test(gReader.Token) ? ("Passed: "+results) : ("Failed: "+results);
 			} 
 			catch(err) { 
 				Ti.API.info('>>>>>>> Error In getToken ' + err ); 
@@ -105,7 +114,9 @@ var gReader =
 			} 
 		};
 		var requestCookies = "SID=" + gReader.Sid; 
+		var authorization = "GoogleLogin auth=" + gReader.Auth;
 		tokenRequest.setRequestHeader("Cookie", requestCookies); 
+		tokenRequest.setRequestHeader("Authorization", authorization);
 		tokenRequest.send(); 
 	}, 
 	connect : function(username,password)

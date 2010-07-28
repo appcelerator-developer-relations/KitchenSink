@@ -1,12 +1,28 @@
 // by default the modal window has a nav bar
 // since we're embedding a navgroup inside the modal
 // window which also has a nav bar, we ask him to hide it
+
+var open = Ti.UI.createButton({
+	title:'Open nav group',
+	top:150,
+	width:200,
+	height:40
+});
+open.addEventListener('click', function() {
+	modal.open({modal:true});
+});
+Ti.UI.currentWindow.add(open);
+
 var modal = Ti.UI.createWindow({
 	navBarHidden:true
 });
 
 var modalWin = Ti.UI.createWindow({
-	backgroundColor:"red"
+	backgroundColor:"red",
+});
+
+var nav = Ti.UI.iPhone.createNavigationGroup({
+	window:modalWin
 });
 
 var table = Ti.UI.createTableView({
@@ -16,7 +32,7 @@ var table = Ti.UI.createTableView({
 modalWin.add(table);
 
 var done = Titanium.UI.createButton({
- 	systemButton:Titanium.UI.iPhone.SystemButton.DONE
+	systemButton:Titanium.UI.iPhone.SystemButton.DONE
 });
 
 modalWin.setRightNavButton(done);
@@ -25,14 +41,15 @@ done.addEventListener('click',function()
 	modal.close();
 });
 
-var nav = Ti.UI.iPhone.createNavigationGroup({
-	window:modalWin
-});
-
 table.addEventListener('click',function(e)
 {
+	var b = Titanium.UI.createButton({
+		title:'button',
+		style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+	});
 	var w = Ti.UI.createWindow({
-		title:e.rowData.title
+		title:e.rowData.title,
+		rightNavButton:b
 	});
 	w.addEventListener('focus',function()
 	{

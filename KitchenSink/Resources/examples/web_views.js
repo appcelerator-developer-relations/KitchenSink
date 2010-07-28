@@ -29,7 +29,16 @@ if (Titanium.Platform.name == 'iPhone OS')
 	// The result for this is going to be centered, because that's where layout puts it.
 	// But users can make sure that embedded webviews are anchored in the usual way.
 	data.push({title:'Auto Size', auto:true, hasChild:true, innerHTML:'<html><body style="height:200px;width:100px;border:1px solid #ccc;padding:10px">200 px height, 100 px width.</body></html>'});
-
+	data.push({title:'Partial Auto', hasChild:true, partial:true, innerHTML:'<html><body><div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><hr/><div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div></body></html>'});
+	
+	// this should work on android too, right?
+	data.push({title:'HTML5 Video', auto:true, hasChild:true, url:'html5video.html'});
+	
+	// can't test youtube in simulator
+	if (Titanium.Platform.model != 'Simulator')
+	{
+		data.push({title:'Youtube Video', auto:true, hasChild:true, url:'youtube.html'});
+	}
 }
 
 // create table view
@@ -188,12 +197,17 @@ tableview.addEventListener('click', function(e)
 				}
 			});
 		}
-
+		
+		if (rowdata.partial)
+		{
+			webview.top = 100;
+			webview.bottom = 0;
+		}
+		
 		w.add(webview);
 		
 
-		// hide toolbar for local web view
-		Ti.App.addEventListener('webview_hidetoolbar', function(e)
+		function hideToolbar(e)
 		{
 			Ti.API.info('received hidetoolbar event, foo = ' + e.foo);
 			if (Titanium.Platform.name == 'iPhone OS') {
@@ -203,6 +217,17 @@ tableview.addEventListener('click', function(e)
 					w.remove(toolbar);
 				}
 			}
+		}
+		// hide toolbar for local web view
+		Ti.App.addEventListener('webview_hidetoolbar', hideToolbar);
+		
+		w.addEventListener('close',function(e)
+		{
+			Ti.API.info("window was closed");
+			
+			// remove our global app event listener from this specific
+			// window instance when the window is closed
+			Ti.App.removeEventListener('webview_hidetoolbar',hideToolbar);
 		});
 		win.tab.open(w);		
 	}

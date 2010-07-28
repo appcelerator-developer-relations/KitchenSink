@@ -7,6 +7,7 @@ var activeMovie = Titanium.Media.createVideoPlayer({
 	scalingMode:Titanium.Media.VIDEO_SCALING_MODE_FILL,
 	width:100,
 	height:100,
+	autoplay:true
 });
 
 win.add(activeMovie);
@@ -55,3 +56,7 @@ win.add(Titanium.UI.createImageView({
 }));
 
 activeMovie.play();
+
+win.addEventListener('close', function() {
+	activeMovie.stop();
+});
