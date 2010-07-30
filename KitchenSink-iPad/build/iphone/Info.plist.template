@@ -9,11 +9,11 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>appicon.png</string>
+	<string>__APPICON__.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>appicon.png</string>
-		<string>appicon@2x.png</string>
+		<string>__APPICON__.png</string>
+		<string>__APPICON__@2x.png</string>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -27,7 +27,7 @@
 		</dict>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.appcelerator.ipad.kitchensink</string>
+	<string>com.appcelerator.titanium</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -53,7 +53,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-        <key>UIStatusBarStyle</key>
-        <string>UIStatusBarStyleDefault</string>
 </dict>
 </plist>
