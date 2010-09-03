@@ -31,7 +31,7 @@
 		</dict>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.appcelerator.kitchensink</string>
+	<string>com.nolanwright.kitchensink</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -61,7 +61,5 @@
 	<array>
 		<string>audio</string>
 	</array>
-        <key>UIStatusBarStyle</key>
-        <string>UIStatusBarStyleDefault</string>
 </dict>
 </plist>
