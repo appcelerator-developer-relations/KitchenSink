@@ -1,5 +1,6 @@
 var win = Titanium.UI.currentWindow;
 
+Titanium.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAY_AND_RECORD;
 var recording = Ti.Media.createAudioRecorder();
 
 // default compression is Ti.Media.AUDIO_FORMAT_LINEAR_PCM
@@ -118,6 +119,7 @@ b1.addEventListener('click', function()
 		file = recording.stop();
 		b1.title = "Start Recording";
 		b2.show();
+		pause.hide();
 		clearInterval(timer);
 		Ti.Media.stopMicrophoneMonitor();
 	}
@@ -133,12 +135,35 @@ b1.addEventListener('click', function()
 		b1.title = "Stop Recording";
 		recording.start();
 		b2.hide();
+		pause.show();
 		Ti.Media.startMicrophoneMonitor();
 		duration = 0;
 		timer = setInterval(showLevels,1000);
 	}
 });
 win.add(b1);
+
+var pause = Titanium.UI.createButton({
+	title:'Pause recording',
+	width:200,
+	height:40,
+	top:80
+});
+win.add(pause);
+pause.hide();
+
+pause.addEventListener('click', function() {
+	if (recording.paused) {
+		pause.title = 'Pause recording';
+		recording.resume();
+		timer = setInterval(showLevels,1000);
+	}
+	else {
+		pause.title = 'Unpause recording';
+		recording.pause();
+		clearInterval(timer);
+	}
+});
 
 var b2 = Titanium.UI.createButton({
 	title:'Playback Recording',
@@ -148,6 +173,7 @@ var b2 = Titanium.UI.createButton({
 });
 
 win.add(b2);
+b2.hide();
 b2.addEventListener('click', function()
 {
 	if (sound && sound.playing)
@@ -180,7 +206,7 @@ var switchLabel = Titanium.UI.createLabel({
 });
 var switcher = Titanium.UI.createSwitch({
 	value:false,
-	bottom:80,
+	bottom:80
 });
 
 switcher.addEventListener('change',function(e)

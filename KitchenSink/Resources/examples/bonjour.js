@@ -16,7 +16,7 @@ bonjourSocket.addEventListener('read', function(e) {
 			title:'Unknown listener message...',
 			message:dataStr
 		}).show();
-		
+
 		// WARNING: There's some weird issue here where data events may or may
 		// not interact with UI update events (including logging) and this
 		// may result in some very ugly undefined behavior... that hasn't been
@@ -40,7 +40,7 @@ var localService = Titanium.Network.createBonjourService({
 	domain:'local.'
 });
 
-try 
+try
 {
 	localService.publish(bonjourSocket);
 }
@@ -71,34 +71,36 @@ var services = null;
 updateUI = function(e) {
 	var data = [];
 	services = e['services'];
-	
+
 	for (var i=0; i < services.length; i++) {
 		var service = services[i];
 		var row = Titanium.UI.createTableViewRow({
 			title:service.name,
 			service:service
 		});
-		
-		service.resolve();
-		service.socket.addEventListener('read', function(x) {
-			Titanium.UI.createAlertDialog({
-				title:'Bonjour message!',
-				message:x['data'].text
-			}).show();
-		});
-		service.socket.connect();
-		
+
+		if (service.socket == null || !service.socket.isValid) {
+			service.resolve();
+			service.socket.addEventListener('read', function(x) {
+				Titanium.UI.createAlertDialog({
+					title:'Bonjour message!',
+					message:x['data'].text
+				}).show();
+			});
+			service.socket.connect();
+		}
+
 		data.push(row);
 	}
-	
+
 	if (data.length == 0) {
 		data.push(Titanium.UI.createTableViewRow({
 			title:'No services'
 		}));
 	}
-	
+
 	tableView.setData(data);
-}
+};
 
 serviceBrowser.addEventListener('updatedServices', updateUI);
 
@@ -110,13 +112,13 @@ Titanium.UI.currentWindow.addEventListener('close', function(e) {
 	Titanium.API.info('Stopped search...');
 	localService.stop();
 	Titanium.API.info('Stopped service...');
-	if (bonjourSocket.isValid()) {
+	if (bonjourSocket.isValid) {
 		bonjourSocket.close();
 	}
 	Titanium.API.info('Closed socket...');
 	for (var i=0; i < services.length; i++) {
 		var service = services[i];
-		if (service.socket.isValid()) {
+		if (service.socket.isValid) {
 			service.socket.close();
 		}
 		Titanium.API.info('Closed socket to service '+service.name+"...");

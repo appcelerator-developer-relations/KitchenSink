@@ -18,7 +18,7 @@ var modal = Ti.UI.createWindow({
 });
 
 var modalWin = Ti.UI.createWindow({
-	backgroundColor:"red",
+	backgroundColor:"red"
 });
 
 var nav = Ti.UI.iPhone.createNavigationGroup({
@@ -44,8 +44,11 @@ done.addEventListener('click',function()
 table.addEventListener('click',function(e)
 {
 	var b = Titanium.UI.createButton({
-		title:'button',
+		title:'Back (no anim)',
 		style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+	});
+	b.addEventListener('click', function() {
+		nav.close(w,{animated:false});
 	});
 	var w = Ti.UI.createWindow({
 		title:e.rowData.title,

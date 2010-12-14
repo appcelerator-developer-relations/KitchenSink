@@ -1,3 +1,39 @@
+function getOrientation(o)
+{  //Came from orientation.js, but we didn't need the buttons and such
+	switch (o)
+	{
+		case Titanium.UI.PORTRAIT:
+		{
+			return 'portrait';
+		}
+		case Titanium.UI.UPSIDE_PORTRAIT:
+		{
+			return 'upside portrait';
+		}
+		case Titanium.UI.LANDSCAPE_LEFT:
+		{
+			return 'landscape left';
+		}
+		case Titanium.UI.LANDSCAPE_RIGHT:
+		{
+			return 'landscape right';
+		}
+		case Titanium.UI.FACE_UP:
+		{
+			return 'face up';
+		}
+		case Titanium.UI.FACE_DOWN:
+		{
+			return 'face down';
+		}
+		case Titanium.UI.UNKNOWN:
+		{
+			return 'unknown';
+		}
+	}
+}
+
+
 var win = Titanium.UI.currentWindow;
 win.backgroundColor = '#ccc';
 
@@ -69,7 +105,7 @@ var scrollView = Titanium.UI.createScrollableView({
 	showPagingControl:true,
 	pagingControlHeight:30,
 	maxZoomScale:2.0,
-	currentPage:1,
+	currentPage:1
 });
 
 win.add(scrollView);
@@ -79,7 +115,7 @@ var activeView = view1;
 
 scrollView.addEventListener('scroll', function(e)
 {
-    activeView = e.view  // the object handle to the view that is about to become visible
+	activeView = e.view;  // the object handle to the view that is about to become visible
 	i = e.currentPage;
 	Titanium.API.info("scroll called - current index " + i + ' active view ' + activeView);
 });
@@ -145,12 +181,12 @@ change.addEventListener('click',function()
 	{
 		if (x==i)
 		{
-			Ti.API.info('SETTING TO NEW VIEW ' + x)
-			ar[x] = newView
+			Ti.API.info('SETTING TO NEW VIEW ' + x);
+			ar[x] = newView;
 		}
 		else
 		{
-			Ti.API.info('SETTING TO OLD VIEW ' + x)
+			Ti.API.info('SETTING TO OLD VIEW ' + x);
 
 			ar[x] = scrollView.views[x];
 		}
@@ -166,7 +202,7 @@ left.addEventListener('click', function(e)
 {
 	if (i == 0) return;
 	i--;
-	scrollView.scrollToView(i)
+	scrollView.scrollToView(i);
 });
 
 // move scroll view right
@@ -204,7 +240,7 @@ else
 		width:320,
 		height: 'auto',
 		opacity: 0
-	})
+	});
 
 	toolbar.add(floater);
 

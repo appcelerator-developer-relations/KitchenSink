@@ -66,6 +66,7 @@ b2.addEventListener('click', function()
 });
 win.add(b2);
 
+tf1.autocorrect = true; // Need to specify an absolute value or we're at the mercy of iOS' default (and maybe android's)
 var b3 = Titanium.UI.createButton({
 	title:'Autocorrect',
 	height:40,
@@ -108,18 +109,19 @@ b5.addEventListener('click', function()
 });
 win.add(b5);
 
+tf1.autocapitalization = Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE;
 var b6 = Titanium.UI.createButton({
-	title:'Capitals',
+	title:'Capital (none)',
 	height:40,
 	width:145,
 	right:10,
 	top:155
 });
-var auto = 0;
+var auto = 1;
 b6.addEventListener('click', function()
 {
 	Ti.API.info('autocapitalization ' + tf1.autocapitalization);
-	
+
 	switch (auto)
 	{
 		case 0:
@@ -147,7 +149,7 @@ b6.addEventListener('click', function()
 		{
 			tf1.autocapitalization = Titanium.UI.TEXT_AUTOCAPITALIZATION_ALL;
 			b6.title = 'Capital (all)';
-			auto=0
+			auto=0;
 			break;
 		}
 	}
@@ -164,8 +166,8 @@ var b7 = Titanium.UI.createButton({
 var clear =0;
 b7.addEventListener('click', function()
 {
-	Ti.API.info('clearButtonMode ' + tf1.clearButtonMode)
-	
+	Ti.API.info('clearButtonMode ' + tf1.clearButtonMode);
+
 	switch (clear)
 	{
 		case 0:
@@ -193,10 +195,10 @@ b7.addEventListener('click', function()
 		{
 			b7.title = 'Clear Button (B)';
 			tf1.clearButtonMode = Titanium.UI.INPUT_BUTTONMODE_ONBLUR;
-			clear=0
+			clear=0;
 			break;
 		}
-	}	
+	}
 });
 win.add(b7);
 
@@ -236,7 +238,7 @@ b8.addEventListener('click', function()
 			align=0;
 			break;
 		}
-	}	
+	}
 });
 win.add(b8);
 

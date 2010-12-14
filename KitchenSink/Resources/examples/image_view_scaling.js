@@ -1,37 +1,36 @@
 var win = Titanium.UI.currentWindow;
+var TIMEOUT_SECS = 2;
 
-if (Titanium.Platform.name == 'android') 
-{
-	// iphone moved to a single image property - android needs to do the same
-	var imageView = Titanium.UI.createImageView({
-		url:'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png'
-	});
-
-}
-else
-{
-	var imageView = Titanium.UI.createImageView({
-		image:'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png'
-	});
+var imageView = Titanium.UI.createImageView({
+	image:'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png'
+});
 	
-}
-
 win.add(imageView);
 
 var l = Titanium.UI.createLabel({
-	text:'',
+	text:'fetching remote image...',
 	bottom:30,
 	color:'#999',
-	height:20,
-	width:300,
+	height:100,
+	right: 10,
+	left: 10,
 	textAlign:'center'
 });
 win.add(l);
 
-setTimeout(function() {
-	// wait for URL to load
-	var blob = imageView.toBlob();
-	l.text = blob.width + "x" + blob.height;
-}, 2000);
 
+function getDimensions() {
+	l.text = 'retrieving dimensions...';
+	var blob = imageView.toBlob();
+	if (blob === null) {
+		l.text = 'Unable to retrieve image dimensions. The image is a remote url -- are you connected to the network? Or the ' + TIMEOUT_SECS + ' second timeout expired. Tap here to try again.';
+	} else {
+		l.text = blob.width + "x" + blob.height;
+		l.removeEventListener('click', getDimensions);
+	}
+}
+
+l.addEventListener('click', getDimensions);
+
+setTimeout(getDimensions, TIMEOUT_SECS * 1000); // give time for the remote image to load.
 

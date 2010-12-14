@@ -1,3 +1,5 @@
+// TODO: Prime target for migration to drillbit
+
 var win = Titanium.UI.currentWindow;
 win.backgroundColor = '#13386c';
 
@@ -132,7 +134,7 @@ result = result && testResult;
 
 testResult = true;
 var xmlstr4 = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"+
-"<root>"+
+"<root id='here'>"+
 " <one>**"+
 "  <two>*"+
 "    <three/>"+
@@ -158,10 +160,13 @@ testResult = testResult && threeList.length==4;
 
 testResult = testResult && xml.documentElement.firstChild.nodeName == "one";
 
+testResult = testResult && xml.documentElement.attributes.getNamedItem("id").nodeValue=="here";
+
 testResult = testResult && xml.documentElement.firstChild.nextSibling.getAttribute("id")=="bar";
 
 testResult = testResult && xml.documentElement.firstChild.ownerDocument.documentElement.nodeName == xml.documentElement.ownerDocument.documentElement.nodeName;
 
+Ti.API.info('>>>> Test 4 Passed before NodeCount: '+testResult);
 
 var nodeCount = 0;
 function nodewalker(node) 
@@ -220,6 +225,8 @@ Ti.API.info("Script is: "+JSON.stringify(scriptList));
 testResult = testResult && scriptList.length==1;
 testResult = testResult && xml.documentElement.firstChild.nodeName == "root";
 
+Ti.API.info('>>>> Test 5 Passed before NodeCount: '+testResult);
+
 var nodeCount = 0;
 function nodewalker(node) 
 {
@@ -263,6 +270,8 @@ Ti.API.info("Script is: "+JSON.stringify(subdataList));
 testResult = testResult && dataList.length==3;
 testResult = testResult && xml.documentElement.firstChild.nodeName == "data";
 
+Ti.API.info('>>>> Test 6 Passed before NodeCount: '+testResult);
+
 var nodeCount = 0;
 function nodewalker(node) 
 {
@@ -292,7 +301,7 @@ Ti.API.info('>>>>>>> XML Test 6 Result: '+testResult);
 result = result && testResult;
 
 var label2 = Ti.UI.createLabel({
-	top:150,
+	top:130,
 	text:'XML Test.\nShould be true.\nResult was: ' + result,
 	color:'white',
 	textAlign:'center',
@@ -302,3 +311,106 @@ var label2 = Ti.UI.createLabel({
 });
 
 win.add(label2);
+
+// Return an array of attribute nodes, sorted by name.
+// An attribute NamedNodeMap has no canonical ordering,
+// so to do a comparison we need to ensure we've got the
+// same order between both.
+function sortAttributeList(attribs)
+{
+	var names = [];
+	var map = {};
+	for (var i = 0; i < attribs; i++)
+	{
+		var a = attribs.item(i);
+		map[a.nodeName] = a;
+		names.push(a.nodeName);
+	}
+	names = names.sort();
+
+	var list = [];
+	for (var i = 0; i < names.length; i++)
+	{
+		list.push(map[names[i]]);
+	}
+	return list;
+}
+
+function matchXmlTrees(a, b)
+{
+	var ok = true;
+	ok = ok && (a.nodeType == b.nodeType);
+	ok = ok && (a.nodeName == b.nodeName);
+	ok = ok && (a.nodeValue == b.nodeValue);
+	
+	if (!ok) {
+		Titanium.API.debug('a: ' + a.nodeType + ' ' + a.nodeName + ' ' + a.nodeValue);
+		Titanium.API.debug('b: ' + a.nodeType + ' ' + b.nodeName + ' ' + b.nodeValue);
+	}
+
+	if (ok && a.nodeType == 1)
+	{
+		var aAttribs = sortAttributeList(a.attributes);
+		var bAttribs = sortAttributeList(b.attributes);
+		if (aAttribs.length == bAttribs.length)
+		{
+			for (var i = 0; i < aAttribs.length; i++)
+			{
+				ok == ok && matchXmlTrees(aAttribs[i], bAttribs[i]);
+			}
+		}
+		else
+		{
+			Titanium.API.debug('mismatched attribute count');
+			ok = false;
+		}
+	}
+
+	if (ok && a.nodeType == 1)
+	{
+		var aChildren = a.childNodes;
+		var bChildren = b.childNodes;
+		if (aChildren.length == bChildren.length)
+		{
+			for (var i = 0; i < aChildren.length; i++)
+			{
+				ok == ok && matchXmlTrees(aChildren.item(i), bChildren.item(i));
+			}
+		}
+		else
+		{
+			Titanium.API.debug('mismatched child count');
+			ok = false;
+		}
+	}
+
+	return ok;
+}
+
+var xmlSources = [xmlstr, xmlstr2, xmlstr3, xmlstr4, xmlstr5, xmlstr6];
+var result = true;
+for (var i = 0; i < xmlSources.length; i++)
+{
+	var a = Ti.XML.parseString(xmlSources[i]);
+
+	var bstr = Ti.XML.serializeToString(a);
+	var b = Ti.XML.parseString(bstr);
+
+	// Make sure we can round-trip from source to DOM to source and back to DOM...
+	var testResult = matchXmlTrees(a, b);
+	Ti.API.info('>>>>>>> XML Serialize Test ' + (i + 1) + ' Result: ' + testResult);
+	
+	result = result && testResult;
+}
+
+var label3 = Ti.UI.createLabel({
+	top:240,
+	text:'XML Serialize Test.\nShould be true.\nResult was: ' + result,
+	color:'white',
+	textAlign:'center',
+	width:'auto',
+	height:'auto',
+	font:{fontFamily:'Helvetica Neue',fontSize:24}
+});
+
+win.add(label3);

@@ -36,7 +36,10 @@ b1.addEventListener('click', function()
 
 		var filename = Titanium.Platform.name == 'android' ? 'test.png' : 'test.pdf';
 		var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,filename);
-		f.write(this.responseData);
+		if (Titanium.Platform.name == 'android') {
+			f.write(this.responseData);
+		}
+
 		var wv = Ti.UI.createWebView({
 			url:f.nativePath,
 			bottom:0,
@@ -53,20 +56,21 @@ b1.addEventListener('click', function()
 	};
 	c.onerror = function(e)
 	{
-		Ti.API.info('XHR Error ' + e.error)
+		Ti.API.info('XHR Error ' + e.error);
 	};
-	
+
 	// open the client
 	if (Titanium.Platform.name == 'android') {
 		//android's WebView doesn't support embedded PDF content
 		c.open('GET', 'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png');
 	} else {
 		c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
+		c.file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'test.pdf');
 	}
 
 	// send the data
 	c.send();
-	
+
 });
 
 
@@ -108,7 +112,7 @@ b2.addEventListener('click', function()
 
 	// send the data
 	c.send();
-	
+
 });
 win.add(b2);
 
@@ -122,7 +126,7 @@ win.add(abort);
 abort.addEventListener('click', function()
 {
 	c.abort();
-		
+
 	c = Titanium.Network.createHTTPClient();
 	ind.value = 0;
 });
@@ -152,7 +156,7 @@ largeFile.addEventListener('click', function()
 	{
 		Ti.UI.createAlertDialog({title:'XHR', message:'Error: ' + e.error}).show();
 	};
-	
+
 	c.open('GET','http://www.appcelerator.com/download-win32');
 	c.send();
 });

@@ -20,14 +20,23 @@ if (Titanium.Platform.name == 'iPhone OS')
 	data.push({title:'Animation', hasChild:true, test:'../examples/animation.js'});
 	data.push({title:'Horizontal Layout', hasChild:true, test:'../examples/horizontal_layout.js'});
 	data.push({title:'Nav Group', hasChild:true, test:'../examples/navgroup.js'});
-	
+
 	Ti.include("../examples/version.js");
-	
+
 	if (isIPhone3_2_Plus())
 	{
 		data.push({title:'Modal Windows', hasChild:true, test:'../examples/modal_windows.js'});
 		data.push({title:'Custom Fonts', hasChild:true, test:'../examples/custom_fonts.js'});
 	}
+}
+
+// add android specific tests
+if (Titanium.Platform.osname == 'android')
+{
+	data.push({title:'Preferences', hasChild:true, test:'../examples/preferences.js'});
+    data.push({title:'Hide Soft Keyboard (Android)', hasChild:true, test:'../examples/android_hide_softkeyboard.js'});
+    data.push({title: 'Window Soft Input (Android)', hasChild:true, test:'../examples/android_window_soft_input_mode.js'});
+    data.push({title: 'Menu (Android)', hasChild:true, test:'../examples/android_menus.js'});
 }
 
 // create table view
@@ -45,18 +54,18 @@ tableview.addEventListener('click', function(e)
 			win = Titanium.UI.createWindow({
 				url:e.rowData.test,
 				title:e.rowData.title
-			});	
+			});
 		} else {
 			win = Titanium.UI.createWindow({
 				url:e.rowData.test,
 				title:e.rowData.title,
 				backgroundColor:'#fff',
 				barColor:'#111'
-				
+
 			});
 		}
-		
-		
+
+
 		if (e.index == 3)
 		{
 			win.hideTabBar();
@@ -71,7 +80,7 @@ Titanium.UI.currentWindow.add(tableview);
 Titanium.UI.currentWindow.addEventListener('focus', function()
 {
 	Ti.API.info('FOCUS RECEIVED IN base_ui');
-})
+});
 //
 //  ADD EVENT LISTENERS FOR CUSTOM EVENTS
 //
@@ -118,7 +127,7 @@ Titanium.App.addEventListener('event_two', function(e)
 	{
 		win.close({opacity:0,duration:500});
 	},1000);
-	
+
 });
 
 

@@ -51,8 +51,22 @@ dashboard.addEventListener('commit',function()
 	Ti.API.info('data ' + dashboard.data);
 	for (var i=0;i<dashboard.data.length;i++)
 	{
-		Ti.API.info('label ' + dashboard.data[i].label)
+		Ti.API.info('label ' + dashboard.data[i].label);
 	}
+});
+
+dashboard.addEventListener('move', function(e) {
+	Ti.API.log('Moved item '+e.item.label);
+});
+
+dashboard.addEventListener('dragStart', function(e) {
+	Ti.API.log('Dragging item '+e.item.label);
+	win.rightNavButton = null;
+});
+
+dashboard.addEventListener('dragEnd', function(e) {
+	Ti.API.log('Drag ended: ' + e.item.label);
+	win.rightNavButton = cancel;
 });
 
 dashboard.addEventListener('click',function(e)
