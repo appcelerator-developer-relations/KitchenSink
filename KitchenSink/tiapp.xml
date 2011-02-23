@@ -1,44 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ti:app xmlns:ti="http://ti.appcelerator.org">
-  <id>com.appcelerator.kitchensink</id>
-  <name>KitchenSink</name>
-  <version>1.0</version>
-  <publisher>Appcelerator</publisher>
-  <url>http://www.appcelerator.com</url>
-  <description>No description provided</description>
-  <copyright>2010 by kevin</copyright>
-  <icon>default_app_logo.png</icon>
-  <persistent-wifi>false</persistent-wifi>
-  <prerendered-icon>false</prerendered-icon>
-  <statusbar-style>default</statusbar-style>
-  <statusbar-hidden>false</statusbar-hidden>
-  <fullscreen>false</fullscreen>
-  <navbar-hidden>false</navbar-hidden>
-  <analytics>true</analytics>
-  <guid>0c7fab46-7adf-4418-8433-2f0591ebec39</guid>
-  <iphone>
-    <orientations device="iphone">
-      <orientation>Ti.UI.PORTRAIT</orientation>
-    </orientations>
-    <orientations device="ipad">
-      <orientation>Ti.UI.PORTRAIT</orientation>
-      <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
-      <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
-      <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
-    </orientations>
-  </iphone>
-  <property name="ti.android.debug" type="bool">false</property>
-  <!-- this will only work with our dev keystore and not on a production device! -->
-  <property name="ti.android.google.map.api.key.development">0ZnKXkWA2dIAu2EM-OV4ZD2lJY3sEWE5TSgjJNg</property>
-  <!-- get yours at http://code.google.com/android/maps-api-signup.html -->
-  <property name="ti.android.google.map.api.key.production">GET_ME_FROM_GOOGLE</property>
-  <plugins>
-    <plugin version="0.1">ti.log</plugin>
-  </plugins>
-  <android xmlns:android="http://schemas.android.com/apk/res/android">
-    <activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" />
-    <services>
-      <service type="interval" url="testservice.js" />
-    </services>
-  </android>
+<?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
+<id>com.appcelerator.titanium</id>
+<name>KitchenSink</name>
+<version>1.0</version>
+<publisher>nwright</publisher>
+<url>appcelerator.com</url>
+<copyright>2009 by nwright</copyright>
+<description>No description provided</description>
+<icon>appicon.png</icon>
+<persistent-wifi>false</persistent-wifi>
+<prerendered-icon>false</prerendered-icon>
+<statusbar-hidden>false</statusbar-hidden>
+<analytics>true</analytics>
+<guid>6fe33f33fd1f4e95a06d2d217170866d</guid>
+<property name="ti.android.debug" type="bool">false</property>
+<property name="ti.facebook.appid">134793934930</property>
+<!-- this will only work with our dev keystore and not on a production device! -->
+<property name="ti.android.google.map.api.key.development">0ZnKXkWA2dIAu2EM-OV4ZD2lJY3sEWE5TSgjJNg</property>
+<!-- get yours at http://code.google.com/android/maps-api-signup.html -->
+<property name="ti.android.google.map.api.key.production">GET_ME_FROM_GOOGLE</property>
+<plugins>
+	<plugin version="0.1">ti.log</plugin>
+</plugins>
+<android xmlns:android="http://schemas.android.com/apk/res/android">
+	<activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" />
+	<services>
+		<service type="interval" url="testservice.js" />
+	</services>
+</android>
 </ti:app>

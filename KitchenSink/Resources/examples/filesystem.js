@@ -7,7 +7,7 @@ Titanium.API.info('Application Directory :' + Titanium.Filesystem.applicationDir
 Titanium.API.info('Application Data Directory :' + Titanium.Filesystem.applicationDataDirectory);
 Titanium.API.info('Application Support Directory :' + Titanium.Filesystem.applicationSupportDirectory);
 
-Titanium.API.info('External Storage Available :' + Titanium.Filesystem.isExteralStoragePresent);
+Titanium.API.info('External Storage Available :' + Titanium.Filesystem.isExternalStoragePresent());
 Titanium.API.info('Separator :' + Titanium.Filesystem.separator);
 Titanium.API.info('Line Ending :' + Titanium.Filesystem.lineEnding);
 
@@ -44,8 +44,11 @@ newFile.write(f.read());
 Ti.API.info('directoryListing for newDir = ' + newDir.getDirectoryListing());
 Ti.API.info("newfile.txt created: " + String(new Date(newFile.createTimestamp())));
 Ti.API.info("newfile.txt modified: " + String(new Date(newFile.modificationTimestamp())));
+Ti.API.info("newfile.txt renamed as b.txt: " + newFile.rename('b.txt'));
 
-Ti.API.info("newfile.txt deleted: " + newFile.deleteFile());
+var renamedFile = Titanium.Filesystem.getFile(newDir.nativePath, 'b.txt');
+Ti.API.info("newfile.txt deleted (expected to fail): " + newFile.deleteFile());
+Ti.API.info("b.txt deleted: " + renamedFile.deleteFile());
 Ti.API.info("mydir deleted: " + newDir.deleteDirectory());
 Ti.API.info('directoryListing for newDir after deleteDirectory = ' + newDir.getDirectoryListing());
 

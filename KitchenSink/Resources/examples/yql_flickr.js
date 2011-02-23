@@ -14,10 +14,10 @@ tableview.addEventListener('click', function(e)
 	Titanium.UI.createAlertDialog({title:'Table View',message:'row ' + row + ' index ' + index + ' section ' + section  + ' row data ' + rowdata}).show();
 });
 
-var navActInd = Titanium.UI.createActivityIndicator();
-navActInd.show();
-
+var navActInd = null;
 if (Titanium.Platform.name == 'iPhone OS') {
+	navActInd = Titanium.UI.createActivityIndicator();
+	navActInd.show();
 	Titanium.UI.currentWindow.setRightNavButton(navActInd);
 }
 
@@ -28,6 +28,15 @@ Titanium.Yahoo.yql('select * from flickr.photos.search where text="Cat" limit 10
 {
 	var images = [];
 	var data = e.data;
+	if (data == null)
+	{
+		Titanium.UI.createAlertDialog({
+			title: 'Error querying YQL',
+			message: 'No data could be retrieved using YQL' }).show();
+		Ti.App.fireEvent('hide_indicator');
+		return;
+	}
+
 	for (var c=0;c<data.photo.length;c++)
 	{
 		var photo = data.photo[c];
@@ -72,7 +81,9 @@ Titanium.Yahoo.yql('select * from flickr.photos.search where text="Cat" limit 10
 		images[c] = row;
 	}
 	tableview.setData(images);
-	navActInd.hide();
+	if(navActInd){
+		navActInd.hide();
+	}
 	Ti.App.fireEvent("hide_indicator");
 });
-				
+

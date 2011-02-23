@@ -3,6 +3,8 @@ win.backgroundColor = '#fff';
 
 Ti.include("version.js");
 
+Ti.Geolocation.preferredProvider = "gps";
+
 if (isIPhone3_2_Plus())
 {
 	//NOTE: starting in 3.2+, you'll need to set the applications
@@ -10,6 +12,27 @@ if (isIPhone3_2_Plus())
 	Ti.Geolocation.purpose = "GPS demo";
 }
 
+function translateErrorCode(code) {
+	if (code == null) {
+		return null;
+	}
+	switch (code) {
+		case Ti.Geolocation.ERROR_LOCATION_UNKNOWN:
+			return "Location unknown";
+		case Ti.Geolocation.ERROR_DENIED:
+			return "Access denied";
+		case Ti.Geolocation.ERROR_NETWORK:
+			return "Network error";
+		case Ti.Geolocation.ERROR_HEADING_FAILURE:
+			return "Failure to detect heading";
+		case Ti.Geolocation.ERROR_REGION_MONITORING_DENIED:
+			return "Region monitoring access denied";
+		case Ti.Geolocation.ERROR_REGION_MONITORING_FAILURE:
+			return "Region monitoring access failure";
+		case Ti.Geolocation.ERROR_REGION_MONITORING_DELAYED:
+			return "Region monitoring setup delayed";
+	}
+}
 
 var currentHeadingLabel = Titanium.UI.createLabel({
 	text:'Current Heading (One Shot)',
@@ -189,6 +212,10 @@ var reverseGeo = Titanium.UI.createLabel({
 });
 win.add(reverseGeo);
 
+// state vars used by resume/pause
+var headingAdded = false;
+var locationAdded = false;
+
 //
 //  SHOW CUSTOM ALERT IF DEVICE HAS GEO TURNED OFF
 //
@@ -200,7 +227,7 @@ else
 {
 	if (Titanium.Platform.name != 'android') {
 		var authorization = Titanium.Geolocation.locationServicesAuthorization
-		Ti.API.log('Authorization: '+authorization);
+		Ti.API.info('Authorization: '+authorization);
 		if (authorization == Titanium.Geolocation.AUTHORIZATION_DENIED) {
 			Ti.UI.createAlertDialog({
 				title:'Kitchen Sink',
@@ -238,6 +265,7 @@ else
 			if (e.error)
 			{
 				currentHeading.text = 'error: ' + e.error;
+				Ti.API.info("Code translation: "+translateErrorCode(e.code));
 				return;
 			}
 			var x = e.heading.x;
@@ -255,11 +283,12 @@ else
 		//
 		// EVENT LISTENER FOR COMPASS EVENTS - THIS WILL FIRE REPEATEDLY (BASED ON HEADING FILTER)
 		//
-		Titanium.Geolocation.addEventListener('heading',function(e)
+		var headingCallback = function(e)
 		{
 			if (e.error)
 			{
 				updatedHeading.text = 'error: ' + e.error;
+				Ti.API.info("Code translation: "+translateErrorCode(e.code));
 				return;
 			}
 
@@ -283,7 +312,9 @@ else
 			},100);
 
 			Titanium.API.info('geo - heading updated: ' + new Date(timestamp) + ' x ' + x + ' y ' + y + ' z ' + z);
-		});
+		};
+		Titanium.Geolocation.addEventListener('heading', headingCallback);
+		headingAdded = true;
 	}
 	else
 	{
@@ -317,6 +348,7 @@ else
 		if (!e.success || e.error)
 		{
 			currentLocation.text = 'error: ' + JSON.stringify(e.error);
+			Ti.API.info("Code translation: "+translateErrorCode(e.code));
 			alert('error ' + JSON.stringify(e.error));
 			return;
 		}
@@ -338,7 +370,7 @@ else
 	//
 	// EVENT LISTENER FOR GEO EVENTS - THIS WILL FIRE REPEATEDLY (BASED ON DISTANCE FILTER)
 	//
-	Titanium.Geolocation.addEventListener('location',function(e)
+	var locationCallback = function(e)
 	{
 		if (!e.success || e.error)
 		{
@@ -346,6 +378,7 @@ else
 			updatedLatitude.text = '';
 			updatedLocationAccuracy.text = '';
 			updatedLocationTime.text = '';
+			Ti.API.info("Code translation: "+translateErrorCode(e.code));
 			return;
 		}
 
@@ -395,12 +428,15 @@ else
 					title:'Reverse geo error',
 					message:evt.error
 				}).show();
+				Ti.API.info("Code translation: "+translateErrorCode(e.code));
 			}
 		});
 
 
 		Titanium.API.info('geo - location updated: ' + new Date(timestamp) + ' long ' + longitude + ' lat ' + latitude + ' accuracy ' + accuracy);
-	});
+	};
+	Titanium.Geolocation.addEventListener('location', locationCallback);
+	locationAdded = true;
 }
 var addr = "2065 Hamilton Avenue San Jose California 95125";
 
@@ -422,7 +458,52 @@ Titanium.Geolocation.forwardGeocoder(addr,function(evt)
 				title:'Forward geo error',
 				message:evt.error
 			}).show();
+			Ti.API.info("Code translation: "+translateErrorCode(e.code));
 		}
 	});
 });
+
+if (Titanium.Platform.name == 'android')
+{
+	//  as the destroy handler will remove the listener, only set the pause handler to remove if you need battery savings
+	Ti.Android.currentActivity.addEventListener('pause', function(e) {
+		Ti.API.info("pause event received");
+		if (headingAdded) {
+			Ti.API.info("removing heading callback on pause");
+			Titanium.Geolocation.removeEventListener('heading', headingCallback);
+			headingAdded = false;
+		}
+		if (locationAdded) {
+			Ti.API.info("removing location callback on pause");
+			Titanium.Geolocation.removeEventListener('location', locationCallback);
+			locationAdded = false;
+		}
+	});
+	Ti.Android.currentActivity.addEventListener('destroy', function(e) {
+		Ti.API.info("destroy event received");
+		if (headingAdded) {
+			Ti.API.info("removing heading callback on destroy");
+			Titanium.Geolocation.removeEventListener('heading', headingCallback);
+			headingAdded = false;
+		}
+		if (locationAdded) {
+			Ti.API.info("removing location callback on destroy");
+			Titanium.Geolocation.removeEventListener('location', locationCallback);
+			locationAdded = false;
+		}
+	});
+	Ti.Android.currentActivity.addEventListener('resume', function(e) {
+		Ti.API.info("resume event received");
+		if (!headingAdded) {
+			Ti.API.info("adding heading callback on resume");
+			Titanium.Geolocation.addEventListener('heading', headingCallback);
+			headingAdded = true;
+		}
+		if (!locationAdded) {
+			Ti.API.info("adding location callback on resume");
+			Titanium.Geolocation.addEventListener('location', locationCallback);
+			locationAdded = true;
+		}
+	});
+}
 

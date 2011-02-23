@@ -1,8 +1,8 @@
 #appname: KitchenSink
-#publisher: kevin
-#url: http://www.appcelerator.com
+#publisher: nwright
+#url: appcelerator.com
 #image: appicon.png
-#appid: com.appcelerator.kitchensink
-#desc: undefined
+#appid: com.appcelerator.titanium
+#desc: No description provided
 #type: mobile
-#guid: 0c7fab46-7adf-4418-8433-2f0591ebec39
+#guid: 43110fac-34e1-4957-a623-cc817b98d5fe

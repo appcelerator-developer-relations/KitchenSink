@@ -8,7 +8,7 @@ var tabGroup = Titanium.UI.createTabGroup({id:'tabGroup1'});
 //
 // create base UI tab and root window
 //
-var win1 = Titanium.UI.createWindow({id:'win1'});
+var win1 = Titanium.UI.createWindow({className:'win1'});
 
 var tab1 = Titanium.UI.createTab({
 	id:'tab1',
@@ -152,10 +152,18 @@ tabGroup.addEventListener('close', function(e)
 {
 	messageLabel.text = 'tab group close event';
 	messageWin.open();
+	if (Ti.Platform.osname == "iphone") {
+//On iOS, when we're closing the tab group, this is a result
+//of the tab group example of 'Close/Animate Tab Group' and
+//we want to reopen the tab group so the user can continue with
+//using Kitchen Sink. HOWEVER, on Android, this is also triggered
+//when the app is being closed via back button, where reopening
+//the tab group is not desired. This is purely a quirk of the tests.
+		tabGroup.open();
+	}
 	setTimeout(function()
 	{
 		messageWin.close({opacity:0,duration:500});
-		tabGroup.open();
 	},1000);
 });
 
@@ -228,41 +236,50 @@ var indWin = null;
 var actInd = null;
 function showIndicator()
 {
-	// window container
-	indWin = Titanium.UI.createWindow({
-		height:150,
-		width:150
-	});
+	if (Ti.Platform.osname != 'android')
+	{
+		// window container
+		indWin = Titanium.UI.createWindow({
+			height:150,
+			width:150
+		});
 
-	// black view
-	var indView = Titanium.UI.createView({
-		height:150,
-		width:150,
-		backgroundColor:'#000',
-		borderRadius:10,
-		opacity:0.8
-	});
-	indWin.add(indView);
+		// black view
+		var indView = Titanium.UI.createView({
+			height:150,
+			width:150,
+			backgroundColor:'#000',
+			borderRadius:10,
+			opacity:0.8
+		});
+		indWin.add(indView);
+	}
 
 	// loading indicator
 	actInd = Titanium.UI.createActivityIndicator({
 		style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG,
 		height:30,
-		width:30
+		width:30,
 	});
-	indWin.add(actInd);
+	
+	if (Ti.Platform.osname != 'android')
+	{
+		indWin.add(actInd);
 
-	// message
-	var message = Titanium.UI.createLabel({
-		text:'Loading',
-		color:'#fff',
-		width:'auto',
-		height:'auto',
-		font:{fontSize:20,fontWeight:'bold'},
-		bottom:20
-	});
-	indWin.add(message);
-	indWin.open();
+		// message
+		var message = Titanium.UI.createLabel({
+			text:'Loading',
+			color:'#fff',
+			width:'auto',
+			height:'auto',
+			font:{fontSize:20,fontWeight:'bold'},
+			bottom:20
+		});
+		indWin.add(message);
+		indWin.open();
+	} else {
+		actInd.message = "Loading";
+	}
 	actInd.show();
 
 };
@@ -270,7 +287,9 @@ function showIndicator()
 function hideIndicator()
 {
 	actInd.hide();
-	indWin.close({opacity:0,duration:500});
+	if (Ti.Platform.osname != 'android') {
+		indWin.close({opacity:0,duration:500});
+	}
 };
 
 //

@@ -145,3 +145,21 @@ b7.addEventListener('click', function()
 	tf1.focus();
 });
 win.add(b7);
+
+if (Titanium.Platform.name == 'iPhone OS')
+{
+	var b8 = Titanium.UI.createButton({
+		title:'Decimal Pad',
+		height:40,
+		width:145,
+		right:10,
+		top:205
+	});
+	b8.addEventListener('click', function()
+	{
+		tf1.blur();
+		tf1.keyboardType = Titanium.UI.KEYBOARD_DECIMAL_PAD;
+		tf1.focus();
+	});
+	win.add(b8);
+}
