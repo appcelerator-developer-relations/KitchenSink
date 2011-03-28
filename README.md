@@ -3,6 +3,8 @@
 This project includes a wide variety of the APIs available in Titanium Mobile.  For more,
 head out to the [Appcelerator Developer Center](http://developer.appcelerator.com).
 
+# NOTE TO VIEWERS
+Using one JavaScript file per window in an application, while occasionally useful, is not considered a best practice.  It is done in the Kitchen Sink so we can have a "clean slate" for every API demo.  In a real application, you would probably use many fewer execution contexts, probably just the root context defined by app.js - for a demo of this approach in a more "real life" app, check out [Tweetanium](http://github.com/appcelerator/Tweetanium).
 
 # WINDOWS USERS
 
