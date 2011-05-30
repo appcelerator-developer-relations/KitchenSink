@@ -128,7 +128,7 @@ navbarButton.addEventListener('click', function()
 // SWITCH TO TITLE CONTROL
 //
 var titleButton = Titanium.UI.createButton({
-	title:'Toggle Swtich in Title',
+	title:'Toggle Switch in Title',
 	height:40,
 	width:200,
 	top:290
