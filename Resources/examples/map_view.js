@@ -130,7 +130,7 @@ var wireClickHandlers = function() {
 	zoomout.addEventListener('click',function() {
 		mapview.zoom(-1);
 	});
-}		
+};
 
 if (!isAndroid) {
 	removeAll = Titanium.UI.createButton({
@@ -210,7 +210,7 @@ if (!isAndroid) {
 		removeAll = menu.add({title:'Remove All'});
 		
 		wireClickHandlers();
-	}
+	};
 }
 
 //
@@ -252,7 +252,7 @@ mapview.addEventListener('click',function(evt)
 	}
 	if (myid == 2)
 	{
-		if(annotationAdded==false)
+		if(annotationAdded === false)
 		{
 			mapview.addAnnotation(mountainView);
 			annotationAdded=true;

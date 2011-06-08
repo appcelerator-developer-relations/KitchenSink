@@ -36,7 +36,7 @@ var changeButton = Titanium.UI.createButton({
 });
 changeButton.addEventListener('click', function()
 {
-	if (basicSwitch.value == false)
+	if (basicSwitch.value === false)
 	{
 		basicSwitch.value = true;
 	}
@@ -58,7 +58,7 @@ var hideShowButton = Titanium.UI.createButton({
 var hidden=false;
 hideShowButton.addEventListener('click', function()
 {
-	if (hidden==true)
+	if (hidden === true)
 	{
 		basicSwitch.show();
 		hidden=false;
@@ -128,7 +128,7 @@ navbarButton.addEventListener('click', function()
 // SWITCH TO TITLE CONTROL
 //
 var titleButton = Titanium.UI.createButton({
-	title:'Toggle Switch in Title',
+	title:'Toggle Swtich in Title',
 	height:40,
 	width:200,
 	top:290
@@ -190,7 +190,7 @@ if (Titanium.Platform.osname == 'android')
 			titleOff:"LO",
 			titleOn:"HI",
 			value:false,
-			top:240,
+			top:240
 	});
 
 	win.add(checkBox);

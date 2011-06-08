@@ -17,7 +17,7 @@ var items = [
 	{title:'Date Picker', hasChild:true, test:'../examples/picker_date1.js'},
 	{title:'Time Picker', hasChild:true, test:'../examples/picker_date2.js'},
 	{title:'Date/Time Picker', hasChild:true, test:'../examples/picker_date3.js', noandroid:true},
-	{title:'Countdown Picker', hasChild:true, test:'../examples/picker_date4.js', noandroid:true},
+	{title:'Countdown Picker', hasChild:true, test:'../examples/picker_date4.js', noandroid:true}
 ];
 
 var data = items;
@@ -32,6 +32,7 @@ if (isAndroid) {
 	data.push({title:'Android "useSpinner" - text 2', hasChild:true, test:'../examples/picker_android_spinner_text2.js'});
 	data.push({title:'Android "useSpinner" - date', hasChild:true, test:'../examples/picker_android_spinner_date.js'});
 	data.push({title:'Android "useSpinner" - time', hasChild:true, test:'../examples/picker_android_spinner_time.js'});
+	data.push({title:'Android "useSpinner" - time (2)', hasChild:true, test:'../examples/picker_android_spinner_time2.js'});
 }
 
 // create table view

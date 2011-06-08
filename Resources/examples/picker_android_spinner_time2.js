@@ -7,9 +7,12 @@ value.setHours(13);
 value.setSeconds(48);
 		
 var picker = Ti.UI.createPicker({
+	useSpinner:true,
 	type:Ti.UI.PICKER_TYPE_TIME,
-	value:value
+	value:value,
+	minuteInterval: 15
 });
+picker.minuteInterval = 15;
 
 // turn on the selection indicator (off by default)
 picker.selectionIndicator = true;
@@ -28,5 +31,12 @@ win.add(label);
 
 picker.addEventListener('change',function(e)
 {
-	label.text = e.value.toLocaleString();
+	label.text = e.value;
 });
+
+win.add(Ti.UI.createLabel({
+	text: 'This example shows setting "minuteInterval: 15".',
+	backgroundColor: 'blue',
+	color: 'yellow',
+	bottom: 5
+}));

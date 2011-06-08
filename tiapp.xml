@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
-<id>com.appcelerator.pushtest</id>
+<id>com.appcelerator.titanium</id>
 <name>KitchenSink</name>
 <version>1.0</version>
-<publisher>Appcelerator</publisher>
-<url>http://www.appcelerator.com</url>
-<copyright>2010 by kevin</copyright>
+<publisher>nwright</publisher>
+<url>appcelerator.com</url>
+<copyright>2009 by nwright</copyright>
 <description>No description provided</description>
-<icon>default_app_logo.png</icon>
+<icon>appicon.png</icon>
 <persistent-wifi>false</persistent-wifi>
 <prerendered-icon>false</prerendered-icon>
 <statusbar-hidden>false</statusbar-hidden>
@@ -22,6 +22,9 @@
 	<plugin version="0.1">ti.log</plugin>
 </plugins>
 <android xmlns:android="http://schemas.android.com/apk/res/android">
+	<manifest>
+		<supports-screens android:anyDensity="false"/>
+	</manifest>
 	<activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" />
 	<services>
 		<service type="interval" url="testservice.js" />

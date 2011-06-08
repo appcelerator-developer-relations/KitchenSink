@@ -38,7 +38,7 @@ var btn04 = Ti.UI.createButton({
 
 var btn05 = Ti.UI.createButton({
 	height:50, bottom:120, right:5, width:120,
-	title:'Detect Address', color:'#000'
+	title:'Detect Adress', color:'#000'
 });
 
 var label = Ti.UI.createLabel({

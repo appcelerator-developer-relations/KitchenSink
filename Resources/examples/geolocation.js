@@ -219,14 +219,14 @@ var locationAdded = false;
 //
 //  SHOW CUSTOM ALERT IF DEVICE HAS GEO TURNED OFF
 //
-if (Titanium.Geolocation.locationServicesEnabled==false)
+if (Titanium.Geolocation.locationServicesEnabled === false)
 {
 	Titanium.UI.createAlertDialog({title:'Kitchen Sink', message:'Your device has geo turned off - turn it on.'}).show();
 }
 else
 {
 	if (Titanium.Platform.name != 'android') {
-		var authorization = Titanium.Geolocation.locationServicesAuthorization
+		var authorization = Titanium.Geolocation.locationServicesAuthorization;
 		Ti.API.info('Authorization: '+authorization);
 		if (authorization == Titanium.Geolocation.AUTHORIZATION_DENIED) {
 			Ti.UI.createAlertDialog({

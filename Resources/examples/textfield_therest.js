@@ -125,33 +125,25 @@ b6.addEventListener('click', function()
 	switch (auto)
 	{
 		case 0:
-		{
 			tf1.autocapitalization = Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE;
 			b6.title = 'Capital (none)';
 			auto++;
 			break;
-		}
 		case 1:
-		{
 			tf1.autocapitalization = Titanium.UI.TEXT_AUTOCAPITALIZATION_WORDS;
 			b6.title = 'Capital (words)';
 			auto++;
 			break;
-		}
 		case 2:
-		{
 			tf1.autocapitalization = Titanium.UI.TEXT_AUTOCAPITALIZATION_SENTENCES;
 			b6.title = 'Capital (sent.)';
 			auto++;
 			break;
-		}
 		case 3:
-		{
 			tf1.autocapitalization = Titanium.UI.TEXT_AUTOCAPITALIZATION_ALL;
 			b6.title = 'Capital (all)';
 			auto=0;
 			break;
-		}
 	}
 });
 win.add(b6);
@@ -171,33 +163,25 @@ b7.addEventListener('click', function()
 	switch (clear)
 	{
 		case 0:
-		{
 			tf1.clearButtonMode = Titanium.UI.INPUT_BUTTONMODE_ALWAYS;
 			b7.title = 'Clear Button (A)';
 			clear++;
 			break;
-		}
 		case 1:
-		{
 			b7.title = 'Clear Button (N)';
 			tf1.clearButtonMode = Titanium.UI.INPUT_BUTTONMODE_NEVER;
 			clear++;
 			break;
-		}
 		case 2:
-		{
 			b7.title = 'Clear Button (F)';
 			tf1.clearButtonMode = Titanium.UI.INPUT_BUTTONMODE_ONFOCUS;
 			clear++;
 			break;
-		}
 		case 3:
-		{
 			b7.title = 'Clear Button (B)';
 			tf1.clearButtonMode = Titanium.UI.INPUT_BUTTONMODE_ONBLUR;
 			clear=0;
 			break;
-		}
 	}
 });
 win.add(b7);
@@ -215,29 +199,23 @@ b8.addEventListener('click', function()
 	switch (align)
 	{
 		case 0:
-		{
 			tf1.textAlign = 'left';
 			tf1.value = 'text align left, marker 10 bold';
 			tf1.font = {fontSize:10,fontFamily:'Marker Felt', fontWeight:'bold'};
 			align++;
 			break;
-		}
 		case 1:
-		{
 			tf1.textAlign = 'center';
 			tf1.value = 'text align center, arial 12';
 			tf1.font = {fontSize:12,fontFamily:'Arial', fontWeight:'normal'};
 			align++;
 			break;
-		}
 		case 2:
-		{
 			tf1.textAlign = 'right';
 			tf1.value = 'text align right, hel 14';
 			tf1.font = {fontSize:14,fontFamily:'Helvetica', fontWeight:'bold'};
 			align=0;
 			break;
-		}
 	}
 });
 win.add(b8);
@@ -255,27 +233,20 @@ b8.addEventListener('click', function()
 	switch (vAlign)
 	{
 		case 0:
-		{
 			tf1.verticalAlign = 'top';
 			b8.title = 'Vertical Align (T)';
 			vAlign++;
 			break;
-		}
 		case 1:
-		{
 			tf1.verticalAlign = 'middle';
 			b8.title = 'Vertical Align (M)';
 			vAlign++;
 			break;
-		}
 		case 2:
-		{
 			tf1.verticalAlign = 'bottom';
 			b8.title = 'Vertical Align (B)';
 			vAlign=0;
 			break;
-		}
-
 	}
 });
 win.add(b8);
@@ -302,13 +273,38 @@ b9.addEventListener('click', function()
 });
 win.add(b9);
 
+// Only TextArea has 'editable' in iOS, not TextField
+if (Ti.Platform.osname === 'android') {
+	var b10 = Titanium.UI.createButton({
+		title:'Editable',
+		height:40,
+		width:145,
+		left:10,
+		top:305
+	});
+	var editable = true;
+	b10.addEventListener('click', function()
+	{
+		if (!editable) {
+			tf1.editable = true;
+			editable = true;
+		}
+		else {
+			tf1.editable=false;
+			editable = false;
+		}
+	});
+	win.add(b10);
+}
+
 var l = Titanium.UI.createLabel({
 	text:'Click buttons to toggle properties',
-	left:10,
+	left: (Ti.Platform.osname==='android') ? 165 : 10,
+	right:10,
 	top:305,
 	color:'#777',
-	width:'auto',
-	height:'auto'
+	height:'auto',
+	font:{fontHeight:10}
 });
 
 win.add(l);
