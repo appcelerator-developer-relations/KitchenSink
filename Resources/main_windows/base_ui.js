@@ -70,6 +70,15 @@ tableview.addEventListener('click', function(e)
 		{
 			win.hideTabBar();
 		}
+		if (Ti.Platform.name==='android' && e.rowData.test.indexOf('window_properties.js') >= 0) {
+			// As explained in apidoc for Window, if opacity is ever to be changed for an Android
+			// activity during its lifetime, it needs to use a translucent background.  We trigger
+			// using a translucent theme by the presence of the opacity property, so we need to
+			// set it here.  Setting it to 1 means it's totally opaque, but gives us the property to
+			// make it more transparent later with the "toggle opacity" test.
+			win.backgroundColor = "#191919"
+			win.opacity = 1;
+		}
 		Titanium.UI.currentTab.open(win,{animated:true});
 	}
 });
@@ -80,6 +89,7 @@ Titanium.UI.currentWindow.add(tableview);
 Titanium.UI.currentWindow.addEventListener('focus', function()
 {
 	Ti.API.info('FOCUS RECEIVED IN base_ui');
+	Ti.API.info(Ti.dumpCoverage());
 });
 //
 //  ADD EVENT LISTENERS FOR CUSTOM EVENTS
