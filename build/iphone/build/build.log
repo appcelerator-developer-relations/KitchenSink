@@ -1,0 +1,137 @@
+================================================================================
+Appcelerator Titanium Diagnostics Build Log
+The contents of this file are useful to send to Appcelerator Support if
+reporting an issue to help us understand your environment, build settings
+and aid in debugging. Please attach this log to any issue that you report.
+================================================================================
+
+Starting build at 03/12/12 11:40
+
+Build details:
+
+   timestamp=02/23/12 17:46
+   module_apiversion=2
+   version=1.8.2
+   githash=59b3a90
+
+
+Script arguments:
+   /Library/Application Support/Titanium/mobilesdk/osx/1.8.2/iphone/builder.py
+   simulator
+   4.3
+   /Users/adecena/Dev/Titanium/_dr/KitchenSink
+   com.appcelerator.kitchensink
+   KitchenSink
+   universal
+   iphone
+   
+
+Building from: /Library/Application Support/Titanium/mobilesdk/osx/1.8.2/iphone
+Platform: Darwin Kernel Version 10.8.0: Tue Jun  7 16:32:41 PDT 2011; root:xnu-1504.15.3~1/RELEASE_X86_64
+
+Xcode path is: /Developer
+
+
+githash=59b3a90, existing_git_hash=59b3a90
+writing contents of /Users/adecena/Dev/Titanium/_dr/KitchenSink/build/iphone/project.xcconfig:
+
+TI_VERSION=1.8.2
+TI_SDK_DIR=/Library/Application Support/Titanium/mobilesdk/osx/$(TI_VERSION)/iphone
+TI_APPID=com.appcelerator.kitchensink
+OTHER_LDFLAGS[sdk=iphoneos*]=$(inherited) -weak_framework iAd
+OTHER_LDFLAGS[sdk=iphonesimulator*]=$(inherited) -weak_framework iAd
+#include "module"
+
+old contents
+
+
+Generated the following stylecode code:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>classes</key>
+		<dict>
+<key>app</key>
+<dict>
+<key>win1</key>
+<dict>
+<key>url</key>
+<string>main_windows/base_ui.js</string>
+<key>titleImage</key>
+<string>images/appcelerator_small.png</string>
+<key>titleid</key>
+<string>base_ui_title</string>
+</dict>
+</dict>
+<key>common</key>
+<dict>
+</dict>
+</dict>
+
+		<key>classes_density</key>
+		<dict>
+<key>app</key>
+<dict>
+</dict>
+<key>common</key>
+<dict>
+</dict>
+</dict>
+
+		<key>ids</key>
+		<dict>
+<key>app</key>
+<dict>
+<key>tab1</key>
+<dict>
+<key>titleid</key>
+<string>base_ui_title</string>
+<key>icon</key>
+<string>images/tabs/KS_nav_views.png</string>
+</dict>
+<key>tabGroup1</key>
+<dict>
+<key>barColor</key>
+<string>#336699</string>
+</dict>
+</dict>
+<key>common</key>
+<dict>
+</dict>
+</dict>
+
+		<key>ids_density</key>
+		<dict>
+<key>app</key>
+<dict>
+</dict>
+<key>common</key>
+<dict>
+</dict>
+</dict>
+
+		<key>tags</key>
+		<dict>
+<key>app</key>
+<dict>
+</dict>
+<key>common</key>
+<dict>
+</dict>
+</dict>
+
+		<key>tags_density</key>
+		<dict>
+<key>app</key>
+<dict>
+</dict>
+<key>common</key>
+<dict>
+</dict>
+</dict>
+
+	</dict>
+</plist>
+Finishing build
