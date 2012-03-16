@@ -1,0 +1,55 @@
+function MessageWindow() {
+	this.proxy = Titanium.UI.createWindow({
+		height:30,
+		width:250,
+		bottom:70,
+		borderRadius:10,
+		touchEnabled:false,	
+		orientationModes : [
+			Titanium.UI.PORTRAIT,
+			Titanium.UI.UPSIDE_PORTRAIT,
+			Titanium.UI.LANDSCAPE_LEFT,
+			Titanium.UI.LANDSCAPE_RIGHT
+		]
+	});
+	this.messageView = Titanium.UI.createView({
+		id:'messageview',
+		height:30,
+		width:250,
+		borderRadius:10,
+		backgroundColor:'#000',
+		opacity:0.7,
+		touchEnabled:false
+	});
+	this.messageLabel = Titanium.UI.createLabel({
+		id:'messagelabel',
+		text:'',
+		color:'#fff',
+		width:250,
+		height:'auto',
+		font:{
+			fontFamily:'Helvetica Neue',
+			fontSize:13
+		},
+		textAlign:'center'
+	});
+		
+	this.proxy.add(this.messageView);
+	this.proxy.add(this.messageLabel);
+	
+	return this;
+}
+
+MessageWindow.prototype.setLabel = function(_text) {
+	this.messageLabel.text = _text;
+};
+
+MessageWindow.prototype.open = function(_args) {
+	this.proxy.open(_args);
+};
+
+MessageWindow.prototype.close = function(_args) {
+	this.proxy.close(_args);
+};
+
+module.exports = MessageWindow;

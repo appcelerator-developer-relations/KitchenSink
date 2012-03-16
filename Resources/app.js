@@ -46,5 +46,27 @@ else if (Ti.Platform.osname === 'mobileweb') {
 	}
 
 	var ApplicationTabGroup = require('ui/common/ApplicationTabGroup');
-	new ApplicationTabGroup(Window).open();
+	new ApplicationTabGroup().open({
+		transition: Titanium.UI.iPhone && Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
+	});
+	
+	var MessageWindow = require('ui/common/MessageWindow'),
+		messageWin = new MessageWindow();
+		
+	Titanium.App.addEventListener('event_one', function(e) {
+		messageWin.setLabel('app.js: event one, array length = ' + e.data.length);
+		messageWin.open();
+		setTimeout(function() {
+			messageWin.close({opacity:0,duration:500});
+		},1000);
+	});
+	
+	Titanium.App.addEventListener('event_two', function(e) {
+		messageWin.setLabel('app.js: event two, name = ' + e.name);
+		messageWin.open();
+		setTimeout(function() {
+			messageWin.close({opacity:0,duration:500});
+		},1000);	
+	});
+	
 })();
