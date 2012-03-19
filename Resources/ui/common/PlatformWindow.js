@@ -6,34 +6,34 @@ function PlatformWindow(title) {
 	
 	// create table view data object
 	var data = [
-		{title:'XHR', hasChild:true, test:'ui/common/platform/xhr.js'},
-		{title:'Network', hasChild:true, test:'ui/common/platform/network.js'},
-		{title:'Common JS', hasChild:true, test:'ui/common/platform/commonjs.js'},
-		{title:'Logging', hasChild:true, test:'ui/common/platform/logging.js'},
-		{title:'Application Data', hasChild:true, test:'ui/common/platform/app_data.js'},
-		{title:'Application Events', hasChild:true, test:'ui/common/platform/app_events.js'},
-		{title:'Properties API', hasChild:true, test:'ui/common/platform/properties.js'},
-		{title:'Database', hasChild:true, test:'ui/common/platform/database.js'},
-		{title:'Platform Data', hasChild:true, test:'ui/common/platform/platform.js'},
-		{title:'Filesystem', hasChild:true, test:'ui/common/platform/filesystem.js'},
-		{title:'JS Includes', hasChild:true, test:'ui/common/platform/js_include.js'},
-		{title:'Set Timeout (timer)', hasChild:true, test:'ui/common/platform/set_timeout.js'},
-		{title:'Set Interval (timer)', hasChild:true, test:'ui/common/platform/set_interval.js'},
-		{title:'XML RSS', hasChild:true, test:'ui/common/platform/xml_rss.js'},
-		{title:'Utils', hasChild:true, test:'ui/common/platform/utils.js'},
-		{title:'JSON', hasChild:true, test:'ui/common/platform/json.js'},
-		{title:'JS search', hasChild:true, test:'ui/common/platform/search_case_insensitive.js'},
-		{title:'Clipboard', hasChild:true, test:'ui/common/platform/clipboard.js'},
-		{title:'Sockets', hasChild:true, test:'ui/common/platform/sockets.js'}
+		{title:'XHR', hasChild:true, test:'ui/common/platform/xhr'},
+		{title:'Network', hasChild:true, test:'ui/common/platform/network'},
+		{title:'Common JS', hasChild:true, test:'ui/common/platform/commonjs'},
+		{title:'Logging', hasChild:true, test:'ui/common/platform/logging'},
+		{title:'Application Data', hasChild:true, test:'ui/common/platform/app_data'},
+		{title:'Application Events', hasChild:true, test:'ui/common/platform/app_events'},
+		{title:'Properties API', hasChild:true, test:'ui/common/platform/properties'},
+		{title:'Database', hasChild:true, test:'ui/common/platform/database'},
+		{title:'Platform Data', hasChild:true, test:'ui/common/platform/platform'},
+		{title:'Filesystem', hasChild:true, test:'ui/common/platform/filesystem'},
+		{title:'JS Includes', hasChild:true, test:'ui/common/platform/js_include'},
+		{title:'Set Timeout (timer)', hasChild:true, test:'ui/common/platform/set_timeout'},
+		{title:'Set Interval (timer)', hasChild:true, test:'ui/common/platform/set_interval'},
+		{title:'XML RSS', hasChild:true, test:'ui/common/platform/xml_rss'},
+		{title:'Utils', hasChild:true, test:'ui/common/platform/utils'},
+		{title:'JSON', hasChild:true, test:'ui/common/platform/json'},
+		{title:'JS search', hasChild:true, test:'ui/common/platform/search_case_insensitive'},
+		{title:'Clipboard', hasChild:true, test:'ui/common/platform/clipboard'},
+		{title:'Sockets', hasChild:true, test:'ui/common/platform/sockets'}
 	];
 	
 	if (Titanium.Platform.name == 'iPhone OS') {
-		data.push({title:'Passing Data (windows)', hasChild:true, test:'ui/handheld/ios/platform/custom_properties.js'});
-		data.push({title:'Bonjour', hasChild:true, test:'ui/handheld/ios/platform/bonjour.js'});
+		data.push({title:'Passing Data (windows)', hasChild:true, test:'ui/handheld/ios/platform/custom_properties'});
+		data.push({title:'Bonjour', hasChild:true, test:'ui/handheld/ios/platform/bonjour'});
 	}
 	
 	if (Titanium.Platform.osname === 'android') {
-		data.push({title: 'Android services', hasChild:true, test:'ui/handheld/android/platform/android_services.js'});
+		data.push({title: 'Android services', hasChild:true, test:'ui/handheld/android/platform/android_services'});
 	}
 	
 	// create table view
@@ -46,7 +46,7 @@ function PlatformWindow(title) {
 		if (e.rowData.test) {
 			var ExampleWindow = require(e.rowData.test),
 				win = new ExampleWindow(e.rowData.title);
-			Titanium.UI.currentTab.open(win,{animated:true});
+			self.containingTab.open(win,{animated:true});
 		}
 	});
 	

@@ -6,18 +6,18 @@ function MashupsWindow(title) {
 	
 	// create table view data object
 	var data = [
-		{title:'Twitter', hasChild:true, test:'ui/common/mashups/twitter.js', title_image:'../images/twitter_logo_header.png'},
-		{title:'Foursquare', hasChild:true, test:'ui/common/mashups/foursquare.js', title_image:'../images/light-poweredby-foursquare.png'},
-		{title:'Facebook', hasChild:true, test:'ui/common/mashups/facebook.js'},
-		{title:'YQL', hasChild:true, test:'ui/common/mashups/yql.js'}
+		{title:'Twitter', hasChild:true, test:'ui/common/mashups/twitter', title_image:'../images/twitter_logo_header.png'},
+		{title:'Foursquare', hasChild:true, test:'ui/common/mashups/foursquare', title_image:'../images/light-poweredby-foursquare.png'},
+		{title:'Facebook', hasChild:true, test:'ui/common/mashups/facebook'},
+		{title:'YQL', hasChild:true, test:'ui/common/mashups/yql'}
 	];
 	
 	//add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS') {
-		data.push({title:'RSS', hasChild:true, test:'ui/handheld/ios/mashups/rss.js', barColor:'#b40000'});
+		data.push({title:'RSS', hasChild:true, test:'ui/handheld/ios/mashups/rss', barColor:'#b40000'});
 	}
 	 
-	data.push({title:'SOAP', hasChild:true, test:'ui/common/mashups/soap.js'});
+	data.push({title:'SOAP', hasChild:true, test:'ui/common/mashups/soap'});
 	
 	// create table view
 	var tableview = Titanium.UI.createTableView({
@@ -36,7 +36,7 @@ function MashupsWindow(title) {
 			if (e.rowData.title_image) {
 				win.titleImage = e.rowData.title_image;
 			}
-			Titanium.UI.currentTab.open(win,{animated:true});
+			self.containingTab.open(win,{animated:true});
 		}
 	});
 	

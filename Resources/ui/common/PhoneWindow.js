@@ -6,39 +6,39 @@ function PhoneWindow(title) {
 	
 	// create table view data object
 	var data = [
-		{title:'Play Movie', hasChild:true, test:'ui/common/phone/movie.js'},
-		{title:'Vibrate', hasChild:true, test:'ui/common/phone/vibrate.js'},
-		{title:'Geolocation', hasChild:true, test:'ui/common/phone/geolocation.js'},
-		{title:'Accelerometer', hasChild:true, test:'ui/common/phone/accelerometer.js'},
-		{title:'Sound', hasChild:true, test:'ui/common/phone/sound.js'},
-		{title:'Photo Gallery', hasChild:true, test:'ui/common/phone/photo_gallery.js'}
+		{title:'Play Movie', hasChild:true, test:'ui/common/phone/movie'},
+		{title:'Vibrate', hasChild:true, test:'ui/common/phone/vibrate'},
+		{title:'Geolocation', hasChild:true, test:'ui/common/phone/geolocation'},
+		{title:'Accelerometer', hasChild:true, test:'ui/common/phone/accelerometer'},
+		{title:'Sound', hasChild:true, test:'ui/common/phone/sound'},
+		{title:'Photo Gallery', hasChild:true, test:'ui/common/phone/photo_gallery'}
 	];
 	
-	data.push({title:'Orientation', hasChild:true, test:'ui/common/phone/orientation.js'});
-	data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts.js'});
+	data.push({title:'Orientation', hasChild:true, test:'ui/common/phone/orientation'});
+	data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts'});
 	
 	if (Titanium.Platform.osname!='ipad') {
-		data.push({title:'Camera', hasChild:true, test:'ui/common/phone/camera.js'});
+		data.push({title:'Camera', hasChild:true, test:'ui/common/phone/camera'});
 	}
 	
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS') {
-		data.push({title:'Screenshot', hasChild:true, test:'ui/handheld/ios/phone/screenshot.js'});
-		data.push({title:'Save to Gallery', hasChild:true, test:'ui/handheld/ios/phone/photo_gallery_save.js'});
-		data.push({title:'Shake', hasChild:true, test:'ui/handheld/ios/phone/shake.js'});
+		data.push({title:'Screenshot', hasChild:true, test:'ui/handheld/ios/phone/screenshot'});
+		data.push({title:'Save to Gallery', hasChild:true, test:'ui/handheld/ios/phone/photo_gallery_save'});
+		data.push({title:'Shake', hasChild:true, test:'ui/handheld/ios/phone/shake'});
 		if (Titanium.Platform.osname!='ipad')
 		{
-			data.push({title:'Record Video', hasChild:true, test:'ui/common/phone/record_video.js'});
+			data.push({title:'Record Video', hasChild:true, test:'ui/common/phone/record_video'});
 		}
-		data.push({title:'Music', hasChild:true, test:'ui/handheld/ios/phone/music.js'});
-		data.push({title:'Proximity Events', hasChild:true, test:'ui/handheld/ios/phone/todo.js'});
-		data.push({title:'App Badge', hasChild:true, test:'ui/handheld/ios/phone/app_badge.js'});
-		data.push({title:'Status Bar', hasChild:true, test:'ui/handheld/ios/phone/statusbar.js'});
-		data.push({title:'Push Notifications', hasChild:true, test:'ui/handheld/ios/phone/push_notification.js'});
+		data.push({title:'Music', hasChild:true, test:'ui/handheld/ios/phone/music'});
+		data.push({title:'Proximity Events', hasChild:true, test:'ui/handheld/ios/phone/todo'});
+		data.push({title:'App Badge', hasChild:true, test:'ui/handheld/ios/phone/app_badge'});
+		data.push({title:'Status Bar', hasChild:true, test:'ui/handheld/ios/phone/statusbar'});
+		data.push({title:'Push Notifications', hasChild:true, test:'ui/handheld/ios/phone/push_notification'});
 	}
 	
 	if (Titanium.Platform.name == 'android') {
-		data.push({title:'Notfications', hasChild:true, test:'ui/handheld/android/phone/notification.js'});
+		data.push({title:'Notfications', hasChild:true, test:'ui/handheld/android/phone/notification'});
 	}
 	
 	// create table view
@@ -51,7 +51,7 @@ function PhoneWindow(title) {
 		if (e.rowData.test) {
 			var ExampleWindow = require(e.rowData.test),
 				win = new ExampleWindow(e.rowData.title);
-			Titanium.UI.currentTab.open(win,{animated:true});
+			self.containingTab.open(win,{animated:true});
 		}
 	});
 	
