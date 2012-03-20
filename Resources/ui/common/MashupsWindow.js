@@ -28,7 +28,7 @@ function MashupsWindow(title) {
 	tableview.addEventListener('click', function(e) {
 		if (e.rowData.test) {
 			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow(e.rowData.title);
+				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab});
 				
 			if (e.rowData.barColor) {
 				win.barColor = e.rowData.barColor;
