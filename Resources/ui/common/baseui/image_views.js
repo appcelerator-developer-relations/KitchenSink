@@ -15,14 +15,14 @@ function image_views(_args) {
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS')
 	{
-		data.push({title:'Image Blob', hasChild:true, test:'ui/common/baseui/image_view_blob'});
-		data.push({title:'Image Masking', hasChild:true, test:'ui/common/baseui/image_mask'});
-		data.push({title:'Image Toolbar', hasChild:true, test:'ui/common/baseui/image_view_toolbar'});
+		data.push({title:'Image Blob', hasChild:true, test:'ui/handheld/ios/baseui/image_view_blob'});
+		data.push({title:'Image Masking', hasChild:true, test:'ui/handheld/ios/baseui/image_mask'});
+		data.push({title:'Image Toolbar', hasChild:true, test:'ui/handheld/ios/baseui/image_view_toolbar'});
 	}
 	
 	data.push({title:'Image Rapid Update', hasChild:true, test:'ui/common/baseui/image_view_updateimages'});
 	if (Titanium.Platform.name == 'android') {
-		data.push({title:'Android drawable resource', hasChild:true, test:'image_view_resource'});
+		data.push({title:'Android drawable resource', hasChild:true, test:'ui/handheld/android/baseui/image_view_resource'});
 	}
 	
 	// create table view
