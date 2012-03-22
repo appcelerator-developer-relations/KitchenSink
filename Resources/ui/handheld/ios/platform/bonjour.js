@@ -107,7 +107,7 @@ function bonjour() {
 	serviceBrowser.addEventListener('updatedServices', updateUI);
 	
 	// Cleanup
-	Titanium.UI.currentWindow.addEventListener('close', function(e) {
+	win.addEventListener('close', function(e) {
 		if (serviceBrowser.isSearching) {
 			serviceBrowser.stopSearch();
 		}
