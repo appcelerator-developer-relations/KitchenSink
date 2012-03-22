@@ -9,9 +9,11 @@ function activity_indicator() {
 	var actInd = Titanium.UI.createActivityIndicator({
 		bottom:10, 
 		height:50,
-		width:50,
-		style:Titanium.UI.iPhone.ActivityIndicatorStyle.PLAIN
+		width:150
 	});
+	if (Ti.UI.iPhone) {
+		actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.PLAIN;
+	}
 	
 	var button0 = Titanium.UI.createButton({
 		title:'Hide',
