@@ -71,7 +71,7 @@ function slider_basic() {
 	});
 	customSlider.addEventListener('change',function(e)
 	{
-		customSliderLabel.text = 'Custom Slider - value = ' + e.value;
+		customSliderLabel.text = 'Custom Slider - value = ' + Math.round(e.value);
 	});
 	
 	
