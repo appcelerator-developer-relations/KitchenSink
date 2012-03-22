@@ -206,9 +206,12 @@ function button_control() {
 	win.add(bhleft);
 	win.add(bhcenter);
 	win.add(bhright);
-	win.add(bvtop);
-	win.add(bvcenter);
-	win.add(bvbottom);
+	
+	if (Ti.Platform.osname === 'android') {
+		win.add(bvtop);
+		win.add(bvcenter);
+		win.add(bvbottom);
+	}
 
 	return win;
 }
