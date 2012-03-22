@@ -191,14 +191,23 @@ function activity_indicator() {
 		win.add(button6);
 		win.add(button7);
 	}
-	else
+	else if (Ti.Platform.osname === 'android') 
 	{
+		win.addEventListener('open', function(e) {
+			actInd.show();
+			actInd.message = 'Loading...';
+			setTimeout(function()
+			{
+				actInd.hide();
+			},2000);
+		});
+	} else {
 		actInd.show();
-		actInd.message = 'Loading...';
-		setTimeout(function()
-		{
-			actInd.hide();
-		},2000);
+			actInd.message = 'Loading...';
+			setTimeout(function()
+			{
+				actInd.hide();
+			},2000);
 	}
 	
 	return win;
