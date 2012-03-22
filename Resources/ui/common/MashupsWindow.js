@@ -6,8 +6,8 @@ function MashupsWindow(title) {
 	
 	// create table view data object
 	var data = [
-		{title:'Twitter', hasChild:true, test:'ui/common/mashups/twitter', title_image:'../images/twitter_logo_header.png'},
-		{title:'Foursquare', hasChild:true, test:'ui/common/mashups/foursquare', title_image:'../images/light-poweredby-foursquare.png'},
+		{title:'Twitter', hasChild:true, test:'ui/common/mashups/twitter', title_image:'/images/twitter_logo_header.png'},
+		{title:'Foursquare', hasChild:true, test:'ui/common/mashups/foursquare', title_image:'/images/light-poweredby-foursquare.png'},
 		{title:'Facebook', hasChild:true, test:'ui/common/mashups/facebook'},
 		{title:'YQL', hasChild:true, test:'ui/common/mashups/yql'}
 	];

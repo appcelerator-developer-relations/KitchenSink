@@ -16,7 +16,7 @@ function mapview() {
 		subtitle:'Mountain View, CA',
 		pincolor: isAndroid ? "orange" : Titanium.Map.ANNOTATION_RED,
 		animate:true,
-		leftButton: '../images/appcelerator_small.png',
+		leftButton: '/images/appcelerator_small.png',
 		myid:1 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 	});
 	
@@ -27,7 +27,7 @@ function mapview() {
 		subtitle:'Cupertino, CA',
 		pincolor:Titanium.Map.ANNOTATION_GREEN,
 		animate:true,
-		rightButton: '../images/apple_logo.jpg',
+		rightButton: '/images/apple_logo.jpg',
 		myid:2 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 	});
 	
@@ -37,7 +37,7 @@ function mapview() {
 			title:"Atlanta, GA",
 			subtitle:'Atlanta Braves Stadium\nfoo',
 			animate:true,
-			leftButton:'../images/atlanta.jpg',
+			leftButton:'/images/atlanta.jpg',
 			rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
 			myid:3 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 		};
@@ -45,7 +45,7 @@ function mapview() {
 	if (!isAndroid) {
 		atlantaParams.pincolor = Titanium.Map.ANNOTATION_PURPLE;
 	} else {
-		atlantaParams.pinImage = "../images/map-pin.png";
+		atlantaParams.pinImage = "/images/map-pin.png";
 	}
 	var atlanta = Titanium.Map.createAnnotation(atlantaParams);
 	

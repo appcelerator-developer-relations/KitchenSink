@@ -84,7 +84,7 @@ function tv_events() {
 		});
 		
 		var imageView = Ti.UI.createImageView({
-			image:'../images/apple_logo.jpg',
+			image:'/images/apple_logo.jpg',
 			left:0,
 			width:30
 		});

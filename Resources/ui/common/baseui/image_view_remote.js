@@ -22,7 +22,7 @@ function image_view_remote() {
 	win.add(l);
 	
 	var imageView2 = Titanium.UI.createImageView({
-		defaultImage:'../images/cloud.png',
+		defaultImage:'/images/cloud.png',
 		top:140,
 		width:100,
 		height:100

@@ -24,8 +24,8 @@ function slider_basic() {
 		width:100,
 		height:'auto',
 		top:30,
-		selectedThumbImage:'../images/slider_thumb.png',
-		highlightedThumbImage:'../images/chat.png'
+		selectedThumbImage:'/images/slider_thumb.png',
+		highlightedThumbImage:'/images/chat.png'
 	});
 	basicSlider.addEventListener('change',function(e)
 	{
@@ -65,9 +65,9 @@ function slider_basic() {
 		width:268,
 		height:11,
 		top:90,
-		leftTrackImage:'../images/slider_orangebar.png',
-		rightTrackImage:'../images/slider_lightbar.png',
-		thumbImage:'../images/slider_thumb.png'
+		leftTrackImage:'/images/slider_orangebar.png',
+		rightTrackImage:'/images/slider_lightbar.png',
+		thumbImage:'/images/slider_thumb.png'
 	});
 	customSlider.addEventListener('change',function(e)
 	{
@@ -89,10 +89,10 @@ function slider_basic() {
 		basicSlider.value = 2;
 		basicSlider.width = 268;
 		basicSlider.height = (Ti.Platform.osname == 'android') ? 50 : 11;
-		basicSlider.leftTrackImage = '../images/slider_orangebar.png';
-		basicSlider.rightTrackImage = '../images/slider_lightbar.png';
-		basicSlider.thumbImage = '../images/slider_thumb.png';
-		basicSlider.highlightedThumbImage = '../images/slider_thumb.png';
+		basicSlider.leftTrackImage = '/images/slider_orangebar.png';
+		basicSlider.rightTrackImage = '/images/slider_lightbar.png';
+		basicSlider.thumbImage = '/images/slider_thumb.png';
+		basicSlider.highlightedThumbImage = '/images/slider_thumb.png';
 	});
 	
 	//

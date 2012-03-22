@@ -4,7 +4,7 @@ function image_view_toolbar() {
 	
 	
 	/*var camera = Titanium.UI.createButton({
-		backgroundImage:'../images/camera.png',
+		backgroundImage:'/images/camera.png',
 		height:33,
 		width:33
 	});*/

@@ -14,7 +14,7 @@ function textfield_tool() {
 	
 	var tf = Titanium.UI.createTextField({
 		height:32,
-		backgroundImage:'../images/inputfield.png',
+		backgroundImage:'/images/inputfield.png',
 		width:200,
 		font:{fontSize:13},
 		color:'#777',
@@ -23,7 +23,7 @@ function textfield_tool() {
 	});
 	
 	var camera = Titanium.UI.createButton({
-		backgroundImage:'../images/camera.png',
+		backgroundImage:'/images/camera.png',
 		height:33,
 		width:33
 	});
@@ -33,8 +33,8 @@ function textfield_tool() {
 	});
 	
 	var send = Titanium.UI.createButton({
-		backgroundImage:'../images/send.png',
-		backgroundSelectedImage:'../images/send_selected.png',
+		backgroundImage:'/images/send.png',
+		backgroundSelectedImage:'/images/send_selected.png',
 		width:67,
 		height:32
 	});

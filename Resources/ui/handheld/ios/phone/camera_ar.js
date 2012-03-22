@@ -3,9 +3,9 @@ function cam_ar() {
 	
 	var button = Titanium.UI.createButton({
 		color:'#fff',
-		backgroundImage:'../images/BUTT_grn_on.png',
-		backgroundSelectedImage:'../images/BUTT_grn_off.png',
-		backgroundDisabledImage: '../images/BUTT_gry_on.png',
+		backgroundImage:'/images/BUTT_grn_on.png',
+		backgroundSelectedImage:'/images/BUTT_grn_off.png',
+		backgroundDisabledImage: '/images/BUTT_gry_on.png',
 		bottom:10,
 		width:301,
 		height:57,

@@ -47,7 +47,7 @@ function tv_pull() {
 	tableHeader.add(border);
 	
 	var arrow = Ti.UI.createView({
-		backgroundImage:"../images/whiteArrow.png",
+		backgroundImage:"/images/whiteArrow.png",
 		width:23,
 		height:60,
 		bottom:10,

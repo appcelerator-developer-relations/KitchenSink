@@ -2,7 +2,7 @@ function movie_local() {
 	var win = Titanium.UI.createWindow();
 	
 	var options = {
-		url: '../movie.mp4',
+		url: '/etc/movie.mp4',
 		backgroundColor: '#111',
 		scalingMode: Titanium.Media.VIDEO_SCALING_MODE_FILL,
 		movieControlMode: Titanium.Media.VIDEO_CONTROL_NONE // See TIMOB-2802, which may change this property name
