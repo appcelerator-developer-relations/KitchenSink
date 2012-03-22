@@ -90,7 +90,10 @@ function BaseUIWindow(title) {
 	self.addEventListener('focus', function()
 	{
 		Ti.API.info('FOCUS RECEIVED IN base_ui');
-		Ti.API.info(Ti.dumpCoverage());
+		
+		if (Ti.Platform.osname !== 'mobileweb') {
+			Ti.API.info(Ti.dumpCoverage());
+		}
 	});
 	//
 	//  ADD EVENT LISTENERS FOR CUSTOM EVENTS

@@ -14,9 +14,6 @@
 if (Ti.version < 1.8 ) {
 	alert('Sorry - this application template requires Titanium Mobile SDK 1.8 or later');
 }
-else if (Ti.Platform.osname === 'mobileweb') {
-	alert('Mobile web is not yet supported by this template');
-}
 
 // This is a single context application with mutliple windows in a stack
 (function() {
