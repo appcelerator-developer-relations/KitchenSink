@@ -5,16 +5,16 @@ function ApplicationTabGroup() {
 		ControlsWindow = require('ui/common/ControlsWindow'),
 		PhoneWindow = require('ui/common/PhoneWindow'),
 		PlatformWindow = require('ui/common/PlatformWindow'),
-		MashupsWindow = require('ui/common/MashupsWindow'),
-		MessageWindow = require('ui/common/MessageWindow');
+		MashupsWindow = require('ui/common/MashupsWindow');
+		//MessageWindow = require('ui/common/MessageWindow');
 	
 	//create app tabs
 	var baseUIWin = new BaseUIWindow(L('base_ui_title')),
 		controlsWin = new ControlsWindow(L('controls_win_title')),
 		phoneWin = new PhoneWindow(L('phone_win_title')),
 		platformWin = new PlatformWindow(L('platform_win_title')),
-		mashupsWin = new MashupsWindow(L('mashups_win_title')),
-		messageWin = new MessageWindow();
+		mashupsWin = new MashupsWindow(L('mashups_win_title'));
+		//messageWin = new MessageWindow();
 	
 	var baseUITab = Ti.UI.createTab({
 		title: L('base_ui_title'),
@@ -62,6 +62,7 @@ function ApplicationTabGroup() {
 	});
 	self.setActiveTab(1);
 	
+	/*
 	self.addEventListener('close', function() {
 		messageWin.setLabel('tab group close event');
 		messageWin.open();
@@ -74,7 +75,7 @@ function ApplicationTabGroup() {
 			messageWin.close({opacity:0,duration:500});
 		},1000);
 	});
-	
+
 	self.addEventListener('open', function(e) {
 		messageWin.setLabel('tab group open event');
 		messageWin.open();
@@ -100,6 +101,7 @@ function ApplicationTabGroup() {
 	self.addEventListener('blur', function(e) {
 		Titanium.API.info('tab blur - new index ' + e.index + ' old index ' + e.previousIndex);
 	});
+	*/
 	
 	return self;
 };
