@@ -21,15 +21,18 @@ function textarea_basic() {
 		font:{fontSize:20,fontFamily:'Marker Felt', fontWeight:'bold'},
 		color:'#888',
 		textAlign:'left',
-		appearance:Titanium.UI.KEYBOARD_APPEARANCE_ALERT,	
-		keyboardType:Titanium.UI.KEYBOARD_NUMBERS_PUNCTUATION,
-		returnKeyType:Titanium.UI.RETURNKEY_EMERGENCY_CALL,
 		borderWidth:2,
 		borderColor:'#bbb',
 		borderRadius:5,
 		suppressReturn:false
-		
 	});
+	
+	if (Ti.Platform.osname !== 'mobileweb') {
+		ta1.appearance = Titanium.UI.KEYBOARD_APPEARANCE_ALERT;
+		ta1.keyboardType = Titanium.UI.KEYBOARD_NUMBERS_PUNCTUATION;
+		ta1.returnKeyType = Titanium.UI.RETURNKEY_EMERGENCY_CALL;
+	}
+	
 	win.add(ta1);
 	
 	

@@ -11,12 +11,16 @@ function ControlsWindow(title) {
 		{title:'Activity Indicator', hasChild:true, test:'ui/common/controls/activity_indicator'},
 		{title:'Progress Bar', hasChild:true, test:'ui/common/controls/progress_bar'},
 		{title:'Button', hasChild:true, test:'ui/common/controls/button'},
-		{title:'Button States', hasChild:true, test:'ui/common/controls/button_state'},
 		{title:'Label', hasChild:true, test:'ui/common/controls/label'},
-		{title:'Search Bar', hasChild:true, test:'ui/common/controls/searchbar'},
 		{title:'Text Field', hasChild:true, test:'ui/common/controls/textfield'},
 		{title:'Text Area', hasChild:true, test:'ui/common/controls/textarea'}
 	];
+	
+	if (Ti.Platform.osname !== 'mobileweb') {
+		data.push({title:'Button States', hasChild:true, test:'ui/common/controls/button_state'});
+		data.push({title:'Search Bar', hasChild:true, test:'ui/common/controls/searchbar'});
+		data.push({title:'Picker', hasChild:true, test:'ui/common/controls/picker'});
+	}
 	
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS') {
@@ -25,7 +29,6 @@ function ControlsWindow(title) {
 		data.push({title:'System Buttons', hasChild:true, test:'ui/handheld/ios/controls/system_buttons'});
 		data.push({title:'Toolbar', hasChild:true, test:'ui/handheld/ios/controls/toolbar'});
 	}
-	data.push({title:'Picker', hasChild:true, test:'ui/common/controls/picker'});
 	
 	// create table view
 	var tableview = Titanium.UI.createTableView({

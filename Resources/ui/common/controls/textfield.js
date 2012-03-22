@@ -7,10 +7,13 @@ function textfield_list(_args) {
 	// create table view data object
 	var data = [
 		{title:'Events', hasChild:true, test:'ui/common/controls/textfield_events'},
-		{title:'Keyboard', hasChild:true, test:'ui/common/controls/textfield_keyboards'},
-		{title:'Border Style', hasChild:true, test:'ui/common/controls/textfield_borders'},
 		{title:'The Rest', hasChild:true, test:'ui/common/controls/textfield_therest'}
 	];
+	
+	if (Ti.Platform.osname !== 'mobileweb') {
+		data.push({title:'Keyboard', hasChild:true, test:'ui/common/controls/textfield_keyboards'});
+		data.push({title:'Border Style', hasChild:true, test:'ui/common/controls/textfield_borders'});
+	}
 	
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS')
