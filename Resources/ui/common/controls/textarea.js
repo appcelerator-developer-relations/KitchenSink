@@ -1,29 +1,35 @@
-// create label view data object
-var data = [
-	{title:'Basic', hasChild:true, test:'../examples/textarea_basic.js'}
-];
+function textarea(_args) {
+	var self = Ti.UI.createWindow({
+		title:_args.title,
+		backgroundColor:'white'
+	});
 
-if (Titanium.Platform.name == 'iPhone OS')
-{
-	data.push({title:'Auto Link', hasChild:true, test:'../examples/textarea_autodetect.js'});
-}
-// create table view
-var tableview = Titanium.UI.createTableView({
-	data:data
-});
-
-// create table view event listener
-tableview.addEventListener('click', function(e)
-{
-	if (e.rowData.test)
+	// create label view data object
+	var data = [
+		{title:'Basic', hasChild:true, test:'ui/common/controls/textarea_basic'}
+	];
+	
+	if (Titanium.Platform.name == 'iPhone OS')
 	{
-		var win = Titanium.UI.createWindow({
-			url:e.rowData.test,
-			title:e.rowData.title
-		});
-		Titanium.UI.currentTab.open(win,{animated:true});
+		data.push({title:'Auto Link', hasChild:true, test:'ui/handheld/ios/controls/textarea_autodetect'});
 	}
-});
+	// create table view
+	var tableview = Titanium.UI.createTableView({
+		data:data
+	});
+	
+	// create table view event listener
+	tableview.addEventListener('click', function(e) {
+		if (e.rowData.test) {
+			var ExampleWindow = require(e.rowData.test),
+				win = new ExampleWindow(_args);
+			_args.containingTab.open(win,{animated:true});
+		}
+	});
+	
+	// add table view to the window
+	self.add(tableview);
+	return self;
+}
 
-// add table view to the window
-Titanium.UI.currentWindow.add(tableview);
+module.exports = textarea;
