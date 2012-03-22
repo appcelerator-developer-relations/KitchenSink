@@ -83,4 +83,4 @@ function navgroup() {
 	return win;
 };
 
-module.exports = win_construct;
+module.exports = navgroup;
