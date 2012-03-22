@@ -30,32 +30,38 @@ function ApplicationTabGroup() {
 	});
 	controlsWin.containingTab = controlsTab;
 	
-	var phoneTab = Ti.UI.createTab({
-		title:L('phone_win_title'),
-		icon:'/images/tabs/KS_nav_phone.png',
-		window:phoneWin
-	});
-	phoneWin.containingTab = phoneTab;
-	
-	var platformTab = Ti.UI.createTab({
-		title:L('platform_win_title'),
-		icon:'/images/tabs/KS_nav_platform.png',
-		window:platformWin
-	});
-	platformWin.containingTab = platformTab;
-	
-	var mashupsTab = Ti.UI.createTab({
-		title:L('mashups_win_title'),
-		icon:'/images/tabs/KS_nav_mashup.png',
-		window:mashupsWin
-	});
-	mashupsWin.containingTab = mashupsTab;
-	
 	self.addTab(baseUITab);
 	self.addTab(controlsTab);
-	self.addTab(phoneTab);
-	self.addTab(platformTab);
-	self.addTab(mashupsTab);
+	
+	
+	if (Ti.Platform.osname !== 'mobileweb') {
+
+		var phoneTab = Ti.UI.createTab({
+			title:L('phone_win_title'),
+			icon:'/images/tabs/KS_nav_phone.png',
+			window:phoneWin
+		});
+		phoneWin.containingTab = phoneTab;
+		
+		var platformTab = Ti.UI.createTab({
+			title:L('platform_win_title'),
+			icon:'/images/tabs/KS_nav_platform.png',
+			window:platformWin
+		});
+		platformWin.containingTab = platformTab;
+		
+		var mashupsTab = Ti.UI.createTab({
+			title:L('mashups_win_title'),
+			icon:'/images/tabs/KS_nav_mashup.png',
+			window:mashupsWin
+		});
+		mashupsWin.containingTab = mashupsTab;
+		
+		self.addTab(phoneTab);
+		self.addTab(platformTab);
+		self.addTab(mashupsTab);
+	}
+	
 	
 	self.addEventListener('open',function() {
 		Titanium.UI.setBackgroundColor('#fff');

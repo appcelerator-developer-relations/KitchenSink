@@ -17,6 +17,10 @@ function BaseUIWindow(title) {
 		{title:'Horizontal Layout', hasChild:true, test:'ui/common/baseui/horizontal_layout'}
 	];
 	
+	if (Ti.Platform.osname == 'mobileweb') {
+		data.shift();
+	}
+	
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS')
 	{
