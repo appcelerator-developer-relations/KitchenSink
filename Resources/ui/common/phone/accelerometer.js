@@ -69,19 +69,21 @@ function accelerometer() {
 		win.add(notice);
 	}
 	
-	if (Titanium.Platform.name == 'android')
+	if (Titanium.Platform.name === 'android')
 	{
-		Ti.Android.currentActivity.addEventListener('pause', function(e) {
-			if (accelerometerAdded) {
-				Ti.API.info("removing accelerometer callback on pause");
-				Ti.Accelerometer.removeEventListener('update', accelerometerCallback);
-			}
-		});
-		Ti.Android.currentActivity.addEventListener('resume', function(e) {
-			if (accelerometerAdded) {
-				Ti.API.info("adding accelerometer callback on resume");
-				Ti.Accelerometer.addEventListener('update', accelerometerCallback);
-			}
+		win.addEventListener('open', function(e) {
+			win.activity.addEventListener('pause', function(e) {
+				if (accelerometerAdded) {
+					Ti.API.info("removing accelerometer callback on pause");
+					Ti.Accelerometer.removeEventListener('update', accelerometerCallback);
+				}
+			});
+			win.activity.addEventListener('resume', function(e) {
+				if (accelerometerAdded) {
+					Ti.API.info("adding accelerometer callback on resume");
+					Ti.Accelerometer.addEventListener('update', accelerometerCallback);
+				}
+			});
 		});
 	}
 	return win;
