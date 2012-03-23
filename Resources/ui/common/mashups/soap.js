@@ -1,5 +1,5 @@
 function soap() {
-	Titanium.include('ui/common/mashups/suds.js');
+	Ti.include('/ui/common/mashups/suds.js');
 	var window = Ti.UI.createWindow();
 	var label = Ti.UI.createLabel({
 	    top: 10,
