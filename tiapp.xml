@@ -7,7 +7,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>2.0.0.v20120322091832</sdk-version>
+    <sdk-version>2.0.0.v20120322231759</sdk-version>
     <id>com.appcelerator.kitchensink</id>
     <name>KitchenSink</name>
     <version>1.0</version>
@@ -35,6 +35,10 @@
             <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
         </orientations>
     </iphone>
-    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+    	<manifest>
+    		<supports-screens android:anyDensity="false"/>
+    	</manifest>
+    </android>
     <modules/>
 </ti:app>
