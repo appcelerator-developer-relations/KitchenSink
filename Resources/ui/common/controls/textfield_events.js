@@ -49,7 +49,6 @@ function textfield_events() {
 	});
 	tf1.addEventListener('change', function(e)
 	{
-		console.log(e);
 		//l.text = 'change received, event val = ' + e.value + '\nfield val = ' + tf1.value;
 		l.text = 'change received, field val = ' + tf1.value;	
 	});
