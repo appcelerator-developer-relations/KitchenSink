@@ -3,14 +3,16 @@ function image_views(_args) {
 	// create table view data object
 	var data = [
 		{title:'Basic', hasChild:true, test:'ui/common/baseui/image_view_basic'},
-		{title:'Animated', hasChild:true, test:'ui/common/baseui/image_view_animated'},
 		{title:'Image File', hasChild:true, test:'ui/common/baseui/image_view_file'},
 		{title:'Remote Image', hasChild:true, test:'ui/common/baseui/image_view_remote'},
 		{title:'Image Scaling', hasChild:true, test:'ui/common/baseui/image_view_scaling'},
-		{title:'Image View Positioning', hasChild:true, test:'ui/common/baseui/image_view_positioning'},
-		{title:'Image View Encoding', hasChild:true, test:'ui/common/baseui/image_view_encoding'}
-	
+		{title:'Image View Positioning', hasChild:true, test:'ui/common/baseui/image_view_positioning'}
 	];
+	
+	if (Ti.Platform.osname !== 'mobileweb') {
+		data.push({title:'Animated', hasChild:true, test:'ui/common/baseui/image_view_animated'});
+		data.push({title:'Image View Encoding', hasChild:true, test:'ui/common/baseui/image_view_encoding'});
+	}
 	
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS')
