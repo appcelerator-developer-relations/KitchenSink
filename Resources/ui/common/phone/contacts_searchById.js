@@ -80,7 +80,7 @@ function contacts_search() {
 	});
 	win.add(tf1);
 	win.add(b1);
-	win.open();
+	
 	return win;
 };
 
