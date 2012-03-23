@@ -1,5 +1,6 @@
-function cam_basic() {
-	var win = Titanium.UI.createWindow();
+var win;
+
+function fireUpTheCamera() {
 	Titanium.Media.showCamera({
 	
 		success:function(event)
@@ -47,6 +48,17 @@ function cam_basic() {
 		allowEditing:true,
 		mediaTypes:[Ti.Media.MEDIA_TYPE_VIDEO,Ti.Media.MEDIA_TYPE_PHOTO]
 	});
+}
+
+function cam_basic() {
+	win = Titanium.UI.createWindow();
+	if (Ti.Platform.osname === 'android') {
+		win.addEventListener('open', function(e) {
+			fireUpTheCamera();
+		});
+	} else {
+		fireUpTheCamera();	
+	}
 	return win;
 };
 
