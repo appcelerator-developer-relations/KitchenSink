@@ -1,27 +1,6 @@
-function photo_gallery() {
-	var win = Titanium.UI.createWindow();
-	
-	var imageView = Titanium.UI.createImageView({
-		height:200,
-		width:200,
-		top:20,
-		left:10,
-		backgroundColor:'#999'
-	});
-	
-	win.add(imageView);
-	
-	var popoverView;
-	var arrowDirection;
-	
-	if (Titanium.Platform.osname == 'ipad')
-	{
-		// photogallery displays in a popover on the ipad and we
-		// want to make it relative to our image with a left arrow
-		arrowDirection = Ti.UI.iPad.POPOVER_ARROW_DIRECTION_LEFT;
-		popoverView = imageView;
-	}
-	
+var popoverView, arrowDirection, imageView;
+
+function openGallery() {
 	Titanium.Media.openPhotoGallery({
 	
 		success:function(event)
@@ -55,6 +34,35 @@ function photo_gallery() {
 		arrowDirection:arrowDirection,
 		mediaTypes:[Ti.Media.MEDIA_TYPE_VIDEO,Ti.Media.MEDIA_TYPE_PHOTO]
 	});
+}
+
+function photo_gallery() {
+	var win = Titanium.UI.createWindow();
+	imageView = Titanium.UI.createImageView({
+		height:200,
+		width:200,
+		top:20,
+		left:10,
+		backgroundColor:'#999'
+	});
+	win.add(imageView);
+	
+	if (Titanium.Platform.osname == 'ipad')
+	{
+		// photogallery displays in a popover on the ipad and we
+		// want to make it relative to our image with a left arrow
+		arrowDirection = Ti.UI.iPad.POPOVER_ARROW_DIRECTION_LEFT;
+		popoverView = imageView;
+	}
+	
+	if (Ti.Platform.osname === 'android') {
+		win.addEventListener('open', function(e) {
+			openGallery();	
+		});	
+	} else {
+		openGallery();
+	}
+	
 	return win;
 };
 
