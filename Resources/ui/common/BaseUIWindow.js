@@ -18,7 +18,7 @@ function BaseUIWindow(title) {
 	];
 	
 	if (Ti.Platform.osname == 'mobileweb') {
-		//data.shift();
+		data.shift();
 	}
 	
 	// add iphone specific tests
