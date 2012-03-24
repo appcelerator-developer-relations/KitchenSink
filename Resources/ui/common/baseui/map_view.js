@@ -6,6 +6,7 @@ function mapview() {
 		isAndroid = true;
 	}
 	
+	var isMW = (Ti.Platform.osname === 'mobileweb');
 	//
 	// CREATE ANNOTATIONS
 	//
@@ -38,9 +39,12 @@ function mapview() {
 			subtitle:'Atlanta Braves Stadium\nfoo',
 			animate:true,
 			leftButton:'/images/atlanta.jpg',
-			rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
 			myid:3 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 		};
+		
+	if (Ti.Platform.osname !== 'mobileweb') {
+		atlantaParams.rightButton = Titanium.UI.iPhone.SystemButton.DISCLOSURE;
+	}
 	
 	if (!isAndroid) {
 		atlantaParams.pincolor = Titanium.Map.ANNOTATION_PURPLE;

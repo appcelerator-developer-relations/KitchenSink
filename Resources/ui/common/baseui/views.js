@@ -13,10 +13,13 @@ function views(_args) {
 		{title:'Remove Views', hasChild:true, test:'ui/common/baseui/remove_views'},
 		{title:'zIndex', hasChild:true, test:'ui/common/baseui/views_zindex'},
 		{title:'Email Dialog', hasChild:true, test:'ui/common/baseui/email_dialog'},
-		{title:'Map View', hasChild:true, test:'ui/common/baseui/map_view'},
-		{title:'View w/ Size', hasChild:true, test:'ui/common/baseui/view_with_size'},
 		{title:'Point Conversion', hasChild:true, test:'ui/common/baseui/view_point_conversion'}
 	];
+	
+	if (Ti.Platform.osname !== 'mobileweb') {
+		data.push({title:'View w/ Size', hasChild:true, test:'ui/common/baseui/view_with_size'});
+		data.push({title:'Map View', hasChild:true, test:'ui/common/baseui/map_view'});
+	}
 	
 	if (Titanium.Platform.name == 'iPhone OS')
 	{
