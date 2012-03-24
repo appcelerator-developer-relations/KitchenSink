@@ -12,9 +12,11 @@ function tv_section_header() {
 		{title:'row 5'}
 	];
 	var tableView = Titanium.UI.createTableView({
-		data:inputData,
-		style:Titanium.UI.iPhone.TableViewStyle.GROUPED
+		data:inputData
 	});
+	if (Ti.Platform.osname !== 'mobileweb') {
+		tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+	}
 	win.add(tableView);
 	return win;
 };

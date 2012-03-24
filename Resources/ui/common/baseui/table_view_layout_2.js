@@ -2,25 +2,28 @@ function tv_layout2() {
 	var win = Titanium.UI.createWindow();
 	win.barColor = '#385292';
 	
-	//
-	// CREATE SEARCH BAR
-	//
-	var search = Titanium.UI.createSearchBar({
-		barColor:'#385292',
-		showCancel:false
-	});
-	search.addEventListener('change', function(e)
-	{
-		e.value; // search string as user types
-	});
-	search.addEventListener('return', function(e)
-	{
-		search.blur();
-	});
-	search.addEventListener('cancel', function(e)
-	{
-		search.blur();
-	});
+	if (Ti.Platform.osname !== 'mobileweb') {
+		
+		//
+		// CREATE SEARCH BAR
+		//
+		var search = Titanium.UI.createSearchBar({
+			barColor:'#385292',
+			showCancel:false
+		});
+		search.addEventListener('change', function(e)
+		{
+			e.value; // search string as user types
+		});
+		search.addEventListener('return', function(e)
+		{
+			search.blur();
+		});
+		search.addEventListener('cancel', function(e)
+		{
+			search.blur();
+		});
+	}
 	
 	var tableView;
 	var data = [];
@@ -161,20 +164,34 @@ function tv_layout2() {
 	//
 	// create table view (
 	//
-	tableView = Titanium.UI.createTableView({
-		data:data,
-		search:search,
-		filterAttribute:'filter',
-		backgroundColor:'white'
-	});
+	if (Ti.Platform.osname !== 'mobileweb') {
+		tableView = Titanium.UI.createTableView({
+			data:data,
+			search:search,
+			filterAttribute:'filter',
+			backgroundColor:'white'
+		});
+	} else {
+		tableView = Titanium.UI.createTableView({
+			data:data,
+			filterAttribute:'filter',
+			backgroundColor:'white'
+		});
+	}
 	
 	tableView.addEventListener('click', function(e)
 	{
 		Ti.API.info('table view row clicked - source ' + e.source);
 		// use rowNum property on object to get row number
 		var rowNum = e.index;
-		var updateRow = createUpdateRow('You clicked on the '+e.source.clickName);
-		tableView.updateRow(rowNum,updateRow,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.LEFT});
+		var updateRow;
+		if (Ti.Platform.osname !== 'mobileweb') {
+			updateRow = createUpdateRow('You clicked on the '+e.source.clickName);
+			tableView.updateRow(rowNum,updateRow,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.LEFT});
+		} else {
+			updateRow = createUpdateRow('Row clicked');
+			tableView.updateRow(rowNum,updateRow);
+		}
 	});
 	
 	win.add(tableView);

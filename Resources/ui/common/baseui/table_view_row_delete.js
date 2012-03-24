@@ -14,9 +14,11 @@ function tv_row_delete() {
 	// set right nav button
 	//
 	var button = Titanium.UI.createButton({
-		title:'Delete Row',
-		style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+		title:'Delete Row'
 	});
+	if (Ti.Platform.osname !== 'mobileweb') {
+		button.style = Titanium.UI.iPhone.SystemButtonStyle.BORDERED;
+	}
 	
 	var tableViewOptions = {data: data};
 	if (Titanium.Platform.name == 'iPhone OS') {
@@ -62,7 +64,11 @@ function tv_row_delete() {
 		Ti.API.info("deleting row "+index);
 		
 		try {
-			tableview.deleteRow(index,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
+			if (Ti.Platform.osname !== 'mobileweb') {
+				tableview.deleteRow(index,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
+			} else {
+				tableview.deleteRow(index);
+			}
 		} catch (E) {
 			Ti.UI.createNotification({ message: E.message }).show();
 		}

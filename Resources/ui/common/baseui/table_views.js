@@ -36,7 +36,9 @@ function table_views(_args) {
 		{title:'Table View (Layout 2)', hasChild:true, test:'ui/common/baseui/table_view_layout_2'}
 	];
 	
-	data.push({title:'Table Search', hasChild:true, test:'ui/common/baseui/table_view_api_search'});
+	if (Ti.Platform.osname !== 'mobileweb') {
+		data.push({title:'Table Search', hasChild:true, test:'ui/common/baseui/table_view_api_search'});
+	}
 	
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS')
@@ -75,13 +77,15 @@ function table_views(_args) {
 	// create table view
 	var tableViewOptions = {
 			data:data,
-			style:Titanium.UI.iPhone.TableViewStyle.GROUPED,
 			headerTitle:'TableView examples and test cases',
 			footerTitle:"Wow. That was cool!",
 			backgroundColor:'transparent',
 			rowBackgroundColor:'white'
 		};
 	
+	if (Ti.Platform.osname !== 'mobileweb') {
+		tableViewOptions.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+	}
 	
 	var tableview = Titanium.UI.createTableView(tableViewOptions);
 	

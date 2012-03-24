@@ -4,9 +4,11 @@ function tv_scroll() {
 	var showScrollIndicators = false;
 	
 	var tv = Ti.UI.createTableView({
-		style:Titanium.UI.iPhone.TableViewStyle.GROUPED,
 		showVerticalScrollIndicator:showScrollIndicators
 	});
+	if (Ti.Platform.osname !== 'mobileweb') {
+		tv.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+	}
 	
 	function setData()
 	{
@@ -23,9 +25,10 @@ function tv_scroll() {
 		tv.setData(data);
 	}
 	
-	var refresh = Titanium.UI.createButton({
-		systemButton:Titanium.UI.iPhone.SystemButton.REFRESH
-	});
+	var refresh = Titanium.UI.createButton();
+	if (Ti.Platform.osname !== 'mobileweb') {
+		refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
+	}
 	refresh.addEventListener('click', function()
 	{
 		showScrollIndicators = !showScrollIndicators;

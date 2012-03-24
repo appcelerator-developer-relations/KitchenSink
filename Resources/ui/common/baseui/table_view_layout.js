@@ -48,9 +48,11 @@ function tv_layout() {
 	var tableView = Titanium.UI.createTableView({
 		backgroundColor:'transparent',
 		data:data,
-		separatorStyle:Ti.UI.iPhone.TableViewSeparatorStyle.NONE,
 		top:10
 	});
+	if (Ti.Platform.osname !== 'mobileweb') {
+		tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
+	}
 	
 	var wrapperView = Titanium.UI.createView({backgroundColor:'transparent',width:300});
 	

@@ -1,9 +1,11 @@
 function tv_refresh() {
 	var win = Ti.UI.createWindow();
 	
-	var tv = Ti.UI.createTableView({
-		style:Titanium.UI.iPhone.TableViewStyle.GROUPED
-	});
+	
+	var tv = Ti.UI.createTableView();
+	if (Ti.Platform.osname !== 'mobileweb') {
+		tv.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+	}
 	
 	function setData()
 	{
@@ -20,9 +22,10 @@ function tv_refresh() {
 		tv.setData(data);
 	}
 	
-	var refresh = Titanium.UI.createButton({
-		systemButton:Titanium.UI.iPhone.SystemButton.REFRESH
-	});
+	var refresh = Titanium.UI.createButton();
+	if (Ti.Platform.osname !== 'mobileweb'){
+		refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
+	}
 	refresh.addEventListener('click', function()
 	{
 		tv.setData([]);
