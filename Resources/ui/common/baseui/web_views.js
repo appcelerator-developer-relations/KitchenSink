@@ -1,4 +1,4 @@
-function webviews() {
+function webviews(_args) {
 	var win = Titanium.UI.createWindow();
 	
 	
@@ -95,7 +95,7 @@ function webviews() {
 		if (e.index == 2)
 		{
 			w.add(webview);
-			win.tab.open(w);
+			_args.containingTab.open(w);
 			var xhr = Titanium.Network.createHTTPClient();
 			var baseURL = 'http://www.google.com';
 			xhr.onload = function()
@@ -252,7 +252,7 @@ function webviews() {
 				// window instance when the window is closed
 				Ti.App.removeEventListener('webview_hidetoolbar',hideToolbar);
 			});
-			win.tab.open(w);		
+			_args.containingTab.open(w);		
 		}
 	
 	});
