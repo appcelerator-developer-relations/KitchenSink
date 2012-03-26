@@ -1,13 +1,7 @@
 	// attempt to simulate a changing of image on toolbar
 function image_view_toolbar() {	
 	var win = Ti.UI.createWindow();
-	
-	
-	/*var camera = Titanium.UI.createButton({
-		backgroundImage:'/images/camera.png',
-		height:33,
-		width:33
-	});*/
+
 	
 	var flexSpace = Titanium.UI.createButton({
 		systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
