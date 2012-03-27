@@ -92,18 +92,7 @@ if (Ti.version < 1.8 ) {
 	Ti.API.info("should be hello, was = "+String.format('%s','hello'));
 	
 	// test to check that we can iterate over titanium based objects
-	(function(){
-		if (osname !== 'mobileweb') {
-			Ti.API.info("you should see a list of properties (3 or more) below this line");
-			Ti.API.info("---------------------------------------------------------------");
-			for (var p in win1)
-			{
-				Ti.API.info("         win1 property: "+p);
-			}
-			Ti.API.info("Did you see properties? ^^^^^ ");
-		}
-		Ti.API.info("---------------------------------------------------------------");
-	
+	(function(){	
 		Ti.API.info("you should see a list of modules (3 or more) below this line");
 		Ti.API.info("---------------------------------------------------------------");
 		for (var p in Titanium)
