@@ -69,7 +69,7 @@ tableview.addEventListener('click', function(e)
 
 	if (rowdata.auto === true)
 	{
-		webview = Ti.UI.createWebView({height:'auto',width:'auto'});
+		webview = Ti.UI.createWebView({height:Ti.UI.SIZE,width:Ti.UI.SIZE});
 	}
 	else
 	{
@@ -99,13 +99,9 @@ tableview.addEventListener('click', function(e)
 		var baseURL = 'http://www.google.com';
 		xhr.onload = function()
 		{
-			if (Titanium.Platform.name != 'android') { // TIMOB-7840
-				webview.setHtml(this.responseText, { baseURL: baseURL });
-			} else {
-				webview.html = this.responseText;
-			}
+			webview.setHtml(this.responseText, { baseURL: baseURL });
 		};
-		
+
 		// open the client
 		xhr.open('GET',baseURL);
 		
