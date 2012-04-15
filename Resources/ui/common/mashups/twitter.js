@@ -227,16 +227,16 @@ function getTweets() {
 				var created_at = prettyDate(strtotime(tweets[c].created_at));
 				var bgcolor = (c % 2) == 0 ? '#fff' : '#eee';
 
-				var row = Ti.UI.createTableViewRow({hasChild:true,height:'auto',backgroundColor:bgcolor});
+				var row = Ti.UI.createTableViewRow({hasChild:true,height:'120dp',backgroundColor:bgcolor});
 
 				// Create a vertical layout view to hold all the info labels and images for each tweet
 				var post_view = Ti.UI.createView({
-					height:'auto',
+					height:'120dp',
 					layout:'vertical',
 					left:5,
 					top:5,
 					bottom:5,
-					right:5
+					right:5,
 				});
 
 				var av = Ti.UI.createImageView({
@@ -255,7 +255,7 @@ function getTweets() {
 					width:120,
 					top:-48,
 					bottom:2,
-					height:16,
+					height:18,
 					textAlign:'left',
 					color:'#444444',
 					font:{fontFamily:'Trebuchet MS',fontSize:14,fontWeight:'bold'}
@@ -280,11 +280,12 @@ function getTweets() {
 				var tweet_text = Ti.UI.createLabel({
 					text:tweet,
 					left:54,
-					top:0,
+					top:4,
 					bottom:2,
 					height:'auto',
-					width:236,
+					width:230,
 					textAlign:'left',
+					color: '#000',
 					font:{fontSize:14}
 				});
 				// Add the tweet to the view

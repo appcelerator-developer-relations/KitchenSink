@@ -1,5 +1,5 @@
 function webviews(_args) {
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({backgroundColor:'#fff'});
 	
 	
 	// create table view data object
@@ -43,6 +43,7 @@ function webviews(_args) {
 	}
 	
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});

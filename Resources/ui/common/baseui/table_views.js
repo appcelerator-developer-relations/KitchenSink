@@ -75,6 +75,7 @@ function table_views(_args) {
 		data.push({title:'Dynamic Scrolling', hasChild:true, test:'ui/handheld/ios/baseui/table_view_dynamic_scroll'});
 	}
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableViewOptions = {
 			data:data,
 			headerTitle:'TableView examples and test cases',

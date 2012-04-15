@@ -1,5 +1,5 @@
 function image_views(_args) {
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
 	// create table view data object
 	var data = [
 		{title:'Basic', hasChild:true, test:'ui/common/baseui/image_view_basic'},
@@ -28,6 +28,7 @@ function image_views(_args) {
 	}
 	
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});

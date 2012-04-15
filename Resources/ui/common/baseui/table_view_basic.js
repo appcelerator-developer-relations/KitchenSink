@@ -1,5 +1,5 @@
 function tv_basic() {
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
 	// create table view data object
 	var data = [
 		{title:'Row 1', hasChild:true, color:'red', selectedColor:'#fff'},
@@ -11,6 +11,7 @@ function tv_basic() {
 	];
 	
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});
