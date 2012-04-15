@@ -27,7 +27,7 @@ function xhr_binary() {
 		imageView.image = f.nativePath;
 	};
 	// open the client (and test HTTPS)
-	xhr.open('GET','https://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png');
+	xhr.open('GET','http://www.appcelerator.com/wp-content/themes/appcelerator/img/a-logo.png');
 	
 	// send the data
 	xhr.send();

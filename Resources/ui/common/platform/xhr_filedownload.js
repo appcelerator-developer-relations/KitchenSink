@@ -63,7 +63,7 @@ function xhr_download() {
 		// open the client
 		if (Titanium.Platform.name == 'android') {
 			//android's WebView doesn't support embedded PDF content
-			c.open('GET', 'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png');
+			c.open('GET', 'http://www.appcelerator.com/wp-content/themes/appcelerator/img/a-logo.png');
 		} else {
 			c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
 			c.file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'test.pdf');
@@ -106,7 +106,7 @@ function xhr_download() {
 		// open the client
 		if (Titanium.Platform.name == 'android') {
 			//android's WebView doesn't support embedded PDF content
-			c.open('GET', 'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png');
+			c.open('GET', 'http://www.appcelerator.com/wp-content/themes/appcelerator/img/a-logo.png');
 		} else {
 			c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
 		}
