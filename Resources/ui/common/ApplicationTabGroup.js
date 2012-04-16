@@ -50,18 +50,17 @@ function ApplicationTabGroup() {
 		});
 		platformWin.containingTab = platformTab;
 		
+		self.addTab(phoneTab);
+		self.addTab(platformTab);
+		
 		var mashupsTab = Ti.UI.createTab({
 			title:L('mashups_win_title'),
 			icon:'/images/tabs/KS_nav_mashup.png',
 			window:mashupsWin
 		});
 		mashupsWin.containingTab = mashupsTab;
-		
-		self.addTab(phoneTab);
-		self.addTab(platformTab);
 		self.addTab(mashupsTab);
 	}
-	
 	
 	self.addEventListener('open',function() {
 		Titanium.UI.setBackgroundColor('#fff');
