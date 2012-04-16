@@ -10,6 +10,7 @@ function MashupsWindow(title) {
 		{title:'Foursquare', hasChild:true, test:'ui/common/mashups/foursquare', title_image:'/images/light-poweredby-foursquare.png'},
 		{title:'Facebook', hasChild:true, test:'ui/common/mashups/facebook'},
 		{title:'Sencha Touch', hasChild:true, test:'ui/common/mashups/senchatouch'},
+		{title:'jQuery mobile', hasChild:true, test:'ui/common/mashups/jquery_mobile'},
 		{title:'YQL', hasChild:true, test:'ui/common/mashups/yql'}
 	];
 	
