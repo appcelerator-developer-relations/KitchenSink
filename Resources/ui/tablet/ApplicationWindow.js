@@ -8,6 +8,10 @@ function ApplicationWindow(title) {
 		base+'3298.js',
 		base+'split_view_features.js'
 	);
+	
+	var jQueryMobile = require('ui/common/mashups/jquery_mobile'),
+		jqMobile = new jQueryMobile();
+
 	/*
 	var SVNav = require('ui/tablet/ios/baseui/split_view_nav.js'),
 		SVNav = require('ui/tablet/ios/baseui/split_view_nav.js'),
@@ -122,6 +126,17 @@ function ApplicationWindow(title) {
 		SplitFeatures.open();
 	});
 	self.add(b7);
+	
+	var b8 = Ti.UI.createButton({
+		title:'jQuery Mobile',
+		width:300,
+		height:50,
+		top:590
+	});
+	b8.addEventListener('click', function() {
+		jqMobile.open();
+	});
+	self.add(b8);
 		
 	if (Ti.App.Properties.getBool('showNotice', true)){
 		var alertNotice = Ti.UI.createAlertDialog({
