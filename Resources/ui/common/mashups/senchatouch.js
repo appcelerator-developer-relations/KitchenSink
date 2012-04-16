@@ -1,4 +1,5 @@
 function SenchaTouch() {
+	var indicator;
 	var win = Ti.UI.createWindow({
 		backgroundColor: '#fff'
 	});
@@ -6,6 +7,17 @@ function SenchaTouch() {
 		url: 'http://dev.sencha.com/deploy/touch/examples/production/kitchensink/'
 	});
 	win.add(webview);
+		
+	win.addEventListener('open', function(e) {
+		indicator = Ti.UI.createActivityIndicator({
+			message: 'Loading Sencha...'
+		});
+		indicator.show();
+	});
+	webview.addEventListener('load', function(e) {
+		indicator.hide();
+	});
+	
 	return win;
 }
 
