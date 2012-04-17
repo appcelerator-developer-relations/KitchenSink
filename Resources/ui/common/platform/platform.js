@@ -1,5 +1,7 @@
 function ti_platform() {
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({
+		layout: 'vertical'
+	});
 	
 	// for battery level to work, you have to turn it
 	// on first otherwise it will report -1.  if you
@@ -46,7 +48,7 @@ function ti_platform() {
 	
 	var l2 = Titanium.UI.createLabel({
 		text:'model:' + Titanium.Platform.model,
-		top:30,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -58,7 +60,7 @@ function ti_platform() {
 	
 	var l3 = Titanium.UI.createLabel({
 		text:'version:' + Titanium.Platform.version,
-		top:50,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -70,7 +72,7 @@ function ti_platform() {
 	
 	var l4 = Titanium.UI.createLabel({
 		text:'architecture:' + Titanium.Platform.architecture,
-		top:70,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -82,7 +84,7 @@ function ti_platform() {
 	
 	var l5 = Titanium.UI.createLabel({
 		text:'macaddress:' + Titanium.Platform.macaddress,
-		top:90,
+		top:10,
 		left:10,
 		width:'auto',
 		height:'auto',
@@ -94,7 +96,7 @@ function ti_platform() {
 	
 	var l6 = Titanium.UI.createLabel({
 		text:'processor count:' + Titanium.Platform.processorCount,
-		top:110,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -107,7 +109,7 @@ function ti_platform() {
 	
 	var l7 = Titanium.UI.createLabel({
 		text:'username:' + Titanium.Platform.username,
-		top:130,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -121,7 +123,7 @@ function ti_platform() {
 	// may select the wrong interface on non-mobile devices.
 	var l8 = Titanium.UI.createLabel({
 		text:'address:' + Titanium.Platform.address,
-		top:150,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -133,7 +135,7 @@ function ti_platform() {
 	
 	var l9 = Titanium.UI.createLabel({
 		text:'ostype:' + Titanium.Platform.ostype,
-		top:170,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -149,7 +151,7 @@ function ti_platform() {
 	
 	var l11 = Titanium.UI.createLabel({
 		text:'battery state:' + batteryStateToString(Titanium.Platform.batteryState),
-		top:190,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -161,7 +163,7 @@ function ti_platform() {
 	
 	var l12 = Titanium.UI.createLabel({
 		text:'battery level:' + Titanium.Platform.batteryLevel,
-		top:210,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -173,7 +175,7 @@ function ti_platform() {
 	
 	var l13 = Titanium.UI.createLabel({
 		text:'display width-x-height:' + Titanium.Platform.displayCaps.platformWidth + 'x' + Titanium.Platform.displayCaps.platformHeight,
-		top:230,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -185,7 +187,7 @@ function ti_platform() {
 	
 	var l15 = Titanium.UI.createLabel({
 		text:'display density:' + Titanium.Platform.displayCaps.density,
-		top:250,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -197,7 +199,7 @@ function ti_platform() {
 	
 	var l16 = Titanium.UI.createLabel({
 		text:'display dpi:' + Titanium.Platform.displayCaps.dpi,
-		top:270,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -209,7 +211,7 @@ function ti_platform() {
 	
 	var l17 = Titanium.UI.createLabel({
 		text:'available memory:' + Titanium.Platform.availableMemory,
-		top:290,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -221,7 +223,7 @@ function ti_platform() {
 	
 	var l18 = Titanium.UI.createLabel({
 		text:'is24HourTimeFormat:' + Titanium.Platform.is24HourTimeFormat(),
-		top:310,
+		top:10,
 		left:10,
 		width:300,
 		height:'auto',
@@ -235,7 +237,7 @@ function ti_platform() {
 		title:'Open URL',
 		height:30,
 		width:200,
-		top:330
+		top:20
 	});
 	win.add(b);
 	var openURL=1;

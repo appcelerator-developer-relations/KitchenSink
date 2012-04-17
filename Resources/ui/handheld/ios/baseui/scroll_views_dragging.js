@@ -5,8 +5,7 @@ function scroll_view_drag() {
 	    width: 320, 
 	    height: 480,
 	    contentWidth: 2000,
-	    backgroundColor:'white',
-	    
+	    backgroundColor:'white'
 	});
 	scrollView.add(Ti.UI.createLabel({
 	    text: 'Swipe Me',

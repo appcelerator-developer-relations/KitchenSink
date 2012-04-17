@@ -1,5 +1,8 @@
 function views(_args) {
 	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
+	
+	var isMobileWeb = Titanium.Platform.osname == 'mobileweb';
+	
 	//create table view data object
 	var data = [
 		{title:'Events Propagation', hasChild:true, test:'ui/common/baseui/view_event_propagation'},
@@ -13,13 +16,10 @@ function views(_args) {
 		{title:'Remove Views', hasChild:true, test:'ui/common/baseui/remove_views'},
 		{title:'zIndex', hasChild:true, test:'ui/common/baseui/views_zindex'},
 		{title:'Email Dialog', hasChild:true, test:'ui/common/baseui/email_dialog'},
-		{title:'Point Conversion', hasChild:true, test:'ui/common/baseui/view_point_conversion'}
+		{title:'Point Conversion', hasChild:true, test:'ui/common/baseui/view_point_conversion'},
+		{title:'View w/ Size', hasChild:!isMobileWeb, test:'ui/common/baseui/view_with_size', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
+		{title:'Map View', hasChild:!isMobileWeb, test:'ui/common/baseui/map_view', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"}
 	];
-	
-	if (Ti.Platform.osname !== 'mobileweb') {
-		data.push({title:'View w/ Size', hasChild:true, test:'ui/common/baseui/view_with_size'});
-		data.push({title:'Map View', hasChild:true, test:'ui/common/baseui/map_view'});
-	}
 	
 	if (Titanium.Platform.name == 'iPhone OS')
 	{

@@ -4,28 +4,37 @@ function PhoneWindow(title) {
 		backgroundColor:'white'
 	});
 	
+	var isMobileWeb = Titanium.Platform.osname == 'mobileweb';
+	
 	// create table view data object
 	var data = [
 		{title:'Play Movie', hasChild:true, test:'ui/common/phone/movie'},
 		{title:'Vibrate', hasChild:true, test:'ui/common/phone/vibrate'},
 		{title:'Geolocation', hasChild:true, test:'ui/common/phone/geolocation'},
-		{title:'Accelerometer', hasChild:true, test:'ui/common/phone/accelerometer'},
-		{title:'Sound', hasChild:true, test:'ui/common/phone/sound'},
-		{title:'Photo Gallery', hasChild:true, test:'ui/common/phone/photo_gallery'}
+		{title:'Accelerometer', hasChild:true, test:'ui/common/phone/accelerometer'}
 	];
+	
+	data.push({title:'Sound', hasChild:!isMobileWeb, test:'ui/common/phone/sound', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
+	data.push({title:'Photo Gallery', hasChild:!isMobileWeb, test:'ui/common/phone/photo_gallery', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
 	
 	data.push({title:'Orientation', hasChild:true, test:'ui/common/phone/orientation'});
 	data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts'});
 	
-	if (Titanium.Platform.osname!='ipad') {
-		data.push({title:'Camera', hasChild:true, test:'ui/common/phone/camera'});
+	if (Titanium.Platform.osname !== 'ipad') {
+		data.push({title:'Camera', hasChild:!isMobileWeb, test:'ui/common/phone/camera', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
 	}
 	
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS') {
 		data.push({title:'Screenshot', hasChild:true, test:'ui/handheld/ios/phone/screenshot'});
 		data.push({title:'Save to Gallery', hasChild:true, test:'ui/handheld/ios/phone/photo_gallery_save'});
-		data.push({title:'Shake', hasChild:true, test:'ui/handheld/ios/phone/shake'});
+	}
+
+	if (Titanium.Platform.name !== 'android') {
+		data.push({title:'Shake', hasChild:true, test:'ui/common/phone/shake'});
+	}
+	
+	if (Titanium.Platform.name == 'iPhone OS') {
 		if (Titanium.Platform.osname!='ipad')
 		{
 			data.push({title:'Record Video', hasChild:true, test:'ui/common/phone/record_video'});
