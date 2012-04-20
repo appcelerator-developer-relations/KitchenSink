@@ -413,26 +413,27 @@ function geolocation() {
 			},100);
 	
 			// reverse geo
-			Titanium.Geolocation.reverseGeocoder(latitude,longitude,function(evt)
-			{
-				if (evt.success) {
-					var places = evt.places;
-					if (places && places.length) {
-						reverseGeo.text = places[0].address;
-					} else {
-						reverseGeo.text = "No address found";
+			if (Ti.Platform.osname !== 'mobileweb') {
+				Titanium.Geolocation.reverseGeocoder(latitude,longitude,function(evt)
+				{
+					if (evt.success) {
+						var places = evt.places;
+						if (places && places.length) {
+							reverseGeo.text = places[0].address;
+						} else {
+							reverseGeo.text = "No address found";
+						}
+						Ti.API.debug("reverse geolocation result = "+JSON.stringify(evt));
 					}
-					Ti.API.debug("reverse geolocation result = "+JSON.stringify(evt));
-				}
-				else {
-					Ti.UI.createAlertDialog({
-						title:'Reverse geo error',
-						message:evt.error
-					}).show();
-					Ti.API.info("Code translation: "+translateErrorCode(e.code));
-				}
-			});
-	
+					else {
+						Ti.UI.createAlertDialog({
+							title:'Reverse geo error',
+							message:evt.error
+						}).show();
+						Ti.API.info("Code translation: "+translateErrorCode(e.code));
+					}
+				});
+			}	
 	
 			Titanium.API.info('geo - location updated: ' + new Date(timestamp) + ' long ' + longitude + ' lat ' + latitude + ' accuracy ' + accuracy);
 		};
@@ -441,28 +442,30 @@ function geolocation() {
 	}
 	var addr = "2065 Hamilton Avenue San Jose California 95125";
 	
-	Titanium.Geolocation.forwardGeocoder(addr,function(evt)
-	{
-		Ti.API.info('in forward ');
-		forwardGeo.text = "lat:"+evt.latitude+", long:"+evt.longitude;
-		Titanium.Geolocation.reverseGeocoder(evt.latitude,evt.longitude,function(evt)
+	if (Ti.Platform.osname !== 'mobileweb') {
+		Titanium.Geolocation.forwardGeocoder(addr,function(evt)
 		{
-			if (evt.success) {
-				var text = "";
-				for (var i = 0; i < evt.places.length; i++) {
-					text += "" + i + ") " + evt.places[i].address + "\n";
+			Ti.API.info('in forward ');
+			forwardGeo.text = "lat:"+evt.latitude+", long:"+evt.longitude;
+			Titanium.Geolocation.reverseGeocoder(evt.latitude,evt.longitude,function(evt)
+			{
+				if (evt.success) {
+					var text = "";
+					for (var i = 0; i < evt.places.length; i++) {
+						text += "" + i + ") " + evt.places[i].address + "\n";
+					}
+					Ti.API.info('Reversed forward: '+text);
 				}
-				Ti.API.info('Reversed forward: '+text);
-			}
-			else {
-				Ti.UI.createAlertDialog({
-					title:'Forward geo error',
-					message:evt.error
-				}).show();
-				Ti.API.info("Code translation: "+translateErrorCode(e.code));
-			}
+				else {
+					Ti.UI.createAlertDialog({
+						title:'Forward geo error',
+						message:evt.error
+					}).show();
+					Ti.API.info("Code translation: "+translateErrorCode(e.code));
+				}
+			});
 		});
-	});
+	}
 	
 	if (Titanium.Platform.name == 'android')
 	{

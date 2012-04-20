@@ -16,6 +16,10 @@ function button_control() {
 		height:40,
 		top:60
 	});
+	b2.addEventListener("click", function() {
+		console.debug("Opening google");
+		Ti.Platform.openURL("http://www.google.com/");
+	});
 	
 	
 	var b3 = Titanium.UI.createButton({

@@ -4,9 +4,11 @@ function BaseUIWindow(title) {
 		backgroundColor:'white'
 	});
 	
+	var isMobileWeb = Titanium.Platform.osname == 'mobileweb';
+	
 	// create table view data object
 	var data = [
-		{title:'Tab Groups', hasChild:true, test:'ui/common/baseui/tab_groups'},
+		{title:'Tab Groups', hasChild:!isMobileWeb, test:'ui/common/baseui/tab_groups', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
 		{title:'Window Properties', hasChild:true, test:'ui/common/baseui/window_properties'},
 		{title:'Window Layout', hasChild:true, test:'ui/common/baseui/window_layout'},
 		{title:'Window (Standalone)', hasChild:true, test:'ui/common/baseui/window_standalone'},
@@ -16,10 +18,6 @@ function BaseUIWindow(title) {
 		{title:'Vertical Layout', hasChild:true, test:'ui/common/baseui/vertical_layout'},
 		{title:'Horizontal Layout', hasChild:true, test:'ui/common/baseui/horizontal_layout'}
 	];
-	
-	if (Ti.Platform.osname == 'mobileweb') {
-		data.shift();
-	}
 	
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS')
@@ -60,7 +58,7 @@ function BaseUIWindow(title) {
 	{
 		if (e.rowData.test)
 		{
-			var ExampleWindow = require(e.rowData.test);
+			var ExampleWindow = require(e.rowData.test),
 				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
 			if (Ti.Platform.name == "android") {
 				
