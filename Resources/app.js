@@ -37,9 +37,6 @@ if (Ti.version < 2.0 ) {
 			win.open();
 		}
 	}
-	else if (osname === 'mobileweb') {
-		Window = require('ui/mobileweb/ApplicationWindow');
-	}
 	else {
 		// iPhone makes use of the platform-specific navigation controller,
 		// all other platforms follow a similar UI pattern
