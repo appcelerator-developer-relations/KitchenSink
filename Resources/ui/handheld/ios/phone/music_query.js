@@ -28,7 +28,7 @@ function music_query() {
 	});
 	var v1 = Ti.UI.createView({
 		top:0,
-		height:"auto",
+		height:"auto"
 	});
 	v1.add(desc1);
 	v1.add(field1);
