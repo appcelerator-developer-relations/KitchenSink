@@ -56,6 +56,12 @@ function ApplicationTabGroup() {
 	mashupsWin.containingTab = mashupsTab;
 	self.addTab(mashupsTab);
 	
+	self.addEventListener('close', function() {
+		if (Ti.Platform.osname == "iphone") {
+			self.open();
+		}
+	});
+	
 	self.addEventListener('open',function() {
 		Titanium.UI.setBackgroundColor('#fff');
 	});
