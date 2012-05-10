@@ -15,6 +15,7 @@ function win_standalone(_args) {
 	{
 		Ti.API.info('FOCUSED EVENT RECEIVED');
 	});
+
 	
 	//
 	//  OPEN WINDOW OUTSIDE OF TAB GROUP
@@ -223,6 +224,10 @@ function win_standalone(_args) {
 		{
 			a.height = 0;
 			w.close(a);
+		});
+		
+		Ti.App.addEventListener('nav_back', function() {
+			w.close();
 		});
 	
 		w.open(a);

@@ -93,6 +93,7 @@ function BaseUIWindow(title) {
 	self.addEventListener('focus', function()
 	{
 		Ti.API.info('FOCUS RECEIVED IN base_ui');
+		Ti.App.fireEvent('nav_back');
 		
 		if (Ti.Platform.osname !== 'mobileweb') {
 			Ti.API.info(Ti.dumpCoverage());
