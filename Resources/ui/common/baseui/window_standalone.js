@@ -3,7 +3,7 @@
 	//  the current window or the current tab group.  These examples show you different ways
 	//  to open windows outside of tab groups.
 	//
-function win_standalone() {	
+function win_standalone(_args) {	
 	var win = Titanium.UI.createWindow();
 	
 	win.orientationModes = [
@@ -406,7 +406,7 @@ function win_standalone() {
 				width:180,
 				height:40
 			});
-			Titanium.UI.currentTab.open(w);
+			_args.containingTab.open(w);
 			w.add(b);
 			b.addEventListener('click',function()
 			{
@@ -422,7 +422,7 @@ function win_standalone() {
 				width:180,
 				height:40
 			});
-			Titanium.UI.currentTab.open(w,{animated:false});
+			_args.containingTab.open(w,{animated:false});
 			w.add(b);
 			b.addEventListener('click',function()
 			{
