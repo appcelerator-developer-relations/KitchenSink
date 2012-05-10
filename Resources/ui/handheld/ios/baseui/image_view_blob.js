@@ -1,8 +1,8 @@
-function image_view_blog() {
+function image_view_blog(_args) {
 	var win = Titanium.UI.createWindow();
 	
 	// start a blob async and notify callback when completed
-	win.tabGroup.toImage(function(e)
+	_args.tabGroup.toImage(function(e)
 	{
 		Ti.API.info("tiGroup blob has been rendered: "+e.blob.width+"x"+e.blob.height);
 	});
@@ -12,7 +12,7 @@ function image_view_blog() {
 	//	then pass the blob to an image view via the image property
 	//
 	var imageView = Titanium.UI.createImageView({
-		image:win.tabGroup.toImage(),
+		image:_args.tabGroup.toImage(),
 		width:200,
 		height:300,
 		top:20
