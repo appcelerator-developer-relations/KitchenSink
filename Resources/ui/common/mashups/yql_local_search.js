@@ -1,4 +1,4 @@
-function local_search() {
+function local_search(_args) {
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#fff'
 	});
@@ -33,8 +33,8 @@ function local_search() {
 			left: 0, right: 0, top: 0, bottom: 0
 		});
 		win.add(wv);
-		if (Ti.UI.currentTab) {
-			Ti.UI.currentTab.open(win, {animated:true});
+		if (_args.containingTab) {
+			_args.containingTab.open(win, {animated:true});
 		} else {
 			win.open({animated: true});
 		}

@@ -218,6 +218,10 @@ function rss() {
 		loadRSSFeed(url);
 	});
 	
+	self.addEventListener('blur', function() {
+		stream.stop();
+	});
+	
 	return self;
 };
 

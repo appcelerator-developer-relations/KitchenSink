@@ -211,11 +211,11 @@ function button_control() {
 	win.add(bhcenter);
 	win.add(bhright);
 	
-	if (Ti.Platform.osname === 'android') {
+//	if (Ti.Platform.osname === 'android') {
 		win.add(bvtop);
 		win.add(bvcenter);
 		win.add(bvbottom);
-	}
+//	}
 
 	return win;
 }

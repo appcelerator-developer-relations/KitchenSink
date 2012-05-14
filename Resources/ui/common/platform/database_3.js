@@ -24,6 +24,11 @@ function db3() {
 	rows.close();
 	
 	self.addEventListener('click',function(e){self.close();});
+	self.addEventListener('open', function() {
+		setTimeout(function() {
+			self.close();
+		},3000);
+	});
 	
 	return self;
 };

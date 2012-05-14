@@ -31,6 +31,12 @@ function db2() {
 		self.close();
 	});
 	
+	self.addEventListener('open', function() {
+		setTimeout(function() {
+			self.close();
+		},3000);
+	});
+	
 	return self;
 };
 
