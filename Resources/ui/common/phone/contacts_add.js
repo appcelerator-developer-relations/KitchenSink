@@ -174,7 +174,7 @@ function contacts_add() {
 			address:{"home":[address]},
 			url:{"home":[weburl]}
 		});
-		
+		alert('Contact Added!');
 	});
 	
 	scrollview.add(v1);

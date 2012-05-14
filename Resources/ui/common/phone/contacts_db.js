@@ -1,4 +1,4 @@
-function contacts_db() {
+function contacts_db(_args) {
 	var win = Ti.UI.createWindow();
 	var android = (Ti.Platform.osname === 'android');
 	
@@ -52,7 +52,7 @@ function contacts_db() {
 					display.add(Ti.UI.createLabel({text: 'No addresses to show'}));
 				}
 	
-				Titanium.UI.currentTab.open(display,{animated:true});
+				_args.containingTab.open(display,{animated:true});
 			});
 		}
 		return rows;

@@ -26,7 +26,7 @@ function contacts(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow();
+				win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}
 	});
