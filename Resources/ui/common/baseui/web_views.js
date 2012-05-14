@@ -36,7 +36,8 @@ function webviews(_args) {
 		data.push({title:'HTML5 Video', auto:true, hasChild:true, url:'/etc/html5video.html'});
 		
 		// can't test youtube in simulator
-		if (Titanium.Platform.model != 'iPhone Simulator')
+		Ti.API.info('MODEL:'+Ti.Platform.model);
+		if (Titanium.Platform.model !== 'Simulator')
 		{
 			data.push({title:'Youtube Video', auto:true, hasChild:true, url:'/etc/youtube.html'});
 		}
@@ -71,7 +72,7 @@ function webviews(_args) {
 	
 		if (rowdata.auto === true)
 		{
-			webview = Ti.UI.createWebView({height:'auto',width:'auto'});
+			webview = Ti.UI.createWebView({height:Ti.UI.SIZE,width:Ti.UI.SIZE});
 		}
 		else
 		{
