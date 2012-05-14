@@ -60,8 +60,8 @@ function view_evt_prop() {
 	
 	a.addEventListener('click',function(ev)
 	{
-		console.log(ev.source.widgetId);
-		console.log(ev.source.parent.widgetId);
+		Ti.API.info(ev.source.widgetId);
+		Ti.API.info(ev.source.parent.widgetId);
 		l.text = "view: You clicked on " +ev.source.name;
 		Ti.API.info('Clicked: '+ev.source.name);
 		clear(l);
