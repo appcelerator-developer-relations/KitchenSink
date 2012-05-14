@@ -11,7 +11,7 @@ function tv_update_row() {
 		for (var i=0;i<30;i++)	
 		{
 			var row = Ti.UI.createTableViewRow({height:50});
-			var l1 = Ti.UI.createLabel({text:'Label ' +  i, font:{fontSize:14}, color:'#888', left:5});
+			var l1 = Ti.UI.createLabel({text:'Label ' +  i, font:{fontSize:14}, color:'#888', left:5, width:Ti.UI.FILL});
 			row.add(l1);
 			var image1 = Ti.UI.createImageView({image:'/images/chat.png', right:5,height:23, width:29});
 			row.add(image1);
