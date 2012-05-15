@@ -38,8 +38,9 @@ function logging() {
 	Titanium.API.info(14);
 	Titanium.API.info(15);
 	
-	
-	alert('ALERT LOG FROM FUNCTION - name: ' + obj.name + ' value: ' + obj.value);
+	win.addEventListener('open', function() {
+		alert('ALERT LOG FROM FUNCTION - name: ' + obj.name + ' value: ' + obj.value);
+	});
 	
 	return win;
 };
