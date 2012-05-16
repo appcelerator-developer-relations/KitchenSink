@@ -150,10 +150,9 @@ function orientation() {
 	});
 	b4.addEventListener('click', function()
 	{
-		var subwin = Ti.UI.createWindow({
-			url:'vibrate.js',
-			backgroundColor:'purple'
-		});
+		var SubWin = require('ui/common/phone/vibrate');
+		var subwin = new SubWin();
+		subwin.backgroundColor = 'purple';
 	
 		subwin.orientationModes = [ 
 			Titanium.UI.PORTRAIT, 

@@ -229,6 +229,14 @@ function win_standalone(_args) {
 		Ti.App.addEventListener('nav_back', function() {
 			w.close();
 		});
+		
+		Ti.Gesture.addEventListener('orientationchange', function(e) {
+			if (e.orientation >= 3) {
+				w.top = 32;
+			} else {
+				w.top = 37;
+			}
+		});
 	
 		w.open(a);
 	});
