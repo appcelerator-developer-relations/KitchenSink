@@ -28,7 +28,7 @@ if (Ti.version < 2.0 ) {
 	var isTablet = osname === 'ipad' || (osname === 'android' && (width > 899 || height > 899));
 	
 	var Window;
-	if (isTablet) {
+	if (isTablet && osname !== 'ipad') {
 		if (osname !== 'ipad') {
 			alert('KitchenSink is not available for this device');
 		} else {
