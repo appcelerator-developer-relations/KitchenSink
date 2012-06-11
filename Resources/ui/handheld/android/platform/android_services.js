@@ -1,9 +1,11 @@
 function android_service() {
 	/*global Ti, alert */
 	var SECS = 5;
-	var URL = '/testservice.js';
+	var URL = 'testservice.js';
 	
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({
+		layout:'vertical'
+	});
 	var title = Ti.UI.createLabel({
 		top: 0, left: 5, right: 5, height: 40,
 		text: 'A service that runs its code every ' + SECS + ' secs.  See Resources/android/testservice.js.  Console:'
@@ -11,7 +13,7 @@ function android_service() {
 	win.add(title);
 	
 	var console = Ti.UI.createLabel({
-		top: 45, left: 5, right: 5, height: 200,
+		top: 5, left: 5, right: 5, height: 150,
 		backgroundColor: 'white', color: 'black',
 		font: {fontSize: 12}, verticalAlign: 'top'
 	});
@@ -34,7 +36,7 @@ function android_service() {
 	
 	var checkButton = Ti.UI.createButton({
 		title: 'Check if Test Service is running',
-		left: 5, right: 5, top: 250, height: 35
+		left: 5, right: 5, top: 5, height: 35
 	});
 	checkButton.addEventListener('click', function(){
 		if (Ti.Android.isServiceRunning(Ti.Android.createServiceIntent({url: URL}))) {
@@ -47,7 +49,7 @@ function android_service() {
 	
 	var startedButton = Ti.UI.createButton({
 		title: 'Start Service via startService()',
-		left: 5, right: 5, top: 290, height: 35
+		left: 5, right: 5, top: 5, height: 35
 	});
 	
 	startedButton.addEventListener('click', function() {
@@ -62,7 +64,7 @@ function android_service() {
 	win.add(startedButton);
 	
 	var bindButton = Ti.UI.createButton({
-		top: 330, left: 5, right: 5, height: 35,
+		top: 5, left: 5, right: 5, height: 35,
 		title: 'Start Service via createService()/start()'
 	});
 	
@@ -92,7 +94,7 @@ function android_service() {
 	win.add(bindButton);
 	
 	var stopButton = Ti.UI.createButton({
-		top: 370, left: 5, right: 5, height: 35,
+		top: 5, left: 5, right: 5, height: 35,
 		title: 'Stop Service via stopService()'
 	});
 	stopButton.addEventListener('click', function() {

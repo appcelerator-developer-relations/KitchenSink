@@ -1,6 +1,8 @@
 function ti_platform() {
-	var win = Titanium.UI.createWindow({
-		layout: 'vertical'
+	var win = Titanium.UI.createWindow();
+	
+	var scrollview = Ti.UI.createScrollView({
+		layout:'vertical'
 	});
 	
 	// for battery level to work, you have to turn it
@@ -44,7 +46,7 @@ function ti_platform() {
 		height:'auto'
 	});
 	
-	win.add(l1);
+	scrollview.add(l1);
 	
 	var l2 = Titanium.UI.createLabel({
 		text:'model:' + Titanium.Platform.model,
@@ -56,7 +58,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l2);
+	scrollview.add(l2);
 	
 	var l3 = Titanium.UI.createLabel({
 		text:'version:' + Titanium.Platform.version,
@@ -68,7 +70,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l3);
+	scrollview.add(l3);
 	
 	var l4 = Titanium.UI.createLabel({
 		text:'architecture:' + Titanium.Platform.architecture,
@@ -80,7 +82,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l4);
+	scrollview.add(l4);
 	
 	var l5 = Titanium.UI.createLabel({
 		text:'macaddress:' + Titanium.Platform.macaddress,
@@ -92,7 +94,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l5);
+	scrollview.add(l5);
 	
 	var l6 = Titanium.UI.createLabel({
 		text:'processor count:' + Titanium.Platform.processorCount,
@@ -104,7 +106,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l6);
+	scrollview.add(l6);
 	
 	
 	var l7 = Titanium.UI.createLabel({
@@ -117,7 +119,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l7);
+	scrollview.add(l7);
 	
 	// NOTE: Needs to be tested on a physical device to get an accurate value;
 	// may select the wrong interface on non-mobile devices.
@@ -131,7 +133,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l8);
+	scrollview.add(l8);
 	
 	var l9 = Titanium.UI.createLabel({
 		text:'ostype:' + Titanium.Platform.ostype,
@@ -143,7 +145,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l9);
+	scrollview.add(l9);
 	
 	if (Titanium.Platform.batteryState == Ti.Platform.BATTERY_STATE_UNKNOWN) {
 		needUpdate = true;
@@ -159,7 +161,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l11);
+	scrollview.add(l11);
 	
 	var l12 = Titanium.UI.createLabel({
 		text:'battery level:' + Titanium.Platform.batteryLevel,
@@ -171,7 +173,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l12);
+	scrollview.add(l12);
 	
 	var l13 = Titanium.UI.createLabel({
 		text:'display width-x-height:' + Titanium.Platform.displayCaps.platformWidth + 'x' + Titanium.Platform.displayCaps.platformHeight,
@@ -183,7 +185,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l13);
+	scrollview.add(l13);
 	
 	var l15 = Titanium.UI.createLabel({
 		text:'display density:' + Titanium.Platform.displayCaps.density,
@@ -195,7 +197,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l15);
+	scrollview.add(l15);
 	
 	var l16 = Titanium.UI.createLabel({
 		text:'display dpi:' + Titanium.Platform.displayCaps.dpi,
@@ -207,7 +209,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l16);
+	scrollview.add(l16);
 	
 	var l17 = Titanium.UI.createLabel({
 		text:'available memory:' + Titanium.Platform.availableMemory,
@@ -219,7 +221,7 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l17);
+	scrollview.add(l17);
 	
 	var l18 = Titanium.UI.createLabel({
 		text:'is24HourTimeFormat:' + Titanium.Platform.is24HourTimeFormat(),
@@ -231,15 +233,15 @@ function ti_platform() {
 		color:'#777'
 	});
 	
-	win.add(l18);
+	scrollview.add(l18);
 	
 	var b = Titanium.UI.createButton({
 		title:'Open URL',
 		height:30,
-		width:200,
+		width:'auto',
 		top:20
 	});
-	win.add(b);
+	scrollview.add(b);
 	var openURL=1;
 	b.addEventListener('click', function()
 	{
@@ -294,6 +296,7 @@ function ti_platform() {
 		Titanium.API.info("Netmask: " + Titanium.Platform.netmask);
 	}
 
+	win.add(scrollview);
 	return win;
 };
 
