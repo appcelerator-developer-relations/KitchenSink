@@ -7,7 +7,7 @@ function win_layout() {
 	//  CREATE FIELD ONE
 	//
 	var firstName = Titanium.UI.createLabel({
-		color:'#fff',
+		color:'#000',
 		text:'First Name',
 		top:10,
 		left:30,
@@ -32,7 +32,7 @@ function win_layout() {
 	//  CREATE FIELD TWO
 	//
 	var lastName = Titanium.UI.createLabel({
-		color:'#fff',
+		color:'#000',
 		text:'Last Name',
 		top:75,
 		left:30,
