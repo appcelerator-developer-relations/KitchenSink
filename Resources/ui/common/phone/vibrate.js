@@ -1,5 +1,7 @@
 function vibrate() {
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({
+		backgroundColor:'#336699'
+	});
 	// initialize to all modes
 	win.orientationModes = [
 		Titanium.UI.PORTRAIT,
