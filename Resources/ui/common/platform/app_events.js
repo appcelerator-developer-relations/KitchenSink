@@ -1,5 +1,7 @@
 function app_events() {
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({
+		navBarHidden:true
+	});
 	
 	
 	var label = Ti.UI.createLabel({
@@ -14,12 +16,14 @@ function app_events() {
 	
 	Titanium.App.addEventListener('pause',function(e)
 	{
+		Ti.API.info("PAUSED");
 		paused = true;
 		label.text = "App has been paused";
 	});
 	
 	Titanium.App.addEventListener('resume',function(e)
 	{
+		Ti.API.info("RESUMED");
 		if (paused)
 		{
 			label.text = "App has resumed";
@@ -29,6 +33,24 @@ function app_events() {
 			label.text = "App has resumed (w/o pause)";
 		}
 	});
+	
+	if (Titanium.Platform.name == 'android') {
+		win.addEventListener('open', function() {
+			win.activity.addEventListener('pause', function(e) {
+				Ti.API.info("pause event received");
+				paused = true;
+				label.text = "App has been paused";
+			});
+			win.activity.addEventListener('resume', function(e) {
+				Ti.API.info("resume event received");
+				if (paused) {
+					label.text = "App has resumed";
+				} else {
+					label.text = "App has resumed (w/o pause)";
+				}
+			});
+		});
+	}
 	
 	return win;
 };

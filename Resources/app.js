@@ -71,7 +71,6 @@ if (Ti.version < 2.0 ) {
 			},1000);	
 		});
 		
-		
 		// test out logging to developer console, formatting and localization
 		Ti.API.info(String.format("%s%s",L("welcome_message","default_not_set"),Titanium.version));
 		Ti.API.debug(String.format("%s %s",L("user_agent_message","default_not_set"),Titanium.userAgent));
