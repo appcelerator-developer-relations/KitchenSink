@@ -5,7 +5,7 @@ function view_autoheight() {
 	var commentTextWrap = Ti.UI.createView({ 
 		backgroundColor: '#fff', 
 		borderRadius: 12, 
-		height: 'auto', 
+		height: Ti.UI.SIZE, 
 		width: 300, 
 		top: 10 
 	});
@@ -14,8 +14,7 @@ function view_autoheight() {
 		text: "My containing view should only be as large as I am ", 
 		font: {fontSize: 12}, 
 		width: 280, 
-		height:'auto', 
-		top: 10 
+		height:Ti.UI.SIZE
 	});
 	
 	commentTextWrap.add(commentText); 

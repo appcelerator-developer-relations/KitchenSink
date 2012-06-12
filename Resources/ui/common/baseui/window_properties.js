@@ -130,6 +130,12 @@ function win_props() {
 			win1.open();
 			win2.open();
 			layout=false;
+			
+			win.addEventListener('close', function() {
+				win1.close();
+				win2.close();
+				layout=true;
+			});
 		}
 		else
 		{

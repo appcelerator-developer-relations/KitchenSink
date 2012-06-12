@@ -369,6 +369,9 @@ function win_standalone(_args) {
 			menuWin.open();
 			menuWin.animate({transform:t2,opacity:1,duration:800});
 			visible=true;
+			win.addEventListener('close', function() {
+				menuWin.close();
+			});
 		}
 		else
 		{

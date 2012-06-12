@@ -7,12 +7,12 @@ function xhr(_args) {
 	// create table view data object
 	var data = [	
 		{title:'Error Callback', hasChild:true, test:'ui/common/platform/xhr_error'},
-		{title:'Binary Data', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_binarydata', touchEnabled:!isMobileWeb, color:!isMobileWeb?"#aaa":"#000"},
-		{title:'XML Data', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_xml', touchEnabled:!isMobileWeb, color:!isMobileWeb?"#aaa":"#000"},
-		{title:'XML Properties', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_properties', touchEnabled:!isMobileWeb, color:!isMobileWeb?"#aaa":"#000"},
-		{title:'File Download', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_filedownload', touchEnabled:!isMobileWeb, color:!isMobileWeb?"#aaa":"#000"},
-		{title:'UTF-8 + GET/POST', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_utf8', touchEnabled:!isMobileWeb, color:!isMobileWeb?"#aaa":"#000"},
-		{title:'Cookies', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_cookie', touchEnabled:!isMobileWeb, color:!isMobileWeb?"#aaa":"#000"},
+		{title:'Binary Data', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_binarydata', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
+		{title:'XML Data', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_xml', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
+		{title:'XML Properties', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_properties', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
+		{title:'File Download', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_filedownload', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
+		{title:'UTF-8 + GET/POST', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_utf8', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
+		{title:'Cookies', hasChild:!isMobileWeb, test:'ui/common/platform/xhr_cookie', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
 		{title:'setTimeout', hasChild:true, test:'ui/common/platform/xhr_settimeout'}
 	];
 	
