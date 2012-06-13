@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+provisioning_profiles/development/407F309D-B6FF-4DA9-82CD-FECBF85012D9/appid=com.appcelerator.*
+provisioning_profiles/development/407F309D-B6FF-4DA9-82CD-FECBF85012D9/filepath=/Users/adecena/Library/MobileDevice/Provisioning Profiles/407F309D-B6FF-4DA9-82CD-FECBF85012D9.mobileprovision
+provisioning_profiles/development/407F309D-B6FF-4DA9-82CD-FECBF85012D9/name=Appcelerator Dev
+provisioning_profiles/development/407F309D-B6FF-4DA9-82CD-FECBF85012D9/uuid=407F309D-B6FF-4DA9-82CD-FECBF85012D9
+provisioning_profiles/development/FB719751-C7F8-46FB-87C7-5E49ECF4A3A6/appid=com.*
+provisioning_profiles/development/FB719751-C7F8-46FB-87C7-5E49ECF4A3A6/filepath=/Users/adecena/Library/MobileDevice/Provisioning Profiles/FB719751-C7F8-46FB-87C7-5E49ECF4A3A6.mobileprovision
+provisioning_profiles/development/FB719751-C7F8-46FB-87C7-5E49ECF4A3A6/name=GlobalDevProvision
+provisioning_profiles/development/FB719751-C7F8-46FB-87C7-5E49ECF4A3A6/uuid=FB719751-C7F8-46FB-87C7-5E49ECF4A3A6

@@ -43,11 +43,6 @@ function cam_ar() {
 	overlay.add(button);
 	overlay.add(messageView);
 	
-	button.addEventListener('click',function()
-	{
-		Ti.Media.hideCamera();
-	});
-	
 	var heading;
 	var gps='...';
 	var address='calculating address';
@@ -121,6 +116,13 @@ function cam_ar() {
 		mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
 		autohide:false	// tell the system not to auto-hide and we'll do it ourself
 	});
+	
+	button.addEventListener('click',function()
+	{
+		alert("Close the camera");
+		Ti.Media.hideCamera();
+	});
+	
 	return win;
 };
 
