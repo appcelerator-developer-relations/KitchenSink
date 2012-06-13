@@ -17,7 +17,7 @@ function button_control() {
 		top:60
 	});
 	b2.addEventListener("click", function() {
-		console.debug("Opening google");
+		Ti.API.info("Opening google");
 		Ti.Platform.openURL("http://www.google.com/");
 	});
 	
@@ -143,9 +143,9 @@ function button_control() {
 	
 	var bhleft = Titanium.UI.createButton({
 		title : 'H-Left',
-		width : 50,
+		width : 60,
 		height: 40,
-		top : 300,
+		top : 270,
 		left : 60
 	});
 	bhleft.addEventListener('click', function() {
@@ -154,9 +154,9 @@ function button_control() {
 	
 	var bhcenter = Titanium.UI.createButton({
 		title : 'H-Center',
-		width : 50,
+		width : 60,
 		height: 40,
-		top : 300,
+		top : 270,
 		left : 120
 	});
 	bhcenter.addEventListener('click', function() {
@@ -165,9 +165,9 @@ function button_control() {
 	
 	var bhright = Titanium.UI.createButton({
 		title : 'H-Right',
-		width : 50,
+		width : 60,
 		height: 40,
-		top : 300,
+		top : 270,
 		left : 180
 	});
 	bhright.addEventListener('click', function() {
@@ -176,9 +176,9 @@ function button_control() {
 	
 	var bvtop = Titanium.UI.createButton({
 		title : 'V-Top',
-		width : 50,
+		width : 60,
 		height: 40,
-		top : 350,
+		top : 320,
 		left : 60
 	});
 	bvtop.addEventListener('click', function() {
@@ -187,9 +187,9 @@ function button_control() {
 	
 	var bvcenter = Titanium.UI.createButton({
 		title : 'V-Center',
-		width : 50,
+		width : 60,
 		height: 40,
-		top : 350,
+		top : 320,
 		left : 120
 	});
 	bvcenter.addEventListener('click', function() {
@@ -198,9 +198,9 @@ function button_control() {
 	
 	var bvbottom = Titanium.UI.createButton({
 		title : 'V-Bottom',
-		width : 50,
+		width : 60,
 		height: 40,
-		top : 350,
+		top : 320,
 		left : 180
 	});
 	bvbottom.addEventListener('click', function() {
