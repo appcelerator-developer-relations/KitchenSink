@@ -63,7 +63,7 @@ function xhr_download() {
 		// open the client
 		if (Titanium.Platform.name == 'android') {
 			//android's WebView doesn't support embedded PDF content
-			c.open('GET', 'http://www.appcelerator.com/wp-content/themes/appcelerator/img/a-logo.png');
+			c.open('GET', 'http://developer.appcelerator.com/blog/wp-content/themes/newapp/images/appcelerator_avatar.png?s=48');
 		} else {
 			c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
 			c.file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'test.pdf');
@@ -106,7 +106,7 @@ function xhr_download() {
 		// open the client
 		if (Titanium.Platform.name == 'android') {
 			//android's WebView doesn't support embedded PDF content
-			c.open('GET', 'http://www.appcelerator.com/wp-content/themes/appcelerator/img/a-logo.png');
+			c.open('GET', 'http://developer.appcelerator.com/blog/wp-content/themes/newapp/images/appcelerator_avatar.png?s=48');
 		} else {
 			c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
 		}
@@ -158,7 +158,7 @@ function xhr_download() {
 			Ti.UI.createAlertDialog({title:'XHR', message:'Error: ' + e.error}).show();
 		};
 	
-		c.open('GET','http://www.appcelerator.com/download-win32');
+		c.open('GET','http://titanium-studio.s3.amazonaws.com/latest/Titanium_Studio.exe');
 		c.send();
 	});
 	
