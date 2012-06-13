@@ -11,7 +11,7 @@ function transform2d() {
 		height:178,
 		width:261,
 		top:10,
-		transform:t1
+		//transform:t1
 	});
 	
 	win.add(cloud1);
@@ -23,7 +23,7 @@ function transform2d() {
 		width:261,
 		top:130,
 		left:75,
-		transform:t2
+		//transform:t2
 	});
 	
 	win.add(cloud2);
