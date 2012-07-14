@@ -1,7 +1,8 @@
 function PlatformWindow(title) {
 	var self = Ti.UI.createWindow({
 		title:title,
-		backgroundColor:'white'
+		// BB TODO: this used to be white
+		backgroundColor:'black'
 	});
 	
 	var isMobileWeb = Titanium.Platform.osname == 'mobileweb';

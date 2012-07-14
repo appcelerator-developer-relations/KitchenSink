@@ -49,12 +49,15 @@ if (Ti.version < 2.0 ) {
 
 		var ApplicationTabGroup = require('ui/common/ApplicationTabGroup');
 		new ApplicationTabGroup().open(
+			/* BB TODO: Ti.UI.iPhone not implemented yet
 			Ti.UI.iPhone ? {transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT} : {}
+			*/
 		);
 		
 		var MessageWindow = require('ui/common/MessageWindow'),
 			messageWin = new MessageWindow();
 			
+		/* BB TODO: Ti.App not implemented yet
 		Titanium.App.addEventListener('event_one', function(e) {
 			messageWin.setLabel('app.js: event one, array length = ' + e.data.length);
 			messageWin.open();
@@ -70,10 +73,13 @@ if (Ti.version < 2.0 ) {
 				messageWin.close({opacity:0,duration:500});
 			},1000);	
 		});
+		*/
 		
 		// test out logging to developer console, formatting and localization
 		Ti.API.info(String.format("%s%s",L("welcome_message","default_not_set"),Titanium.version));
+		/* BB TODO: Ti.useragent not implemeted yet
 		Ti.API.debug(String.format("%s %s",L("user_agent_message","default_not_set"),Titanium.userAgent));
+		*/
 		
 		Ti.API.debug(String.format("locale specific date is %s",String.formatDate(new Date()))); // default is short
 		Ti.API.debug(String.format("locale specific date (medium) is %s",String.formatDate(new Date(),"medium")));
@@ -83,9 +89,11 @@ if (Ti.version < 2.0 ) {
 		Ti.API.debug(String.format("locale specific decimal is %s",String.formatDecimal(12.99)));
 		
 		
+		/* BB TODO: Ti.Locale not implemented yet
 		Ti.API.info("should be en, was = "+Ti.Locale.currentLanguage);
 		Ti.API.info("welcome_message = "+Ti.Locale.getString("welcome_message"));
 		Ti.API.info("should be def, was = "+Ti.Locale.getString("welcome_message2","def"));
+		*/
 		Ti.API.info("welcome_message = "+L("welcome_message"));
 		Ti.API.info("should be def, was = "+L("welcome_message2","def"));
 		Ti.API.info("should be 1, was = "+String.format('%d',1));
