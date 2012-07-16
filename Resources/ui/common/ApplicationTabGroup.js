@@ -73,6 +73,7 @@ function ApplicationTabGroup() {
 			Titanium.UI.LANDSCAPE_RIGHT
 		]
 	});
+	/* BB TODO: createView not implemented yet
 	var messageView = Titanium.UI.createView({
 		id:'messageview',
 		height:30,
@@ -82,6 +83,7 @@ function ApplicationTabGroup() {
 		opacity:0.7,
 		touchEnabled:false
 	});
+	*/
 		
 	var messageLabel = Titanium.UI.createLabel({
 		id:'messagelabel',
@@ -95,7 +97,9 @@ function ApplicationTabGroup() {
 		},
 		textAlign:'center'
 	});
+	/* BB TODO: createView not implemented yet
 	messageWin.add(messageView);
+	*/
 	messageWin.add(messageLabel);
 	
 	self.addEventListener('close', function() {
