@@ -29,7 +29,7 @@ if (Ti.version < 2.0 ) {
 	
 	var Window;
 	
-	if (osname !== 'ipad') {
+	if (osname === 'ipad') {
 		Window = require('ui/tablet/ApplicationWindow');
 		var win = new Window('KitchenSink');
 		win.open();
