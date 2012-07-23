@@ -1,33 +1,52 @@
-SplitFeatures = {};
+function SplitView_Features(){
 
-// WINDOWS
-SplitFeatures.masterWindow = Ti.UI.createWindow({backgroundColor:'#ffffff'});
-SplitFeatures.detailWindow = Ti.UI.createWindow({backgroundColor:'#336699'});
+	SplitFeatures = {};
 
-SplitFeatures.masterDisplayButton = Ti.UI.createButton({
-	title:'Display master (portrait)',
-	width:300,
-	height:40
-});
-SplitFeatures.detailWindow.add(SplitFeatures.masterDisplayButton);
-SplitFeatures.masterDisplayButton.addEventListener('click', function() {
-	if (!SplitFeatures.splitView.showMasterInPortrait) {
-		SplitFeatures.masterDisplayButton.title = "Don't display master (portrait)";
-		SplitFeatures.splitView.showMasterInPortrait = true;
-	}
-	else {
-		SplitFeatures.masterDisplayButton.title = 'Display master (portrait)';
-		SplitFeatures.splitView.showMasterInPortrait = false;		
-	}
-});
+	// WINDOWS
+	SplitFeatures.masterWindow = Ti.UI.createWindow({backgroundColor:'#ffffff'});
+	SplitFeatures.detailWindow = Ti.UI.createWindow({backgroundColor:'#336699'});
 
-// SPLIT VIEW
-SplitFeatures.splitView = Titanium.UI.iPad.createSplitWindow({
-	masterView:SplitFeatures.masterWindow,
-	detailView:SplitFeatures.detailWindow,
-});
+	SplitFeatures.masterDisplayButton = Ti.UI.createButton({
+		title:'Display master (portrait)',
+		width:300,
+		height:40
+	});
+	SplitFeatures.detailWindow.add(SplitFeatures.masterDisplayButton);
+	SplitFeatures.masterDisplayButton.addEventListener('click', function() {
+		if (!SplitFeatures.splitView.showMasterInPortrait) {
+			SplitFeatures.masterDisplayButton.title = "Don't display master (portrait)";
+			SplitFeatures.splitView.showMasterInPortrait = true;
+		}
+		else {
+			SplitFeatures.masterDisplayButton.title = 'Display master (portrait)';
+			SplitFeatures.splitView.showMasterInPortrait = false;		
+		}
+	});
 
-SplitFeatures.open = function()
-{
-	SplitFeatures.splitView.open();	
-};
+	// SPLIT VIEW
+	SplitFeatures.splitView = Titanium.UI.iPad.createSplitWindow({
+		masterView:SplitFeatures.masterWindow,
+		detailView:SplitFeatures.detailWindow,
+	});
+
+	//CLOSE TEST
+	SplitFeatures.closeButton = Ti.UI.createButton({
+		title:'Close Test',
+		width:300,
+		height:40,
+		top:10
+	});
+	SplitFeatures.detailWindow.add(SplitFeatures.closeButton);
+	SplitFeatures.closeButton.addEventListener('click', function() {
+		SplitFeatures.splitView.close();
+	});
+
+	SplitFeatures.open = function()
+	{
+		SplitFeatures.splitView.open();	
+	};
+
+	return SplitFeatures;
+}
+
+module.exports = SplitView_Features;

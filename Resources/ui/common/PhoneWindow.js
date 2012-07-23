@@ -50,6 +50,10 @@ function PhoneWindow(title) {
 		data.push({title:'Notfications', hasChild:true, test:'ui/handheld/android/phone/notification'});
 	}
 	
+	if (Titanium.Platform.osname == 'ipad') {
+		data.push({title:'iPad Features', hasChild:true, test:'ui/handheld/ios/phone/ipad_feature'});	
+	}
+
 	// create table view
 	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
