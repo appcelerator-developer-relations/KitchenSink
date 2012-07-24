@@ -20,7 +20,8 @@ function PhoneWindow(title) {
 	data.push({title:'Orientation', hasChild:true, test:'ui/common/phone/orientation'});
 	data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts'});
 	
-	if (Titanium.Platform.osname !== 'ipad') {
+	//Donot include camera if it is iPad 1st gen.
+	if (Titanium.Platform.model !== 'iPad1,1') {
 		data.push({title:'Camera', hasChild:!isMobileWeb, test:'ui/common/phone/camera', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
 	}
 	
