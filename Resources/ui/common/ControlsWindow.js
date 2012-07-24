@@ -38,11 +38,12 @@ function ControlsWindow(title) {
 	});
 	
 	// create table view event listener
-	tableview.addEventListener('click', function(e) {
-		if (e.rowData.test) {
-			var ExampleWindow = require(e.rowData.test),
+	tableview.addEventListener('click', function(e) {		
+		if ( data[e.index].test) {   //(e.rowData.test) {
+			var ExampleWindow = require( data[e.index].test),
 				win = new ExampleWindow({
-					title:e.rowData.title,
+					title:data[e.index].title,
+					//title:e.rowData.title,
 					containingTab:self.containingTab,
 					tabGroup:self.tabGroup
 				});

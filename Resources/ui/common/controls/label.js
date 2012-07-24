@@ -1,7 +1,7 @@
 function label(_args) {
 	var self = Ti.UI.createWindow({
 		title:_args.title,
-		backgroundColor:'white'
+		backgroundColor:'black'
 	});
 	
 	// create label view data object
@@ -22,8 +22,8 @@ function label(_args) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e) {
-		if (e.rowData.test) {
-			var ExampleWindow = require(e.rowData.test),
+		if (data[e.index].test) {
+			var ExampleWindow = require(data[e.index].test),
 				win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}

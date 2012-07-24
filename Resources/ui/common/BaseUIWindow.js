@@ -56,12 +56,15 @@ function BaseUIWindow(title) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e)
-	{
-		if (e.rowData.test)
+	{		
+		if (data[e.index].test)//(e.rowData.test)
 		{
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
+			// var ExampleWindow = require(e.rowData.test),				// win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
+			var ExampleWindow = require(data[e.index].test),
+				win = new ExampleWindow({title:data[e.index].title,containingTab:self.containingTab,tabGroup:self.tabGroup});
 			if (Ti.Platform.name == "android") {
+				
+			} else if(Ti.Platform.name == "blackberry"){
 				
 			} else {
 				win.backgroundColor = "#fff";

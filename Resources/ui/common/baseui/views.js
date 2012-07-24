@@ -1,5 +1,8 @@
 function views(_args) {
-	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
+	var isBlackberry = Titanium.Platform.name == 'blackberry';
+	var viewWindowProperties = {backgroundColor:'#fff'};
+	
+	var win = Ti.UI.createWindow(viewWindowProperties);
 	
 	var isMobileWeb = Titanium.Platform.osname == 'mobileweb';
 	
@@ -57,11 +60,11 @@ function views(_args) {
 	// create table view event listener
 	tableview.addEventListener('click', function(e)
 	{
-		if (e.rowData.test)
+		if (data[e.index].test)
 		{
-			var ExampleWindow = require(e.rowData.test);
+			var ExampleWindow = require(data[e.index].test);
 				win = new ExampleWindow(_args);
-			_args.containingTab.open(win,{animated:true});
+			_args.containingTab.open(win,{animated:false});
 		}
 	});
 	

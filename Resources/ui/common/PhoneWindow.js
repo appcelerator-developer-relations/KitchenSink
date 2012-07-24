@@ -58,10 +58,13 @@ function PhoneWindow(title) {
 	});
 	
 	// create table view event listener
-	tableview.addEventListener('click', function(e) {
-		if (e.rowData.test) {
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab});
+	tableview.addEventListener('click', function(e) {		
+		if (data[e.index].test) { // (e.rowData.test) {
+			var ExampleWindow = require(data[e.index].test),
+				win = new ExampleWindow({
+					title:data[e.index].title,
+					containingTab:self.containingTab
+					});
 			self.containingTab.open(win,{animated:true});
 		}
 	});

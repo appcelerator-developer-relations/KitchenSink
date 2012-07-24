@@ -1,4 +1,11 @@
 function progressbar() {
+	var scaleX = Math.floor(Titanium.Platform.displayCaps.platformWidth / 320);
+	var scaleY = Math.floor(Titanium.Platform.displayCaps.platformHeight / 480);
+	if( scaleX < 1 )
+		scaleX = 1;	
+	if (scaleY > 1)
+		 scaleY +=1; 
+	
 	var win = Ti.UI.createWindow();
 	var value = 0;
 	var ind, ind2, ind3, ind4, button, flexSpace, interval;
@@ -34,21 +41,28 @@ function progressbar() {
 	} else {
 		button = Titanium.UI.createButton({
 			title:'Start Progress',
-			height:40,
-			width:200,
+			height:40*scaleY,
+			width:200*scaleX,
 			top:10
 		});
-		ind = Titanium.UI.createProgressBar({
-			width:150,
+		var progressBarProperty = {
+			width:450*scaleX,
 			min:0,
 			max:10,
 			value:0,
-			height:70,
-			color:'#888',
-			message:'Downloading 0 of 10',
-			font:{fontSize:14, fontWeight:'bold'},
+			height:70*scaleY,			
 			top:60
-		});
+		}
+		
+		if ( osname != 'blackberry')
+		{
+			progressBarProperty.width = 150*scaleX;
+			progressBarProperty.color = '#888';
+			progressBarProperty.message = 'Downloading 0 of 10';
+			progressBarProperty.font = {fontSize:14, fontWeight:'bold'};			
+		}
+		
+		ind = Titanium.UI.createProgressBar(progressBarProperty);
 		win.add(button);
 		win.add(ind);
 		
@@ -113,16 +127,16 @@ function progressbar() {
 		//
 		button.addEventListener('click', function()
 		{
-			ind.show();
-			
-			if (isIos) {
+			ind.show();			
+			if (isIos) {				
 				ind2.show();
 				ind3.show();
 				ind4.show();
 			}
 		
 			val = 0;
-			clearInterval(interval);
+			if( interval )			
+				clearInterval(interval);			
 			interval = setInterval(function()
 			{
 				Ti.API.info('INTERVAL FIRED value ' + val);
@@ -138,7 +152,7 @@ function progressbar() {
 					win.setTitle('Progress Bar');
 					return;
 				}
-				ind.value = val;
+				ind.value = val;				
 				ind.message = 'Downloading ' + val + ' of 10';
 				if (isIos) {
 					ind2.value = val;

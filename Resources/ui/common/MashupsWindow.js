@@ -32,16 +32,20 @@ function MashupsWindow(title) {
 	});
 	
 	// create table view event listener
-	tableview.addEventListener('click', function(e) {
-		if (e.rowData.test) {
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab});
+	tableview.addEventListener('click', function(e) {		
+		if (data[e.index].test) { // (e.rowData.test) {
+			var ExampleWindow = require(data[e.index].test),
+				win = new ExampleWindow({
+					title:data[e.index].title,
+					//title:e.rowData.title,
+					containingTab:self.containingTab
+					});
 				
-			if (e.rowData.barColor) {
-				win.barColor = e.rowData.barColor;
+			if (data[e.index].barColor) {
+				win.barColor = data[e.index].barColor;
 			}
-			if (e.rowData.title_image) {
-				win.titleImage = e.rowData.title_image;
+			if (data[e.index].title_image) {
+				win.titleImage = data[e.index].title_image;
 			}
 			self.containingTab.open(win,{animated:true});
 		}
