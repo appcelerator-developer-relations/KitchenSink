@@ -1,12 +1,19 @@
 function button_control() {
-	var isBlackberry = Titanium.Platform.name == 'blackberry';
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if(isBlackberry)
+	{
+		scaleX += 1;
+		scaleY += 2;
+	}
 	
 	var win = Ti.UI.createWindow();
 	
 	var b1 = Titanium.UI.createButton({
 		title:'I am a Button',
-		height:140,
-		width:390,
+		height:40 * scaleY,
+		width:200 * scaleX,
 		top:10
 	});
 	
@@ -24,33 +31,38 @@ function button_control() {
 	});
 	
 	var button3_properties = {
-		color:'#fff',		
+		color:'#fff',
+		backgroundImage:'/images/BUTT_grn_off.png',
+		backgroundSelectedImage:'/images/BUTT_grn_on.png',
+		backgroundDisabledImage:'/images/BUTT_drk_off.png',
 		top:110,
-		width:401,
-		height:127,
+		width:301 * scaleX,
+		height:57 * scaleY,
 		font:{fontSize:20,fontWeight:'bold',fontFamily:'Helvetica Neue'},
 		title:'Click Me'
 	}
-	if( !isBlackberry)
+	if (isBlackberry)
 	{
-		button3_properties.backgroundImage ='/images/BUTT_grn_off.png';
-		button3_properties.backgroundSelectedImage ='/images/BUTT_grn_on.png';
-		button3_properties.backgroundDisabledImage = '/images/BUTT_drk_off.png';
+		delete button3_properties.backgroundImage;
+		delete button3_properties.backgroundSelectedImage;
+		delete button3_properties.backgroundDisabledImage;
 	}
 	
 	var b3 = Titanium.UI.createButton(button3_properties);
 	
 	var buttonLabelProperties = {
-		color:'#f00',		
+		color:'#f00',
+		highlightedColor:'#0f0',
 		backgroundColor:'transparent',
 		width:'100',		
+		height:'auto',
 		right:5,
 		text:'Custom Label'
 	}
-	if ( !isBlackberry )
+	if (isBlackberry)
 	{
-		buttonLabelProperties.highlightedColor = '#0f0';
-		buttonLabelProperties.height = 'auto';	
+		delete buttonLabelProperties.highlightedColor;
+		delete buttonLabelProperties.height;
 	}
 	
 	var buttonLabel = Titanium.UI.createLabel(buttonLabelProperties);
@@ -77,12 +89,12 @@ function button_control() {
 			case 1:
 				b3.font = {fontSize:25,fontFamily:'Marker Felt', fontWeight:'bold'};
 				b3.title = 'I am red';
-				if( !isBlackberry )
+				if(!isBlackberry)
 				{
 					b3.backgroundImage = '/images/BUTT_red_off.png';
 					b3.backgroundSelectedImage = '/images/BUTT_red_on.png';
 					b3.color = '#222';
-				}else
+				} else
 				{
 					b3.backgroundColor = '#C00';
 				}		
@@ -90,7 +102,7 @@ function button_control() {
 				state++;
 				break;
 			case 2:
-				b3.width = 400;
+				b3.width = 200 * scaleX;
 				b3.color = '#fff';
 				b3.title = 'White text';
 				if (isBlackberry)
@@ -104,8 +116,8 @@ function button_control() {
 	
 	var b4 = Titanium.UI.createButton({
 		title:'Hide/Show Button Above',
-		width:500,
-		height:140,
+		width:200 * scaleX,
+		height:40 * scaleY,
 		top:175
 	});
 	
@@ -165,8 +177,8 @@ function button_control() {
 	
 	var bhleft = Titanium.UI.createButton({
 		title : 'H-Left',
-		width : 360,
-		height: 140,		
+		width : 60 * scaleX,
+		height: 40 * scaleY,
 		top : 270,
 		left : 60
 	});
@@ -176,8 +188,8 @@ function button_control() {
 	
 	var bhcenter = Titanium.UI.createButton({
 		title : 'H-Center',
-		width : 360,
-		height: 140,
+		width : 60 * scaleX,
+		height: 40 * scaleY,
 		top : 270,
 		left : 120
 	});
@@ -187,8 +199,8 @@ function button_control() {
 	
 	var bhright = Titanium.UI.createButton({
 		title : 'H-Right',
-		width : 360,
-		height: 140,
+		width : 60 * scaleX,
+		height: 40 * scaleY,
 		top : 270,
 		left : 180
 	});
@@ -197,7 +209,6 @@ function button_control() {
 	});
 	
 	var bvtop = Titanium.UI.createButton({
-		backgroundColor : '#F77',
 		title : 'V-Top',
 		width : 60,
 		height: 40,
@@ -230,7 +241,7 @@ function button_control() {
 		b1.verticalAlign = Titanium.UI.TEXT_VERTICAL_ALIGNMENT_BOTTOM;
 	});
 	
-	if( !isBlackberry )
+	if(!isBlackberry)
 	{
 		win.add(bhleft);
 		win.add(bhcenter);
@@ -238,7 +249,8 @@ function button_control() {
 	}
 	
 	
-	if (Ti.Platform.osname === 'android') {
+	// if (Ti.Platform.osname === 'android') {
+	if (!isBlackberry) {
 		win.add(bvtop);
 		win.add(bvcenter);
 		win.add(bvbottom);

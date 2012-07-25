@@ -1,16 +1,11 @@
 function button_states() {
-	var isBlackberry = Titanium.Platform.name == 'blackberry';
-	var scaleX = Math.floor(Titanium.Platform.displayCaps.platformWidth / 320);
-	var scaleY = Math.floor(Titanium.Platform.displayCaps.platformWidth / 480);	
-	if ( scaleX < 1 )
-		scaleX = 1;
-	if ( scaleY < 1 )
-		scaleY = 1;
-		
-	if (isBlackberry)
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if(isBlackberry)
 	{
-		scaleX *= 4;
-		scaleY *= 2;
+		scaleX += 7;
+		scaleY += 2;
 	}
 	
 	var win = Ti.UI.createWindow();
@@ -18,8 +13,8 @@ function button_states() {
 	var button1 = Titanium.UI.createButton({
 	  left:10,
 	  top:10,
-	  height:50*scaleY,
-	  width:50*scaleX,
+	  height:50 * scaleY,
+	  width:50 * scaleX,
 	  enabled:true,
 	  focusable:true,
 	  title:'B1',
@@ -29,8 +24,8 @@ function button_states() {
 	var button2 = Titanium.UI.createButton({
 	  left:70,
 	  top:10,
-	  height:50*scaleY,
-	  width:50*scaleX,
+	  height:50 * scaleY,
+	  width:50 * scaleX,
 	  focusable:true,
 	  enabled:true,
 	  title:'B2',
@@ -40,8 +35,8 @@ function button_states() {
 	var button3 = Titanium.UI.createButton({
 	  left:130,
 	  top:10,
-	  height:50*scaleY,
-	  width:50*scaleX,
+	  height:50 * scaleY,
+	  width:50 * scaleX,
 	  enabled:true,
 	  focusable:true,
 	  title:'B3',
@@ -51,8 +46,8 @@ function button_states() {
 	var button4 = Titanium.UI.createButton({
 	  left:190,
 	  top:10,
-	  height:50*scaleY,
-	  width:50*scaleX,
+	  height:50 * scaleY,
+	  width:50 * scaleX,
 	  focusable:true,
 	  enabled:true,
 	  title:'B4',
@@ -62,8 +57,8 @@ function button_states() {
 	var button5 = Titanium.UI.createButton({
 	  left:10,
 	  top:200,
-	  height:60*scaleY,
-	  width:100*scaleX,
+	  height:60 * scaleY,
+	  width:100 * scaleX,
 	  focusable:true,
 	  enabled:true,
 	  title:'click me'
@@ -83,7 +78,8 @@ function button_states() {
 				button2.focusable=false;
 				button2.enabled=false;
 				state=0;
-				break;			
+				break;
+				
 		}
 	})
 	

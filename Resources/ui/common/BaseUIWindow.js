@@ -1,4 +1,5 @@
 function BaseUIWindow(title) {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var self = Ti.UI.createWindow({
 		title:title,
 		// BB TODO: this used to be white
@@ -56,17 +57,24 @@ function BaseUIWindow(title) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e)
-	{		
-		if (data[e.index].test)//(e.rowData.test)
+	{
+		var test = e.rowData.test;
+		var dataTitle = e.rowData.title;
+		if (isBlackberry)
 		{
-			// var ExampleWindow = require(e.rowData.test),				// win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
-			var ExampleWindow = require(data[e.index].test),
-				win = new ExampleWindow({title:data[e.index].title,containingTab:self.containingTab,tabGroup:self.tabGroup});
+			test = data[e.index].test;
+			dataTitle = data[e.index].title;
+		}
+		if (typeof test != 'undefined')
+		{
+			var ExampleWindow = require(test),
+				win = new ExampleWindow({title:dataTitle,containingTab:self.containingTab,tabGroup:self.tabGroup});
 			if (Ti.Platform.name == "android") {
 				
-			} else if(Ti.Platform.name == "blackberry"){
-				
-			} else {
+			} else if (Ti.Platform.name == "blackberry") {
+				win.backgroundColor = "#000";
+			}
+			 else {
 				win.backgroundColor = "#fff";
 				win.barColor = "#111";
 			}
@@ -78,7 +86,7 @@ function BaseUIWindow(title) {
 					win.hideTabBar();
 				}
 			}
-			if (Ti.Platform.name==='android' && e.rowData.test.indexOf('window_properties') >= 0) {
+			if (Ti.Platform.name==='android' && test.indexOf('window_properties') >= 0) {
 				// As explained in apidoc for Window, if opacity is ever to be changed for an Android
 				// activity during its lifetime, it needs to use a translucent background.  We trigger
 				// using a translucent theme by the presence of the opacity property, so we need to
@@ -87,7 +95,7 @@ function BaseUIWindow(title) {
 				win.backgroundColor = "#191919"
 				win.opacity = 1;
 			}
-			self.containingTab.open(win,{animated:true});
+			self.containingTab.open(win,{animated:false});
 		}
 	});
 	

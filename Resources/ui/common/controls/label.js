@@ -1,9 +1,14 @@
 function label(_args) {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var self = Ti.UI.createWindow({
 		title:_args.title,
-		backgroundColor:'black'
+		backgroundColor:'white'
 	});
 	
+	if (isBlackberry)
+	{
+		self.backgroundColor = 'black';
+	}
 	// create label view data object
 	var data = [
 		{title:'Basic', hasChild:true, test:'ui/common/controls/label_basic'}
@@ -22,8 +27,15 @@ function label(_args) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e) {
-		if (data[e.index].test) {
-			var ExampleWindow = require(data[e.index].test),
+		var test = e.rowData.test;
+		var dataTitle = e.rowData.title;
+		if (isBlackberry)
+		{
+			test = data[e.index].test;
+			dataTitle = data[e.index].title;
+		}
+		if (typeof test != 'undefined') {
+			var ExampleWindow = require(test),
 				win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}

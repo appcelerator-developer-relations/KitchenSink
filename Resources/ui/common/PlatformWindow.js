@@ -1,4 +1,5 @@
 function PlatformWindow(title) {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var self = Ti.UI.createWindow({
 		title:title,
 		// BB TODO: this used to be white
@@ -50,9 +51,16 @@ function PlatformWindow(title) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e) {
-		if (data[e.index].test) {
-			var ExampleWindow = require(data[e.index].test),
-				win = new ExampleWindow({title:data[e.index].title,containingTab:self.containingTab});
+		var test = e.rowData.test;
+		var dataTitle = e.rowData.title;
+		if (isBlackberry)
+		{
+			test = data[e.index].test;
+			dataTitle = data[e.index].title;
+		}
+		if (typeof test != 'undefined') {
+			var ExampleWindow = require(test),
+				win = new ExampleWindow({title:dataTitle,containingTab:self.containingTab});
 			self.containingTab.open(win,{animated:true});
 		}
 	});
