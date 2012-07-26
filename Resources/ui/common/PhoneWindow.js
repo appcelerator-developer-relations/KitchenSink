@@ -67,12 +67,9 @@ function PhoneWindow(title) {
 			test = data[e.index].test;
 			dataTitle = data[e.index].title;
 		}
-		if (typeof test != 'undefined') {
+		if (typeof test !== 'undefined') {
 			var ExampleWindow = require(test),
-				win = new ExampleWindow({
-					title:dataTitle,
-					containingTab:self.containingTab
-					});
+				win = new ExampleWindow({title:dataTitle,containingTab:self.containingTab});
 			self.containingTab.open(win,{animated:true});
 		}
 	});

@@ -7,7 +7,6 @@ function options_dialog() {
 		scaleX += 1;
 		scaleY += 2;
 	}
-		
 	var win = Titanium.UI.createWindow();
 	
 	win.orientationModes = [
@@ -45,11 +44,10 @@ function options_dialog() {
 		title:'I am a title'
 	};
 	
-	if (isBlackberry)
-	{
+	if (isBlackberry) {
 		delete optionsDialogOpts.destructive;
 		delete optionsDialogOpts.cancel;
-	}
+	};
 	
 	if (isAndroid) {
 		optionsDialogOpts.selectedIndex = 3;

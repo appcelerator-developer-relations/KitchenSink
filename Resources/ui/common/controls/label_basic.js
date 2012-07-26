@@ -1,6 +1,5 @@
 function label_basic() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
-	
 	var win = Ti.UI.createWindow();
 	
 	var l1 = Titanium.UI.createLabel({
@@ -13,7 +12,7 @@ function label_basic() {
 	
 	win.add(l1);
 	
-	var lable2Properties = {
+	var l2 = Titanium.UI.createLabel({
 		text:'Appcelerator',
 		height:50,
 		width:'auto',
@@ -23,44 +22,20 @@ function label_basic() {
 		font:{fontSize:48, fontStyle:'italic'},
 		top:170,
 		textAlign:'center'
+	});
+	
+	if (isBlackberry) {
+		l2.width = 550;		
 	};
-	
-	if (isBlackberry)
-	{
-		lable2Properties.width = 550;
-		delete lable2Properties.shadowColor;
-		delete lable2Properties.shadowOffset;
-	}
-	
-	var l2 = Titanium.UI.createLabel(lable2Properties);
 	
 	win.add(l2);
 	
-	var button1Properties = {
+	var b1 = Titanium.UI.createButton({
 		title:'Hide/Show',
 		height:40,
 		width:200,
 		top:230
-	};
-	var button2Properties = {
-		title:'Change Label 2',
-		height:40,
-		width:200,
-		top:280
-	};
-	
-	if (isBlackberry)
-	{
-		button1Properties.height = 140;
-		button1Properties.width = 390;
-
-		button2Properties.height = 140;
-		button2Properties.width = 390;
-		
-		l1.textAlign = Titanium.UI.TEXT_ALIGNMENT_CENTER;
-		l2.width = 550;
-	}
-	var b1 = Titanium.UI.createButton(button1Properties);
+	});
 	var visible=true;
 	b1.addEventListener('click', function()
 	{
@@ -79,7 +54,12 @@ function label_basic() {
 	});
 	win.add(b1);
 	
-	var b2 = Titanium.UI.createButton(button2Properties);
+	var b2 = Titanium.UI.createButton({
+		title:'Change Label 2',
+		height:40,
+		width:200,
+		top:280
+	});
 	var changed=false;
 	b2.addEventListener('click', function()
 	{
@@ -104,8 +84,18 @@ function label_basic() {
 	});
 	win.add(b2);
 	
-	if (!isBlackberry)
-	{
+	if (isBlackberry) {
+		b1.height = 140;
+		b1.width = 390;
+		
+		b2.height = 140;
+		b2.width = 390;
+		
+		l1.textAlign = Titanium.UI.TEXT_ALIGNMENT_CENTER;
+		l2.width = 550;
+	};
+	
+	if (!isBlackberry) {
 		var b3 = Titanium.UI.createButton({
 			title:'Label 1 background',
 			height:40,
@@ -130,7 +120,7 @@ function label_basic() {
 		});
 		win.add(b3);
 	}
-
+	
 	var size = Ti.UI.createLabel({
 		height:30,
 		width:300,

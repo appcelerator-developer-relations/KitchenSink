@@ -6,8 +6,7 @@ function button_control() {
 	{
 		scaleX += 1;
 		scaleY += 2;
-	}
-	
+	};
 	var win = Ti.UI.createWindow();
 	
 	var b1 = Titanium.UI.createButton({
@@ -89,26 +88,22 @@ function button_control() {
 			case 1:
 				b3.font = {fontSize:25,fontFamily:'Marker Felt', fontWeight:'bold'};
 				b3.title = 'I am red';
-				if(!isBlackberry)
-				{
+				if (!isBlackberry)	{
 					b3.backgroundImage = '/images/BUTT_red_off.png';
 					b3.backgroundSelectedImage = '/images/BUTT_red_on.png';
 					b3.color = '#222';
-				} else
-				{
+				} else {
 					b3.backgroundColor = '#C00';
-				}		
-				
+				};
 				state++;
 				break;
 			case 2:
 				b3.width = 200 * scaleX;
 				b3.color = '#fff';
 				b3.title = 'White text';
-				if (isBlackberry)
-				{
+				if (isBlackberry) {
 					b3.backgroundColor = 'transparent';
-				}
+				};
 				state=0;
 				break;
 		}
@@ -241,15 +236,13 @@ function button_control() {
 		b1.verticalAlign = Titanium.UI.TEXT_VERTICAL_ALIGNMENT_BOTTOM;
 	});
 	
-	if(!isBlackberry)
-	{
+	if (!isBlackberry){
 		win.add(bhleft);
 		win.add(bhcenter);
 		win.add(bhright);
-	}
+	}	
 	
-	
-	// if (Ti.Platform.osname === 'android') {
+//	if (Ti.Platform.osname === 'android') {
 	if (!isBlackberry) {
 		win.add(bvtop);
 		win.add(bvcenter);

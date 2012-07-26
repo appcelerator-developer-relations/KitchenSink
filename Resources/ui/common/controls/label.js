@@ -5,10 +5,10 @@ function label(_args) {
 		backgroundColor:'white'
 	});
 	
-	if (isBlackberry)
-	{
+	if (isBlackberry) {
 		self.backgroundColor = 'black';
 	}
+	
 	// create label view data object
 	var data = [
 		{title:'Basic', hasChild:true, test:'ui/common/controls/label_basic'}
@@ -34,7 +34,7 @@ function label(_args) {
 			test = data[e.index].test;
 			dataTitle = data[e.index].title;
 		}
-		if (typeof test != 'undefined') {
+		if (typeof test !== 'undefined') {
 			var ExampleWindow = require(test),
 				win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});

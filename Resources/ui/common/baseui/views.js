@@ -65,7 +65,7 @@ function views(_args) {
 			test = data[e.index].test;
 			dataTitle = data[e.index].title;
 		}
-		if (typeof test != 'undefined')
+		if (typeof test !== 'undefined')
 		{
 			var ExampleWindow = require(test);
 				win = new ExampleWindow(_args);

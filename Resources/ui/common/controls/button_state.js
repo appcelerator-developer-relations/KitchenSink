@@ -6,8 +6,7 @@ function button_states() {
 	{
 		scaleX += 7;
 		scaleY += 2;
-	}
-	
+	};
 	var win = Ti.UI.createWindow();
 	
 	var button1 = Titanium.UI.createButton({

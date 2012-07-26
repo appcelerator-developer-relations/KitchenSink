@@ -73,8 +73,7 @@ function BaseUIWindow(title) {
 				
 			} else if (Ti.Platform.name == "blackberry") {
 				win.backgroundColor = "#000";
-			}
-			 else {
+			} else {
 				win.backgroundColor = "#fff";
 				win.barColor = "#111";
 			}
@@ -86,7 +85,7 @@ function BaseUIWindow(title) {
 					win.hideTabBar();
 				}
 			}
-			if (Ti.Platform.name==='android' && test.indexOf('window_properties') >= 0) {
+			if (Ti.Platform.name==='android' && e.rowData.test.indexOf('window_properties') >= 0) {
 				// As explained in apidoc for Window, if opacity is ever to be changed for an Android
 				// activity during its lifetime, it needs to use a translucent background.  We trigger
 				// using a translucent theme by the presence of the opacity property, so we need to
@@ -95,7 +94,7 @@ function BaseUIWindow(title) {
 				win.backgroundColor = "#191919"
 				win.opacity = 1;
 			}
-			self.containingTab.open(win,{animated:false});
+			self.containingTab.open(win,{animated:true});
 		}
 	});
 	

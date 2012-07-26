@@ -2,12 +2,11 @@ function progressbar() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var scaleX = 1;
 	var scaleY = 1;
-	if(isBlackberry)
+	if (isBlackberry)
 	{
 		scaleX += 1;
 		scaleY += 2;
 	}
-	
 	var win = Ti.UI.createWindow();
 	var value = 0;
 	var ind, ind2, ind3, ind4, button, flexSpace, interval;
@@ -47,7 +46,7 @@ function progressbar() {
 			width:200 * scaleX,
 			top:10
 		});
-		var progressBarProperty = {
+		ind = Titanium.UI.createProgressBar({
 			width:150 * scaleX,
 			min:0,
 			max:10,
@@ -57,16 +56,10 @@ function progressbar() {
 			message:'Downloading 0 of 10',
 			font:{fontSize:14, fontWeight:'bold'},
 			top:60
+		});
+		if (isBlackberry) {
+			ind.width = 450 * scaleX;
 		}
-		
-		if (isBlackberry)
-		{
-			progressBarProperty.width = 450 * scaleX;
-			delete progressBarProperty.color;
-			delete progressBarProperty.message;
-			delete progressBarProperty.font;
-		}
-		ind = Titanium.UI.createProgressBar(progressBarProperty);
 		win.add(button);
 		win.add(ind);
 		
@@ -140,6 +133,7 @@ function progressbar() {
 			}
 		
 			val = 0;
+			// TODO: remove condition once clearInterval doesn't choke on undefined param
 			if (typeof interval != 'undefined')
 				clearInterval(interval);
 			interval = setInterval(function()
