@@ -4,7 +4,7 @@ function sound_file() {
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'etc/cricket.wav');
 	
 	// load from file object
-	var sound = Titanium.Media.createSound({sound:file});
+	var sound = Titanium.Media.createSound({url:file});
 	
 	//
 	// PLAY
