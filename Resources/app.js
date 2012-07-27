@@ -35,7 +35,7 @@ if (Ti.version < 2.0 ) {
 		Window = require('ui/handheld/ios/ApplicationWindow');
 	}
 	else if (osname === 'mobileweb'){
-		Window = require('ui/handheld/mobileweb/ApplicationWindow');
+		Window = require('ui/mobileweb/ApplicationWindow');
 	}
 	else {
 		Window = require('ui/handheld/android/ApplicationWindow');
