@@ -5,7 +5,7 @@ function camera(_args) {
 		{title:'Camera Basic', hasChild:true, test:'ui/common/phone/camera_basic'}
 	];
 	
-	if (Ti.Platform.osname == "iphone") {
+	if (Ti.Platform.osname == "iphone" ||Ti.Platform.osname == 'ipad') {
 		data.push({title:'Camera Custom Overlay', hasChild:true, test:'ui/handheld/ios/phone/camera_overlay'});
 		data.push({title:'Camera Overlay Webview', hasChild:true, test:'ui/handheld/ios/phone/camera_overlay_webview'});
 		data.push({title:'Camera Augmented Reality', hasChild:true, test:'ui/handheld/ios/phone/camera_ar'});
@@ -21,6 +21,9 @@ function camera(_args) {
 			//TODO: this seems to work the first time, but not subsequent. fix for 1.5
 			//data.push({title:'Video Editing', hasChild:true, test:'ui/common/phone/video_edit'});	
 		}
+	}
+	if(Ti.Platform.osname == 'ipad') {
+		data.push({title:'Camera Popover view', hasChild:true, test:'ui/tablet/ios/baseui/camera_popover'})
 	}
 	
 	// create table view
