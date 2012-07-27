@@ -354,10 +354,8 @@ function geolocation() {
 		//
 		// GET CURRENT POSITION - THIS FIRES ONCE
 		//
-		//Titanium.UI.createAlertDialog({title:'Opened Window',message:'going to fire getCurrentPosition'}).show();
 		win.addEventListener('open', function() {
 			win.openedflag = 1;
-			Titanium.UI.createAlertDialog({title:'Opened Window',message:'going to fire getCurrentPosition'}).show();
 			Titanium.Geolocation.getCurrentPosition(function(e)
 			{
 				if (!e.success || e.error)
@@ -468,7 +466,6 @@ function geolocation() {
 	win.addEventListener('focus', function()
 	{
 		win.focusedflag = 1;
-		Titanium.UI.createAlertDialog({title:'Focus Window',message:'going to fire '}).show();
 		Ti.API.info("focus event received");
 		if (!headingAdded && headingCallback) {
 			Ti.API.info("adding heading callback on resume");
