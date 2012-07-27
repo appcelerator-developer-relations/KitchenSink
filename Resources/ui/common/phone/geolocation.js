@@ -1,7 +1,9 @@
 function geolocation() {
 	var win = Titanium.UI.createWindow();
 	win.backgroundColor = '#fff';
-	
+	win.openedflag = 0 ;
+	win.focusedflag = 0;
+
 	Ti.include("/etc/version.js");
 	
 	Ti.Geolocation.preferredProvider = "gps";
@@ -227,6 +229,14 @@ function geolocation() {
 	else
 	{
 		if (Titanium.Platform.name != 'android') {
+			if(win.openedflag == 0 ){
+				Ti.API.info('firing open event');
+				win.fireEvent('open');
+			}
+			if(win.focusedflag == 0){
+				Ti.API.info('firing focus event');
+				win.fireEvent('focus');
+			}
 			var authorization = Titanium.Geolocation.locationServicesAuthorization;
 			Ti.API.info('Authorization: '+authorization);
 			if (authorization == Titanium.Geolocation.AUTHORIZATION_DENIED) {
@@ -345,6 +355,7 @@ function geolocation() {
 		// GET CURRENT POSITION - THIS FIRES ONCE
 		//
 		win.addEventListener('open', function() {
+			win.openedflag = 1;
 			Titanium.Geolocation.getCurrentPosition(function(e)
 			{
 				if (!e.success || e.error)
@@ -368,13 +379,23 @@ function geolocation() {
 		
 				Titanium.API.info('geo - current location: ' + new Date(timestamp) + ' long ' + longitude + ' lat ' + latitude + ' accuracy ' + accuracy);
 			});
-		});
+		});	
 	
 		//
 		// EVENT LISTENER FOR GEO EVENTS - THIS WILL FIRE REPEATEDLY (BASED ON DISTANCE FILTER)
 		//
 		var locationCallback = function(e)
 		{
+			//Mobileweb seems to be not firing window event for some odd reason.
+			//Forcing a window open and focus event.
+			if(win.openedflag == 0 ){
+				Ti.API.info('firing open event');
+				win.fireEvent('open');
+			}
+			if(win.focusedflag == 0){
+				Ti.API.info('firing focus event');
+				win.fireEvent('focus');
+			}
 			if (!e.success || e.error)
 			{
 				updatedLocation.text = 'error:' + JSON.stringify(e.error);
@@ -415,36 +436,51 @@ function geolocation() {
 			},100);
 	
 			// reverse geo
-			if (Ti.Platform.osname !== 'mobileweb') {
-				Titanium.Geolocation.reverseGeocoder(latitude,longitude,function(evt)
-				{
-					if (evt.success) {
-						var places = evt.places;
-						if (places && places.length) {
-							reverseGeo.text = places[0].address;
-						} else {
-							reverseGeo.text = "No address found";
-						}
-						Ti.API.debug("reverse geolocation result = "+JSON.stringify(evt));
+			Titanium.Geolocation.reverseGeocoder(latitude,longitude,function(evt)
+			{
+				if (evt.success) {
+					var places = evt.places;
+					if (places && places.length) {
+						reverseGeo.text = places[0].address;
+					} else {
+						reverseGeo.text = "No address found";
 					}
-					else {
-						Ti.UI.createAlertDialog({
-							title:'Reverse geo error',
-							message:evt.error
-						}).show();
-						Ti.API.info("Code translation: "+translateErrorCode(e.code));
-					}
-				});
-			}	
+					Ti.API.debug("reverse geolocation result = "+JSON.stringify(evt));
+				}
+				else {
+					Ti.UI.createAlertDialog({
+						title:'Reverse geo error',
+						message:evt.error
+					}).show();
+					Ti.API.info("Code translation: "+translateErrorCode(e.code));
+				}
+			});	
 	
 			Titanium.API.info('geo - location updated: ' + new Date(timestamp) + ' long ' + longitude + ' lat ' + latitude + ' accuracy ' + accuracy);
 		};
 		Titanium.Geolocation.addEventListener('location', locationCallback);
 		locationAdded = true;
+		
 	}
-	var addr = "2065 Hamilton Avenue San Jose California 95125";
-	
-	if (Ti.Platform.osname !== 'mobileweb') {
+
+	win.addEventListener('focus', function()
+	{
+		win.focusedflag = 1;
+		Ti.API.info("focus event received");
+		if (!headingAdded && headingCallback) {
+			Ti.API.info("adding heading callback on resume");
+			Titanium.Geolocation.addEventListener('heading', headingCallback);
+			headingAdded = true;
+		}
+		if (!locationAdded && locationCallback) {
+			Ti.API.info("adding location callback on resume");
+			Titanium.Geolocation.addEventListener('location', locationCallback);
+			locationAdded = true;
+		}
+
+
+		var addr = "2065 Hamilton Avenue San Jose California 95125";
+		
 		Titanium.Geolocation.forwardGeocoder(addr,function(evt)
 		{
 			Ti.API.info('in forward ');
@@ -467,51 +503,23 @@ function geolocation() {
 				}
 			});
 		});
-	}
+	});	
 	
-	if (Titanium.Platform.name == 'android')
-	{
-		//  as the destroy handler will remove the listener, only set the pause handler to remove if you need battery savings
-		Ti.Android.currentActivity.addEventListener('pause', function(e) {
-			Ti.API.info("pause event received");
-			if (headingAdded) {
-				Ti.API.info("removing heading callback on pause");
-				Titanium.Geolocation.removeEventListener('heading', headingCallback);
-				headingAdded = false;
-			}
-			if (locationAdded) {
-				Ti.API.info("removing location callback on pause");
-				Titanium.Geolocation.removeEventListener('location', locationCallback);
-				locationAdded = false;
-			}
-		});
-		Ti.Android.currentActivity.addEventListener('destroy', function(e) {
-			Ti.API.info("destroy event received");
-			if (headingAdded) {
-				Ti.API.info("removing heading callback on destroy");
-				Titanium.Geolocation.removeEventListener('heading', headingCallback);
-				headingAdded = false;
-			}
-			if (locationAdded) {
-				Ti.API.info("removing location callback on destroy");
-				Titanium.Geolocation.removeEventListener('location', locationCallback);
-				locationAdded = false;
-			}
-		});
-		Ti.Android.currentActivity.addEventListener('resume', function(e) {
-			Ti.API.info("resume event received");
-			if (!headingAdded && headingCallback) {
-				Ti.API.info("adding heading callback on resume");
-				Titanium.Geolocation.addEventListener('heading', headingCallback);
-				headingAdded = true;
-			}
-			if (!locationAdded && locationCallback) {
-				Ti.API.info("adding location callback on resume");
-				Titanium.Geolocation.addEventListener('location', locationCallback);
-				locationAdded = true;
-			}
-		});
-	}
+	win.addEventListener('blur', function() {
+		Ti.API.info("pause event received");
+		if (headingAdded) {
+			Ti.API.info("removing heading callback on pause");
+			Titanium.Geolocation.removeEventListener('heading', headingCallback);
+			headingAdded = false;
+		}
+		if (locationAdded) {
+			Ti.API.info("removing location callback on pause");
+			Titanium.Geolocation.removeEventListener('location', locationCallback);
+			locationAdded = false;
+		}
+	});
+	
+	
 	return win;
 };
 
