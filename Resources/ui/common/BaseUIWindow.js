@@ -60,18 +60,16 @@ function BaseUIWindow(title) {
 	{
 		var test = e.rowData.test;
 		var dataTitle = e.rowData.title;
-		if (isBlackberry)
-		{
+		if (isBlackberry) {
 			test = data[e.index].test;
 			dataTitle = data[e.index].title;
 		}
-		if (typeof test != 'undefined')
-		{
+		if (typeof test !== 'undefined') {
 			var ExampleWindow = require(test),
 				win = new ExampleWindow({title:dataTitle,containingTab:self.containingTab,tabGroup:self.tabGroup});
 			if (Ti.Platform.name == "android") {
 				
-			} else if (Ti.Platform.name == "blackberry") {
+			} else if (Ti.Platform.name === "blackberry") {
 				win.backgroundColor = "#000";
 			} else {
 				win.backgroundColor = "#fff";

@@ -38,8 +38,7 @@ function MashupsWindow(title) {
 		var dataTitle = e.rowData.title;
 		var barColor = e.rowData.barColor;
 		var titleImage = e.rowData.title_image;
-		if (isBlackberry)
-		{
+		if (isBlackberry) {
 			test = data[e.index].test;
 			dataTitle = data[e.index].title;
 			barColor = data[e.index].barColor;

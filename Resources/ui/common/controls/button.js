@@ -2,8 +2,7 @@ function button_control() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var scaleX = 1;
 	var scaleY = 1;
-	if(isBlackberry)
-	{
+	if (isBlackberry) {
 		scaleX += 1;
 		scaleY += 2;
 	};
@@ -29,7 +28,7 @@ function button_control() {
 		Ti.Platform.openURL("http://www.google.com/");
 	});
 	
-	var button3_properties = {
+	var b3 = Titanium.UI.createButton({
 		color:'#fff',
 		backgroundImage:'/images/BUTT_grn_off.png',
 		backgroundSelectedImage:'/images/BUTT_grn_on.png',
@@ -39,33 +38,20 @@ function button_control() {
 		height:57 * scaleY,
 		font:{fontSize:20,fontWeight:'bold',fontFamily:'Helvetica Neue'},
 		title:'Click Me'
-	}
-	if (isBlackberry)
-	{
-		delete button3_properties.backgroundImage;
-		delete button3_properties.backgroundSelectedImage;
-		delete button3_properties.backgroundDisabledImage;
-	}
+	});
 	
-	var b3 = Titanium.UI.createButton(button3_properties);
-	
-	var buttonLabelProperties = {
+	var buttonLabel = Titanium.UI.createLabel({
 		color:'#f00',
 		highlightedColor:'#0f0',
 		backgroundColor:'transparent',
-		width:'100',		
+		width:'100',
 		height:'auto',
 		right:5,
 		text:'Custom Label'
+	});
+	if (isBlackberry) {
+		buttonLabel.height = 40;
 	}
-	if (isBlackberry)
-	{
-		delete buttonLabelProperties.highlightedColor;
-		delete buttonLabelProperties.height;
-	}
-	
-	var buttonLabel = Titanium.UI.createLabel(buttonLabelProperties);
-	
 	b3.add(buttonLabel);
 	
 	var state = 0;
@@ -88,7 +74,7 @@ function button_control() {
 			case 1:
 				b3.font = {fontSize:25,fontFamily:'Marker Felt', fontWeight:'bold'};
 				b3.title = 'I am red';
-				if (!isBlackberry)	{
+				if (!isBlackberry) {
 					b3.backgroundImage = '/images/BUTT_red_off.png';
 					b3.backgroundSelectedImage = '/images/BUTT_red_on.png';
 					b3.color = '#222';
@@ -236,7 +222,7 @@ function button_control() {
 		b1.verticalAlign = Titanium.UI.TEXT_VERTICAL_ALIGNMENT_BOTTOM;
 	});
 	
-	if (!isBlackberry){
+	if (!isBlackberry) {
 		win.add(bhleft);
 		win.add(bhcenter);
 		win.add(bhright);

@@ -2,8 +2,8 @@ function button_states() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var scaleX = 1;
 	var scaleY = 1;
-	if(isBlackberry)
-	{
+	if(isBlackberry) {
+		//scale factor to scale button width up to ~400 for BB
 		scaleX += 7;
 		scaleY += 2;
 	};
@@ -78,7 +78,7 @@ function button_states() {
 				button2.enabled=false;
 				state=0;
 				break;
-				
+
 		}
 	})
 	

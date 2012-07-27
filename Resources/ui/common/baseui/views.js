@@ -60,13 +60,11 @@ function views(_args) {
 	{
 		var test = e.rowData.test;
 		var dataTitle = e.rowData.title;
-		if (isBlackberry)
-		{
+		if (isBlackberry) {
 			test = data[e.index].test;
 			dataTitle = data[e.index].title;
 		}
-		if (typeof test !== 'undefined')
-		{
+		if (typeof test !== 'undefined') {
 			var ExampleWindow = require(test);
 				win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});

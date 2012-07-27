@@ -2,8 +2,7 @@ function progressbar() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var scaleX = 1;
 	var scaleY = 1;
-	if (isBlackberry)
-	{
+	if (isBlackberry) {
 		scaleX += 1;
 		scaleY += 2;
 	}
@@ -126,7 +125,7 @@ function progressbar() {
 		{
 			ind.show();
 			
-			if (isIos) {				
+			if (isIos) {
 				ind2.show();
 				ind3.show();
 				ind4.show();
@@ -151,7 +150,7 @@ function progressbar() {
 					win.setTitle('Progress Bar');
 					return;
 				}
-				ind.value = val;				
+				ind.value = val;
 				ind.message = 'Downloading ' + val + ' of 10';
 				if (isIos) {
 					ind2.value = val;
