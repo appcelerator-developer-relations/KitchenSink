@@ -1,4 +1,5 @@
 function MashupsWindow(title) {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var self = Ti.UI.createWindow({
 		title:title,
 		// BB TODO: this used to be white
@@ -33,15 +34,25 @@ function MashupsWindow(title) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e) {
-		if (e.rowData.test) {
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab});
+		var test = e.rowData.test;
+		var dataTitle = e.rowData.title;
+		var barColor = e.rowData.barColor;
+		var titleImage = e.rowData.title_image;
+		if (isBlackberry) {
+			test = data[e.index].test;
+			dataTitle = data[e.index].title;
+			barColor = data[e.index].barColor;
+			titleImage = data[e.index].title_image;
+		}
+		if (typeof test !== 'undefined') {
+			var ExampleWindow = require(test),
+				win = new ExampleWindow({title:dataTitle,containingTab:self.containingTab});
 				
-			if (e.rowData.barColor) {
-				win.barColor = e.rowData.barColor;
+			if (typeof barColor !== 'undefined') {
+				win.barColor = barColor;
 			}
-			if (e.rowData.title_image) {
-				win.titleImage = e.rowData.title_image;
+			if (typeof titleImage !== 'undefined') {
+				win.titleImage = titleImage;
 			}
 			self.containingTab.open(win,{animated:true});
 		}

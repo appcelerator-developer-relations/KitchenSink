@@ -1,8 +1,13 @@
 function label(_args) {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var self = Ti.UI.createWindow({
 		title:_args.title,
 		backgroundColor:'white'
 	});
+	
+	if (isBlackberry) {
+		self.backgroundColor = 'black';
+	}
 	
 	// create label view data object
 	var data = [
@@ -22,8 +27,15 @@ function label(_args) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e) {
-		if (e.rowData.test) {
-			var ExampleWindow = require(e.rowData.test),
+		var test = e.rowData.test;
+		var dataTitle = e.rowData.title;
+		if (isBlackberry)
+		{
+			test = data[e.index].test;
+			dataTitle = data[e.index].title;
+		}
+		if (typeof test !== 'undefined') {
+			var ExampleWindow = require(test),
 				win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}

@@ -1,4 +1,11 @@
 function progressbar() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	var value = 0;
 	var ind, ind2, ind3, ind4, button, flexSpace, interval;
@@ -34,21 +41,24 @@ function progressbar() {
 	} else {
 		button = Titanium.UI.createButton({
 			title:'Start Progress',
-			height:40,
-			width:200,
+			height:40 * scaleY,
+			width:200 * scaleX,
 			top:10
 		});
 		ind = Titanium.UI.createProgressBar({
-			width:150,
+			width:150 * scaleX,
 			min:0,
 			max:10,
 			value:0,
-			height:70,
+			height:70 * scaleY,
 			color:'#888',
 			message:'Downloading 0 of 10',
 			font:{fontSize:14, fontWeight:'bold'},
 			top:60
 		});
+		if (isBlackberry) {
+			ind.width = 450 * scaleX;
+		}
 		win.add(button);
 		win.add(ind);
 		
@@ -122,7 +132,9 @@ function progressbar() {
 			}
 		
 			val = 0;
-			clearInterval(interval);
+			// TODO: remove condition once clearInterval doesn't choke on undefined param
+			if (typeof interval != 'undefined')
+				clearInterval(interval);
 			interval = setInterval(function()
 			{
 				Ti.API.info('INTERVAL FIRED value ' + val);

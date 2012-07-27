@@ -1,4 +1,5 @@
 function label_basic() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow();
 	
 	var l1 = Titanium.UI.createLabel({
@@ -22,6 +23,10 @@ function label_basic() {
 		top:170,
 		textAlign:'center'
 	});
+	
+	if (isBlackberry) {
+		l2.width = 550;		
+	};
 	
 	win.add(l2);
 	
@@ -64,42 +69,57 @@ function label_basic() {
 			l2.shadowColor = '#336699';
 			l2.font = {fontSize:20};
 			changed=true;
-			size.text = l2.size.height + ' ' + l2.size.width;  // where is size defined?
+			size.text = (isBlackberry) ? l2.getHeight() + ' ' + l2.getWidth() :
+										l2.size.height + ' ' + l2.size.width;  // where is size defined?
 		}
 		else
 		{
 			l2.color = '#900';
 			l2.shadowColor = '#aaa';
 			l2.font = {fontSize:48};
-			size.text = l2.size.height + ' ' + l2.size.width;
+			size.text = (isBlackberry) ? l2.getHeight() + ' ' + l2.getWidth() : 
+										l2.size.height + ' ' + l2.size.width;
 			changed=false;
 		}
 	});
 	win.add(b2);
 	
-	var b3 = Titanium.UI.createButton({
-		title:'Label 1 background',
-		height:40,
-		width:200,
-		top:330
-	});
-	var bg = false;
-	b3.addEventListener('click', function()
-	{
-		if (!bg) {
-			l1.backgroundPaddingLeft = 10;
-			l1.backgroundPaddingRight = 10;
-			l1.backgroundPaddingTop = 10;
-			l1.backgroundPaddingBottom = 10;
-			l1.backgroundImage = '/images/chat.png';
-			bg = true;
-		}
-		else {
-			l1.backgroundImage = null;
-			bg = false;
-		}
-	});
-	win.add(b3);
+	if (isBlackberry) {
+		b1.height = 140;
+		b1.width = 390;
+		
+		b2.height = 140;
+		b2.width = 390;
+		
+		l1.textAlign = Titanium.UI.TEXT_ALIGNMENT_CENTER;
+		l2.width = 550;
+	};
+	
+	if (!isBlackberry) {
+		var b3 = Titanium.UI.createButton({
+			title:'Label 1 background',
+			height:40,
+			width:200,
+			top:330
+		});
+		var bg = false;
+		b3.addEventListener('click', function()
+		{
+			if (!bg) {
+				l1.backgroundPaddingLeft = 10;
+				l1.backgroundPaddingRight = 10;
+				l1.backgroundPaddingTop = 10;
+				l1.backgroundPaddingBottom = 10;
+				l1.backgroundImage = '/images/chat.png';
+				bg = true;
+			}
+			else {
+				l1.backgroundImage = null;
+				bg = false;
+			}
+		});
+		win.add(b3);
+	}
 	
 	var size = Ti.UI.createLabel({
 		height:30,

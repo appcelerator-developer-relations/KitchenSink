@@ -1,4 +1,12 @@
 function options_dialog() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if(isBlackberry)
+	{
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	win.orientationModes = [
@@ -36,12 +44,17 @@ function options_dialog() {
 		title:'I am a title'
 	};
 	
+	if (isBlackberry) {
+		delete optionsDialogOpts.destructive;
+		delete optionsDialogOpts.cancel;
+	};
+	
 	if (isAndroid) {
 		optionsDialogOpts.selectedIndex = 3;
 	}
 	
 	var dialog = Titanium.UI.createOptionDialog(optionsDialogOpts);
-	
+		
 	// add event listener
 	dialog.addEventListener('click',function(e)
 	{
@@ -59,8 +72,8 @@ function options_dialog() {
 	// BUTTON TO SHOW BASIC DIALOG
 	var button1 = Titanium.UI.createButton({
 		title:'Show Dialog 1',
-		height:40,
-		width:200,
+		height:40 * scaleY,
+		width:200 * scaleX,
 		top:10
 	});
 	button1.addEventListener('click', function()
@@ -68,15 +81,15 @@ function options_dialog() {
 		if (isAndroid) {
 			dialog.androidView = null;
 			applyButtons();
-		}
+		}		
 		dialog.show();
 	});
 	
 	// BUTTON TO MODIFY DIALOG AND SHOW
 	var button2 = Titanium.UI.createButton({
 		title:'Modify and Show Dialog',
-		height:40,
-		width:200,
+		height:40 * scaleY,
+		width:200 * scaleX,
 		top:60
 	});
 	button2.addEventListener('click', function()
@@ -102,7 +115,7 @@ function options_dialog() {
 		},
 		textAlign:'center',
 		top:110,
-		width:300
+		width:300 * scaleX
 	});
 	
 	if (isAndroid) {
@@ -152,8 +165,8 @@ function options_dialog() {
 	if (!isAndroid) {
 		var button4 = Titanium.UI.createButton({
 			title:'Show w/hide, animated',
-			height:40,
-			width:200,
+			height:40 * scaleY,
+			width:200 * scaleX,
 			top:250
 		});
 		
@@ -169,8 +182,8 @@ function options_dialog() {
 		
 		var button5 = Titanium.UI.createButton({
 			title:'Show w/hide, nonanimated',
-			height:40,
-			width:200,
+			height:40 * scaleY,
+			width:200 * scaleX,
 			top:300
 		});
 		
