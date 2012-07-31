@@ -42,9 +42,13 @@ if (Ti.version < 2.0 ) {
 	}
 
 	var ApplicationTabGroup = require('ui/common/ApplicationTabGroup');
-	new ApplicationTabGroup().open(
-		Ti.UI.iPhone ? {transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT} : {}
-	);
+	var theTabGroup = new ApplicationTabGroup();
+	if (osname === 'iphone' || osname === 'ipad') {
+		theTabGroup.open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+	}
+	else{
+		theTabGroup.open();
+	}
 	
 	var MessageWindow = require('ui/common/MessageWindow'),
 		messageWin = new MessageWindow();
