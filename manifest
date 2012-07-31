@@ -1,8 +1,8 @@
 #appname: KitchenSink
-#publisher: nwright
-#url: appcelerator.com
+#publisher: adecena
+#url: http://appcelerator.com
 #image: appicon.png
-#appid: com.appcelerator.titanium
-#desc: No description provided
-#type: mobile
-#guid: 43110fac-34e1-4957-a623-cc817b98d5fe
+#appid: com.appcelerator.kitchensink
+#desc: undefined
+#type: ipad
+#guid: 28a706e9-4130-4acb-bc76-9494255a9279
