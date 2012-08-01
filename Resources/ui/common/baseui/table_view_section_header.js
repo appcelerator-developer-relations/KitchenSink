@@ -2,6 +2,7 @@
 	//  This is a test that is meant to verify that a row object can have a header
 	//  and the table view has no table view header - the header should be displayed
 function tv_section_header() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Titanium.UI.createWindow();
 	
 	var inputData = [
@@ -15,6 +16,7 @@ function tv_section_header() {
 		data:inputData
 	});
 	if (Ti.Platform.osname !== 'mobileweb') {
+		if (!isBlackberry)
 		tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
 	}
 	win.add(tableView);

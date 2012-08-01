@@ -1,4 +1,5 @@
 function props() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Titanium.UI.createWindow();
 	
 	/**
@@ -81,9 +82,12 @@ function props() {
 	// test getters
 	//
 	Titanium.API.info('String: '+ Titanium.App.Properties.getString('String'));
-	Titanium.API.info('Int: '+ Titanium.App.Properties.getString('Int'));
-	Titanium.API.info('Bool: '+ Titanium.App.Properties.getString('Bool'));
-	Titanium.API.info('Double: '+ Titanium.App.Properties.getString('Double'));
+	if (!isBlackberry) {
+		Titanium.API.info('Int: '+ Titanium.App.Properties.getString('Int'));
+		Titanium.API.info('Bool: '+ Titanium.App.Properties.getString('Bool'));
+		Titanium.API.info('Double: '+ Titanium.App.Properties.getString('Double'));
+	}
+	
 	Titanium.API.info('List:');
 	
 	var list = Titanium.App.Properties.getList('MyList');
@@ -103,10 +107,13 @@ function props() {
 	//
 	// test out remove property and setting to null
 	//
-	Titanium.App.Properties.setString('String',null);
+	if (!isBlackberry) {
+		Titanium.App.Properties.setString('String',null);
+	}
 	Titanium.App.Properties.removeProperty('Int');
 	Titanium.API.info("String should be null - value = " + resultHelper(Titanium.App.Properties.getString('String'),null));
-	Titanium.API.info("Int should be null - value = " + resultHelper(Titanium.App.Properties.getString('Int'),null));
+	if (!isBlackberry)
+		Titanium.API.info("Int should be null - value = " + resultHelper(Titanium.App.Properties.getString('Int'),null));
 	
 	//
 	// application settings testing

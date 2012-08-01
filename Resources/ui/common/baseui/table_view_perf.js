@@ -1,6 +1,7 @@
 function tv_perf() {
-	var w = Ti.UI.createWindow();
-	var v = Ti.UI.createView();
+	var isBlackberry = Titanium.Platform.name === 'blackberry';	
+	var w = Ti.UI.createWindow();	
+	var v = Ti.UI.createView();	
 	var tv = Ti.UI.createTableView({
 		top:0,
 		height:280,
@@ -13,6 +14,9 @@ function tv_perf() {
 		height:"auto",
 		bottom:15
 	});
+	if (isBlackberry) {
+		l.height = 40;
+	}
 	v.add(tv);
 	v.add(l);
 	w.add(v);
@@ -24,7 +28,12 @@ function tv_perf() {
 	
 	for (var c=0;c<count;c++)
 	{
-		var row = Ti.UI.createTableViewRow({title:"Row "+(c+1), className: "row"});
+		var row;
+		if (isBlackberry) {
+			row = {title:"Row "+(c+1), className: "row"};
+		} else {
+			row = Ti.UI.createTableViewRow({title:"Row "+(c+1), className: "row"});
+		}		
 		data[c] = row;
 	}
 	

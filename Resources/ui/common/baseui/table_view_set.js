@@ -1,6 +1,7 @@
 function tv_set() {
 	//JGH: FIXME - remove HTML
 	
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Titanium.UI.createWindow();
 	
 	var data = [
@@ -28,20 +29,30 @@ function tv_set() {
 	
 	tableView.addEventListener('click',function(e)
 	{
+		if (isBlackberry) {
+			e.index = parseInt(e.index);
+		}
 		switch(e.index)
 		{
 			case 0:
 				var data = [];
 				for (var c=0;c<10;c++)
 				{
-					var row = Ti.UI.createTableViewRow();
+					var row = {};
+					if (!isBlackberry) {
+						row = Ti.UI.createTableViewRow();
+					}
 					row.title = "Row "+ (c+1);
 					row.hasCheck = true;
 					row.backgroundColor = '#aaa';
 					data[c]=row;
 				}
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});				
+				if (isBlackberry) {
+					tableView.setData(data);
+				} else {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
+					tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});
+				}
 				break;
 			case 1:
 				var data = [
@@ -53,9 +64,13 @@ function tv_set() {
 					{title:'Row 7', image:'Mail.png'}
 	
 				];
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
-				tableView.separatorColor = null;
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.DOWN});
+				if (isBlackberry) {
+					tableView.setData(data);
+				} else {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
+					tableView.separatorColor = null;
+					tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.DOWN});
+				}
 				break;
 			case 2:
 				var data = [
@@ -70,9 +85,13 @@ function tv_set() {
 					{title:'Row 9'}
 	
 				];
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
-				tableView.separatorColor = "red";
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
+				if (isBlackberry) {
+					tableView.setData(data);
+				} else {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
+					tableView.separatorColor = "red";
+					tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
+				}
 				break;
 		}
 			

@@ -1,4 +1,5 @@
 function table_views(_args) {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow();
 	if (Ti.Platform.name == 'android') 
 	{
@@ -85,7 +86,8 @@ function table_views(_args) {
 		};
 	
 	if (Ti.Platform.osname !== 'mobileweb') {
-		tableViewOptions.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+		if (!isBlackberry)
+			tableViewOptions.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
 	}
 	
 	var tableview = Titanium.UI.createTableView(tableViewOptions);

@@ -1,4 +1,5 @@
 function vertical_layout_tv() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow();
 	
 	var tv = Ti.UI.createTableView({minRowHeight:50});
@@ -9,6 +10,10 @@ function vertical_layout_tv() {
 	
 	var data = [];
 	
+	if (isBlackberry) {
+		alert('This functionality depends on Ti.UI.createTableViewRow() which is not supported for Blackberry yet');
+		return win;
+	}
 	for (var i=0;i<50;i++)
 	{
 		var row = Ti.UI.createTableViewRow({height:'auto',className:"row"});

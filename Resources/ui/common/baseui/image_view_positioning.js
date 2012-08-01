@@ -34,6 +34,9 @@ function image_view_position() {
 		textAlign:'center'
 	});
 	
+	if (Titanium.Platform.osname === 'blackberry') {
+		label.height = 100;
+	}
 	win.add(label);
 	
 	return win;

@@ -22,6 +22,10 @@ function image_view_scale() {
 	
 	
 	function getDimensions() {
+		if (Ti.Platform.osname === 'blackberry') {
+			alert('Titanium.UI.ImageView.toBlob() is not supported for Blackberry');
+			return;
+		}
 		if (Ti.Platform.osname === 'mobileweb') {
 			l.text = 'dimensions unavailable'
 		} else {

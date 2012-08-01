@@ -1,4 +1,5 @@
 function tv_row_update() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Titanium.UI.createWindow();
 	
 	// create table view data
@@ -27,6 +28,10 @@ function tv_row_update() {
 	var tableView = Titanium.UI.createTableView({data:data});
 	tableView.addEventListener('click',function(e)
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.TableView.updateRow() is not supported for Blackberry yet');
+			return;
+		}
 		switch(e.index)
 		{
 			case 0:

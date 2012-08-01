@@ -1,4 +1,5 @@
 function tv_basic() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
 	// create table view data object
 	var data = [

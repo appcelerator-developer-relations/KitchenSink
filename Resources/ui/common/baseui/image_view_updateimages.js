@@ -21,6 +21,10 @@ function image_view_update() {
 	
 	win.add(cartoonGuy);
 	
+	if (Titanium.Platform.osname === 'blackberry') {
+		alert('Blackberry Titanium.UI.ImageView.start() and stop() are not implemented yet');
+		return win;
+	}
 	cartoonGuy.start();
 	
 	cartoonGuy.addEventListener('touchstart', function(e)

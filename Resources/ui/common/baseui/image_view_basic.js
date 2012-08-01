@@ -1,8 +1,9 @@
 function image_view_basic() {
 	var win = Titanium.UI.createWindow();
 	
+	//changed image url form remote to local - because the image with this url is not available in WEB already.
 	var imageView = Titanium.UI.createImageView({
-		image:'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png',
+		image:'/images/flower.jpg',
 		width:261,
 		height:178,
 		top:20
@@ -24,6 +25,9 @@ function image_view_basic() {
 	});
 	win.add(l);
 	
+	if (Titanium.Platform.osname === 'blackberry'){
+		l.height = 100;
+	}
 	function clicker()
 	{
 		Titanium.UI.createAlertDialog({title:'Image View', message:'You clicked me!'}).show();

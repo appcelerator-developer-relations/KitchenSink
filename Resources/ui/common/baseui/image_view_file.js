@@ -1,4 +1,8 @@
 function image_view_file() {
+	if (Titanium.Platform.osname === 'blackberry'){
+		alert('Ti.Filesystem module is not supported for BB');
+		return;
+	}
 	var win = Titanium.UI.createWindow();;
 	
 	var f = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'/images/apple_logo.jpg');

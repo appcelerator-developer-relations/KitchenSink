@@ -1,4 +1,5 @@
 function tv_row_delete() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Titanium.UI.createWindow();
 	
 	// create table view data object
@@ -17,6 +18,7 @@ function tv_row_delete() {
 		title:'Delete Row'
 	});
 	if (Ti.Platform.osname !== 'mobileweb') {
+		if (!isBlackberry)
 		button.style = Titanium.UI.iPhone.SystemButtonStyle.BORDERED;
 	}
 	
@@ -31,6 +33,8 @@ function tv_row_delete() {
 		win.add(button);
 	}
 	
+	if (isBlackberry)
+		button.height = 100;
 	// create table view
 	var tableview = Titanium.UI.createTableView(tableViewOptions);
 	
@@ -63,6 +67,10 @@ function tv_row_delete() {
 		var index = tableview.data.length-1;
 		Ti.API.info("deleting row "+index);
 		
+		if (isBlackberry) {
+			alert('Delete TableRow is not supported for BB');
+			return;
+		}
 		try {
 			if (Ti.Platform.osname !== 'mobileweb') {
 				tableview.deleteRow(index,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
