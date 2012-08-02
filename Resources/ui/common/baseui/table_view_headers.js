@@ -68,6 +68,12 @@ function tv_headers() {
 	var search = Titanium.UI.createSearchBar({
 		showCancel:false
 	});
+	search.addEventListener('blur',function(){
+		if(Ti.Platform.name === "android"){
+			Ti.API.info('Going to hide soft Keyboard as we are shifting focus away from the SearchBar.');
+			Ti.UI.Android.hideSoftKeyboard();
+		}	
+	});
 	// create table view
 	var tableview = Titanium.UI.createTableView({
 		data:data,
