@@ -53,7 +53,7 @@ function tv_layout() {
 	});
 	if (Ti.Platform.osname !== 'mobileweb') {
 		if (!isBlackberry)
-		tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
+			tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
 	}
 	
 	if (isBlackberry) {

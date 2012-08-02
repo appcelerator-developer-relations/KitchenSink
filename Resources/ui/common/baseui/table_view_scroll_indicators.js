@@ -9,7 +9,7 @@ function tv_scroll() {
 	});
 	if (Ti.Platform.osname !== 'mobileweb') {
 		if (!isBlackberry)
-		tv.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+			tv.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
 	}
 	
 	function setData()
@@ -36,7 +36,7 @@ function tv_scroll() {
 	var refresh = Titanium.UI.createButton();
 	if (Ti.Platform.osname !== 'mobileweb') {
 		if (!isBlackberry)
-		refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
+			refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
 	}
 	refresh.addEventListener('click', function()
 	{

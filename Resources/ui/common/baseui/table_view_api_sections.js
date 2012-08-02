@@ -1,8 +1,11 @@
 function tv_api_sections() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	if (isBlackberry) {
+		alert('Ti.UI.createTableViewSection() is not supported for Blackberry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	
-	//Seems Ti.UI.createTableViewSection() doesn't working for BB
 	var section1 = Ti.UI.createTableViewSection({
 		headerTitle:'Header 1'
 	});

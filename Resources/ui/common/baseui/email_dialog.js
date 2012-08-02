@@ -50,6 +50,10 @@ function openEmail() {
 */
 
 function email_dialog() {
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.UI.EmailDialog and Titanium.UI.createEmailDialog() are not supported for Blackberry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	
 	// initialize to all modes

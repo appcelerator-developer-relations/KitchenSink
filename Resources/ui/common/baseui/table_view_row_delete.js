@@ -19,7 +19,7 @@ function tv_row_delete() {
 	});
 	if (Ti.Platform.osname !== 'mobileweb') {
 		if (!isBlackberry)
-		button.style = Titanium.UI.iPhone.SystemButtonStyle.BORDERED;
+			button.style = Titanium.UI.iPhone.SystemButtonStyle.BORDERED;
 	}
 	
 	var tableViewOptions = {data: data};

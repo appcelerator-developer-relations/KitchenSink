@@ -169,8 +169,8 @@ function tab_group(_args) {
 	
 	if (isBlackberry) {
 		openLabel.top = openLabel.top * scaleY;
-		openLabel.width = 600;
-		openLabel.height = 100;
+		openLabel.width = 300 * scaleX;
+		openLabel.height = 30 * scaleY;
 		setActiveTabObjectButton.width = setActiveTabObjectButton.width * 2;
 	}
 	// add views based on platform

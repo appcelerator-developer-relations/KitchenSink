@@ -1,17 +1,28 @@
 function view_evt_prop() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Titanium.UI.createWindow();
 	win.backgroundColor = '#13386c';
 	win.name = "window";
 	
-	var a = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'orange',width:100,height:100,top:10,name:"view a"});
-	var b = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'purple',width:100,height:100,top:115,right:40,name:"view b"});
-	var c = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'red',width:100,height:100,top:115,left:40,name:"view c"});
-	var d = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'cyan',width:100,height:100,top:220,name:"view d"});
+	var a = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'orange',width:100 * scaleX,height:100 * scaleX,top:10 * scaleX,name:"view a"});
+	var b = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'purple',width:100 * scaleX,height:100 * scaleX,top:115 * scaleX,right:40,name:"view b"});
+	var c = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'red',width:100 * scaleX,height:100 * scaleX,top:115 * scaleX,left:40 * scaleX,name:"view c"});
+	var d = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'cyan',width:100 * scaleX,height:100 * scaleX,top:220 * scaleX,name:"view d"});
 	
-	a.add(Ti.UI.createLabel({name:"label a",color:'white',text:'A',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}}));
-	b.add(Ti.UI.createLabel({name:"label b",color:'white',text:'B',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}}));
-	c.add(Ti.UI.createLabel({name:"label c",color:'white',text:'C',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}}));
-	d.add(Ti.UI.createLabel({name:"label d",color:'white',text:'D',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}}));
+	var aLabel = Ti.UI.createLabel({name:"label a",color:'white',text:'A',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}});
+	var bLabel = Ti.UI.createLabel({name:"label b",color:'white',text:'B',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}});
+	var cLabel = Ti.UI.createLabel({name:"label c",color:'white',text:'C',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}});
+	var dLabel = Ti.UI.createLabel({name:"label d",color:'white',text:'D',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}});
+	a.add(aLabel);
+	b.add(bLabel);
+	c.add(cLabel);
+	d.add(dLabel);
 	
 	var l = Ti.UI.createLabel({
 		color:'white',
@@ -33,6 +44,33 @@ function view_evt_prop() {
 		width:'auto'
 	});
 	
+	if (isBlackberry) {
+		a.left = 150 * scaleX;
+		b.left = 250 * scaleX;
+		d.left = a.left;
+		
+		aLabel.width = 95 * scaleX;
+		aLabel.height = 20 * scaleY;
+		
+		bLabel.width = 95 * scaleX;
+		bLabel.height = 20 * scaleY;
+		
+		cLabel.width = 95 * scaleX;
+		cLabel.height = 20 * scaleY;
+		
+		dLabel.width = 95 * scaleX;
+		dLabel.height = 20 * scaleY;
+		
+		l.width = Ti.Platform.displayCaps.platformWidth;
+		l.height = 15 * scaleY;
+		l.top = 300 * scaleY
+		
+		l2.width = Ti.Platform.displayCaps.platformWidth;
+		l2.height = 15 * scaleY;
+		l2.top = 280 * scaleY;
+		
+		alert('Titanium.Event.source is not supported for Blackberry yet');
+	}
 	win.add(a);
 	win.add(b);
 	win.add(c);
@@ -49,7 +87,7 @@ function view_evt_prop() {
 			{
 				o.text = "";
 			}
-		},1000);
+		},2000);
 	}
 	
 	win.addEventListener('click',function(ev)

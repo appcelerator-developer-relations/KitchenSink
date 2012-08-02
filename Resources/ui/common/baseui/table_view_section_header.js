@@ -17,7 +17,7 @@ function tv_section_header() {
 	});
 	if (Ti.Platform.osname !== 'mobileweb') {
 		if (!isBlackberry)
-		tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+			tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
 	}
 	win.add(tableView);
 	return win;

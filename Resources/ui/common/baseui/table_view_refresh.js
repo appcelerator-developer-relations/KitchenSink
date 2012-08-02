@@ -32,7 +32,7 @@ function tv_refresh() {
 	var refresh = Titanium.UI.createButton();
 	if (Ti.Platform.osname !== 'mobileweb'){
 		if (!isBlackberry)
-		refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
+			refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
 	}
 	refresh.addEventListener('click', function()
 	{

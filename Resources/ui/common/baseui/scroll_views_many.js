@@ -1,4 +1,11 @@
 function scroll_view_many() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	//
@@ -7,10 +14,10 @@ function scroll_view_many() {
 	var scrollView1 = Titanium.UI.createScrollView({
 		contentWidth:'auto',
 		contentHeight:'auto',
-		top:10,
-		left:10,
-		width:100,
-		height:150,
+		top:10 * scaleY,
+		left:10 * scaleX,
+		width:100 * scaleX,
+		height:150 * scaleY,
 		borderRadius:10,
 		backgroundColor:'#ff99000',
 		showVerticalScrollIndicator:false,
@@ -21,9 +28,9 @@ function scroll_view_many() {
 	var view1 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:10,
-		width:150,
-		height:200,
-		top:10
+		width:150 * scaleX,
+		height:200 * scaleY,
+		top:10 * scaleY
 	});
 	
 	var l1 = Ti.UI.createLabel({
@@ -42,10 +49,10 @@ function scroll_view_many() {
 	var scrollView2 = Titanium.UI.createScrollView({
 		contentWidth:'auto',
 		contentHeight:'auto',
-		top:10,
-		right:10,
-		width:100,
-		height:150,
+		top:10 * scaleY,
+		right:10 * scaleX,
+		width:100 * scaleX,
+		height:150 * scaleY,
 		borderRadius:10,
 		backgroundColor:'#ff99000',
 		showVerticalScrollIndicator:true,
@@ -56,9 +63,9 @@ function scroll_view_many() {
 	var view2 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:10,
-		width:150,
-		height:200,
-		top:10
+		width:150 * scaleX,
+		height:200 * scaleY,
+		top:10 * scaleY
 	});
 	
 	var l2 = Ti.UI.createLabel({
@@ -70,6 +77,12 @@ function scroll_view_many() {
 	view2.add(l2);
 	scrollView2.add(view2);
 	win.add(scrollView2);
+	if (isBlackberry) {
+		l1.width = 140 * scaleX;
+		l1.height = 20 * scaleY;
+		l2.width = 140 * scaleX;
+		l2.height = 20 * scaleY;
+	}
 	
 	//
 	//  THESE ARE IPHONE-SPECIFIC

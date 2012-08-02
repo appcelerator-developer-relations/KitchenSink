@@ -1,4 +1,8 @@
 function mapview() {
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Map module is not supported for Blackberry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	var isAndroid = false;

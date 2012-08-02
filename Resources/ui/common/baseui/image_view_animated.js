@@ -41,7 +41,7 @@ function image_view_anim() {
 	});
 	
 	if (isBlackberry) {
-		frame.height = 100;
+		frame.height = 25 * scaleY;
 	}
 	
 	//
@@ -94,7 +94,7 @@ function image_view_anim() {
 		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
 		top:10 * scaleY,
-		left:10
+		left:10 * scaleX
 	});
 	start.addEventListener('click', function()
 	{
@@ -116,7 +116,7 @@ function image_view_anim() {
 		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
 		top:130 * scaleY,
-		left:10
+		left:10 * scaleX
 	});
 	reverse.addEventListener('click', function()
 	{
@@ -157,7 +157,7 @@ function image_view_anim() {
 		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
 		top:90 * scaleY,
-		left:10
+		left:10 * scaleX
 	});
 	pause.addEventListener('click', function()
 	{
@@ -179,7 +179,7 @@ function image_view_anim() {
 		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
 		top:90 * scaleY,
-		right:10
+		right:10 * scaleX
 	});
 	resume.addEventListener('click', function()
 	{
@@ -201,7 +201,7 @@ function image_view_anim() {
 		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
 		top:50 * scaleY,
-		left:10
+		left:10 * scaleX
 	});
 	
 	// help text
@@ -232,15 +232,15 @@ function image_view_anim() {
 		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
 		top:50 * scaleY,
-		right:10
+		right:10 * scaleX
 	});
 	
 	if (isBlackberry) {
 		resume.left = 250 * scaleX;
 		durationDown.left = 250 * scaleX;
 		stop.left = 250 * scaleX;
-		l.height = 100;
-		l.width = 600;
+		l.height = 25 * scaleY;
+		l.width = 300 * scaleX;
 		l.color = 'black';
 		l.top = 180 * scaleY;
 	}

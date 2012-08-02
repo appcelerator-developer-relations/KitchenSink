@@ -27,8 +27,9 @@ function tv_row_append() {
 		var index = e.index;
 		var section = e.section;
 		var row = e.row;
-		if (typeof row !== 'undefined')
-		row.height = 100;
+		if (typeof row !== 'undefined') {
+			row.height = 100;
+		}
 		var rowdata = e.rowData;
 		if (index == 2)
 		{

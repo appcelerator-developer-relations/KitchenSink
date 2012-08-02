@@ -31,7 +31,6 @@ function switch_control() {
 		top:30 * scaleY
 	});
 	
-	//Seems not working for BB
 	basicSwitch.addEventListener('change',function(e)
 	{
 		basicSwitchLabel.text = 'Basic Switch value = ' + e.value + ' act val ' + basicSwitch.value;

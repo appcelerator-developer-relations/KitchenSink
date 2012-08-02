@@ -29,6 +29,7 @@ function tv_set() {
 	
 	tableView.addEventListener('click',function(e)
 	{
+		//TODO remove this when this will be claryfied if a bug and solved.
 		if (isBlackberry) {
 			e.index = parseInt(e.index);
 		}
