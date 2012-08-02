@@ -189,6 +189,7 @@ function scroll_view_scroll() {
 	
 	// move scroll view left
 	var left = Titanium.UI.createButton({
+		backgroundColor: 'transparent',
 		image:'/images/icon_arrow_left.png'
 	});
 	left.addEventListener('click', function(e)
@@ -200,6 +201,7 @@ function scroll_view_scroll() {
 	
 	// move scroll view right
 	var right = Titanium.UI.createButton({
+		backgroundColor: 'transparent',
 		image:'/images/icon_arrow_right.png'
 	});
 	right.addEventListener('click', function(e)
@@ -225,7 +227,7 @@ function scroll_view_scroll() {
 			height: 50,
 			backgroundColor: '#333333',
 			borderRadius: 10,
-			opacity: 0.3,
+			opacity: 0.7,
 			left: 10,
 			right: 10
 		});
@@ -233,13 +235,13 @@ function scroll_view_scroll() {
 		var floater = Titanium.UI.createView({
 			width:320,
 			height: 'auto',
-			opacity: 0
+			backgroundColor: 'transparent'
 		});
 	
 		toolbar.add(floater);
 	
 		left.left = 10;
-		left.width = 30;
+		left.width = 35;
 	
 		change.left = 50;
 		change.width = 70;
@@ -254,7 +256,7 @@ function scroll_view_scroll() {
 		jump.height = 35;
 	
 		right.right = 10;
-		right.width = 30;
+		right.width = 35;
 	
 		floater.add(left);
 		floater.add(change);
