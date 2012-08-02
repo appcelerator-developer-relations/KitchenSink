@@ -1,53 +1,60 @@
-NavController = {};
+function Navigation_controller(){
 
-NavController.mainWindow = Ti.UI.createWindow();
+	NavController = {};
 
-// WINDOWS
-NavController.win = Ti.UI.createWindow({title:'Navigation Group',backgroundColor:'#336699'});
+	NavController.mainWindow = Ti.UI.createWindow();
 
-// NAV GROUP
-NavController.navGroup = Ti.UI.iPhone.createNavigationGroup({
-	window:NavController.win
-});
+	// WINDOWS
+	NavController.win = Ti.UI.createWindow({title:'Navigation Group',backgroundColor:'#336699'});
 
-NavController.mainWindow.add(NavController.navGroup)
-
-// BUTTON
-NavController.button = Ti.UI.createButton({
-	title:'Open Window',
-	width:300,
-	height:50,
-	top:100
-});
-NavController.button.addEventListener('click', function()
-{
-	var w = Ti.UI.createWindow({
-		title:'New Window',
-		backgroundColor:'#fff'
+	// NAV GROUP
+	NavController.navGroup = Ti.UI.iPhone.createNavigationGroup({
+		window:NavController.win
 	});
-	var l = Ti.UI.createLabel({
-		textAlign:'center',
-		text:'New Window'
-	})
-	NavController.navGroup.open(w,{animated:true});
-});
-NavController.win.add(NavController.button);
 
-// CLOSE BUTTON
-NavController.closeButton = Ti.UI.createButton({
-	title:'Close Nav Group',
-	width:300,
-	height:50,
-	top:170
-});
-NavController.closeButton.addEventListener('click', function()
-{
-	NavController.mainWindow.close();
-});
-NavController.win.add(NavController.closeButton);
+	NavController.mainWindow.add(NavController.navGroup)
 
-NavController.open = function()
-{
-	Ti.API.info('IN OPEN')
-	NavController.mainWindow.open();	
+	// BUTTON
+	NavController.button = Ti.UI.createButton({
+		title:'Open Window',
+		width:300,
+		height:50,
+		top:100
+	});
+	NavController.button.addEventListener('click', function()
+	{
+		var w = Ti.UI.createWindow({
+			title:'New Window',
+			backgroundColor:'#fff'
+		});
+		var l = Ti.UI.createLabel({
+			textAlign:'center',
+			text:'New Window'
+		})
+		NavController.navGroup.open(w,{animated:true});
+	});
+	NavController.win.add(NavController.button);
+
+	// CLOSE BUTTON
+	NavController.closeButton = Ti.UI.createButton({
+		title:'Close Nav Group',
+		width:300,
+		height:50,
+		top:170
+	});
+	NavController.closeButton.addEventListener('click', function()
+	{
+		NavController.mainWindow.close();
+	});
+	NavController.win.add(NavController.closeButton);
+
+	NavController.open = function()
+	{
+		Ti.API.info('IN OPEN')
+		NavController.mainWindow.open();	
+	};
+	
+	return NavController;
 };
+
+module.exports = Navigation_controller;

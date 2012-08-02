@@ -1,3 +1,5 @@
+// Keep a reference to this window so it does not get collected on Android.
+var messageWin;
 function ApplicationTabGroup() {
 	//create module instance
 	var self = Ti.UI.createTabGroup(),
@@ -60,7 +62,7 @@ function ApplicationTabGroup() {
 	
 	
 	// Tabgroup events and message window
-	var messageWin = Titanium.UI.createWindow({
+	messageWin = Titanium.UI.createWindow({
 		height:30,
 		width:250,
 		bottom:70,
@@ -101,8 +103,8 @@ function ApplicationTabGroup() {
 	messageWin.add(messageView);
 	*/
 	messageWin.add(messageLabel);
-	
-	self.addEventListener('close', function() {
+	/*
+	self.addEventListener('close', function(e) {
 		messageLabel.text = 'tab group close event';
 		messageWin.open();
 		
@@ -114,29 +116,34 @@ function ApplicationTabGroup() {
 			messageWin.close({opacity:0,duration:500});
 		},1000);
 	});
+	*/
+	self.addEventListener('open',function(e) {
+		if (e.source == self){
+			Titanium.UI.setBackgroundColor('#fff');
+			messageLabel.text = 'tab group open event';
+			messageWin.open();
 	
-	self.addEventListener('open',function() {
-		Titanium.UI.setBackgroundColor('#fff');
-		messageLabel.text = 'tab group open event';
-		messageWin.open();
-
-		setTimeout(function() {
-			messageWin.close({opacity:0,duration:500});
-		},1000);
+			setTimeout(function() {
+				messageWin.close({opacity:0,duration:500});
+			},1000);
+		}
 	});
 	
 	self.addEventListener('focus', function(e) {
-		messageLabel.text = 'tab changed to ' + e.index + ' old index ' + e.previousIndex;
-		messageWin.open();
-
-		setTimeout(function() {
-			Ti.API.info('tab ' + e.tab.title + ' prevTab = ' + (e.previousTab ? e.previousTab.title : null));
-			messageLabel.text = 'active title ' + e.tab.title + ' old title ' + (e.previousTab ? e.previousTab.title : null);
-		},1000);
-
-		setTimeout(function() {
-			messageWin.close({opacity:0,duration:500});
-		},2000);
+		//IOS fires with source tabGroup. Android with source tab
+		if( (e.source == baseUITab) || (e.source == controlsTab) || (e.source == phoneTab) || (e.source == platformTab) || (e.source == mashupsTab) || (e.source == self)){
+			messageLabel.text = 'tab changed to ' + e.index + ' old index ' + e.previousIndex;
+			messageWin.open();
+	
+			setTimeout(function() {
+				Ti.API.info('tab ' + e.tab.title + ' prevTab = ' + (e.previousTab ? e.previousTab.title : null));
+				messageLabel.text = 'active title ' + e.tab.title + ' old title ' + (e.previousTab ? e.previousTab.title : null);
+			},1000);
+	
+			setTimeout(function() {
+				messageWin.close({opacity:0,duration:500});
+			},2000);
+		}
 	});
 	
 	self.addEventListener('blur', function(e) {
