@@ -1,4 +1,11 @@
 function textfield_border() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	
 	win.orientationModes = [
@@ -8,7 +15,12 @@ function textfield_border() {
 		Titanium.UI.LANDSCAPE_RIGHT
 	]; 
 	
-	var scrolly = Titanium.UI.createScrollView({contentHeight:'auto'});
+	var scrolly;
+	if (isBlackberry) {
+		scrolly = Titanium.UI.createView({width:Ti.Platform.displayCaps.platformWidth, height:Ti.Platform.displayCaps.platformHeight});
+	} else {
+		scrolly = Titanium.UI.createScrollView({contentHeight:'auto'});
+	}
 	win.add(scrolly);
 	
 	var tf1 = Titanium.UI.createTextField({
@@ -62,12 +74,12 @@ function textfield_border() {
 	
 	var tf6 = Titanium.UI.createTextField({
 		hintText:'custom background image',
-		height:32,
-		top:235,
+		height:32 * scaleY,
+		top:235 * scaleY,
 		backgroundImage:'/images/inputfield.png',
-		paddingLeft:10,
-		left:10,
-		right:60,
+		paddingLeft:10 * scaleX,
+		left:10 * scaleX,
+		right:60 * scaleY,
 		font:{fontSize:13},
 		color:'#777',
 		clearOnEdit:true
@@ -83,6 +95,9 @@ function textfield_border() {
 		scrolly.add(tf5);
 	}
 	
+	if (isBlackberry) {
+		tf6.width = 300 * scaleX;	
+	}
 	scrolly.add(tf6);
 	
 	return win;

@@ -56,7 +56,7 @@ function ApplicationTabGroup() {
 	mashupsWin.containingTab = mashupsTab;
 	self.addTab(mashupsTab);
 	
-	self.setActiveTab(0);
+	self.setActiveTab(1);
 	
 	
 	// Tabgroup events and message window

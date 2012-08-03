@@ -1,12 +1,19 @@
 function textfield_rest() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	
 	var tf1 = Titanium.UI.createTextField({
 		color:'#336699',
-		top:10,
-		left:10,
-		width:250,
-		height:40,
+		top:10 * scaleY,
+		left:10 * scaleX,
+		width:250 * scaleX,
+		height:40 * scaleY,
 		hintText:'hintText',
 		keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
 		returnKeyType:Titanium.UI.RETURNKEY_DEFAULT,
@@ -21,10 +28,10 @@ function textfield_rest() {
 	
 	var b1 = Titanium.UI.createButton({
 		title:'Enabled',
-		height:40,
-		width:145,
-		left:10,
-		top:55
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:55 * scaleY
 	});
 	b1.addEventListener('click', function()
 	{
@@ -35,10 +42,10 @@ function textfield_rest() {
 	
 	var b2 = Titanium.UI.createButton({
 		title:'Background Image',
-		height:40,
-		width:145,
-		right:10,
-		top:55
+		height:40 * scaleY,
+		width:145 * scaleX,
+		right:10 * scaleY,
+		top:55 * scaleY
 	});
 	var bgi = 0;
 	b2.addEventListener('click', function()
@@ -70,10 +77,10 @@ function textfield_rest() {
 	tf1.autocorrect = true; // Need to specify an absolute value or we're at the mercy of iOS' default (and maybe android's)
 	var b3 = Titanium.UI.createButton({
 		title:'Autocorrect',
-		height:40,
-		width:145,
-		left:10,
-		top:105
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:105 * scaleY
 	});
 	b3.addEventListener('click', function()
 	{
@@ -84,10 +91,10 @@ function textfield_rest() {
 	
 	var b4 = Titanium.UI.createButton({
 		title:'Clear on Edit',
-		height:40,
-		width:145,
-		right:10,
-		top:105
+		height:40 * scaleY,
+		width:145 * scaleX,
+		right:10 * scaleX,
+		top:105 * scaleY
 	});
 	b4.addEventListener('click', function()
 	{
@@ -98,10 +105,10 @@ function textfield_rest() {
 	
 	var b5 = Titanium.UI.createButton({
 		title:'Password Mask',
-		height:40,
-		width:145,
-		left:10,
-		top:155
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:155 * scaleY
 	});
 	b5.addEventListener('click', function()
 	{
@@ -113,10 +120,10 @@ function textfield_rest() {
 	tf1.autocapitalization = Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE;
 	var b6 = Titanium.UI.createButton({
 		title:'Capital (none)',
-		height:40,
-		width:145,
-		right:10,
-		top:155
+		height:40 * scaleY,
+		width:145 * scaleX,
+		right:10 * scaleX,
+		top:155 * scaleY
 	});
 	var auto = 1;
 	b6.addEventListener('click', function()
@@ -151,10 +158,10 @@ function textfield_rest() {
 	
 	var b7 = Titanium.UI.createButton({
 		title:'Clear Button',
-		height:40,
-		width:145,
-		left:10,
-		top:205
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:205 * scaleY
 	});
 	var clear =0;
 	b7.addEventListener('click', function()
@@ -189,10 +196,10 @@ function textfield_rest() {
 	
 	var b8 = Titanium.UI.createButton({
 		title:'Text Align',
-		height:40,
-		width:145,
-		right:10,
-		top:205
+		height:40 * scaleY,
+		width:145 * scaleX,
+		right:10 * scaleX,
+		top:205 * scaleY
 	});
 	var align =0;
 	b8.addEventListener('click', function()
@@ -219,14 +226,18 @@ function textfield_rest() {
 				break;
 		}
 	});
+	if (isBlackberry) {
+		b8.left = 220 * scaleX;
+		b8.enabled = false;
+	}
 	win.add(b8);
 	
 	var b8 = Titanium.UI.createButton({
 		title:'Vertical Align',
-		height:40,
-		width:145,
-		left:10,
-		top:255
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:255 * scaleY
 	});
 	var vAlign =0;
 	b8.addEventListener('click', function()
@@ -254,10 +265,10 @@ function textfield_rest() {
 	
 	var b9 = Titanium.UI.createButton({
 		title:'Allow resizing',
-		height:40,
-		width:145,
-		right:10,
-		top:255
+		height:40 * scaleY,
+		width:145 * scaleX,
+		right:10 * scaleX,
+		top:255 * scaleY
 	});
 	
 	var resizing = false;
@@ -278,10 +289,10 @@ function textfield_rest() {
 	if (Ti.Platform.osname === 'android') {
 		var b10 = Titanium.UI.createButton({
 			title:'Editable',
-			height:40,
-			width:145,
-			left:10,
-			top:305
+			height:40 * scaleY,
+			width:145 * scaleX,
+			left:10 * scaleX,
+			top:305 * scaleY
 		});
 		var editable = true;
 		b10.addEventListener('click', function()
@@ -300,14 +311,31 @@ function textfield_rest() {
 	
 	var l = Titanium.UI.createLabel({
 		text:'Click buttons to toggle properties',
-		left: (Ti.Platform.osname==='android') ? 165 : 10,
-		right:10,
-		top:305,
+		left: (Ti.Platform.osname==='android') ? 165 * scaleX : 10 * scaleX,
+		right:10 * scaleX,
+		top:305 * scaleY,
 		color:'#777',
 		height:'auto',
 		font:{fontHeight:10}
 	});
 	
+	if (isBlackberry) {
+		b2.left = 220 * scaleX;
+		b4.left = 220 * scaleX;
+		b6.left = 220 * scaleX;
+		b9.left = 220 * scaleX;
+		
+		b2.enabled = false;
+		b3.enabled = false;
+		b4.enabled = false;
+		b5.enabled = false;
+		b6.enabled = false;
+		b7.enabled = false;
+		b8.enabled = false;
+		b9.enabled = false;
+		
+		l.height = 40 * scaleY;
+	}
 	win.add(l);
 
 	return win;
