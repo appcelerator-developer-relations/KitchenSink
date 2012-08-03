@@ -1,7 +1,7 @@
 function fb_pub_stream() {
 	/*globals Titanium, Ti, alert, require, setTimeout, setInterval, JSON*/
 	var win = Ti.UI.createWindow({backroundColor:'#fff'});
-	Titanium.Facebook.appid = "134793934930";
+	Titanium.Facebook.appid = "495338853813822";
 	Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
 	
 	function showRequestResult(e) {
@@ -69,7 +69,12 @@ function fb_pub_stream() {
 		top: 45, left: 10, right: 10, height: 40
 	});
 	statusBtn.addEventListener('click', function() {
-		Titanium.Facebook.requestWithGraphPath('me/feed', {message: statusText.value}, "POST", showRequestResult);
+		var text = statusText.value;
+		if( (text === '')){
+			Ti.UI.createAlertDialog({ tile:'ERROR', message:'No text to Publish !! '}).show();
+		}else {
+			Titanium.Facebook.requestWithGraphPath('me/feed', {message: text}, "POST", showRequestResult);
+		}	
 	});
 	actionsView.add(statusBtn);
 	

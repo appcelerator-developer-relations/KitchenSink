@@ -22,7 +22,8 @@ function PhoneWindow(title) {
 	data.push({title:'Orientation', hasChild:true, test:'ui/common/phone/orientation'});
 	data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts'});
 	
-	if (Titanium.Platform.osname !== 'ipad') {
+	//Donot include camera if it is iPad 1st gen.
+	if (Titanium.Platform.model !== 'iPad1,1') {
 		data.push({title:'Camera', hasChild:!isMobileWeb, test:'ui/common/phone/camera', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
 	}
 	
@@ -52,6 +53,10 @@ function PhoneWindow(title) {
 		data.push({title:'Notfications', hasChild:true, test:'ui/handheld/android/phone/notification'});
 	}
 	
+	if (Titanium.Platform.osname == 'ipad') {
+		data.push({title:'iPad Features', hasChild:true, test:'ui/handheld/ios/phone/ipad_feature'});	
+	}
+
 	// create table view
 	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({

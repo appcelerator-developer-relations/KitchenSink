@@ -1,7 +1,7 @@
 function fb_photos() {
 	/*globals Titanium, Ti, alert, require, setTimeout, setInterval, JSON*/
 	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
-	Titanium.Facebook.appid = "134793934930";
+	Titanium.Facebook.appid = "495338853813822";
 	Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
 	
 	var B1_TITLE = "Upload Photo from Gallery with Graph API";

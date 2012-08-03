@@ -157,8 +157,9 @@ function xhr_download() {
 		{
 			Ti.UI.createAlertDialog({title:'XHR', message:'Error: ' + e.error}).show();
 		};
-	
+		
 		c.open('GET','http://titanium-studio.s3.amazonaws.com/latest/Titanium_Studio.exe');
+		c.file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'tiStudio.exe');
 		c.send();
 	});
 	
