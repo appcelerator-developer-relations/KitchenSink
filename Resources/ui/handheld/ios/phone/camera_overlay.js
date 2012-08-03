@@ -21,6 +21,18 @@ function cam_overlay() {
 		title:'Take Picture'
 	});
 	
+	var closebutton = Titanium.UI.createButton({
+		color:'#fff',
+		backgroundImage:'/images/BUTT_red_on.png',
+		backgroundSelectedImage:'/images/BUTT_red_off.png',
+		backgroundDisabledImage: '/images/BUTT_gry_on.png',
+		top:10,
+		width:301,
+		height:57,
+		font:{fontSize:20,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+		title:'Close Camera'
+	});
+
 	var messageView = Titanium.UI.createView({
 		height:30,
 		width:250,
@@ -50,6 +62,7 @@ function cam_overlay() {
 	overlay.add(scanner);
 	overlay.add(button);
 	overlay.add(messageView);
+	overlay.add(closebutton);
 	
 	button.addEventListener('click',function()
 	{
@@ -64,6 +77,13 @@ function cam_overlay() {
 	});
 	
 	
+	closebutton.addEventListener('click',function()
+	{
+		alert("Camera closed");
+		Ti.Media.hideCamera();
+		win.close();
+	});
+
 	Titanium.Media.showCamera({
 	
 		success:function(event)

@@ -13,9 +13,22 @@ function cam_video() {
 		title:'Start Video'
 	});
 	
+	var closebutton = Titanium.UI.createButton({
+		color:'#fff',
+		backgroundImage:'/images/BUTT_red_on.png',
+		backgroundSelectedImage:'/images/BUTT_red_off.png',
+		backgroundDisabledImage: '/images/BUTT_gry_on.png',
+		top:10,
+		width:120,
+		height:40,
+		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+		title:'Close cameras'
+	});
+
 	var overlay = Titanium.UI.createView();
 	overlay.add(button);
-	
+	overlay.add(closebutton);
+
 	var cameraFlash = Ti.UI.createButton({
 		color:'#fff',
 		title:"auto",
@@ -95,6 +108,13 @@ function cam_video() {
 		cameraFlash.visible = false;
 	});
 	
+
+	closebutton.addEventListener('click',function(){
+		Ti.Media.hideCamera();
+		win.close();
+	});
+
+
 	Titanium.Media.showCamera({
 	
 		success:function(event)
