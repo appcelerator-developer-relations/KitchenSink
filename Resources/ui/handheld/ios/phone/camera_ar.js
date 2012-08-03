@@ -65,7 +65,12 @@ function cam_ar() {
 		container.message.text = text;
 	}
 	
-	Titanium.Geolocation.purpose = "AR Demo";
+	Ti.include("/etc/version.js");
+	if (isIPhone3_2_Plus())
+	{
+		Titanium.Geolocation.purpose = "AR Demo";
+	}
+	
 	
 	Titanium.Geolocation.addEventListener('location',function(e)
 	{
