@@ -152,6 +152,7 @@ function tialert() {
 	
 	win.add(button5);
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
 		l.top = 280 * scaleY;
 		l.width = 200 * scaleX;

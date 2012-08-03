@@ -57,6 +57,7 @@ function view_evt_interaction() {
 		font:{fontSize:13}
 	});
 	win.add(l2);
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
 		label.width = 50 * scaleX;
 		label.height = 15 * scaleY;

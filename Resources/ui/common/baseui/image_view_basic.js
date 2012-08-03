@@ -1,9 +1,8 @@
 function image_view_basic() {
 	var win = Titanium.UI.createWindow();
 	
-	//changed image url form remote to local - because the image with this url is not available in WEB already.
 	var imageView = Titanium.UI.createImageView({
-		image:'/images/flower.jpg',
+		image:'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png',
 		width:261,
 		height:178,
 		top:20
@@ -25,6 +24,7 @@ function image_view_basic() {
 	});
 	win.add(l);
 	
+	//TODO review this part of code if layout height'auto' property will be implemented for BB
 	if (Titanium.Platform.osname === 'blackberry'){
 		l.height = 100;
 	}

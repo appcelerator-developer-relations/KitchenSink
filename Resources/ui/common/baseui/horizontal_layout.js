@@ -44,6 +44,7 @@ function horizontal_layout() {
 		l1.color = 'white';
 		l2.color = 'white';
 		l3.color = 'white';
+		//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 		l1.width = 150 * scaleX;
 		l2.width = 150 * scaleX;
 		l3.width = 150 * scaleX;

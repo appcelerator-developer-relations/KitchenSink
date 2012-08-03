@@ -9,7 +9,7 @@ function image_view_anim() {
 	var win = Titanium.UI.createWindow();
 	
 	// show indicator from app.js
-	//TODO remove this when fireing cutom event will be ready for BB
+	//TODO remove this when Jira task TIMOB-9980 will be implemented
 	if (!isBlackberry)
 		Titanium.App.fireEvent('show_indicator');
 
@@ -52,7 +52,7 @@ function image_view_anim() {
 	imageView.addEventListener('load', function(e)
 	{
 		if (isBlackberry) {
-			alert('Blackberry doesn\'t suppory Titanium.UI.ImageView.start() yet');
+			alert('Titanium.UI.ImageView.start() isn\'t supported for Blackberry yet');
 			return;
 		}
 		// hide indicator from app.js
@@ -99,7 +99,7 @@ function image_view_anim() {
 	start.addEventListener('click', function()
 	{
 		if (isBlackberry) {
-			alert('Blackberry doesn\'t support Titanium.UI.ImageView.animating and Titanium.UI.ImageView.start() yet');
+			alert('Titanium.UI.ImageView.animating and Titanium.UI.ImageView.start() aren\'t supported for Blackberry yet');
 			return;
 		}
 		if (imageView.animating === false)
@@ -121,7 +121,7 @@ function image_view_anim() {
 	reverse.addEventListener('click', function()
 	{
 		if (isBlackberry) {
-			alert('Blackberry doesn\'t support Titanium.UI.ImageView.reverse yet');
+			alert('Titanium.UI.ImageView.reverse isn\'t supported for Blackberry yet');
 			return;
 		}
 		imageView.reverse = !imageView.reverse;
@@ -140,7 +140,7 @@ function image_view_anim() {
 	stop.addEventListener('click', function()
 	{
 		if (isBlackberry) {
-			alert('Blackberry doesn\'t support Titanium.UI.ImageView.stop() yet');
+			alert('Titanium.UI.ImageView.stop() isn\'t supported for Blackberry yet');
 			return;
 		}
 		if (imageView.animating)
@@ -162,7 +162,7 @@ function image_view_anim() {
 	pause.addEventListener('click', function()
 	{
 		if (isBlackberry) {
-			alert('Blackberry doesn\'t support Titanium.UI.ImageView.pause() yet');
+			alert('Titanium.UI.ImageView.pause() isn\'t supported for Blackberry yet');
 			return;
 		}
 		if (imageView.animating)
@@ -184,7 +184,7 @@ function image_view_anim() {
 	resume.addEventListener('click', function()
 	{
 		if (isBlackberry) {
-			alert('Blackberry doesn\'t support Titanium.UI.ImageView.resume() yet');
+			alert('Titanium.UI.ImageView.resume() isn\'t supported for Blackberry yet');
 			return;
 		}
 		if (imageView.paused)
@@ -216,7 +216,7 @@ function image_view_anim() {
 	durationUp.addEventListener('click', function()
 	{
 		if (isBlackberry) {
-			alert('Blackberry doesn\'t support Titanium.UI.ImageView.duration yet');
+			alert('Titanium.UI.ImageView.duration isn\'t supported for Blackberry yet');
 			return;
 		}
 		imageView.duration += 100;
@@ -235,6 +235,7 @@ function image_view_anim() {
 		right:10 * scaleX
 	});
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
 		resume.left = 250 * scaleX;
 		durationDown.left = 250 * scaleX;
@@ -248,7 +249,7 @@ function image_view_anim() {
 	durationDown.addEventListener('click', function()
 	{
 		if (isBlackberry) {
-			alert('Blackberry doesn\'t support Titanium.UI.ImageView.duration yet');
+			alert('Titanium.UI.ImageView.duration isn\'t supported for Blackberry yet');
 			return;
 		}
 		if (imageView.duration > 100)

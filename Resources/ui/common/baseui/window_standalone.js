@@ -369,7 +369,7 @@ function win_standalone(_args) {
 		
 		var t2 = Titanium.UI.create2DMatrix();
 	} else {
-		alert('Blackberry doesnn\'t support Titanium.UI.create2DMatrix() yet')
+		alert('Blackberry doesn\'t support Titanium.UI.create2DMatrix() yet')
 	}
 	
 	var navButton = Titanium.UI.createButton({

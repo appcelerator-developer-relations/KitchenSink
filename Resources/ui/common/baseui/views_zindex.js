@@ -9,6 +9,7 @@ function views_zindex() {
 	
 	var win = Ti.UI.createWindow();
 	var scrollView;
+	//TODO revert this part to original when createScrollView() will be implemented for Blackberry
 	if (isBlackberry) {
 		scrollView = Ti.UI.createView({height:200 * scaleY,top:0});
 	} else {

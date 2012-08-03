@@ -21,6 +21,7 @@ function tv_empty() {
 	win.add(b1);
 	b1.addEventListener('click',function()
 	{
+		//TODO remove this lines of code when appendRow() will be implemented for Blackberry
 		if (isBlackberry) {
 			alert('TableView Append row is not supported for Blackberry yet');
 			return;

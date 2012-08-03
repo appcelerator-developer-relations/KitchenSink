@@ -167,6 +167,7 @@ function tab_group(_args) {
 		height:'auto'
 	});
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
 		openLabel.top = openLabel.top * scaleY;
 		openLabel.width = 300 * scaleX;

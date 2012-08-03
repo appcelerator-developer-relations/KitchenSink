@@ -5,6 +5,7 @@ function tv_comp() {
 	
 	// create table view data object
 	var data = [];
+	//TODO remove this when Ti.UI.createTableViewRow will be implemented
 	if (isBlackberry) {
 		data[0] = {title:'Row 1',backgroundColor:'#900'};
 		data[1] = {title:'Row 2',backgroundColor:'#fff'};
@@ -59,6 +60,7 @@ function tv_comp() {
 		height:'auto'
 	});
 	
+	//TODO review this part of code if layout height/widht - 'auto' will be implemented for BB
 	if (isBlackberry) {
 		label.height = 100;
 		label.width = 500;

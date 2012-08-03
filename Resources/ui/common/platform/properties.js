@@ -82,6 +82,7 @@ function props() {
 	// test getters
 	//
 	Titanium.API.info('String: '+ Titanium.App.Properties.getString('String'));
+	//TODO remove this check when Jira bug TIMOB-10255 will be fixed.
 	if (!isBlackberry) {
 		Titanium.API.info('Int: '+ Titanium.App.Properties.getString('Int'));
 		Titanium.API.info('Bool: '+ Titanium.App.Properties.getString('Bool'));
@@ -107,11 +108,13 @@ function props() {
 	//
 	// test out remove property and setting to null
 	//
+	//TODO remove this check when Jira bug TIMOB-10255 will be fixed.
 	if (!isBlackberry) {
 		Titanium.App.Properties.setString('String',null);
 	}
 	Titanium.App.Properties.removeProperty('Int');
 	Titanium.API.info("String should be null - value = " + resultHelper(Titanium.App.Properties.getString('String'),null));
+	//TODO remove this check when Jira bug TIMOB-10255 will be fixed.
 	if (!isBlackberry)
 		Titanium.API.info("Int should be null - value = " + resultHelper(Titanium.App.Properties.getString('Int'),null));
 	

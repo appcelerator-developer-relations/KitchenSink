@@ -9,8 +9,6 @@ function image_view_encode() {
 	
 	}); 
 	
-	//Added logging of  encodeURIComponent() method because the image with the given url is not available any more.
-	Titanium.API.info('Testing encodeURIComponent(): \'ΜΟΥΣΙΚΗ\' = ' + encodeURIComponent('ΜΟΥΣΙΚΗ'));
 	win.add(test_img);
 
 	return win;

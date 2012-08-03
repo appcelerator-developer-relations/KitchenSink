@@ -91,6 +91,7 @@ function win_layout() {
 		textAlign:'center'
 	});
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
 		firstName.height = 15 * scaleY;
 		firstName.color = 'white';

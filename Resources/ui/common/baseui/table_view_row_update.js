@@ -28,6 +28,7 @@ function tv_row_update() {
 	var tableView = Titanium.UI.createTableView({data:data});
 	tableView.addEventListener('click',function(e)
 	{
+		//TODO remove this lines when updateRow() will be implemnetd for Blackberry
 		if (isBlackberry) {
 			alert('Titanium.UI.TableView.updateRow() is not supported for Blackberry yet');
 			return;

@@ -18,7 +18,7 @@ function tv_scroll() {
 		for (var i=0;i<30;i++)
 		{
 			var row;
-			//TODO revert this back wneh createTableViewRow() will be implemented for Blackberry
+			//TODO revert this back when createTableViewRow() will be implemented for Blackberry
 			if (isBlackberry) {
 				row = {text:'Label ' +  i, title:'Label ' +  i};
 			} else {

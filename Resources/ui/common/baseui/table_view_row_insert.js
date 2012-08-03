@@ -30,6 +30,7 @@ function tv_row_insert() {
 	tableView.addEventListener('click', function(e)
 	{
 	
+		//TODO remove this lines when inserRow will be implemneted for Blackberry
 		if (isBlackberry) {
 			alert('Titanium.UI.TableView.insertRowAfter(),  insertRowBefore() are not supported for Blackberry yet');
 			return;

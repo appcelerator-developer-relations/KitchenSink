@@ -1,4 +1,9 @@
 function scroll_views(_args) {
+	//TODO remove this lines when Jira TIMOB-8832 and TIMOB-8831 tasks will be implemeneted and recheck further scroll views files again.
+	if (Titanium.Platform.osname === 'blackberry'){
+		alert('ScrollView and ScrollableView aren\'t implemeneted for Blackberry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
 	// create table view data object
 	var data = [

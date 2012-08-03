@@ -44,6 +44,7 @@ function viewsize() {
 	    view.updateLayout({width:150 * scaleX,height:150 * scaleY});
 	    label.text = "Box should now be 150x150";
 	});
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
 		label.width = 200 * scaleX;
 		label.height = 40 * scaleY;

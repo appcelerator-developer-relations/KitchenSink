@@ -197,6 +197,7 @@ function options_dialog() {
 			setTimeout(function(){dialog.hide({animated:false});},2000);
 		});
 		
+		//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 		if (isBlackberry) {
 			button4.top = 150 * scaleY;
 			button4.width = 300 * scaleX;

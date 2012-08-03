@@ -10,6 +10,7 @@ function vertical_layout_tv() {
 	
 	var data = [];
 	
+	//TODO remove this lines when createTableViewRow() will be implemented
 	if (isBlackberry) {
 		alert('This functionality depends on Ti.UI.createTableViewRow() which is not supported for Blackberry yet');
 		return win;

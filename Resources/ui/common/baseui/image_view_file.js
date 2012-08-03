@@ -1,4 +1,5 @@
 function image_view_file() {
+	//TODO remove these lines of code when  Ti.Filesystem will be implemeneted for Blackberry
 	if (Titanium.Platform.osname === 'blackberry'){
 		alert('Ti.Filesystem module is not supported for BB');
 		return;

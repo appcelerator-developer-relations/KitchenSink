@@ -67,6 +67,7 @@ function tv_headers() {
 	];
 	
 	var search;
+	//TODO modify back this code when SearchBar will be implemented for Blackberry
 	if (!isBlackberry) {
 		search = Titanium.UI.createSearchBar({
 			showCancel:false

@@ -14,8 +14,11 @@ function tv_perf() {
 		height:"auto",
 		bottom:15
 	});
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
-		l.height = 40;
+		l.width = 700;
+		l.height = 70;
+		l.top = 1100;
 	}
 	v.add(tv);
 	v.add(l);

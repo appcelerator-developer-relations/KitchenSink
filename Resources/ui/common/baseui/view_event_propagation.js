@@ -15,6 +15,7 @@ function view_evt_prop() {
 	var c = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'red',width:100 * scaleX,height:100 * scaleX,top:115 * scaleX,left:40 * scaleX,name:"view c"});
 	var d = Ti.UI.createView({borderColor:'#133899',borderWidth:6,borderRadius:2,backgroundColor:'cyan',width:100 * scaleX,height:100 * scaleX,top:220 * scaleX,name:"view d"});
 	
+	//Separated creating label and adding it to the view in order to control label's width/height. 'auto' is not implemented for Blackberry yet
 	var aLabel = Ti.UI.createLabel({name:"label a",color:'white',text:'A',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}});
 	var bLabel = Ti.UI.createLabel({name:"label b",color:'white',text:'B',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}});
 	var cLabel = Ti.UI.createLabel({name:"label c",color:'white',text:'C',height:'auto',width:'auto',font:{fontSize:48,fontWeight:'bold',fontFamily:'Helvetica Neue'}});
@@ -44,6 +45,7 @@ function view_evt_prop() {
 		width:'auto'
 	});
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
 		a.left = 150 * scaleX;
 		b.left = 250 * scaleX;

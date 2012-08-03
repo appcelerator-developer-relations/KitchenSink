@@ -31,6 +31,9 @@ function switch_control() {
 		top:30 * scaleY
 	});
 	
+	if (isBlackberry) {
+		alert('Custom EventListener is not supported for Blackberry yet');
+	}
 	basicSwitch.addEventListener('change',function(e)
 	{
 		basicSwitchLabel.text = 'Basic Switch value = ' + e.value + ' act val ' + basicSwitch.value;

@@ -67,8 +67,9 @@ function tv_row_delete() {
 		var index = tableview.data.length-1;
 		Ti.API.info("deleting row "+index);
 		
+		//TODO remove this lines when deleteRow() will be implemented for TableView for Blackberry
 		if (isBlackberry) {
-			alert('Delete TableRow is not supported for BB');
+			alert('Delete TableRow is not supported for Blackberry');
 			return;
 		}
 		try {

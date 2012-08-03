@@ -385,6 +385,7 @@ function window_events() {
 			},200);
 		});
 	}
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
 		focusLabel.top = 15 * scaleY;
 		blurLabel.height = 15 * scaleY;

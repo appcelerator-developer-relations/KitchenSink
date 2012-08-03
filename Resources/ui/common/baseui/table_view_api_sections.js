@@ -1,5 +1,6 @@
 function tv_api_sections() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this code when Ti.UI.createTableViewSection() will be implemented for Blackberry
 	if (isBlackberry) {
 		alert('Ti.UI.createTableViewSection() is not supported for Blackberry yet');
 		return;

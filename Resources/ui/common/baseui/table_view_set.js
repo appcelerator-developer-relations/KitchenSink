@@ -29,7 +29,8 @@ function tv_set() {
 	
 	tableView.addEventListener('click',function(e)
 	{
-		//TODO remove this when this will be claryfied if a bug and solved.
+		//e.index returns string value which is wrong for switch statment.
+		//TODO remove this when this will be claryfied if a bug or not and solved.
 		if (isBlackberry) {
 			e.index = parseInt(e.index);
 		}
@@ -40,6 +41,7 @@ function tv_set() {
 				for (var c=0;c<10;c++)
 				{
 					var row = {};
+					//TODO revert this to origin approache when createTableViewRow() will be implemented for Blackberry
 					if (!isBlackberry) {
 						row = Ti.UI.createTableViewRow();
 					}
@@ -48,6 +50,7 @@ function tv_set() {
 					row.backgroundColor = '#aaa';
 					data[c]=row;
 				}
+				//TODO revert back this code when animationStyle and separatorStyle will be implemented for Blackberry
 				if (isBlackberry) {
 					tableView.setData(data);
 				} else {
@@ -65,6 +68,7 @@ function tv_set() {
 					{title:'Row 7', image:'Mail.png'}
 	
 				];
+				//TODO revert back code when used properties will be implemented for Blackberry
 				if (isBlackberry) {
 					tableView.setData(data);
 				} else {
@@ -86,6 +90,7 @@ function tv_set() {
 					{title:'Row 9'}
 	
 				];
+				//TODO revert back code when used properties will be implemented for Blackberry
 				if (isBlackberry) {
 					tableView.setData(data);
 				} else {

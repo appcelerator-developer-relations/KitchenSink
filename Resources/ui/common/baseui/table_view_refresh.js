@@ -6,7 +6,7 @@ function tv_refresh() {
 	var tv = Ti.UI.createTableView();
 	if (Ti.Platform.osname !== 'mobileweb') {
 		if (!isBlackberry)
-		tv.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+			tv.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
 	}
 	
 	function setData()
@@ -15,6 +15,7 @@ function tv_refresh() {
 		for (var i=0;i<30;i++)
 		{
 			var row;
+			//TODO modify this code back when createTableViewRow() will be implemented
 			if (isBlackberry) {
 				row = {text:'Label ' +  i, title:'Label ' +  i};
 			} else {

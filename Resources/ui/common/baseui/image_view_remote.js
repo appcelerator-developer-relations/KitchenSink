@@ -42,6 +42,7 @@ function image_view_remote() {
 		height : 50 * scaleY,
 		width : "auto"
 	});
+	//TODO review this part of code if layout widht - 'auto' will be implemented for BB
 	if (isBlackberry) {
 		b.width = 400;
 	}
