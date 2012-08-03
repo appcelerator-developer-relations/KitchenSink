@@ -29,11 +29,11 @@ if (Ti.version < 2.0 ) {
 	
 	var Window;
 	
-		// iPhone makes use of the platform-specific navigation controller,
-		// all other platforms follow a similar UI pattern
+	// iPhone makes use of the platform-specific navigation controller,
+	// all other platforms follow a similar UI pattern
 	if (osname === 'iphone' || osname === 'ipad') {
-			Window = require('ui/handheld/ios/ApplicationWindow');
-		}
+		Window = require('ui/handheld/ios/ApplicationWindow');
+	}
 	else if (osname === 'mobileweb'){
 		Window = require('ui/mobileweb/ApplicationWindow');
 	}
@@ -49,7 +49,7 @@ if (Ti.version < 2.0 ) {
 	else{
 		theTabGroup.open();
 	}
-		
+	
 	var MessageWindow = require('ui/common/MessageWindow'),
 		messageWin = new MessageWindow();
 		
@@ -110,7 +110,6 @@ if (Ti.version < 2.0 ) {
 		Ti.API.info("Did you see modules? ^^^^^ ");
 		Ti.API.info("---------------------------------------------------------------");
 	})();
-}
 	
 	
 })();
