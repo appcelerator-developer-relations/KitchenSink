@@ -1,7 +1,8 @@
 function cam_ar() {
-	var win = Titanium.UI.createWindow();
+	container  = {};
+	container.win = Titanium.UI.createWindow();
 	
-	var button = Titanium.UI.createButton({
+	container.button = Titanium.UI.createButton({
 		color:'#fff',
 		backgroundImage:'/images/BUTT_grn_on.png',
 		backgroundSelectedImage:'/images/BUTT_grn_off.png',
@@ -13,23 +14,30 @@ function cam_ar() {
 		title:'Cancel'
 	});
 	
-	var messageView = Titanium.UI.createView({
+	container.button.addEventListener('click',function()
+	{
+		alert("Close the camera");
+		Ti.Media.hideCamera();
+		container.close();
+	});
+	
+	container.messageView = Titanium.UI.createView({
 		height:60,
 		width:250,
 		top:10
 	});
 	
-	var indView = Titanium.UI.createView({
+	container.indView = Titanium.UI.createView({
 		height:60,
 		width:270,
 		backgroundColor:'#000',
 		borderRadius:10,
 		opacity:0.7
 	});
-	messageView.add(indView);
+	container.messageView.add(container.indView);
 	
 	// message
-	var message = Titanium.UI.createLabel({
+	container.message = Titanium.UI.createLabel({
 		text:'Calculating...',
 		color:'#fff',
 		font:{fontSize:14,fontWeight:'bold',fontFamily:'Helvetica Neue'},
@@ -37,56 +45,52 @@ function cam_ar() {
 		width:270,
 		height:'auto'
 	});
-	messageView.add(message);
+	container.messageView.add(container.message);
 	
-	var overlay = Titanium.UI.createView();
-	overlay.add(button);
-	overlay.add(messageView);
+	container.overlay = Titanium.UI.createView();
+	container.overlay.add(container.button);
+	container.overlay.add(container.messageView);
 	
-	var heading;
-	var gps='...';
-	var address='calculating address';
+	container.heading;
+	container.gps='...';
+	container.address='calculating address';
 	
-	function refreshLabel()
+	container.refreshLabel = function ()
 	{
-		var text = "Heading: "+Math.round(heading)+"°, Location: "+gps;
-		if (address)
+		var text = "Heading: "+Math.round(container.heading)+"°, Location: "+container.gps;
+		if (container.address)
 		{
-			text+="\n"+address;
+			text+="\n"+container.address;
 		}
-		message.text = text;
+		container.message.text = text;
 	}
 	
-	Ti.include("/etc/version.js");
-	if (isIPhone3_2_Plus())
-	{
-		Titanium.Geolocation.purpose = "AR Demo";
-	}
+	Titanium.Geolocation.purpose = "AR Demo";
 	
 	Titanium.Geolocation.addEventListener('location',function(e)
 	{
 		var longitude = e.coords.longitude;
 		var latitude = e.coords.latitude;
-		gps = Math.round(longitude)+' x '+Math.round(latitude);
+		container.gps = Math.round(longitude)+' x '+Math.round(latitude);
 		Titanium.Geolocation.reverseGeocoder(latitude,longitude,function(evt)
 		{
 			var places = evt.places[0];
-			address = places.street ? places.street : places.address;
-			refreshLabel();
+			container.address = places.street ? places.street : places.address;
+			container.refreshLabel();
 		});
-		refreshLabel();
+		container.refreshLabel();
 	});
 	
 	Titanium.Geolocation.addEventListener('heading',function(e)
 	{
 		if (e.error)
 		{
-			updatedHeading.text = 'error: ' + e.error;
+			container.updatedHeading.text = 'error: ' + e.error;
 			return;
 		}
 	
-		heading = e.heading.magneticHeading;
-		refreshLabel();
+		container.heading = e.heading.magneticHeading;
+		container.refreshLabel();
 	});
 	
 	
@@ -111,19 +115,21 @@ function cam_ar() {
 			}
 			a.show();
 		},
-		overlay:overlay,
+		overlay:container.overlay,
 		showControls:false,	// don't show system controls
 		mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
 		autohide:false	// tell the system not to auto-hide and we'll do it ourself
 	});
 	
-	button.addEventListener('click',function()
-	{
-		alert("Close the camera");
-		Ti.Media.hideCamera();
-	});
+	container.open = function(){
+		container.win.open();
+	};
+
+	container.close = function(){
+		container.win.close();
+	}
 	
-	return win;
+	return container;
 };
 
 module.exports = cam_ar;
