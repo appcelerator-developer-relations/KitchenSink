@@ -41,8 +41,8 @@ function viewsize() {
 	
 	button.addEventListener('click',function() {
 		alert('Titanium.UI.View.updateLayout() is not supported for Blackberry yet');
-	    view.updateLayout({width:150 * scaleX,height:150 * scaleY});
-	    label.text = "Box should now be 150x150";
+		view.updateLayout({width:150 * scaleX,height:150 * scaleY});
+		label.text = "Box should now be 150x150";
 	});
 	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
@@ -51,6 +51,7 @@ function viewsize() {
 		
 		button.top = 150 * scaleY;
 		button.width = 200 * scaleX;
+		button.height = 50 * scaleY;
 	}
 	return win;
 };

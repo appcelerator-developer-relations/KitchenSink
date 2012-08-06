@@ -30,7 +30,7 @@ function tv_set() {
 	tableView.addEventListener('click',function(e)
 	{
 		//e.index returns string value which is wrong for switch statment.
-		//TODO remove this when this will be claryfied if a bug or not and solved.
+		//TODO There is a bug created for this issue: TIMOB-10315. Remove this lines when bug is fixed.
 		if (isBlackberry) {
 			e.index = parseInt(e.index);
 		}

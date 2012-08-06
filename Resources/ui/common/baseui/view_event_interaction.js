@@ -78,7 +78,7 @@ function view_evt_interaction() {
 		{
 			l.text = "click on box";
 			
-		},2000);
+		},1000);
 		
 	});
 	
@@ -89,7 +89,7 @@ function view_evt_interaction() {
 		setTimeout(function()
 		{
 			l2.text = "click on label";
-		},2000);
+		},1000);
 	});
 
 	return win;

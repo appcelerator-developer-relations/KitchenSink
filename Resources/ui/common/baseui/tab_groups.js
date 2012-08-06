@@ -172,7 +172,7 @@ function tab_group(_args) {
 		openLabel.top = openLabel.top * scaleY;
 		openLabel.width = 300 * scaleX;
 		openLabel.height = 30 * scaleY;
-		setActiveTabObjectButton.width = setActiveTabObjectButton.width * 2;
+		setActiveTabObjectButton.width = 300 * scaleX;
 	}
 	// add views based on platform
 	if (Titanium.Platform.name == 'iPhone OS')
