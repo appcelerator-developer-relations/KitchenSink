@@ -1,7 +1,8 @@
 function cam_overlay() {
-	var win = Titanium.UI.createWindow();
+	container ={};
+	container.win = Titanium.UI.createWindow();
 	
-	var scanner = Titanium.UI.createView({
+	container.scanner = Titanium.UI.createView({
 		width:260,
 		height:200,
 		borderColor:'red',
@@ -9,7 +10,7 @@ function cam_overlay() {
 		borderRadius:15
 	});
 	
-	var button = Titanium.UI.createButton({
+	container.button = Titanium.UI.createButton({
 		color:'#fff',
 		backgroundImage:'/images/BUTT_grn_on.png',
 		backgroundSelectedImage:'/images/BUTT_grn_off.png',
@@ -21,7 +22,7 @@ function cam_overlay() {
 		title:'Take Picture'
 	});
 	
-	var closebutton = Titanium.UI.createButton({
+	container.closebutton = Titanium.UI.createButton({
 		color:'#fff',
 		backgroundImage:'/images/BUTT_red_on.png',
 		backgroundSelectedImage:'/images/BUTT_red_off.png',
@@ -33,55 +34,55 @@ function cam_overlay() {
 		title:'Close Camera'
 	});
 
-	var messageView = Titanium.UI.createView({
+	container.messageView = Titanium.UI.createView({
 		height:30,
 		width:250,
 		visible:false
 	});
 	
-	var indView = Titanium.UI.createView({
+	container.indView = Titanium.UI.createView({
 		height:30,
 		width:250,
 		backgroundColor:'#000',
 		borderRadius:10,
 		opacity:0.7
 	});
-	messageView.add(indView);
+	container.messageView.add(container.indView);
 	
 	// message
-	var message = Titanium.UI.createLabel({
+	container.message = Titanium.UI.createLabel({
 		text:'Picture Taken',
 		color:'#fff',
 		font:{fontSize:20,fontWeight:'bold',fontFamily:'Helvetica Neue'},
 		width:'auto',
 		height:'auto'
 	});
-	messageView.add(message);
+	container.messageView.add(container.message);
 	
-	var overlay = Titanium.UI.createView();
-	overlay.add(scanner);
-	overlay.add(button);
-	overlay.add(messageView);
-	overlay.add(closebutton);
+	container.overlay = Titanium.UI.createView();
+	container.overlay.add(container.scanner);
+	container.overlay.add(container.button);
+	container.overlay.add(container.messageView);
+	container.overlay.add(container.closebutton);
 	
-	button.addEventListener('click',function()
+	container.button.addEventListener('click',function()
 	{
-		scanner.borderColor = 'blue';
+		container.scanner.borderColor = 'blue';
 		Ti.Media.takePicture();
-		messageView.animate({visible:true});
+		container.messageView.animate({visible:true});
 		setTimeout(function()
 		{
-			scanner.borderColor = 'red';
-			messageView.animate({visible:false});
+			container.scanner.borderColor = 'red';
+			container.messageView.animate({visible:false});
 		},500);
 	});
 	
 	
-	closebutton.addEventListener('click',function()
+	container.closebutton.addEventListener('click',function()
 	{
 		alert("Camera closed");
 		Ti.Media.hideCamera();
-		win.close();
+		container.win.close();
 	});
 
 	Titanium.Media.showCamera({
@@ -96,7 +97,7 @@ function cam_overlay() {
 				width:win.width,
 				height:win.height
 			});
-			win.add(imageView);
+			container.win.add(imageView);
 			
 			// programatically hide the camera
 			Ti.Media.hideCamera();
@@ -117,12 +118,15 @@ function cam_overlay() {
 			}
 			a.show();
 		},
-		overlay:overlay,
+		overlay:container.overlay,
 		showControls:false,	// don't show system controls
 		mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
 		autohide:false // tell the system not to auto-hide and we'll do it ourself
 	});
-	return win;
+	container.open = function(){
+		container.win.open();
+	};
+	return container;
 };
 
 module.exports = cam_overlay;
