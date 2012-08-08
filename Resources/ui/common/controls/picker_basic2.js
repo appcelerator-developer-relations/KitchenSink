@@ -1,7 +1,7 @@
 function picker_basic2() {
-	//TODO remove this lines when Jira TIMOB-9788 task will be implemeneted.
+	//TODO remove this lines when Jira TIMOB-9788 task will be implemented.
 	if (Titanium.Platform.osname === 'blackberry'){
-		alert('Custom Picker is not implemeneted for Blackberry yet');
+		alert('Custom Picker is not implemented for Blackberry yet');
 		return;
 	}
 	var win = Ti.UI.createWindow();

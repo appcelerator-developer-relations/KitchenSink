@@ -73,6 +73,8 @@ function picker_date1() {
 		label.width = 200 * scaleX;
 		label.height = 40 * scaleY;
 		localebutton.top = 200 * scaleY;
+		//Review this part when Jira task: TIMOB-9788 will be implemented
+		localebutton.enabled = false;
 	}
 	win.add(localebutton);
 	
