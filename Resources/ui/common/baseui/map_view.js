@@ -223,7 +223,7 @@ function mapview() {
 	//
 	
 	// region change event listener
-	mapview.addEventListener('regionChanged',function(evt)
+	mapview.addEventListener('regionchanged',function(evt)
 	{
 		Titanium.API.info('maps region has updated to '+evt.longitude+','+evt.latitude+','+evt.latitudeDelta+','+evt.longitudeDelta);
 	    Titanium.API.info(mapview.latitudeDelta+','+mapview.longitudeDelta);
