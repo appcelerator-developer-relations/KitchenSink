@@ -233,7 +233,7 @@ function win_standalone(_args) {
 			if (e.orientation == Ti.UI.LANDSCAPE_LEFT || e.orientation == Ti.UI.LANDSCAPE_RIGHT) {
 				w.top = 32;
 			} 
-			else if (e.orientation == Ti.UI.LANDSCAPE_PORTRAIT || e.orientation == Ti.UI.UPSIDE_PORTRAIT) {
+			else if (e.orientation == Ti.UI.PORTRAIT) {
 				w.top = 37;
 			}
 		});
