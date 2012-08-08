@@ -142,7 +142,7 @@ function tv_pull() {
 		}
 	});
 	
-	tableView.addEventListener('scrollEnd',function(e)
+	tableView.addEventListener('scrollend',function(e)
 	{
 		if (pulling && !reloading && e.contentOffset.y <= -65.0)
 		{
