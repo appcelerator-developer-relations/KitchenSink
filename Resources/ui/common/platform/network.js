@@ -1,4 +1,9 @@
 function network() {
+	//TODO review this part when Jira tasks: TIMOB-8587 and TIMOB-10275 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Network module is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	var label = Titanium.UI.createLabel({

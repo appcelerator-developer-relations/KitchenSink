@@ -1,4 +1,10 @@
 function filesystem() {
+	//TODO review this part when Jira task: TIMOB-8580 will be implemented
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	if (isBlackberry) {
+		alert('Titanium.Filesystem module is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// path variables

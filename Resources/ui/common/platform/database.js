@@ -1,4 +1,10 @@
 function db() {
+	//TODO review this part when Jira task: TIMOB-8578 will be implemented
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	if (isBlackberry) {
+		alert('Titanium.Database module is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	var l = Titanium.UI.createLabel({

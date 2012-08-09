@@ -1,4 +1,9 @@
 function utils() {
+	//TODO review this part when Jira task: TIMOB-8591 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Utils module is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	var scrollView = Titanium.UI.createScrollView({
 		contentWidth:Ti.Platform.displayCaps.platformWidth,
