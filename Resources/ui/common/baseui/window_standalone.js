@@ -203,14 +203,13 @@ function win_standalone(_args) {
 	b5.addEventListener('click', function()
 	{
 		var w = Titanium.UI.createWindow({
-			height:0,
+			top:Ti.Platform.displayCaps.platformHeight,
 			backgroundColor:'#000',
-			bottom:0
 		});
 	
 		// create window open animation
 		var a = Titanium.UI.createAnimation();
-		a.height = 420;
+		a.top = 32;
 		a.duration = 300;
 	
 		// create a button to close window
@@ -222,7 +221,7 @@ function win_standalone(_args) {
 		w.add(b);
 		b.addEventListener('click', function()
 		{
-			a.height = 0;
+			a.top=Ti.Platform.displayCaps.platformHeight,
 			w.close(a);
 		});
 		
@@ -231,9 +230,10 @@ function win_standalone(_args) {
 		});
 		
 		Ti.Gesture.addEventListener('orientationchange', function(e) {
-			if (e.orientation >= 3) {
+			if (e.orientation == Ti.UI.LANDSCAPE_LEFT || e.orientation == Ti.UI.LANDSCAPE_RIGHT) {
 				w.top = 32;
-			} else {
+			} 
+			else if (e.orientation == Ti.UI.PORTRAIT) {
 				w.top = 37;
 			}
 		});
