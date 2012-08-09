@@ -1,4 +1,11 @@
 function picker_date4() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	win.backgroundColor = 'black';
 	
@@ -17,7 +24,7 @@ function picker_date4() {
 	
 	var label = Ti.UI.createLabel({
 		text:'Press Start',
-		top:6,
+		top:6 * scaleY,
 		width:'auto',
 		height:'auto',
 		textAlign:'center',
@@ -27,9 +34,9 @@ function picker_date4() {
 	
 	var button = Ti.UI.createButton({
 		title:'Start',
-		top:34,
-		width:120,
-		height:30
+		top:34 * scaleY,
+		width:120 * scaleX,
+		height:30 * scaleY
 	});
 	win.add(button);
 	
@@ -71,6 +78,12 @@ function picker_date4() {
 	{
 		label.text = e.value.toLocaleString();
 	});
+	if (isBlackberry) {
+		label.left = 10 * scaleX;
+		label.width = 300 * scaleX;
+		label.height = 40 * scaleY;
+		button.height = 40 * scaleY;
+	}
 
 	return win;
 }

@@ -1,4 +1,11 @@
 function picker_date2() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	win.backgroundColor = 'black';
 	
@@ -19,7 +26,7 @@ function picker_date2() {
 	
 	var label = Ti.UI.createLabel({
 		text:'Choose a time',
-		top:6,
+		top:6 * scaleY,
 		width:'auto',
 		height:'auto',
 		textAlign:'center',
@@ -31,6 +38,11 @@ function picker_date2() {
 	{
 		label.text = e.value.toLocaleString();
 	});
+	if (isBlackberry) {
+		label.left = 10 * scaleX;
+		label.width = 200 * scaleX;
+		label.height = 40 * scaleY;
+	}
 
 	return win;
 }

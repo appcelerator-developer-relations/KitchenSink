@@ -1,4 +1,11 @@
 function picker_date1() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	win.backgroundColor = 'black';
 	
@@ -31,7 +38,7 @@ function picker_date1() {
 	
 	var label = Ti.UI.createLabel({
 		text:'Choose a date',
-		top:6,
+		top:6 * scaleY,
 		width:'auto',
 		height:'auto',
 		textAlign:'center',
@@ -47,9 +54,9 @@ function picker_date1() {
 	var locale = false;
 	var localebutton = Ti.UI.createButton({
 		title:'Change locale',
-		bottom:20,
-		width:200,
-		height:40
+		bottom:20 * scaleY,
+		width:200 * scaleX,
+		height:40 * scaleY
 	});
 	localebutton.addEventListener('click', function() {
 		if (!locale) {
@@ -61,6 +68,14 @@ function picker_date1() {
 			picker.setLocale(Titanium.Platform.locale);
 		}
 	});
+	if (isBlackberry) {
+		label.left = 10 * scaleX;
+		label.width = 200 * scaleX;
+		label.height = 40 * scaleY;
+		localebutton.top = 200 * scaleY;
+		//Review this part when Jira task: TIMOB-9788 will be implemented
+		localebutton.enabled = false;
+	}
 	win.add(localebutton);
 	
 	return win;

@@ -1,4 +1,10 @@
 function textfield_border() {
+	//TODO review this part when Jira task: TIMOB-9051 will be implemented.
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	if (isBlackberry) {
+		alert('Titanium.UI.TextField.borderStyle property is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	
 	win.orientationModes = [

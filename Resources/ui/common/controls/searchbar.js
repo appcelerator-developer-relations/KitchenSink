@@ -1,4 +1,9 @@
 function searchbar() {
+	//TODO remove this lines when Jira TIMOB-8833 task will be implemented.
+	if (Titanium.Platform.osname === 'blackberry'){
+		alert('SearchBar is not implemented for Blackberry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	
 	var search = Titanium.UI.createSearchBar({
