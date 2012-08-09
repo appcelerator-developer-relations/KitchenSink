@@ -34,6 +34,10 @@ function image_view_position() {
 		textAlign:'center'
 	});
 	
+	//TODO review this part of code if layout height - 'auto' will be implemented for BB
+	if (Titanium.Platform.osname === 'blackberry') {
+		label.height = 100;
+	}
 	win.add(label);
 	
 	return win;

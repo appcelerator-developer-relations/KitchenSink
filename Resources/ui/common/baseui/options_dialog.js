@@ -21,7 +21,7 @@ function options_dialog() {
 		var showCancel = Ti.UI.createSwitch({
 			style : Ti.UI.Android.SWITCH_STYLE_CHECKBOX,
 			title: 'Show Cancel Button',
-			top : 160
+			top : 160 * scaleY
 		});
 		
 		var applyButtons = function() 
@@ -54,7 +54,7 @@ function options_dialog() {
 	}
 	
 	var dialog = Titanium.UI.createOptionDialog(optionsDialogOpts);
-		
+	
 	// add event listener
 	dialog.addEventListener('click',function(e)
 	{
@@ -74,14 +74,14 @@ function options_dialog() {
 		title:'Show Dialog 1',
 		height:40 * scaleY,
 		width:200 * scaleX,
-		top:10
+		top:10 * scaleY
 	});
 	button1.addEventListener('click', function()
 	{
 		if (isAndroid) {
 			dialog.androidView = null;
 			applyButtons();
-		}		
+		}	
 		dialog.show();
 	});
 	
@@ -90,7 +90,7 @@ function options_dialog() {
 		title:'Modify and Show Dialog',
 		height:40 * scaleY,
 		width:200 * scaleX,
-		top:60
+		top:60 * scaleY
 	});
 	button2.addEventListener('click', function()
 	{
@@ -114,7 +114,7 @@ function options_dialog() {
 			fontSize:15
 		},
 		textAlign:'center',
-		top:110,
+		top:110 * scaleY,
 		width:300 * scaleX
 	});
 	
@@ -167,7 +167,7 @@ function options_dialog() {
 			title:'Show w/hide, animated',
 			height:40 * scaleY,
 			width:200 * scaleX,
-			top:250
+			top:250 * scaleY
 		});
 		
 		button4.addEventListener('click', function()
@@ -184,7 +184,7 @@ function options_dialog() {
 			title:'Show w/hide, nonanimated',
 			height:40 * scaleY,
 			width:200 * scaleX,
-			top:300
+			top:300 * scaleY
 		});
 		
 		button5.addEventListener('click', function()
@@ -197,6 +197,13 @@ function options_dialog() {
 			setTimeout(function(){dialog.hide({animated:false});},2000);
 		});
 		
+		//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+		if (isBlackberry) {
+			button4.top = 150 * scaleY;
+			button4.width = 300 * scaleX;
+			button5.top = 200 * scaleY;
+			button5.width = 300 * scaleX
+		}
 		win.add(button4);
 		win.add(button5);
 	}

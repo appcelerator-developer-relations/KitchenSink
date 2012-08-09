@@ -1,4 +1,5 @@
 function tv_removeall() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow();
 	
 	
@@ -32,6 +33,10 @@ function tv_removeall() {
 		button2.left = 0;
 		tableview.top = 30;
 		win.add(button);
+	}
+	if (isBlackberry) {
+		button.height = 100;
+		button2.height = 100;
 	}
 	
 	button.addEventListener('click',function(e)

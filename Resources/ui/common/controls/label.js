@@ -27,15 +27,8 @@ function label(_args) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e) {
-		var test = e.rowData.test;
-		var dataTitle = e.rowData.title;
-		if (isBlackberry)
-		{
-			test = data[e.index].test;
-			dataTitle = data[e.index].title;
-		}
-		if (typeof test !== 'undefined') {
-			var ExampleWindow = require(test),
+		if (e.rowData.test) {
+			var ExampleWindow = require(e.rowData.test),
 				win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}

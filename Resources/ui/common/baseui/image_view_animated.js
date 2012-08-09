@@ -1,9 +1,18 @@
 function image_view_anim() {	
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 3;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// show indicator from app.js
-	Titanium.App.fireEvent('show_indicator');
-	
+	//TODO remove this when Jira task TIMOB-9980 will be implemented
+	if (!isBlackberry)
+		Titanium.App.fireEvent('show_indicator');
+
 	// load images
 	var images = [];
 	for (var i=1;i<18;i++)
@@ -31,6 +40,9 @@ function image_view_anim() {
 		font:{fontSize:48,fontFamily:'Helvetica Neue'}
 	});
 	
+	if (isBlackberry) {
+		frame.height = 25 * scaleY;
+	}
 	
 	//
 	// IMAGE VIEW EVENTS
@@ -39,6 +51,10 @@ function image_view_anim() {
 	// listen for load event (when all images are loaded)
 	imageView.addEventListener('load', function(e)
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.ImageView.start() isn\'t supported for Blackberry yet');
+			return;
+		}
 		// hide indicator from app.js
 		Titanium.App.fireEvent('hide_indicator');
 	
@@ -74,14 +90,18 @@ function image_view_anim() {
 	// start animation
 	var start = Titanium.UI.createButton({
 		title:'Start Animation',
-		height:30,
-		width:120,
+		height:30 * scaleY,
+		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
-		top:10,
-		left:10
+		top:10 * scaleY,
+		left:10 * scaleX
 	});
 	start.addEventListener('click', function()
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.ImageView.animating and Titanium.UI.ImageView.start() aren\'t supported for Blackberry yet');
+			return;
+		}
 		if (imageView.animating === false)
 		{
 			imageView.start();
@@ -92,14 +112,18 @@ function image_view_anim() {
 	// reverse animation
 	var reverse = Titanium.UI.createButton({
 		title:'Reverse',
-		height:30,
-		width:120,
+		height:30 * scaleY,
+		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
-		top:130,
-		left:10
+		top:130 * scaleY,
+		left:10 * scaleX
 	});
 	reverse.addEventListener('click', function()
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.ImageView.reverse isn\'t supported for Blackberry yet');
+			return;
+		}
 		imageView.reverse = !imageView.reverse;
 	});
 	win.add(reverse);
@@ -107,14 +131,18 @@ function image_view_anim() {
 	// stop animation
 	var stop = Titanium.UI.createButton({
 		title:'Stop Animation',
-		height:30,
-		width:120,
+		height:30 * scaleY,
+		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
-		top:10,
-		right:10
+		top:10 * scaleY,
+		right:10 * scaleX
 	});
 	stop.addEventListener('click', function()
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.ImageView.stop() isn\'t supported for Blackberry yet');
+			return;
+		}
 		if (imageView.animating)
 		{
 			imageView.stop();
@@ -125,14 +153,18 @@ function image_view_anim() {
 	// pause animation
 	var pause = Titanium.UI.createButton({
 		title:'Pause Animation',
-		height:30,
-		width:120,
+		height:30 * scaleY,
+		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
-		top:90,
-		left:10
+		top:90 * scaleY,
+		left:10 * scaleX
 	});
 	pause.addEventListener('click', function()
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.ImageView.pause() isn\'t supported for Blackberry yet');
+			return;
+		}
 		if (imageView.animating)
 		{
 			imageView.pause();
@@ -143,14 +175,18 @@ function image_view_anim() {
 	// resume animation
 	var resume = Titanium.UI.createButton({
 		title:'Resume Animation',
-		height:30,
-		width:120,
+		height:30 * scaleY,
+		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
-		top:90,
-		right:10
+		top:90 * scaleY,
+		right:10 * scaleX
 	});
 	resume.addEventListener('click', function()
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.ImageView.resume() isn\'t supported for Blackberry yet');
+			return;
+		}
 		if (imageView.paused)
 		{
 			imageView.resume();
@@ -161,11 +197,11 @@ function image_view_anim() {
 	// increase duration
 	var durationUp = Titanium.UI.createButton({
 		title:'Duration++',
-		height:30,
-		width:120,
+		height:30 * scaleY,
+		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
-		top:50,
-		left:10
+		top:50 * scaleY,
+		left:10 * scaleX
 	});
 	
 	// help text
@@ -179,6 +215,10 @@ function image_view_anim() {
 	
 	durationUp.addEventListener('click', function()
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.ImageView.duration isn\'t supported for Blackberry yet');
+			return;
+		}
 		imageView.duration += 100;
 		l.text = 'Duration = ' + imageView.duration + ' ms (re-start to apply)';
 	
@@ -188,16 +228,30 @@ function image_view_anim() {
 	// decrease duration
 	var durationDown = Titanium.UI.createButton({
 		title:'Duration--',
-		height:30,
-		width:120,
+		height:30 * scaleY,
+		width:120 * scaleX,
 		font:{fontSize:13, fontFamily:'Helvetica Neue'},
-		top:50,
-		right:10
+		top:50 * scaleY,
+		right:10 * scaleX
 	});
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+	if (isBlackberry) {
+		resume.left = 250 * scaleX;
+		durationDown.left = 250 * scaleX;
+		stop.left = 250 * scaleX;
+		l.height = 25 * scaleY;
+		l.width = 300 * scaleX;
+		l.color = 'black';
+		l.top = 180 * scaleY;
+	}
 	
 	durationDown.addEventListener('click', function()
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.ImageView.duration isn\'t supported for Blackberry yet');
+			return;
+		}
 		if (imageView.duration > 100)
 		{
 			imageView.duration -= 100;

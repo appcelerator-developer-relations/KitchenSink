@@ -1,5 +1,4 @@
 function MashupsWindow(title) {
-	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var self = Ti.UI.createWindow({
 		title:title,
 		// BB TODO: this used to be white
@@ -44,15 +43,15 @@ function MashupsWindow(title) {
 			barColor = data[e.index].barColor;
 			titleImage = data[e.index].title_image;
 		}
-		if (typeof test !== 'undefined') {
+		if (e.rowData.test) {
 			var ExampleWindow = require(test),
-				win = new ExampleWindow({title:dataTitle,containingTab:self.containingTab});
+				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab});
 				
-			if (typeof barColor !== 'undefined') {
-				win.barColor = barColor;
+			if (e.rowData.barColor) {
+				win.barColor = e.rowData.barColor;
 			}
-			if (typeof titleImage !== 'undefined') {
-				win.titleImage = titleImage;
+			if (e.rowData.title_image) {
+				win.titleImage = e.rowData.title_image;
 			}
 			self.containingTab.open(win,{animated:true});
 		}

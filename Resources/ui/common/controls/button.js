@@ -12,16 +12,16 @@ function button_control() {
 		title:'I am a Button',
 		height:40 * scaleY,
 		width:200 * scaleX,
-		top:10
+		top:10 * scaleY
 	});
 	
 	
 	var b2 = Titanium.UI.createButton({
 		title:'I am a Button',
 		image:'/images/chat.png',
-		width:200,
-		height:40,
-		top:60
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:60 * scaleY
 	});
 	b2.addEventListener("click", function() {
 		Ti.API.info("Opening google");
@@ -33,7 +33,7 @@ function button_control() {
 		backgroundImage:'/images/BUTT_grn_off.png',
 		backgroundSelectedImage:'/images/BUTT_grn_on.png',
 		backgroundDisabledImage:'/images/BUTT_drk_off.png',
-		top:110,
+		top:110 * scaleY,
 		width:301 * scaleX,
 		height:57 * scaleY,
 		font:{fontSize:20,fontWeight:'bold',fontFamily:'Helvetica Neue'},
@@ -74,22 +74,15 @@ function button_control() {
 			case 1:
 				b3.font = {fontSize:25,fontFamily:'Marker Felt', fontWeight:'bold'};
 				b3.title = 'I am red';
-				if (!isBlackberry) {
-					b3.backgroundImage = '/images/BUTT_red_off.png';
-					b3.backgroundSelectedImage = '/images/BUTT_red_on.png';
-					b3.color = '#222';
-				} else {
-					b3.backgroundColor = '#C00';
-				};
+				b3.backgroundImage = '/images/BUTT_red_off.png';
+				b3.backgroundSelectedImage = '/images/BUTT_red_on.png';
+				b3.color = '#222';
 				state++;
 				break;
 			case 2:
 				b3.width = 200 * scaleX;
 				b3.color = '#fff';
 				b3.title = 'White text';
-				if (isBlackberry) {
-					b3.backgroundColor = 'transparent';
-				};
 				state=0;
 				break;
 		}

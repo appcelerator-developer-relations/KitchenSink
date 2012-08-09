@@ -43,7 +43,7 @@ function progressbar() {
 			title:'Start Progress',
 			height:40 * scaleY,
 			width:200 * scaleX,
-			top:10
+			top:10 * scaleY
 		});
 		ind = Titanium.UI.createProgressBar({
 			width:150 * scaleX,
@@ -54,7 +54,7 @@ function progressbar() {
 			color:'#888',
 			message:'Downloading 0 of 10',
 			font:{fontSize:14, fontWeight:'bold'},
-			top:60
+			top:60 * scaleY
 		});
 		if (isBlackberry) {
 			ind.width = 450 * scaleX;

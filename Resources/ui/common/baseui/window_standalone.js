@@ -3,7 +3,14 @@
 	//  the current window or the current tab group.  These examples show you different ways
 	//  to open windows outside of tab groups.
 	//
-function win_standalone(_args) {	
+function win_standalone(_args) {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}	
 	var win = Titanium.UI.createWindow();
 	
 	win.orientationModes = [
@@ -22,9 +29,9 @@ function win_standalone(_args) {
 	//
 	var b1 = Titanium.UI.createButton({
 		title:'Open (Plain)',
-		width:200,
-		height:40,
-		top:10
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:10 * scaleY
 	});
 	
 	b1.addEventListener('click', function()
@@ -37,8 +44,8 @@ function win_standalone(_args) {
 		// create a button to close window
 		var b = Titanium.UI.createButton({
 			title:'Close',
-			height:30,
-			width:150
+			height:30 * scaleY,
+			width:150 * scaleX
 		});
 		w.add(b);
 		b.addEventListener('click', function()
@@ -55,13 +62,17 @@ function win_standalone(_args) {
 		//
 		var b2 = Titanium.UI.createButton({
 			title:'Open (Nav Bar Covered)',
-			width:200,
-			height:40,
-			top:60
+			width:200 * scaleX,
+			height:40 * scaleY,
+			top:60 * scaleY
 		});
 		
 		b2.addEventListener('click', function()
 		{
+			if (isBlackberry) {
+				alert('Blackberry doesn\'t support Animated openning yet');
+				return;
+			}
 			var options = {
 					height:0,
 					width:0,
@@ -103,9 +114,9 @@ function win_standalone(_args) {
 		//
 		var b3 = Titanium.UI.createButton({
 			title:'Traditional Modal',
-			width:200,
-			height:40,
-			top:110
+			width:200 * scaleX,
+			height:40 * scaleY,
+			top:110 * scaleY
 		});
 		
 		b3.addEventListener('click', function()
@@ -133,9 +144,9 @@ function win_standalone(_args) {
 	//
 	var b4 = Titanium.UI.createButton({
 		title:'Open (Animation Fun)',
-		width:200,
-		height:40,
-		top:160
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:160 * scaleY
 	});
 	
 	b4.addEventListener('click', function()
@@ -195,9 +206,9 @@ function win_standalone(_args) {
 	//
 	var b5 = Titanium.UI.createButton({
 		title:'Open (Nav Bar Visible)',
-		width:200,
-		height:40,
-		top:210
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:210 * scaleY
 	});
 	
 	b5.addEventListener('click', function()
@@ -247,9 +258,9 @@ function win_standalone(_args) {
 	//
 	var b6 = Titanium.UI.createButton({
 		title:'Open (Fullscreen)',
-		width:200,
-		height:40,
-		top:260
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:260 * scaleY
 	});
 	
 	b6.addEventListener('click', function()
@@ -261,8 +272,8 @@ function win_standalone(_args) {
 		// create a button to close window
 		var b = Titanium.UI.createButton({
 			title:'Close',
-			height:30,
-			width:150
+			height:30 * scaleY,
+			width:150 * scaleX
 		});
 		w.add(b);
 		b.addEventListener('click', function()
@@ -279,9 +290,9 @@ function win_standalone(_args) {
 	//
 	var b7 = Titanium.UI.createButton({
 		title:'Open (Toolbar)',
-		width:200,
-		height:40,
-		top:310
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:310 * scaleY
 	});
 	
 	b7.addEventListener('click', function()
@@ -339,24 +350,27 @@ function win_standalone(_args) {
 	});
 	
 	
-	
-	//
-	// ODD SHAPED WINDOWS
-	//
-	var t = Titanium.UI.create2DMatrix();
-	t= t.rotate(-90);
-	var menuWin = Titanium.UI.createWindow({
-		backgroundImage:'/images/menubox.png',
-		height:178,
-		width:204,
-		top:32,
-		right:40,
-		anchorPoint:{x:1,y:0},
-		transform:t,
-		opacity:0
-	});
-	
-	var t2 = Titanium.UI.create2DMatrix();
+	if (!isBlackberry) {
+		//
+		// ODD SHAPED WINDOWS
+		//
+		var t = Titanium.UI.create2DMatrix();
+		t= t.rotate(-90);
+		var menuWin = Titanium.UI.createWindow({
+			backgroundImage:'/images/menubox.png',
+			height:178,
+			width:204,
+			top:32,
+			right:40,
+			anchorPoint:{x:1,y:0},
+			transform:t,
+			opacity:0
+		});
+		
+		var t2 = Titanium.UI.create2DMatrix();
+	} else {
+		alert('Blackberry doesn\'t support Titanium.UI.create2DMatrix() yet')
+	}
 	
 	var navButton = Titanium.UI.createButton({
 		title:'Toggle Window'

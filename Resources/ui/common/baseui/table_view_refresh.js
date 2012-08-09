@@ -1,10 +1,12 @@
 function tv_refresh() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow();
 	
 	
 	var tv = Ti.UI.createTableView();
 	if (Ti.Platform.osname !== 'mobileweb') {
-		tv.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+		if (!isBlackberry)
+			tv.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
 	}
 	
 	function setData()
@@ -12,11 +14,17 @@ function tv_refresh() {
 		var data = [];
 		for (var i=0;i<30;i++)
 		{
-			var row = Ti.UI.createTableViewRow({height:50});
-			var l1 = Ti.UI.createLabel({text:'Label ' +  i, font:{fontSize:14}, color:'#888', left:5});
-			row.add(l1);
-			var image1 = Ti.UI.createImageView({image:'/images/chat.png', right:5,height:23, width:29});
-			row.add(image1);
+			var row;
+			//TODO modify this code back when createTableViewRow() will be implemented
+			if (isBlackberry) {
+				row = {text:'Label ' +  i, title:'Label ' +  i};
+			} else {
+				row = Ti.UI.createTableViewRow({height:50});
+				var l1 = Ti.UI.createLabel({text:'Label ' +  i, font:{fontSize:14}, color:'#888', left:5});
+				row.add(l1);
+				var image1 = Ti.UI.createImageView({image:'/images/chat.png', right:5,height:23, width:29});
+				row.add(image1);				
+			}
 			data.push(row);
 		}
 		tv.setData(data);
@@ -24,7 +32,8 @@ function tv_refresh() {
 	
 	var refresh = Titanium.UI.createButton();
 	if (Ti.Platform.osname !== 'mobileweb'){
-		refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
+		if (!isBlackberry)
+			refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
 	}
 	refresh.addEventListener('click', function()
 	{
@@ -44,7 +53,10 @@ function tv_refresh() {
 		tv.top = 60;
 		win.add(refresh);
 	}
-	
+	if (isBlackberry) {
+		refresh.width = 400;
+		refresh.height = 100;
+	}
 	win.add(tv);
 	setData();
 	return win;

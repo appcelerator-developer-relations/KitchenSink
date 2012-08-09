@@ -1,4 +1,11 @@
 function tialert() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	};
 	var win = Titanium.UI.createWindow();
 	
 	//
@@ -38,9 +45,9 @@ function tialert() {
 	//
 	var button1 = Titanium.UI.createButton({
 		title:'Basic Alert',
-		height:40,
-		width:200,
-		top:10
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:10 * scaleY
 	});
 	
 	button1.addEventListener('click', function()
@@ -61,9 +68,9 @@ function tialert() {
 	//
 	var button2 = Titanium.UI.createButton({
 		title:'Alert 2 Buttons',
-		height:40,
-		width:200,
-		top:60
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:60 * scaleY
 	});
 	
 	button2.addEventListener('click', function()
@@ -83,9 +90,9 @@ function tialert() {
 	//
 	var button3 = Titanium.UI.createButton({
 		title:'Alert 3 Buttons',
-		height:40,
-		width:200,
-		top:110
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:110 * scaleY
 	});
 	
 	button3.addEventListener('click', function()
@@ -104,9 +111,9 @@ function tialert() {
 	//
 	var button4 = Titanium.UI.createButton({
 		title:'Double Alert',
-		height:40,
-		width:200,
-		top:160
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:160 * scaleY
 	});
 	
 	button4.addEventListener('click', function()
@@ -125,9 +132,9 @@ function tialert() {
 	//
 	var button5 = Titanium.UI.createButton({
 		title:'Cancel Alert',
-		height:40,
-		width:200,
-		top:210
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:210 * scaleY
 	});
 	
 	button5.addEventListener('click', function()
@@ -145,6 +152,12 @@ function tialert() {
 	
 	win.add(button5);
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+	if (isBlackberry) {
+		l.top = 280 * scaleY;
+		l.width = 200 * scaleX;
+		l.height = 40 * scaleY;
+	}
 	return win;
 };
 

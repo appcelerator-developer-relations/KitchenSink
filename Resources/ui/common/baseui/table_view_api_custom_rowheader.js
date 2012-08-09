@@ -1,15 +1,25 @@
 function tv_api_rowheader() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [];
 	
-	data[0] = Ti.UI.createTableViewRow({hasChild:true,title:'Header should be Foo',header:'Foo'});
-	data[1] = Ti.UI.createTableViewRow({hasDetail:true,title:'Row 2'});
-	data[2] = Ti.UI.createTableViewRow({hasCheck:true,title:'Header should be Bar',header:'Bar'});
-	data[3] = Ti.UI.createTableViewRow({title:'Footer should be Bye',footer:'Bye'});
+	if (isBlackberry) {
+		data[0] = {hasChild:true,title:'Header should be Foo',header:'Foo'};
+		data[1] = {hasDetail:true,title:'Row 2'};
+		data[2] = {hasCheck:true,title:'Header should be Bar',header:'Bar'};
+		data[3] = {title:'Footer should be Bye',footer:'Bye'};
+	} else {
+		data[0] = Ti.UI.createTableViewRow({hasChild:true,title:'Header should be Foo',header:'Foo'});
+		data[1] = Ti.UI.createTableViewRow({hasDetail:true,title:'Row 2'});
+		data[2] = Ti.UI.createTableViewRow({hasCheck:true,title:'Header should be Bar',header:'Bar'});
+		data[3] = Ti.UI.createTableViewRow({title:'Footer should be Bye',footer:'Bye'});
+	}
 	
 	// now do it with direct properties
-	var row = Ti.UI.createTableViewRow();
+	var row = {};
+	if (!isBlackberry)
+		row = Ti.UI.createTableViewRow();
 	row.header = "Blah";
 	row.title = "Header should be Blah";
 	data[4] = row;

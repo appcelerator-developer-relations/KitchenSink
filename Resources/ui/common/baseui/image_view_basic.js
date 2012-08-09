@@ -24,6 +24,10 @@ function image_view_basic() {
 	});
 	win.add(l);
 	
+	//TODO review this part of code if layout height'auto' property will be implemented for BB
+	if (Titanium.Platform.osname === 'blackberry'){
+		l.height = 100;
+	}
 	function clicker()
 	{
 		Titanium.UI.createAlertDialog({title:'Image View', message:'You clicked me!'}).show();

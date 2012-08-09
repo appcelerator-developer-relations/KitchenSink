@@ -1,4 +1,11 @@
 function scroll_view_scroll() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 1;
+	}
 	function getOrientation(o)
 	{  //Came from orientation.js, but we didn't need the buttons and such
 		switch (o)
@@ -90,7 +97,7 @@ function scroll_view_scroll() {
 	var scrollView = Titanium.UI.createScrollableView({
 		views:[view1,view2,view3,view4],
 		showPagingControl:true,
-		pagingControlHeight:30,
+		pagingControlHeight:30 * scaleY,
 		maxZoomScale:2.0,
 		currentPage:1
 	});
@@ -133,6 +140,10 @@ function scroll_view_scroll() {
 			width:'auto',
 			height:'auto'
 		});
+		if (isBlackberry) {
+			l.width = 50 * scaleX;
+			l.height = 30 * scaleY;
+		}
 		newView.add(l);
 		scrollView.addView(newView);
 	});
@@ -168,6 +179,10 @@ function scroll_view_scroll() {
 			height:'auto',
 			width:'auto'
 		});
+		if (isBlackberry) {
+			l.width = 80 * scaleX;
+			l.height = 30 * scaleY;
+		}
 		newView.add(l);
 		var ar = [];
 		for (var x=0;x<scrollView.views.length;x++)
@@ -221,46 +236,63 @@ function scroll_view_scroll() {
 	else
 	{
 		var toolbar = Titanium.UI.createView({
-			bottom: 10,
-			height: 50,
+			bottom: 10 * scaleY,
+			height: 50 * scaleY,
 			backgroundColor: '#333333',
 			borderRadius: 10,
 			opacity: 0.3,
-			left: 10,
-			right: 10
+			left: 10 * scaleX,
+			right: 10 * scaleX
 		});
 	
 		var floater = Titanium.UI.createView({
-			width:320,
+			width:320 * scaleX,
 			height: 'auto',
 			opacity: 0
 		});
 	
 		toolbar.add(floater);
 	
-		left.left = 10;
-		left.width = 30;
+		left.left = 10 * scaleX;
+		left.width = 30 * scaleX;
 	
-		change.left = 50;
-		change.width = 70;
-		change.height = 35;
+		change.left = 50 * scaleX;
+		change.width = 70 * scaleX;
+		change.height = 35 * scaleY;
 	
-		add.left = 130;
-		add.width = 70;
-		add.height = 35;
+		add.left = 130 * scaleX;
+		add.width = 70 * scaleX;
+		add.height = 35 * scaleY;
 	
-		jump.left = 210;
-		jump.width = 70;
-		jump.height = 35;
+		jump.left = 210 * scaleX;
+		jump.width = 70 * scaleX;
+		jump.height = 35 * scaleY;
 	
-		right.right = 10;
-		right.width = 30;
+		right.right = 10 * scaleX;
+		right.width = 30 * scaleX;
 	
 		floater.add(left);
 		floater.add(change);
 		floater.add(add);
 		floater.add(jump);
 		floater.add(right);
+		if( isBlackberry) {
+			l1.width = 50 * scaleX;
+			l1.height = 30 * scaleY;
+			
+			l2.width = 50 * scaleX;
+			l2.height = 30 * scaleY;
+			
+			l3.width = 50 * scaleX;
+			l3.height = 30 * scaleY;
+			
+			l4.width = 50 * scaleX;
+			l4.height = 30 * scaleY;
+			
+			toolbar.top =  Ti.Platform.displayCaps.platformHeight - 10 * scaleY;
+			toolbar.width = Ti.Platform.displayCaps.platformWidth - 2 * toolbar.left;
+			floater.height = 50 * scaleY;
+		}
 		win.add(toolbar);
 	}
 	return win;

@@ -1,5 +1,6 @@
 	//FIXME: JGH redo
 function tv_layout() {
+	var isBlackberry = Titanium.Platform.name == 'blackberry';
 	var win = Titanium.UI.createWindow();
 	win.backgroundImage = '/images/tableview/brown_bg_482.png';
 	
@@ -51,13 +52,18 @@ function tv_layout() {
 		top:10
 	});
 	if (Ti.Platform.osname !== 'mobileweb') {
-		tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
+		if (!isBlackberry)
+			tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
 	}
 	
-	var wrapperView = Titanium.UI.createView({backgroundColor:'transparent',width:300});
+	if (isBlackberry) {
+		win.add(tableView);
+	} else {
+		var wrapperView = Titanium.UI.createView({backgroundColor:'transparent',width:300});
 	
-	wrapperView.add(tableView);
-	win.add(wrapperView);
+		wrapperView.add(tableView);
+		win.add(wrapperView);
+	}
 	
 	//win.add(tableView);
 	return win;

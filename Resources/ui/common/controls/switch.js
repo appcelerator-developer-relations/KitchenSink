@@ -1,4 +1,11 @@
 function switch_control() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	
 	//
@@ -12,15 +19,21 @@ function switch_control() {
 			fontSize:15
 		},
 		textAlign:'center',
-		top:10,
+		top:10 * scaleY,
 		height:'auto'
 	});
+	if (isBlackberry) {
+		basicSwitchLabel.height = 40 * scaleY;
+	}
 	
 	var basicSwitch = Titanium.UI.createSwitch({
 		value:false,
-		top:30
+		top:30 * scaleY
 	});
 	
+	if (isBlackberry) {
+		alert('Custom EventListener is not supported for Blackberry yet');
+	}
 	basicSwitch.addEventListener('change',function(e)
 	{
 		basicSwitchLabel.text = 'Basic Switch value = ' + e.value + ' act val ' + basicSwitch.value;
@@ -31,9 +44,9 @@ function switch_control() {
 	//
 	var changeButton = Titanium.UI.createButton({
 		title:'Change Switch',
-		height:40,
-		width:200,
-		top:90
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:90 * scaleY
 	});
 	changeButton.addEventListener('click', function()
 	{
@@ -52,9 +65,9 @@ function switch_control() {
 	//
 	var hideShowButton = Titanium.UI.createButton({
 		title:'Hide/Show Switch',
-		height:40,
-		width:200,
-		top:140
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:140 * scaleY
 	});
 	var hidden=false;
 	hideShowButton.addEventListener('click', function()

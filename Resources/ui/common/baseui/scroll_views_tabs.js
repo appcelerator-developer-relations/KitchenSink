@@ -1,34 +1,43 @@
 function scroll_view_tabs() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Titanium.UI.createWindow();
 	win.backgroundColor = '#000';
 	
 	var leftImage = Ti.UI.createView({
 		backgroundImage:'/images/icon_arrow_left.png',
-		height:30,
-		width:30,
-		top:18,
-		left:5,
+		height:30 * scaleX,
+		width:30 * scaleX,
+		top:18 * scaleY,
+		left:5 * scaleX,
 		visible:false
 	});
 	win.add(leftImage);
 	var rightImage = Ti.UI.createView({
 		backgroundImage:'/images/icon_arrow_right.png',
-		height:30,
-		width:30,
-		top:18,
+		height:30 * scaleX,
+		width:30 * scaleX,
+		top:18 * scaleX,
 		right:5
 	});
 	win.add(rightImage);
-	
+	if (isBlackberry) {
+		rightImage.left = 300 * scaleX;
+	}
 	//
 	// HORIZONTAL SCROLLING TABS
 	//
 	var scrollView = Titanium.UI.createScrollView({
-		contentWidth:500,
-		contentHeight:50,
-		top:10,
-		height:50,
-		width:230,
+		contentWidth:500 * scaleX,
+		contentHeight:50 * scaleY,
+		top:10 * scaleY,
+		height:50 * scaleY,
+		width:230 * scaleX,
 		borderRadius:10,
 		backgroundColor:'#13386c'
 	
@@ -62,9 +71,9 @@ function scroll_view_tabs() {
 	var view1 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		left:10
+		width:40 * scaleX,
+		height:40 * scaleY,
+		left:10 * scaleX
 	});
 	scrollView.add(view1);
 	var l1 = Ti.UI.createLabel({
@@ -80,9 +89,9 @@ function scroll_view_tabs() {
 	var view2 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		left:60
+		width:40 * scaleX,
+		height:40 * scaleY,
+		left:60 * scaleX
 	});
 	scrollView.add(view2);
 	var l2 = Ti.UI.createLabel({
@@ -98,9 +107,9 @@ function scroll_view_tabs() {
 	var view3 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		left:110
+		width:40 * scaleX,
+		height:40 * scaleY,
+		left:110 * scaleX
 	});
 	scrollView.add(view3);
 	
@@ -117,9 +126,9 @@ function scroll_view_tabs() {
 	var view4 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		left:160
+		width:40 * scaleX,
+		height:40 * scaleY,
+		left:160 * scaleX
 	});
 	scrollView.add(view4);
 	
@@ -136,9 +145,9 @@ function scroll_view_tabs() {
 	var view5 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		left:210
+		width:40 * scaleX,
+		height:40 * scaleY,
+		left:210 * scaleX
 	});
 	scrollView.add(view5);
 	
@@ -155,9 +164,9 @@ function scroll_view_tabs() {
 	var view6 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		left:260
+		width:40 * scaleX,
+		height:40 * scaleY,
+		left:260 * scaleX
 	});
 	scrollView.add(view6);
 	
@@ -174,9 +183,9 @@ function scroll_view_tabs() {
 	var view7 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		left:310
+		width:40 * scaleX,
+		height:40 * scaleY,
+		left:310 * scaleX
 	});
 	scrollView.add(view7);
 	
@@ -193,9 +202,9 @@ function scroll_view_tabs() {
 	var view8 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		left:360
+		width:40 * scaleX,
+		height:40 * scaleY,
+		left:360 * scaleX
 	});
 	scrollView.add(view8);
 	
@@ -215,11 +224,11 @@ function scroll_view_tabs() {
 	// VERTICAL SCROLLING TABS
 	//
 	var scrollView2 = Titanium.UI.createScrollView({
-		contentWidth:75,
-		contentHeight:500,
-		top:70,
-		height:200,
-		width:75,
+		contentWidth:75 * scaleX,
+		contentHeight:500 * scaleY,
+		top:70 * scaleY,
+		height:200 * scaleY,
+		width:75 * scaleX,
 		borderRadius:10,
 		backgroundColor:'#13386c'
 	});
@@ -235,9 +244,9 @@ function scroll_view_tabs() {
 	var view9 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		top:10
+		width:40 * scaleX,
+		height:40 * scaleY,
+		top:10 * scaleY
 	});
 	scrollView2.add(view9);
 	
@@ -254,9 +263,9 @@ function scroll_view_tabs() {
 	var view10 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		top:60
+		width:40 * scaleX,
+		height:40 * scaleY,
+		top:60 * scaleY
 	});
 	scrollView2.add(view10);
 	
@@ -273,9 +282,9 @@ function scroll_view_tabs() {
 	var view11 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		top:110
+		width:40 * scaleX,
+		height:40 * scaleY,
+		top:110 * scaleY
 	});
 	scrollView2.add(view11);
 	
@@ -292,9 +301,9 @@ function scroll_view_tabs() {
 	var view12 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		top:160
+		width:40 * scaleX,
+		height:40 * scaleY,
+		top:160 * scaleY
 	});
 	scrollView2.add(view12);
 	
@@ -311,9 +320,9 @@ function scroll_view_tabs() {
 	var view13 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		top:210
+		width:40 * scaleX,
+		height:40 * scaleY,
+		top:210 * scaleY
 	});
 	scrollView2.add(view13);
 	
@@ -330,9 +339,9 @@ function scroll_view_tabs() {
 	var view14 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		top:260
+		width:40 * scaleX,
+		height:40 * scaleY,
+		top:260 * scaleY
 	});
 	scrollView2.add(view14);
 	
@@ -349,9 +358,9 @@ function scroll_view_tabs() {
 	var view15 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		top:310
+		width:40 * scaleX,
+		height:40 * scaleY,
+		top:310 * scaleY
 	});
 	scrollView2.add(view15);
 	
@@ -368,9 +377,9 @@ function scroll_view_tabs() {
 	var view16 = Ti.UI.createView({
 		backgroundColor:'#336699',
 		borderRadius:20,borderWidth:1,borderColor:'#336699',
-		width:40,
-		height:40,
-		top:360
+		width:40 * scaleX,
+		height:40 * scaleY,
+		top:360 * scaleY
 	});
 	scrollView2.add(view16);
 	
@@ -384,6 +393,55 @@ function scroll_view_tabs() {
 	});
 	view16.add(l16);
 	
+	if (isBlackberry) {
+		l1.width = 20 * scaleX;
+		l1.height = 20 * scaleY;
+		
+		l2.width = 20 * scaleX;
+		l2.height = 20 * scaleY;
+		
+		l3.width = 20 * scaleX;
+		l3.height = 20 * scaleY;
+		
+		l4.width = 20 * scaleX;
+		l4.height = 20 * scaleY;
+		
+		l5.width = 20 * scaleX;
+		l5.height = 20 * scaleY;
+		
+		l6.width = 20 * scaleX;
+		l6.height = 20 * scaleY;
+		
+		l7.width = 20 * scaleX;
+		l7.height = 20 * scaleY;
+		
+		l8.width = 20 * scaleX;
+		l8.height = 20 * scaleY;
+		
+		l9.width = 20 * scaleX;
+		l9.height = 20 * scaleY;
+		
+		l10.width = 20 * scaleX;
+		l10.height = 20 * scaleY;
+		
+		l11.width = 20 * scaleX;
+		l11.height = 20 * scaleY;
+		
+		l12.width = 20 * scaleX;
+		l12.height = 20 * scaleY;
+		
+		l13.width = 20 * scaleX;
+		l13.height = 20 * scaleY;
+		
+		l14.width = 20 * scaleX;
+		l14.height = 20 * scaleY;
+		
+		l15.width = 20 * scaleX;
+		l15.height = 20 * scaleY;
+		
+		l16.width = 20 * scaleX;
+		l16.height = 20 * scaleY;
+	}
 	
 	win.add(scrollView);
 	return win;

@@ -1,4 +1,12 @@
 function window_events() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if(isBlackberry)
+	{
+		scaleX += 1;
+		scaleY += 2;
+	}
 	// current window
 	var win = Titanium.UI.createWindow();
 	
@@ -35,8 +43,8 @@ function window_events() {
 			fontFamily:'Helvetica Neue',
 			fontSize:13
 		},
-		left:10,
-		top:10,
+		left:10 * scaleX,
+		top:10 * scaleY,
 		height:'auto',
 		width:'auto'
 	});
@@ -52,8 +60,8 @@ function window_events() {
 			fontFamily:'Helvetica Neue',
 			fontSize:13
 		},
-		left:10,
-		top:30,
+		left:10 * scaleX,
+		top:30 * scaleY,
 		height:'auto',
 		width:'auto'
 	});
@@ -69,8 +77,8 @@ function window_events() {
 			fontFamily:'Helvetica Neue',
 			fontSize:13
 		},
-		left:10,
-		top:50,
+		left:10 * scaleX,
+		top:50 * scaleY,
 		height:'auto',
 		width:'auto'
 	});
@@ -86,8 +94,8 @@ function window_events() {
 			fontFamily:'Helvetica Neue',
 			fontSize:13
 		},
-		left:10,
-		top:70,
+		left:10 * scaleX,
+		top:70 * scaleY,
 		height:'auto',
 		width:'auto'
 	});
@@ -97,8 +105,8 @@ function window_events() {
 	
 	var l0 = Titanium.UI.createLabel({
 		text:'try to trigger each event',
-		bottom:50,
-		width:300,
+		bottom:50 * scaleX,
+		width:300 * scaleY,
 		height:'auto',
 		textAlign:'center'
 	});
@@ -107,9 +115,9 @@ function window_events() {
 	
 	var l1 = Titanium.UI.createLabel({
 		text:'touchstart not fired',
-		top:90,
-		left:10,
-		width:300,
+		top:90 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14,fontFamily:'Helvetica Neue'}
 	});
@@ -118,9 +126,9 @@ function window_events() {
 	
 	var l2 = Titanium.UI.createLabel({
 		text:'touchmove not fired',
-		top:110,
-		left:10,
-		width:300,
+		top:110 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -129,9 +137,9 @@ function window_events() {
 	
 	var l3 = Titanium.UI.createLabel({
 		text:'touchend not fired',
-		top:130,
-		left:10,
-		width:300,
+		top:130 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -140,9 +148,9 @@ function window_events() {
 	
 	var l4 = Titanium.UI.createLabel({
 		text:'touchcancel not fired',
-		top:270,
-		left:10,
-		width:300,
+		top:270 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -151,9 +159,9 @@ function window_events() {
 	
 	var l5 = Titanium.UI.createLabel({
 		text:'singletap not fired',
-		top:150,
-		left:10,
-		width:300,
+		top:150 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -162,9 +170,9 @@ function window_events() {
 	
 	var l6 = Titanium.UI.createLabel({
 		text:'doubletap not fired',
-		top:170,
-		left:10,
-		width:300,
+		top:170 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -173,9 +181,9 @@ function window_events() {
 	
 	var l7 = Titanium.UI.createLabel({
 		text:'twofingertap not fired',
-		top:190,
-		left:10,
-		width:300,
+		top:190 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -184,9 +192,9 @@ function window_events() {
 	
 	var l8 = Titanium.UI.createLabel({
 		text:'swipe not fired',
-		top:210,
-		left:10,
-		width:300,
+		top:210 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -195,9 +203,9 @@ function window_events() {
 	
 	var l9 = Titanium.UI.createLabel({
 		text:'click not fired',
-		top:230,
-		left:10,
-		width:300,
+		top:230 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -206,9 +214,9 @@ function window_events() {
 	
 	var l10 = Titanium.UI.createLabel({
 		text:'dblclick not fired',
-		top:250,
-		left:10,
-		width:300,
+		top:250 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -376,6 +384,46 @@ function window_events() {
 				l11.color = '#333';
 			},200);
 		});
+	}
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+	if (isBlackberry) {
+		focusLabel.top = 15 * scaleY;
+		blurLabel.height = 15 * scaleY;
+		blurLabel.width = 200 * scaleX;	
+		
+		openLabel.height = 15 * scaleY;
+		openLabel.width = 200 * scaleX;	
+		
+		closeLabel.height = 15 * scaleY;
+		closeLabel.width = 200 * scaleX;	
+		
+		l0.height = 15 * scaleY;
+		l1.height = 15 * scaleY;
+		l2.height = 15 * scaleY;
+		l3.height = 15 * scaleY;
+		l4.height = 15 * scaleY;
+		l5.height = 15 * scaleY;
+		l6.height = 15 * scaleY;
+		l7.height = 15 * scaleY;
+		l8.height = 15 * scaleY;
+		l9.height = 15 * scaleY;
+		l10.height = 15 * scaleY;
+		
+		focusLabel.color = 'white';
+		blurLabel.color = 'white';
+		openLabel.color = 'white';
+		closeLabel.color = 'white';
+		l0.color = 'white';
+		l1.color = 'white';
+		l2.color = 'white';
+		l3.color = 'white';
+		l4.color = 'white';
+		l5.color = 'white';
+		l6.color = 'white';
+		l7.color = 'white';
+		l8.color = 'white';
+		l9.color = 'white';
+		l10.color = 'white';
 	}
 	return win;
 };

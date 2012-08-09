@@ -1,6 +1,11 @@
 function tv_layout2() {
 	var win = Titanium.UI.createWindow();
 	win.barColor = '#385292';
+	//TODO remove this code when Ti.UI.createTableViewRow() will be implemented for Blackberry
+	if (Ti.Platform.osname === 'blackberry') {
+		alert('This functionality depends on Ti.UI.createTableViewRow() which is not supported for BB yet');
+		return win;
+	}
 	
 	if (Ti.Platform.osname !== 'mobileweb') {
 		

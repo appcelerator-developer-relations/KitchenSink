@@ -1,4 +1,5 @@
 function tv_row_insert() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Titanium.UI.createWindow();
 	
 	// create table view data
@@ -29,6 +30,11 @@ function tv_row_insert() {
 	tableView.addEventListener('click', function(e)
 	{
 	
+		//TODO remove this lines when inserRow will be implemneted for Blackberry
+		if (isBlackberry) {
+			alert('Titanium.UI.TableView.insertRowAfter(),  insertRowBefore() are not supported for Blackberry yet');
+			return;
+		}
 		switch(e.rowData.title)
 		{
 			case 'Insert Row Above (no anim)':

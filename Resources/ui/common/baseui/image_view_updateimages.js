@@ -21,6 +21,11 @@ function image_view_update() {
 	
 	win.add(cartoonGuy);
 	
+	//TODO remove these lines of code when Titanium.UI.ImageView.start() and stop() will be implemeneted
+	if (Titanium.Platform.osname === 'blackberry') {
+		alert('Titanium.UI.ImageView.start() and stop() are not implemented for Blackberry yet');
+		return win;
+	}
 	cartoonGuy.start();
 	
 	cartoonGuy.addEventListener('touchstart', function(e)

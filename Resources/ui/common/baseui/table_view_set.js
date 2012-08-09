@@ -1,6 +1,7 @@
 function tv_set() {
 	//JGH: FIXME - remove HTML
 	
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Titanium.UI.createWindow();
 	
 	var data = [
@@ -28,20 +29,34 @@ function tv_set() {
 	
 	tableView.addEventListener('click',function(e)
 	{
+		//e.index returns string value which is wrong for switch statment.
+		//TODO There is a bug created for this issue: TIMOB-10315. Remove this lines when bug is fixed.
+		if (isBlackberry) {
+			e.index = parseInt(e.index);
+		}
 		switch(e.index)
 		{
 			case 0:
 				var data = [];
 				for (var c=0;c<10;c++)
 				{
-					var row = Ti.UI.createTableViewRow();
+					var row = {};
+					//TODO revert this to origin approache when createTableViewRow() will be implemented for Blackberry
+					if (!isBlackberry) {
+						row = Ti.UI.createTableViewRow();
+					}
 					row.title = "Row "+ (c+1);
 					row.hasCheck = true;
 					row.backgroundColor = '#aaa';
 					data[c]=row;
 				}
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});				
+				//TODO revert back this code when animationStyle and separatorStyle will be implemented for Blackberry
+				if (isBlackberry) {
+					tableView.setData(data);
+				} else {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
+					tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});
+				}
 				break;
 			case 1:
 				var data = [
@@ -53,9 +68,14 @@ function tv_set() {
 					{title:'Row 7', image:'Mail.png'}
 	
 				];
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
-				tableView.separatorColor = null;
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.DOWN});
+				//TODO revert back code when used properties will be implemented for Blackberry
+				if (isBlackberry) {
+					tableView.setData(data);
+				} else {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
+					tableView.separatorColor = null;
+					tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.DOWN});
+				}
 				break;
 			case 2:
 				var data = [
@@ -70,9 +90,14 @@ function tv_set() {
 					{title:'Row 9'}
 	
 				];
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
-				tableView.separatorColor = "red";
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
+				//TODO revert back code when used properties will be implemented for Blackberry
+				if (isBlackberry) {
+					tableView.setData(data);
+				} else {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
+					tableView.separatorColor = "red";
+					tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
+				}
 				break;
 		}
 			

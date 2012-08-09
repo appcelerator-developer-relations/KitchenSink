@@ -1,4 +1,11 @@
 function view_pointconv() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Titanium.UI.createWindow();
 	win.backgroundColor = 'blue';
 	win.name = "window";
@@ -8,8 +15,8 @@ function view_pointconv() {
 		borderWidth:6,
 		borderRadius:2,
 		backgroundColor:'red',
-		width:200,
-		height:50,
+		width:200 * scaleX,
+		height:50 * scaleY,
 		top:0,
 		name:"view 1"
 	});
@@ -19,9 +26,9 @@ function view_pointconv() {
 		borderWidth:6,
 		borderRadius:2,
 		backgroundColor:'green',
-		width:200,
-		height:50,
-		top:50,
+		width:200 * scaleX,
+		height:50 * scaleY,
+		top:50 * scaleY,
 		name:"view 1"
 	});
 	
@@ -30,9 +37,9 @@ function view_pointconv() {
 		borderWidth:6,
 		borderRadius:2,
 		backgroundColor:'yellow',
-		width:200,
-		height:50,
-		top:100,
+		width:200 * scaleX,
+		height:50 * scaleY,
+		top:100 * scaleY,
 		name:"view 1"
 	});
 	
@@ -41,9 +48,9 @@ function view_pointconv() {
 		borderWidth:6,
 		borderRadius:2,
 		backgroundColor:'magenta',
-		width:200,
-		height:50,
-		top:150,
+		width:200 * scaleX,
+		height:50 * scaleY,
+		top:150 * scaleY,
 		name:"view 1"
 	});
 	
@@ -52,9 +59,9 @@ function view_pointconv() {
 		borderWidth:6,
 		borderRadius:2,
 		backgroundColor:'purple',
-		width:200,
-		height:50,
-		top:200,
+		width:200 * scaleX,
+		height:50 * scaleY,
+		top:200 * scaleY,
 		name:"view 1"
 	});
 	
@@ -78,6 +85,16 @@ function view_pointconv() {
 		width:'auto'
 	});
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+	if (isBlackberry) {
+		label1.width = 300 * scaleX;
+		label1.height = 40 * scaleY;
+		label1.top = 250 * scaleY;
+		
+		label2.width = 300 * scaleX;
+		label2.height = 40 * scaleY;
+		label2.top = 290 * scaleY;
+	}
 	win.add(greenView);
 	win.add(yellowView);
 	win.add(magentaView);
@@ -87,6 +104,9 @@ function view_pointconv() {
 	
 	greenView.addEventListener('click',function(ev)
 	{
+		if (isBlackberry) {
+			alert('Titanium.UI.View.convertPointToView() is not supported for Blackberry yet');
+		}
 		var localPoint = {x:ev.x, y:ev.y}
 		var convPoint = yellowView.convertPointToView(localPoint, win);
 		label1.text = "localPoint: " + localPoint.x + " " + localPoint.y;
@@ -96,6 +116,9 @@ function view_pointconv() {
 	yellowView.addEventListener('click',function(ev)
 	{
 		try {
+			if (isBlackberry) {
+				alert('Titanium.UI.View.convertPointToView() is not supported for Blackberry yet');
+			}
 			var localPoint = {x:ev.x, y:ev.y}
 			var convPoint = yellowView.convertPointToView(localPoint, redView);
 			if (convPoint) {
@@ -120,6 +143,9 @@ function view_pointconv() {
 		}
 	
 		try {
+			if (isBlackberry) {
+				alert('Titanium.UI.View.convertPointToView() is not supported for Blackberry yet');
+			}
 			var localPoint = {y:ev.y}
 			var convPoint = magentaView.convertPointToView(localPoint, win);
 		} catch (e) {
@@ -132,6 +158,9 @@ function view_pointconv() {
 	{
 		Ti.API.debug("purple view");
 		try {
+			if (isBlackberry) {
+				alert('Titanium.UI.View.convertPointToView() is not supported for Blackberry yet');
+			}
 			var localPoint = {x:ev.x, y:ev.y}
 			var convPoint = purpleView.convertPointToView(localPoint, win);
 			if (convPoint) {
