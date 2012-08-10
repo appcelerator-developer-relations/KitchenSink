@@ -4,14 +4,17 @@ function cam_overlay_web() {
 	var overlay = Titanium.UI.createView();
 	
 	var html = '<html><body>';
-	html += '<div id="button" style="background-color:red;height:80px;width:200px;color:white;text-align:center;line-height:80px">Take Photo</div>';
+	html += '<div id="button" style="background-color:green;height:80px;width:150px;color:white;text-align:center;line-height:80px;">Take Photo</div>';
+	html += '<div id="closebutton" style="background-color:red;height:80px;width:150px;color:white;text-align:center;line-height:80px;left:170px;top:-80px;position:relative;">Close Camera</div>';
 	html += '<script>document.getElementById("button").onclick= function(){Ti.App.fireEvent("camera_button")}</script>';
-	html +='</body></html>';
+	html += '<script>document.getElementById("closebutton").onclick= function(){Ti.App.fireEvent("camera_closebutton")}</script>';
+	html += '</body></html>';
+	
 	var webview = Ti.UI.createWebView({
 		bottom:10,
 		height:80,
-		width:200,
-		backgroundColor:'#ff0000',
+		width:320,
+		backgroundColor:'transparent',
 		html:html
 	});
 	overlay.add(webview);
@@ -21,6 +24,11 @@ function cam_overlay_web() {
 		Ti.Media.takePicture();
 	});
 	
+	Ti.App.addEventListener('camera_closebutton', function()
+	{
+		Ti.Media.hideCamera();
+		win.close();
+	});
 	
 	Titanium.Media.showCamera({
 	
