@@ -13,7 +13,7 @@ function cam_overlay_web() {
 	var webview = Ti.UI.createWebView({
 		bottom:10,
 		height:80,
-		width:400,
+		width:320,
 		backgroundColor:'transparent',
 		html:html
 	});

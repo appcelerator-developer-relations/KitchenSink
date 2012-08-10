@@ -94,8 +94,8 @@ function cam_overlay() {
 			// place our picture into our window
 			var imageView = Ti.UI.createImageView({
 				image:event.media,
-				width:win.width,
-				height:win.height
+				width:container.win.width,
+				height:container.win.height
 			});
 			container.win.add(imageView);
 			
@@ -126,7 +126,7 @@ function cam_overlay() {
 	container.open = function(){
 		container.win.open();
 	};
-	return container;
+	return container.win;
 };
 
 module.exports = cam_overlay;

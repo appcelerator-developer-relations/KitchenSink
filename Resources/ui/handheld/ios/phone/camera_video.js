@@ -161,7 +161,7 @@ function cam_video() {
 		container.win.open();
 	};
 
-	return container;
+	return container.win;
 };
 
 module.exports = cam_video;
