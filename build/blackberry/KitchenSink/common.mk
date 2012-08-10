@@ -29,7 +29,7 @@ LDFLAGS+=-Wl,-z,relro -Wl,-z,now $(if $(filter g so shared,$(VARIANTS)),,-pie)
 LIBS+=tibb v8 v8preparser socket bps
 
 # Extra .so required
-LDFLAGS+=-lbbcascades -lbbdevice -lQtCore -lQtDeclarative -lQtGui -lQtMultimedia -lQtNetwork -lm -lbb
+LDFLAGS+=-lbbcascades -lbbdevice -lbbsystem -lQtCore -lQtDeclarative -lQtGui -lQtMultimedia -lQtNetwork -lm -lbb
 LDFLAGS+=-lQtOpenGL -lQtScript -lQtScriptTools -lQtSql -lQtSvg -lQtTest -lQtXml
 
 include $(MKFILES_ROOT)/qmacros.mk
