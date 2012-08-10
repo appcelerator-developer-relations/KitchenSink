@@ -16,7 +16,7 @@ function cam_ar() {
 	
 	container.button.addEventListener('click',function()
 	{
-		alert("Close the camera");
+		alert("Camera closed.");
 		Ti.Media.hideCamera();
 		container.close();
 	});
@@ -71,8 +71,7 @@ function cam_ar() {
 		Titanium.Geolocation.purpose = "AR Demo";
 	}
 	
-	
-	Titanium.Geolocation.addEventListener('location',function(e)
+	container.locationUpdate = function(e)
 	{
 		var longitude = e.coords.longitude;
 		var latitude = e.coords.latitude;
@@ -84,9 +83,10 @@ function cam_ar() {
 			container.refreshLabel();
 		});
 		container.refreshLabel();
-	});
+	};
+
 	
-	Titanium.Geolocation.addEventListener('heading',function(e)
+	container.updateHeadingLabel = function(e)
 	{
 		if (e.error)
 		{
@@ -96,7 +96,8 @@ function cam_ar() {
 	
 		container.heading = e.heading.magneticHeading;
 		container.refreshLabel();
-	});
+	};
+
 	
 	
 	Titanium.Media.showCamera({
@@ -125,16 +126,23 @@ function cam_ar() {
 		mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
 		autohide:false	// tell the system not to auto-hide and we'll do it ourself
 	});
-	
+		
+	container.win.addEventListener('open',function(){
+		Titanium.Geolocation.addEventListener('location',container.locationUpdate);
+		Titanium.Geolocation.addEventListener('heading',container.updateHeadingLabel);
+
+	});
 	container.open = function(){
 		container.win.open();
 	};
 
 	container.close = function(){
+		Titanium.Geolocation.removeEventListener('heading',container.updateHeadingLabel);
+		Titanium.Geolocation.removeEventListener('location',container.locationUpdate);
 		container.win.close();
 	}
-	
-	return container;
+
+	return container.win;
 };
 
 module.exports = cam_ar;
