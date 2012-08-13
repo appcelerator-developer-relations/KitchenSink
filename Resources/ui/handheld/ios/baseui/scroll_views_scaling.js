@@ -86,7 +86,7 @@ function scroll_view_scale() {
 		{
 			scrollView.zoomScale = scrollView.zoomScale-0.1;
 		}
-		label.text = "Scale: "+scrollView.scale;
+		label.text = "Scale: "+scrollView.zoomScale;
 	});
 	return win;
 };
