@@ -11,6 +11,7 @@ function textarea(_args) {
 	
 	if (Titanium.Platform.name == 'iPhone OS')
 	{
+		//TODO Update before 2.2.0 RELEASE
 		data.push({title:'Auto Link', hasChild:true, test:'ui/handheld/ios/controls/textarea_autodetect'});
 	}
 	// create table view

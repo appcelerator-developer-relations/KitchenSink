@@ -8,7 +8,7 @@ function movie_remote() {
 	var activeMovie = Titanium.Media.createVideoPlayer({
 		url: contentURL,
 		backgroundColor:'#111',
-		movieControlMode:Titanium.Media.VIDEO_CONTROL_DEFAULT, // See TIMOB-2802, which may change this property name
+		mediaControlStyle:Titanium.Media.VIDEO_CONTROL_DEFAULT, // See TIMOB-2802, which may change this property name
 		scalingMode:Titanium.Media.VIDEO_SCALING_MODE_FILL
 	});
 	

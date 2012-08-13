@@ -206,20 +206,20 @@ function transition() {
 	view.add(toolbarView);
 	
 	// create and add toolbar
-	var toolbar = Titanium.UI.createToolbar({
+	var toolbar = Titanium.UI.iOS.createToolbar({
 		items:[flexSpace,one,flexSpace],
 		bottom:0,
 		borderTop:true,
 		borderBottom:true
 	});
-	var toolbar2 = Titanium.UI.createToolbar({
+	var toolbar2 = Titanium.UI.iOS.createToolbar({
 		items:[flexSpace,two,flexSpace],
 		bottom:0,
 		borderTop:true,
 		borderBottom:true,
 		barColor:'black'
 	});
-	var toolbar3 = Titanium.UI.createToolbar({
+	var toolbar3 = Titanium.UI.iOS.createToolbar({
 		items:[flexSpace,three,flexSpace],
 		bottom:0,
 		borderTop:true,
