@@ -1,8 +1,7 @@
 function MashupsWindow(title) {
 	var self = Ti.UI.createWindow({
 		title:title,
-		// BB TODO: this used to be white
-		backgroundColor:'black'
+		backgroundColor:'white'
 	});
 
 	var isMobileWeb = Titanium.Platform.osname == 'mobileweb';

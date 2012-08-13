@@ -5,10 +5,6 @@ function label(_args) {
 		backgroundColor:'white'
 	});
 	
-	if (isBlackberry) {
-		self.backgroundColor = 'black';
-	}
-	
 	// create label view data object
 	var data = [
 		{title:'Basic', hasChild:true, test:'ui/common/controls/label_basic'}
