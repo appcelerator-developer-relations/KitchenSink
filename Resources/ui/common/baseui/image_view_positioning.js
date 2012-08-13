@@ -2,7 +2,7 @@ function image_view_position() {
 	var win = Ti.UI.createWindow();
 	
 	var view = Ti.UI.createImageView({
-		image:'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png',
+		image:'http://static.appcelerator.com/images/header/appc_logo.png',
 		top:10,
 		left:10,
 		height:'auto',
