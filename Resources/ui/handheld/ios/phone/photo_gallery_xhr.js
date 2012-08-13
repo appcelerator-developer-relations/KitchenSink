@@ -8,7 +8,7 @@ function gallery_xhr() {
 		Titanium.UI.createAlertDialog({title:'Photo Gallery',message:'Check your photo gallery for a titanium logo'}).show();		
 	};
 	// open the client
-	xhr.open('GET','http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png');
+	xhr.open('GET','http://static.appcelerator.com/images/header/appc_logo.png');
 	
 	// send the data
 	xhr.send();
