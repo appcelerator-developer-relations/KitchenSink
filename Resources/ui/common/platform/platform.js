@@ -22,8 +22,9 @@ function ti_platform() {
 	// add a battery listener, it will turn it on for you
 	// automagically
 	var needUpdate = false;
-	if (!isBlackberry)
+	if (!isBlackberry) {
 		Titanium.Platform.batteryMonitoring = true;
+	}
 	var batteryEventListener;
 	
 	win.addEventListener('close',function()
@@ -299,8 +300,9 @@ function ti_platform() {
 			Titanium.UI.createAlertDialog({title:'Platform', message:message}).show();
 		}
 	};
-	if (!isBlackberry)
+	if (!isBlackberry) {
 		Titanium.Platform.addEventListener('battery', batteryEventListener);
+	}
 	
 	Titanium.API.info("Current Phone Locale is "+Titanium.Platform.locale);
 	Titanium.API.info("OS name is " + Titanium.Platform.osname);
