@@ -5,7 +5,7 @@ function movie_local() {
 		url: '/etc/movie.mp4',
 		backgroundColor: '#111',
 		scalingMode: Titanium.Media.VIDEO_SCALING_MODE_FILL,
-		movieControlMode: Titanium.Media.VIDEO_CONTROL_NONE // See TIMOB-2802, which may change this property name
+		mediaControlStyle: Titanium.Media.VIDEO_CONTROL_NONE // See TIMOB-2802, which may change this property name
 	};
 	
 	if (Titanium.Platform.osname == "ipad") {
@@ -33,9 +33,6 @@ function movie_local() {
 	{
 		movieLabel.text = "You clicked the video label. Sweet!";
 		movieLabel.text = "mediaControlStyle = " + activeMovie.mediaControlStyle;
-		if (Titanium.Platform.name == 'iPhone OS') {
-			movieLabel.text = movieLabel.text + " movieControlStyle = " + activeMovie.movieControlStyle;
-		}
 	});
 	
 	activeMovie.addEventListener('load', function()

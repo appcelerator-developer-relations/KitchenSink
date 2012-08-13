@@ -15,7 +15,7 @@ function record_video() {
 		{
 			var activeMovie = Titanium.Media.createVideoPlayer({
 				backgroundColor:'#111',
-				movieControlMode:Titanium.Media.VIDEO_CONTROL_DEFAULT,
+				mediaControlStyle:Titanium.Media.VIDEO_CONTROL_DEFAULT,
 				scalingMode:Titanium.Media.VIDEO_SCALING_ASPECT_FILL,
 				//contentURL:movieFile.nativePath
 				media:movieFile			// note you can use either contentURL to nativePath or the file object
