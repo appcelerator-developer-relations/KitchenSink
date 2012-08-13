@@ -3,6 +3,13 @@ function js_include() {
 	
 	var self = Ti.UI.createWindow();
 	
+	if (Titanium.Platform.osname === 'blackberry') {
+		//TODO remove this when bug: TIMOB-10340 will be fixed for BlackBerry
+		Titanium.include('/etc/my_js_include_2.js');
+		Titanium.include('/etc/local_include.js');
+		//TODO remove this when custom event listener will be implemented for BlackBerry
+		alert('first name: ' + myFirstName + ' middle name: ' + myMiddleName +' last name: ' + myLastName);
+	}
 	self.addEventListener('open', function() {
 
 		Ti.UI.createAlertDialog({

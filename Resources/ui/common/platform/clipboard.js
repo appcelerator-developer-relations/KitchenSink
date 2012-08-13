@@ -1,4 +1,9 @@
 function clipboard() {
+	//TODO review this part when Jira task: TIMOB-8812 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.UI.Clipboard module is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// initialize to all modes

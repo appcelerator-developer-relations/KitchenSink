@@ -1,4 +1,11 @@
 function commonjs() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	};
 	var win = Ti.UI.createWindow();
 	
 	var view = Ti.UI.createView({
@@ -7,15 +14,22 @@ function commonjs() {
 	});
 	
 	win.add(view);
+	//TODO remove this offset idea when Ti.UI.View.layout = 'vertical' will be supported for Blackberry
+	var offset = 0;
 	
 	function addResult(msg)
 	{
 		var label = Ti.UI.createLabel({
 			height:"auto",
 			width:"auto",
-			top:20,
+			top:20 * scaleY + offset,
 			text:msg
 		});
+		if (isBlackberry) {
+			label.height = 30 * scaleY;
+			label.width = 200 * scaleX;
+			offset += 30 * scaleY;
+		}
 		view.add(label);
 	}
 	

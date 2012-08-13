@@ -1,4 +1,10 @@
 function app_data() {
+	//TODO review this part when Jira task: TIMOB-8575 will be implemented
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	if (isBlackberry) {
+		alert('Titanium.App module getXXX() methods are not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	var data = '';

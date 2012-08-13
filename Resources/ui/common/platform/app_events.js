@@ -1,4 +1,10 @@
 function app_events() {
+	//TODO review this part when Jira task: TIMOB-8575 will be implemented
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	if (isBlackberry) {
+		alert('Titanium.App addEventListener() is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow({
 		navBarHidden:true
 	});
