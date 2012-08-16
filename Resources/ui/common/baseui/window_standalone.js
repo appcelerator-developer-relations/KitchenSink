@@ -315,7 +315,7 @@ function win_standalone(_args) {
 		});
 	
 		// create and add toolbar
-		var toolbar = Titanium.UI.createToolbar({
+		var toolbar = Titanium.UI.iOS.createToolbar({
 			items:[hello,flexSpace,label, flexSpace,close],
 			top:0,
 			borderTop:false,

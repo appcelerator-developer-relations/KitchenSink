@@ -80,13 +80,13 @@ function scroll_view_scale() {
 	{
 		if (e.index === 0)
 		{
-			scrollView.zoomScale = scrollView.scale+0.1;
+			scrollView.zoomScale = scrollView.zoomScale+0.1;
 		}
 		else
 		{
-			scrollView.zoomScale = scrollView.scale-0.1;
+			scrollView.zoomScale = scrollView.zoomScale-0.1;
 		}
-		label.text = "Scale: "+scrollView.scale;
+		label.text = "Scale: "+scrollView.zoomScale;
 	});
 	return win;
 };
