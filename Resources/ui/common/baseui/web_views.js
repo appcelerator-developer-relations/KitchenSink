@@ -102,11 +102,7 @@ function webviews(_args) {
 			var baseURL = 'http://www.google.com';
 			xhr.onload = function()
 			{
-				if (Titanium.Platform.name != 'android') { // TIMOB-7840
-					webview.setHtml(this.responseText, { baseURL: baseURL });
-				} else {
-					webview.html = this.responseText;
-				}
+				webview.setHtml(this.responseText, { baseURL: baseURL });
 			};
 			
 			// open the client
