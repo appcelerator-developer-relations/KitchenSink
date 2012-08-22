@@ -111,23 +111,23 @@ function button_control() {
 	});
 	
 	var b5 = Titanium.UI.createButton({
-		width:200,
-		height:40,
-		top:225
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:225 * scaleY
 	});
 	var b5Label = Ti.UI.createLabel({
 		text:'Label',
-		width:50,
-		height:20,
+		width:50 * scaleX,
+		height:20 * scaleY,
 		color:'#336699'
 	});
 	b5.add(b5Label);
 	
 	var b5ImageView = Ti.UI.createImageView({
 		image:'/images/camera.png',
-		left:10,
-		height:33,
-		width:33
+		left:10 * scaleX,
+		height:33 * scaleY,
+		width:33 * scaleY
 	});
 	b5.add(b5ImageView);
 	b5.addEventListener('touchstart', function()
@@ -153,8 +153,8 @@ function button_control() {
 		title : 'H-Left',
 		width : 60 * scaleX,
 		height: 40 * scaleY,
-		top : 270,
-		left : 60
+		top : 270 * scaleY,
+		left : 60 * scaleX
 	});
 	bhleft.addEventListener('click', function() {
 		b1.textAlign = Titanium.UI.TEXT_ALIGNMENT_LEFT;
@@ -164,8 +164,8 @@ function button_control() {
 		title : 'H-Center',
 		width : 60 * scaleX,
 		height: 40 * scaleY,
-		top : 270,
-		left : 120
+		top : 270 * scaleY,
+		left : 120 * scaleX
 	});
 	bhcenter.addEventListener('click', function() {
 		b1.textAlign = Titanium.UI.TEXT_ALIGNMENT_CENTER;
@@ -175,8 +175,8 @@ function button_control() {
 		title : 'H-Right',
 		width : 60 * scaleX,
 		height: 40 * scaleY,
-		top : 270,
-		left : 180
+		top : 270 * scaleY,
+		left : 180 * scaleX
 	});
 	bhright.addEventListener('click', function() {
 		b1.textAlign = Titanium.UI.TEXT_ALIGNMENT_RIGHT;
@@ -184,10 +184,10 @@ function button_control() {
 	
 	var bvtop = Titanium.UI.createButton({
 		title : 'V-Top',
-		width : 60,
-		height: 40,
-		top : 320,
-		left : 60
+		width : 60 * scaleX,
+		height: 40 * scaleY,
+		top : 320 * scaleY,
+		left : 60 * scaleX
 	});
 	bvtop.addEventListener('click', function() {
 		b1.verticalAlign = Titanium.UI.TEXT_VERTICAL_ALIGNMENT_TOP;
@@ -195,10 +195,10 @@ function button_control() {
 	
 	var bvcenter = Titanium.UI.createButton({
 		title : 'V-Center',
-		width : 60,
-		height: 40,
-		top : 320,
-		left : 120
+		width : 60 * scaleX,
+		height: 40 * scaleY,
+		top : 320 * scaleY,
+		left : 120 * scaleX
 	});
 	bvcenter.addEventListener('click', function() {
 		b1.verticalAlign = Titanium.UI.TEXT_VERTICAL_ALIGNMENT_CENTER;
@@ -206,26 +206,45 @@ function button_control() {
 	
 	var bvbottom = Titanium.UI.createButton({
 		title : 'V-Bottom',
-		width : 60,
-		height: 40,
-		top : 320,
-		left : 180
+		width : 60 * scaleX,
+		height: 40 * scaleY,
+		top : 320 * scaleY,
+		left : 180 * scaleX
 	});
 	bvbottom.addEventListener('click', function() {
 		b1.verticalAlign = Titanium.UI.TEXT_VERTICAL_ALIGNMENT_BOTTOM;
 	});
 	
-	if (!isBlackberry) {
-		win.add(bhleft);
-		win.add(bhcenter);
-		win.add(bhright);
-	}	
+	win.add(bhleft);
+	win.add(bhcenter);
+	win.add(bhright);
 	
 //	if (Ti.Platform.osname === 'android') {
-	if (!isBlackberry) {
 		win.add(bvtop);
 		win.add(bvcenter);
 		win.add(bvbottom);
+//	}
+	if (isBlackberry) {
+		bhleft.enabled = false;
+		bhcenter.enabled = false;
+		bhright.enabled = false;
+		bvtop.enabled = false;
+		bvcenter.enabled = false;
+		bvbottom.enabled = false;
+
+		bhleft.left = 40 * scaleX;
+		bhleft.width = 100 * scaleX;
+		bhcenter.left = 140 * scaleX;
+		bhcenter.width = 100 * scaleX;
+		bhright.left = 240 * scaleX;
+		bhright.width = 100 * scaleX;
+
+		bvtop.left = bhleft.left;
+		bvtop.width = bhleft.width;
+		bvcenter.left = bhcenter.left;
+		bvcenter.width = bhcenter.width;
+		bvbottom.left = bhright.left;
+		bvbottom.width = bhright.width + 10 * scaleY;
 	}
 
 	return win;

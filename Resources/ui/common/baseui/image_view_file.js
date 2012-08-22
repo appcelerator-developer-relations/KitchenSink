@@ -1,7 +1,7 @@
 function image_view_file() {
-	//TODO remove these lines of code when  Ti.Filesystem will be implemeneted for Blackberry
+	//TODO remove these lines of code when Jira task: TIMOB-8580 will be implemeneted for Blackberry
 	if (Titanium.Platform.osname === 'blackberry'){
-		alert('Ti.Filesystem module is not supported for BB');
+		alert('Titanium.Filesystem module is not supported for BlackBerry yet');
 		return;
 	}
 	var win = Titanium.UI.createWindow();;

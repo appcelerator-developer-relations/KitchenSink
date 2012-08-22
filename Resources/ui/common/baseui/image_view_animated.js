@@ -1,4 +1,9 @@
-function image_view_anim() {	
+function image_view_anim() {
+	//TODO review this part when Image View animation methods will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.UI.ImageView animation methods are not implemented for BlackBerry yet');
+		return;
+	}
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var scaleX = 1;
 	var scaleY = 1;

@@ -1,10 +1,7 @@
 function image_view_remote() {
-	var isBlackberry = Titanium.Platform.name === 'blackberry';
-	var scaleX = 1;
-	var scaleY = 1;
-	if (isBlackberry) {
-		scaleX += 1;
-		scaleY += 2;
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('BlackBerry does not support remote image functionality');
+		return;
 	}
 	var win = Titanium.UI.createWindow();
 	
@@ -22,8 +19,8 @@ function image_view_remote() {
 		text:'This is a remote image URL',
 		bottom:30,
 		color:'#999',
-		height:20 * scaleY,
-		width:300 * scaleX,
+		height:20,
+		width:300,
 		textAlign:'center'
 	});
 	win.add(l);
@@ -39,13 +36,9 @@ function image_view_remote() {
 	var b = Titanium.UI.createButton({
 		title : 'Assign remote image url',
 		top : 260,
-		height : 50 * scaleY,
+		height : 50,
 		width : "auto"
 	});
-	//TODO review this part of code if layout widht - 'auto' will be implemented for BB
-	if (isBlackberry) {
-		b.width = 400;
-	}
 	win.add(b);
 	b.addEventListener('click', function(e) {
 			imageView2.image = 'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png';

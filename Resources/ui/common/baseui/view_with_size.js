@@ -40,7 +40,6 @@ function viewsize() {
 	win.add(button);
 	
 	button.addEventListener('click',function() {
-		alert('Titanium.UI.View.updateLayout() is not supported for Blackberry yet');
 		view.updateLayout({width:150 * scaleX,height:150 * scaleY});
 		label.text = "Box should now be 150x150";
 	});

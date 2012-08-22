@@ -1,4 +1,9 @@
 function horizontal_layout() {
+	//TODO review this part when layout will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Ui.View layout horizontal is not supported for BlackBerry yet');
+		return;
+	}
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var scaleX = 1;
 	var scaleY = 1;
@@ -48,7 +53,6 @@ function horizontal_layout() {
 		l1.width = 150 * scaleX;
 		l2.width = 150 * scaleX;
 		l3.width = 150 * scaleX;
-		alert('Blackberry doesn\'t support View.layout - vertical yet');
 	}
 	view.add(l3);
 	return win;

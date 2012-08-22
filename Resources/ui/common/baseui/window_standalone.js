@@ -47,6 +47,9 @@ function win_standalone(_args) {
 			height:30 * scaleY,
 			width:150 * scaleX
 		});
+		if (isBlackberry) {
+			b.height = 40 * scaleY;
+		}
 		w.add(b);
 		b.addEventListener('click', function()
 		{
@@ -69,10 +72,6 @@ function win_standalone(_args) {
 		
 		b2.addEventListener('click', function()
 		{
-			if (isBlackberry) {
-				alert('Blackberry doesn\'t support Animated openning yet');
-				return;
-			}
 			var options = {
 					height:0,
 					width:0,
@@ -280,6 +279,9 @@ function win_standalone(_args) {
 		{
 			w.close();
 		});
+		if (isBlackberry) {
+			b.height = 40 * scaleY;
+		}
 	
 		w.open({fullscreen:true});
 	});
@@ -406,6 +408,10 @@ function win_standalone(_args) {
 		win.add(b3);
 	}
 	win.add(b6);
+	if (isBlackberry) {
+		b2.enabled = false;
+		b3.enabled = false;
+	}
 	
 	if (Titanium.Platform.name == 'iPhone OS')
 	{

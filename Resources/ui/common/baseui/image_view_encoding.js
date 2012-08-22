@@ -1,4 +1,8 @@
 function image_view_encode() {
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('BlackBerry does not support remote image functionality');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	
 	// this is a remote URL with a UTF-8 character encoded. We should be able

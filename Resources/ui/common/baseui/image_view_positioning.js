@@ -1,4 +1,11 @@
 function image_view_position() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	};
 	var win = Ti.UI.createWindow();
 	
 	if (Titanium.Platform.name == 'android') 
@@ -30,13 +37,18 @@ function image_view_position() {
 	var label = Ti.UI.createLabel({
 		text:'Image should be at top 10 and left 10',
 		height:'auto',
-		bottom:20,
+		bottom:20 * scaleY,
 		textAlign:'center'
 	});
 	
-	//TODO review this part of code if layout height - 'auto' will be implemented for BB
-	if (Titanium.Platform.osname === 'blackberry') {
-		label.height = 100;
+	if (isBlackberry) {
+		//Cascade doesn't provide remote image functionality
+		view.image = '/images/smallpic1.jpg';
+		view.width = Titanium.Platform.displayCaps.platformWidth;
+		view.height = 200 * scaleY;
+		label.width = Titanium.Platform.displayCaps.platformWidth;
+		label.height = 40 * scaleY;
+		label.top = 250 * scaleY;
 	}
 	win.add(label);
 	

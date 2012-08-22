@@ -36,10 +36,6 @@ function win_props() {
 	});
 	buttonImage.addEventListener('click', function()
 	{
-		if (isBlackberry) {
-			alert('Titanium.UI.Window.backgroundImage is not implemented for Blackberry yet');
-			return;
-		}
 		win.backgroundImage = '/images/bg.png';
 	});
 	win.add(buttonImage);
@@ -124,24 +120,44 @@ function win_props() {
 	{	
 		if (layout)
 		{
-			win1 = Titanium.UI.createWindow({
-				height:50 * scaleY,
-				width:200 * scaleX,
-				bottom:50 * scaleY,
-				left:10 * scaleX,
-				backgroundColor:'#336699',
-				borderRadius:10,
-				zIndex:3
-			});
-			win2 = Titanium.UI.createWindow({
-				height:50 * scaleY,
-				width:200 * scaleX,
-				bottom:60 * scaleY,
-				left:20 * scaleX,
-				backgroundColor:'pink',
-				borderRadius:10,
-				zIndex:1
-			});
+			//TODO remove this when TIMOB-10524 bug will be fixed
+			if (!isBlackberry) {
+				win1 = Titanium.UI.createWindow({
+					height:50 * scaleY,
+					width:200 * scaleX,
+					bottom:50 * scaleY,
+					left:10 * scaleX,
+					backgroundColor:'#336699',
+					borderRadius:10,
+					zIndex:3
+				});
+				win2 = Titanium.UI.createWindow({
+					height:50 * scaleY,
+					width:200 * scaleX,
+					bottom:60 * scaleY,
+					left:20 * scaleX,
+					backgroundColor:'pink',
+					borderRadius:10,
+					zIndex:1
+				});
+			} else {
+				win1 = Titanium.UI.createWindow({
+					height:50 * scaleY,
+					width:200 * scaleX,
+					bottom:50 * scaleY,
+					left:10 * scaleX,
+					backgroundColor:'#336699',
+					borderRadius:10
+				});
+				win2 = Titanium.UI.createWindow({
+					height:50 * scaleY,
+					width:200 * scaleX,
+					bottom:60 * scaleY,
+					left:20 * scaleX,
+					backgroundColor:'pink',
+					borderRadius:10
+				});
+			}
 			
 			win1.open();
 			win2.open();
@@ -197,6 +213,9 @@ function win_props() {
 	if (Titanium.Platform.name == 'iPhone OS')
 	{
 		win.add(buttonBorder);
+	}
+	if (isBlackberry) {
+		buttonImage.enabled = false;
 	}
 	
 	return win;

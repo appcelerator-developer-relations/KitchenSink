@@ -89,6 +89,10 @@ function button_states() {
 	win.add(button4);
 	win.add(button5);
 	
+	if (isBlackberry) {
+		button3.enabled = false;
+		button4.enabled = false;
+	}
 	return win;
 }
 

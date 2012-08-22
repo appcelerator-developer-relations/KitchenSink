@@ -100,6 +100,9 @@ function views_zindex() {
 		font:{fontSize:12}
 	});
 	
+	if (isBlackberry) {
+		l2.top = 250 * scaleY;
+	}
 	win.add(l2);
 	
 	return win;
