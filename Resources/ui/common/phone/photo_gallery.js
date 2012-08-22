@@ -37,6 +37,11 @@ function openGallery() {
 }
 
 function photo_gallery() {
+	//TODO review this part when Jira tasks: TIMOB-8585 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Media module is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	imageView = Titanium.UI.createImageView({
 		height:200,

@@ -1,4 +1,9 @@
 function yql(_args) {
+	//TODO review this part when Jira tasks: TIMOB-8593 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Yahoo module is not implemented for BlackBerry yet');
+		return;
+	}
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#fff'
 	});

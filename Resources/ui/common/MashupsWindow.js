@@ -32,18 +32,8 @@ function MashupsWindow(title) {
 	
 	// create table view event listener
 	tableview.addEventListener('click', function(e) {
-		var test = e.rowData.test;
-		var dataTitle = e.rowData.title;
-		var barColor = e.rowData.barColor;
-		var titleImage = e.rowData.title_image;
-		if (isBlackberry) {
-			test = data[e.index].test;
-			dataTitle = data[e.index].title;
-			barColor = data[e.index].barColor;
-			titleImage = data[e.index].title_image;
-		}
 		if (e.rowData.test) {
-			var ExampleWindow = require(test),
+			var ExampleWindow = require(e.rowData.test),
 				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab});
 				
 			if (e.rowData.barColor) {

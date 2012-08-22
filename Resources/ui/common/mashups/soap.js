@@ -1,4 +1,9 @@
 function soap() {
+	//TODO review this part when Jira tasks: TIMOB-8592, TIMOB-8587 and TIMOB-10275 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Network and Titanium.XML module is not implemented for BlackBerry yet');
+		return;
+	}
 	Ti.include('/ui/common/mashups/suds.js');
 	var window = Ti.UI.createWindow();
 	var label = Ti.UI.createLabel({
