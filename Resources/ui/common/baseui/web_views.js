@@ -78,7 +78,7 @@ function webviews(_args) {
 		{
 			webview = Ti.UI.createWebView();
 		}
-		if (Ti.Platform.osname === 'iphone') {
+		if ((Ti.Platform.osname === 'iphone') || (Ti.Platform.osname === 'ipad')) {
 			var reloadButton = Titanium.UI.createButton({
 				title:'Reload',
 				style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN
