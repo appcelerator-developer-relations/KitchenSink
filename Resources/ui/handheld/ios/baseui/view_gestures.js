@@ -68,7 +68,7 @@ function view_gestures() {
 	//////////
 	
 	var webview = Ti.UI.createWebView({
-		url:'local_webview_pinchzoom.html',
+		url:'/etc/local_webview_pinchzoom.html',
 		height:160,
 		width:200,
 		top:220
