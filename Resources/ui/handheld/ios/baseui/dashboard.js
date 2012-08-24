@@ -70,12 +70,12 @@ function dashboard() {
 		Ti.API.log('Moved item '+e.item.label);
 	});
 	
-	dashboard.addEventListener('dragStart', function(e) {
+	dashboard.addEventListener('dragstart', function(e) {
 		Ti.API.log('Dragging item '+e.item.label);
 		win.rightNavButton = null;
 	});
 	
-	dashboard.addEventListener('dragEnd', function(e) {
+	dashboard.addEventListener('dragend', function(e) {
 		Ti.API.log('Drag ended: ' + e.item.label);
 		win.rightNavButton = cancel;
 	});
