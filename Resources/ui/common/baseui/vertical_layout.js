@@ -1,4 +1,9 @@
 function vertical_layout(_args) {
+	//TODO review this part when layout will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Ui.View layout vertical is not supported for BlackBerry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
 	//create table view data object
 	var data = [

@@ -1,4 +1,9 @@
 function image_view_scale() {
+	//TODO review this part when Jira tasks: TIMOB-8897 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Blob object is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	var TIMEOUT_SECS = 2;
 	
@@ -22,11 +27,6 @@ function image_view_scale() {
 	
 	
 	function getDimensions() {
-		//TODO remove these lines of code when Titanium.UI.ImageView.toBlob() will be implemented
-		if (Ti.Platform.osname === 'blackberry') {
-			alert('Titanium.UI.ImageView.toBlob() is not supported for Blackberry');
-			return;
-		}
 		if (Ti.Platform.osname === 'mobileweb') {
 			l.text = 'dimensions unavailable'
 		} else {

@@ -90,31 +90,29 @@ function label_basic() {
 	});
 	win.add(b2);
 	
-	if (!isBlackberry) {
-		var b3 = Titanium.UI.createButton({
-			title:'Label 1 background',
-			height:40,
-			width:200,
-			top:330
-		});
-		var bg = false;
-		b3.addEventListener('click', function()
-		{
-			if (!bg) {
-				l1.backgroundPaddingLeft = 10;
-				l1.backgroundPaddingRight = 10;
-				l1.backgroundPaddingTop = 10;
-				l1.backgroundPaddingBottom = 10;
-				l1.backgroundImage = '/images/chat.png';
-				bg = true;
-			}
-			else {
-				l1.backgroundImage = null;
-				bg = false;
-			}
-		});
-		win.add(b3);
-	}
+	var b3 = Titanium.UI.createButton({
+		title:'Label 1 background',
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:330 * scaleY
+	});
+	var bg = false;
+	b3.addEventListener('click', function()
+	{
+		if (!bg) {
+			l1.backgroundPaddingLeft = 10;
+			l1.backgroundPaddingRight = 10;
+			l1.backgroundPaddingTop = 10;
+			l1.backgroundPaddingBottom = 10;
+			l1.backgroundImage = '/images/chat.png';
+			bg = true;
+		}
+		else {
+			l1.backgroundImage = null;
+			bg = false;
+		}
+	});
+	win.add(b3);
 	
 	var size = Ti.UI.createLabel({
 		height:30 * scaleY,
@@ -125,7 +123,8 @@ function label_basic() {
 	});
 	
 	if (isBlackberry) {
-		size.top = 330 * scaleY;
+		size.top = 370 * scaleY;
+		b3.enabled = false;
 	}
 	win.add(size);
 	

@@ -1,4 +1,9 @@
 function picker_date4() {
+	//TODO review this part when Jira tasks: TIMOB-8587 and TIMOB-10275 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Ti.UI.Picker of PICKER_TYPE_COUNT_DOWN_TIMER type is not implemented for BlackBerry yet');
+		return;
+	}
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var scaleX = 1;
 	var scaleY = 1;

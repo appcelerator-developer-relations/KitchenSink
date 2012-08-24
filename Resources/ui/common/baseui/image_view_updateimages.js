@@ -1,4 +1,9 @@
 function image_view_update() {
+	//TODO review this part when Image View animation methods will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.UI.ImageView animation methods are not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	var _WhenStillImgs = [];
@@ -21,11 +26,6 @@ function image_view_update() {
 	
 	win.add(cartoonGuy);
 	
-	//TODO remove these lines of code when Titanium.UI.ImageView.start() and stop() will be implemeneted
-	if (Titanium.Platform.osname === 'blackberry') {
-		alert('Titanium.UI.ImageView.start() and stop() are not implemented for Blackberry yet');
-		return win;
-	}
 	cartoonGuy.start();
 	
 	cartoonGuy.addEventListener('touchstart', function(e)
