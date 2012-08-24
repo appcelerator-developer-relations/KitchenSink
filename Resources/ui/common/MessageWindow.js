@@ -5,12 +5,7 @@ function MessageWindow() {
 		bottom:70,
 		borderRadius:10,
 		touchEnabled:false,	
-		orientationModes : [
-			Titanium.UI.PORTRAIT,
-			Titanium.UI.UPSIDE_PORTRAIT,
-			Titanium.UI.LANDSCAPE_LEFT,
-			Titanium.UI.LANDSCAPE_RIGHT
-		]
+		orientationModes : [Titanium.UI.PORTRAIT]
 	});
 	var messageView = Titanium.UI.createView({
 		id:'messageview',
