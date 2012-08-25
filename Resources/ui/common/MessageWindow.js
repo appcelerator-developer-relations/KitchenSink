@@ -5,8 +5,8 @@ function MessageWindow() {
 		bottom:70,
 		borderRadius:10,
 		touchEnabled:false,	
-		//The messageWindow should take the same orientation of its parent window , 
-		//we shouldnot try specifying anything here.
+		//The messageWindow should take the same orientation of its parent window, 
+		//we should not try specifying anything here.
 		//orientationModes : [Titanium.UI.PORTRAIT]
 	});
 	var messageView = Titanium.UI.createView({
