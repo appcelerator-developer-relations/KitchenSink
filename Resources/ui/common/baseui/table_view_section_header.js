@@ -11,12 +11,11 @@ function tv_section_header() {
 		{title:'row 4', header:'Header 2'},
 		{title:'row 5'}
 	];
-	var tableView = Titanium.UI.createTableView({
-		data:inputData
-	});
+	var tableView = Titanium.UI.createTableView();
 	if (Ti.Platform.osname !== 'mobileweb') {
 		tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
 	}
+	tableView.data = inputData;
 	win.add(tableView);
 	return win;
 };
