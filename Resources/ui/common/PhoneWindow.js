@@ -8,20 +8,22 @@ function PhoneWindow(title) {
 	
 	// create table view data object
 	var data = [
-		{title:'Play Movie', hasChild:true, test:'ui/common/phone/movie'},
-		{title:'Vibrate', hasChild:true, test:'ui/common/phone/vibrate'},
-		{title:'Geolocation', hasChild:true, test:'ui/common/phone/geolocation'},
-		{title:'Accelerometer', hasChild:true, test:'ui/common/phone/accelerometer'}
+		{title:'Play Movie', hasChild:true, test:'ui/common/phone/movie'}
 	];
-	
+	if (self.model != 'Kindle Fire') {
+		data.push({title:'Vibrate', hasChild:true, test:'ui/common/phone/vibrate'});
+		data.push({title:'Geolocation', hasChild:true, test:'ui/common/phone/geolocation'});
+		data.push({title:'Accelerometer', hasChild:true, test:'ui/common/phone/accelerometer'});
+		data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts'});
+	};
 	data.push({title:'Sound', hasChild:!isMobileWeb, test:'ui/common/phone/sound', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
 	data.push({title:'Photo Gallery', hasChild:!isMobileWeb, test:'ui/common/phone/photo_gallery', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
 	
 	data.push({title:'Orientation', hasChild:true, test:'ui/common/phone/orientation'});
-	data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts'});
+	
 	
 	//Donot include camera if it is iPad 1st gen.
-	if (Titanium.Platform.model !== 'iPad1,1') {
+	if (Titanium.Platform.model !== 'iPad1,1' || self.model != 'Kindle Fire') {
 		data.push({title:'Camera', hasChild:!isMobileWeb, test:'ui/common/phone/camera', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
 	}
 	
