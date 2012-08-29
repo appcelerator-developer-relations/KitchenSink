@@ -10,7 +10,7 @@ function PhoneWindow(title) {
 	var data = [
 		{title:'Play Movie', hasChild:true, test:'ui/common/phone/movie'}
 	];
-	if (self.model != 'Kindle Fire') {
+	if (Ti.Platform.model != 'Kindle Fire') {
 		data.push({title:'Vibrate', hasChild:true, test:'ui/common/phone/vibrate'});
 		data.push({title:'Geolocation', hasChild:true, test:'ui/common/phone/geolocation'});
 		data.push({title:'Accelerometer', hasChild:true, test:'ui/common/phone/accelerometer'});
@@ -23,7 +23,7 @@ function PhoneWindow(title) {
 	
 	
 	//Donot include camera if it is iPad 1st gen.
-	if (Titanium.Platform.model !== 'iPad1,1' || self.model != 'Kindle Fire') {
+	if ((Titanium.Platform.model !== 'iPad1,1') && ( Ti.Platform.model != 'Kindle Fire')) {
 		data.push({title:'Camera', hasChild:!isMobileWeb, test:'ui/common/phone/camera', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
 	}
 	

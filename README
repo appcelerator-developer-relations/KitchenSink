@@ -1,6 +1,6 @@
 Welcome to your Appcelerator Titanium Mobile Project
 
-This is tabbed application, consisting of multiple stacks of windows associated with tabs in a tab group.  A starting point for tab-based application with multiple top-level windows. Requires Titanium Mobile SDK 1.8.0+.
+This is tabbed application, consisting of multiple stacks of windows associated with tabs in a tab group.  A starting point for tab-based application with multiple top-level windows. Requires Titanium Mobile SDK 2.1.0+.
 
 ----------------------------------
 Stuff our legal folk make us say:
