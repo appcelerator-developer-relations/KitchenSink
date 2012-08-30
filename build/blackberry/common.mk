@@ -35,7 +35,7 @@ LDFLAGS+=-lQtOpenGL -lQtScript -lQtScriptTools -lQtSql -lQtSvg -lQtTest -lQtXml
 include $(MKFILES_ROOT)/qmacros.mk
 
 # Suppress the _g suffix from the debug variant
-BUILDNAME=$(NAME)
+BUILDNAME=$(TIAPP_NAME)
 
 include $(MKFILES_ROOT)/qtargets.mk
 
