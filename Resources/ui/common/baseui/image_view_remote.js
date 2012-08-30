@@ -2,7 +2,7 @@ function image_view_remote() {
 	var win = Titanium.UI.createWindow();
 	
 	var imageView = Titanium.UI.createImageView({
-		image:'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png',
+		image:'http://static.appcelerator.com/images/header/appc_logo.png',
 		defaultImage:'/images/cloud.png',
 		top:20,
 		width:100,
@@ -37,7 +37,7 @@ function image_view_remote() {
 	});
 	win.add(b);
 	b.addEventListener('click', function(e) {
-			imageView2.image = 'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png';
+			imageView2.image = 'http://static.appcelerator.com/images/header/appc_logo.png';
 	});
 	return win;
 };

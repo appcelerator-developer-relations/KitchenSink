@@ -36,7 +36,7 @@ function transform3d() {
 	button.addEventListener('click', function()
 	{
 	
-		var t1 = Ti.UI.iOS.create3DMatrix();
+		var t1 = Ti.UI.create3DMatrix();
 		t1 = t1.translate(0,0,1000);
 		t1.m34 = 1.0/-90;
 		var a1 = Titanium.UI.createAnimation();
@@ -68,7 +68,7 @@ function transform3d() {
 						a3.repeat = 1;
 						a3.addEventListener('complete',function()
 						{
-							view.animate({transform:Ti.UI.iOS.create3DMatrix(),duration:500});
+							view.animate({transform:Ti.UI.create3DMatrix(),duration:500});
 						});
 						view.animate(a3);
 				});

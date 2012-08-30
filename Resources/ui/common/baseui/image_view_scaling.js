@@ -3,7 +3,7 @@ function image_view_scale() {
 	var TIMEOUT_SECS = 2;
 	
 	var imageView = Titanium.UI.createImageView({
-		image:'http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png',
+		image:'http://static.appcelerator.com/images/header/appc_logo.png',
 		width: 325
 	});
 		

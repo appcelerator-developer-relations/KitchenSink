@@ -11,7 +11,7 @@ function view_hideshow() {
 	
 	win.add(mainView);
 	
-	var tabbedBar = Ti.UI.createTabbedBar({
+	var tabbedBar = Ti.UI.iOS.createTabbedBar({
 		labels: ['Browse','Search'],
 		backgroundColor: '#a4a4a4',
 		style: Ti.UI.iPhone.SystemButtonStyle.BAR,

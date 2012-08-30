@@ -22,7 +22,7 @@ function tv_api_remote() {
 		
 	
 		var i = Ti.UI.createImageView({
-			image: "http://www.appcelerator.com/wp-content/uploads/2009/06/titanium_desk.png",
+			image: "http://static.appcelerator.com/images/header/appc_logo.png",
 			top: 10,
 			left: 0,
 			width:125,

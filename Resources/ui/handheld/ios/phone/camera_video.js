@@ -1,7 +1,8 @@
 function cam_video() {
-	var win = Titanium.UI.createWindow();
+	container = {};
+	container.win = Titanium.UI.createWindow();
 	
-	var button = Titanium.UI.createButton({
+	container.button = Titanium.UI.createButton({
 		color:'#fff',
 		backgroundImage:'/images/BUTT_grn_on.png',
 		backgroundSelectedImage:'/images/BUTT_grn_off.png',
@@ -13,10 +14,23 @@ function cam_video() {
 		title:'Start Video'
 	});
 	
-	var overlay = Titanium.UI.createView();
-	overlay.add(button);
-	
-	var cameraFlash = Ti.UI.createButton({
+	container.closebutton = Titanium.UI.createButton({
+		color:'#fff',
+		backgroundImage:'/images/BUTT_red_on.png',
+		backgroundSelectedImage:'/images/BUTT_red_off.png',
+		backgroundDisabledImage: '/images/BUTT_gry_on.png',
+		top:10,
+		width:120,
+		height:40,
+		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+		title:'Close cameras'
+	});
+
+	container.overlay = Titanium.UI.createView();
+	container.overlay.add(container.button);
+	container.overlay.add(container.closebutton);
+
+	container.cameraFlash = Ti.UI.createButton({
 		color:'#fff',
 		title:"auto",
 		left:20,
@@ -26,30 +40,30 @@ function cam_video() {
 		backgroundImage:"/images/BUTT_drk_on.png",
 		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'}
 	});
-	overlay.add(cameraFlash);
+	container.overlay.add(container.cameraFlash);
 	
-	var current = Ti.Media.CAMERA_FLASH_AUTO;
-	var cameraFlashModes = Ti.Media.availableCameraFlashModes;
-	cameraFlash.addEventListener('click',function()
+	container.current = Ti.Media.CAMERA_FLASH_AUTO;
+	container.cameraFlashModes = Ti.Media.availableCameraFlashModes;
+	container.cameraFlash.addEventListener('click',function()
 	{
 		if (Ti.Media.cameraFlashMode == Ti.Media.CAMERA_FLASH_AUTO)
 		{
-			cameraFlash.title = "on";
+			container.cameraFlash.title = "on";
 			Ti.Media.cameraFlashMode = Ti.Media.CAMERA_FLASH_ON;
 		}
 		else if (Ti.Media.cameraFlashMode == Ti.Media.CAMERA_FLASH_ON)
 		{
-			cameraFlash.title = "off";
+			container.cameraFlash.title = "off";
 			Ti.Media.cameraFlashMode = Ti.Media.CAMERA_FLASH_OFF;
 		}
 		else
 		{
-			cameraFlash.title = "auto";
+			container.cameraFlash.title = "auto";
 			Ti.Media.cameraFlashMode = Ti.Media.CAMERA_FLASH_AUTO;
 		}
 	});
 	
-	var cameraType = Ti.UI.createButton({
+	container.cameraType = Ti.UI.createButton({
 		color:'#fff',
 		title:"front",
 		top:20,
@@ -60,24 +74,24 @@ function cam_video() {
 		font:{fontSize:16,fontWeight:'bold',fontFamily:'Helvetica Neue'}
 	});
 	
-	var cameras = Ti.Media.availableCameras;
-	for (var c=0;c<cameras.length;c++)
+	container.cameras = Ti.Media.availableCameras;
+	for (var c=0;c<container.cameras.length;c++)
 	{
 		// if we have a rear camera ... we add switch button
-		if (cameras[c]==Ti.Media.CAMERA_REAR)
+		if (container.cameras[c]==Ti.Media.CAMERA_REAR)
 		{
-			overlay.add(cameraType);
+			container.overlay.add(container.cameraType);
 	
-			cameraType.addEventListener('click',function()
+			container.cameraType.addEventListener('click',function()
 			{
 				if (Ti.Media.camera == Ti.Media.CAMERA_FRONT)
 				{
-					cameraType.title = "front";
+					container.cameraType.title = "front";
 					Ti.Media.switchCamera(Ti.Media.CAMERA_REAR);
 				}
 				else
 				{
-					cameraType.title = "rear";
+					container.cameraType.title = "rear";
 					Ti.Media.switchCamera(Ti.Media.CAMERA_FRONT);
 				}
 			});
@@ -85,16 +99,24 @@ function cam_video() {
 		}
 	}
 	
-	button.addEventListener('click',function()
+	container.button.addEventListener('click',function()
 	{
 		Ti.Media.startVideoCapture();
-		button.title = "Stop Video";
-		button.backgroundImage = "/images/BUTT_red_on.png";
-		button.backgroundSelectedImage = '/images/BUTT_red_off.png';
-		cameraType.visible = false;
-		cameraFlash.visible = false;
+		container.button.title = "Stop Video";
+		container.button.backgroundImage = "/images/BUTT_red_on.png";
+		container.button.backgroundSelectedImage = '/images/BUTT_red_off.png';
+		container.cameraType.visible = false;
+		container.cameraFlash.visible = false;
 	});
 	
+
+	container.closebutton.addEventListener('click',function(){
+		Ti.Media.hideCamera();
+		container.win.close();
+		container = null;
+	});
+
+
 	Titanium.Media.showCamera({
 	
 		success:function(event)
@@ -107,11 +129,10 @@ function cam_video() {
 			var activeMovie = Titanium.Media.createVideoPlayer({
 				media:event.media,
 				backgroundColor:'#111',
-				movieControlMode:Titanium.Media.VIDEO_CONTROL_DEFAULT,
-				movieControlStyle:Titanium.Media.VIDEO_CONTROL_FULLSCREEN,
+				mediaControlStyle:Titanium.Media.VIDEO_CONTROL_FULLSCREEN,
 				scalingMode:Titanium.Media.VIDEO_SCALING_MODE_FILL
 			});
-			win.add(activeMovie);
+			container.win.add(activeMovie);
 		},
 		cancel:function()
 		{
@@ -129,13 +150,17 @@ function cam_video() {
 			}
 			a.show();
 		},
-		overlay:overlay,
+		overlay:container.overlay,
 		showControls:false,	// don't show system controls
 		mediaTypes:Ti.Media.MEDIA_TYPE_VIDEO,
 		videoQuality:Ti.Media.QUALITY_640x480,
 		autohide:false // tell the system not to auto-hide and we'll do it ourself
 	});
-	return win;
+	container.open = function(){
+		container.win.open();
+	};
+
+	return container.win;
 };
 
 module.exports = cam_video;

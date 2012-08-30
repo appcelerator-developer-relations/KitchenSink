@@ -12,7 +12,7 @@ function movie_embed() {
 	var activeMovie = Titanium.Media.createVideoPlayer({
 		url:'/etc/movie.mp4',
 		backgroundColor:'#111',
-		movieControlMode: Titanium.Media.VIDEO_CONTROL_EMBEDDED, // See TIMOB-2802, which may change this property name
+		mediaControlStyle: Titanium.Media.VIDEO_CONTROL_EMBEDDED, // See TIMOB-2802, which may change this property name
 		scalingMode:Titanium.Media.VIDEO_SCALING_MODE_FILL,
 		width:100,
 		height:100,
