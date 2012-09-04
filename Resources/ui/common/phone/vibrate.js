@@ -19,7 +19,10 @@ function vibrate() {
 	
 	b1.addEventListener('click', function()
 	{
-		Titanium.Media.vibrate();	
+		if(Ti.Platform.model != 'Kindle Fire'){
+			Titanium.Media.vibrate();		
+		}
+		
 	});
 	return win;
 };
