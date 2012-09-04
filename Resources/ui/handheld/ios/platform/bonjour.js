@@ -104,7 +104,7 @@ function bonjour() {
 		tableView.setData(data);
 	};
 	
-	serviceBrowser.addEventListener('updatedServices', updateUI);
+	serviceBrowser.addEventListener('updatedservices', updateUI);
 	
 	// Cleanup
 	win.addEventListener('close', function(e) {
