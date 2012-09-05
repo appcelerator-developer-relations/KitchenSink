@@ -145,6 +145,7 @@ function ApplicationTabGroup() {
 	self.addEventListener('blur', function(e) {
 		Titanium.API.info('tab blur - new index ' + e.index + ' old index ' + e.previousIndex);
 	});
+	self.model = Ti.Platform.model;
 	
 	return self;
 };
