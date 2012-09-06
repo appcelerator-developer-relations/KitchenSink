@@ -1,5 +1,10 @@
 function tv_row_insert() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableView insertRow will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('TTitanium.UI.TableView.insertRow() is not supported for Blackberry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// create table view data

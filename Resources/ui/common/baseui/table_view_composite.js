@@ -1,5 +1,10 @@
 function tv_comp() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableViewRow will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('Ti.UI.TableViewRow is not supported for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	win.backgroundColor = '#000099';
 	

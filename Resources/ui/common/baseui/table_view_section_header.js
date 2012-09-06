@@ -3,6 +3,11 @@
 	//  and the table view has no table view header - the header should be displayed
 function tv_section_header() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableView header and style will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('TableView header and style property are not supported for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	var inputData = [

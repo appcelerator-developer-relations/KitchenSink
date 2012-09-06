@@ -1,5 +1,10 @@
 function tv_headers() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableView header will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('TableView header is not supported for BlackBerry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [

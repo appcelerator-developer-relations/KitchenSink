@@ -162,10 +162,7 @@ function win_props() {
 			win1.open();
 			win2.open();
 			layout=false;
-			if (isBlackberry){
-				win1.top = 150 * scaleY;
-				win2.top = 180 * scaleY;
-			}
+
 			win.addEventListener('close', function() {
 				win1.close();
 				win2.close();

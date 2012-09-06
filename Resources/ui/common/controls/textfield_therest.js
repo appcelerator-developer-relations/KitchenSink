@@ -33,13 +33,10 @@ function textfield_rest() {
 		left:10 * scaleX,
 		top:55 * scaleY
 	});
-	var tfEnabled = true;
 	b1.addEventListener('click', function()
 	{
 		Ti.API.info('enabled ' + tf1.enabled);
-		//TODO revert this back when Jira bug TIMOB-10520 will be fixed (textField.getEnabled() returns 'undefined' now).
-		tfEnabled = (tfEnabled)?false:true;
-		tf1.enabled = tfEnabled;
+		tf1.enabled = (tf1.enabled)?false:true;
 	});
 	win.add(b1);
 	

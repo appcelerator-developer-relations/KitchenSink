@@ -1,5 +1,4 @@
 function label(_args) {
-	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var self = Ti.UI.createWindow({
 		title:_args.title,
 		backgroundColor:'white'

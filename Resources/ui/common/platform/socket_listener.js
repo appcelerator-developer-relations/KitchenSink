@@ -1,4 +1,11 @@
 function sock_listen() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	};
 	var win = Titanium.UI.createWindow();
 	
 	var connectedSockets = [];
@@ -35,7 +42,6 @@ function sock_listen() {
 	};
 	
 	var socket = Titanium.Network.Socket.createTCP({
-		host:Ti.Platform.address,
 		port:40404,
 		accepted: function(e) {
 			var sock = e.inbound;
@@ -55,12 +61,15 @@ function sock_listen() {
 		}
 	});
 	
+	if (!isBlackberry) {
+		socket.host = Ti.Platform.address;
+	}
 	var messageLabel = Titanium.UI.createLabel({
 		text:'Socket messages',
 		font:{fontSize:14},
 		color:'#777',
-		top:220,
-		left:10
+		top:220 * scaleY,
+		left:10 * scaleX
 	});
 	win.add(messageLabel);
 	
@@ -68,17 +77,17 @@ function sock_listen() {
 		text:'Read data',
 		font:{fontSize:14},
 		color:'#777',
-		top:250,
-		left:10,
-		width:400
+		top:250 * scaleY,
+		left:10 * scaleX,
+		width:400 * scaleX
 	});
 	win.add(readLabel);
 	
 	var connectButton = Titanium.UI.createButton({
 		title:'Listen on 40404',
-		width:200,
-		height:40,
-		top:10
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:10 * scaleY
 	});
 	win.add(connectButton);
 	connectButton.addEventListener('click', function() {
@@ -93,9 +102,9 @@ function sock_listen() {
 	
 	var closeButton = Titanium.UI.createButton({
 		title:'Close',
-		width:200,
-		height:40,
-		top:60
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:60 * scaleY
 	});
 	win.add(closeButton);
 	closeButton.addEventListener('click', function() {
@@ -118,9 +127,9 @@ function sock_listen() {
 	
 	var stateButton = Titanium.UI.createButton({
 		title:'Socket state',
-		width:200,
-		height:40,
-		top:110
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:110 * scaleY
 	});
 	win.add(stateButton);
 	stateButton.addEventListener('click', function() {
@@ -147,18 +156,26 @@ function sock_listen() {
 	
 	var writeButton = Titanium.UI.createButton({
 		title:"Write 'Paradise Lost'",
-		width:200,
-		height:40,
-		top:160
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:160 * scaleY
 	});
 	win.add(writeButton);
 	writeButton.addEventListener('click', function() {
-		var plBlob = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, 'paradise_lost.txt').read();
-		var input = Ti.Stream.createStream({source:plBlob, mode:Ti.Stream.MODE_READ});
-	
-		for (var index in connectedSockets) {
-			var sock = connectedSockets[index];
-			Ti.Stream.writeStream(input, sock, 4096);
+		if (!isBlackberry) {
+			var plBlob = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, 'paradise_lost.txt').read();
+			var input = Ti.Stream.createStream({source:plBlob, mode:Ti.Stream.MODE_READ});
+		
+			for (var index in connectedSockets) {
+				var sock = connectedSockets[index];
+				Ti.Stream.writeStream(input, sock, 4096);
+			}
+		} else {
+			var outData = Ti.createBuffer({value:"I'm a writer!"});
+			for (var index in connectedSockets) {
+				var sock = connectedSockets[index];
+				var bytesWritten = sock.write(outData);
+			}
 		}
 		messageLabel.text = "I'm a writer!";
 	});

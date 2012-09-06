@@ -1,12 +1,15 @@
 function tv_api_search() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	if (isBlackberry) {
+		alert('Titanium.UI.createSearchBar(), Ti.UI.createTableViewRow() and Titanium.UI.createButtonBar() are not supported for Blackberry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// create table view data object
 	var data = [];
 	var search;
 	if (isBlackberry) {
-		alert('Titanium.UI.createSearchBar() and Ti.UI.createTableViewRow() are not supported for Blackberry yet');
 		data[0] = {hasChild:true,title:'Row 1'};
 		data[1] = {hasDetail:true,title:'Row 2'};
 		data[2] = {hasCheck:true,title:'Row 3'};
@@ -53,30 +56,27 @@ function tv_api_search() {
 		Titanium.UI.createAlertDialog({title:'Table View',message:'row ' + row + ' index ' + index + ' section ' + section  + ' row data ' + rowdata}).show();
 	});
 	
-	if (!isBlackberry) {
-		var hide = Titanium.UI.createButtonBar({
-			labels:['Hide', 'Show'],
-			backgroundColor:'#336699',
-			height:25,
-			width:120
-		});
-		hide.addEventListener('click', function(e)
+	
+	var hide = Titanium.UI.createButtonBar({
+		labels:['Hide', 'Show'],
+		backgroundColor:'#336699',
+		height:25,
+		width:120
+	});
+	hide.addEventListener('click', function(e)
+	{
+		Ti.API.info("search hidden = "+tableview.searchHidden);
+		if (e.index === 0)
 		{
-			Ti.API.info("search hidden = "+tableview.searchHidden);
-			if (e.index === 0)
-			{
-				tableview.searchHidden = true;
-			}
-			else if (e.index === 1)
-			{
-				tableview.scrollToTop(0,{animated:true});
-			}
-		});
-		if (Titanium.Platform.name == 'iPhone OS') {
-			win.setRightNavButton(hide);
+			tableview.searchHidden = true;
 		}
-	} else {
-		alert('Titanium.UI.Titanium.UI.createButtonBar() is not supported for Blackberry yet');
+		else if (e.index === 1)
+		{
+			tableview.scrollToTop(0,{animated:true});
+		}
+	});
+	if (Titanium.Platform.name == 'iPhone OS') {
+		win.setRightNavButton(hide);
 	}
 	// add table view to the window
 	win.add(tableview);

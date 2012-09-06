@@ -1,5 +1,10 @@
 function tv_row_append() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableView appendRow will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('Titanium.UI.TableView.appendRow() is not supported for Blackberry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [
@@ -42,10 +47,6 @@ function tv_row_append() {
 			// row.add(l);
 			var data = {title:'New Row ' + newRowCount, header:'New Header '+newSectionCount};
 			
-			if (isBlackberry) {
-				alert('TTitanium.UI.TableView.appendRow() is not supported for Blackberry yet');
-				return;
-			}
 			tableview.appendRow(data);
 			newSectionCount++;
 			newRowCount++;

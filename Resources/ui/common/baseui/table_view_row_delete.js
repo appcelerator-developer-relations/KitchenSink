@@ -1,5 +1,10 @@
 function tv_row_delete() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableView deleteRow will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('TTitanium.UI.TableView.deleteRow() is not supported for Blackberry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// create table view data object
