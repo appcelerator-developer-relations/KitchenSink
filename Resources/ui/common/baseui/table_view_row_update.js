@@ -1,5 +1,10 @@
 function tv_row_update() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableView updateRow will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('TTitanium.UI.TableView.updateRow() is not supported for Blackberry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// create table view data

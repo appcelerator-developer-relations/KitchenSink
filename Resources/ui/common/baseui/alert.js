@@ -55,6 +55,8 @@ function tialert() {
 		a.buttonNames = null; // unset in case you did 2/3rd and then back to 1st
 		if (Ti.Platform.osname === 'android') {
 			a.message = 'Basic Alert';
+		} else if(isBlackberry){
+			a.message = 'Two Buttons';
 		} else {
 			a.message = 'One Button';
 		}

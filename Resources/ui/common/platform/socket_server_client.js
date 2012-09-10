@@ -1,34 +1,71 @@
 function sock_server_client() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	};
 	var win = Ti.UI.createWindow();
 	
 	win.add(Ti.UI.createLabel({text:"Listening socket output:", color:'white', top: 40}));
-	var listenerStatusArea = Ti.UI.createTextArea({
-		editable:true,
-		value:'Listener status',
-		height:100,
-		width:300,
-		top:80,
-		textAlign:'left',
-		borderWidth:2,
-		borderColor:'#bbb',
-		borderRadius:5,
-		suppressReturn:false	
-	});
+	var listenerStatusArea;
+	if (isBlackberry) {
+		listenerStatusArea = Ti.UI.createTextField({
+			editable:true,
+			value:'Listener status',
+			height:100 * scaleY,
+			width:300 * scaleX,
+			top:80 * scaleY,
+			textAlign:'left',
+			borderWidth:2,
+			borderColor:'#bbb',
+			borderRadius:5
+		});
+	} else {
+		listenerStatusArea = Ti.UI.createTextArea({
+			editable:true,
+			value:'Listener status',
+			height:100 * scaleY,
+			width:300 * scaleX,
+			top:80 * scaleY,
+			textAlign:'left',
+			borderWidth:2,
+			borderColor:'#bbb',
+			borderRadius:5,
+			suppressReturn:false
+		});
+	}
 	win.add(listenerStatusArea);
 	
 	win.add(Ti.UI.createLabel({text:"Client socket output:", color:'white', bottom: 220}));
-	var clientStatusArea = Ti.UI.createTextArea({
-		editable:false,
-		value:'Client status',
-		height:100,
-		width:300,
-		bottom:80,
-		textAlign:'left',
-		borderWidth:2,
-		borderColor:'#bbb',
-		borderRadius:5,
-		suppressReturn:false
-	});
+	var clientStatusArea;
+	if (isBlackberry) {
+		clientStatusArea = Ti.UI.createTextField({
+			editable:false,
+			value:'Client status',
+			height:100 * scaleY,
+			width:300 * scaleX,
+			bottom:80 * scaleY,
+			textAlign:'left',
+			borderWidth:2,
+			borderColor:'#bbb',
+			borderRadius:5
+		});
+	} else {
+		clientStatusArea = Ti.UI.createTextArea({
+			editable:false,
+			value:'Client status',
+			height:100 * scaleY,
+			width:300 * scaleX,
+			bottom:80 * scaleY,
+			textAlign:'left',
+			borderWidth:2,
+			borderColor:'#bbb',
+			borderRadius:5,
+			suppressReturn:false
+		});
+	}
 	win.add(clientStatusArea);
 	
 	function pumpCallback(e) {
@@ -93,23 +130,40 @@ function sock_server_client() {
 			clientStatusArea.value = "STATUS: reading data";
 			var readBuffer = Ti.createBuffer({length:1024});
 			var bytesRead = 0;
-			
-			function readCallback(e) {
-				if (e.bytesProcessed == -1) { // EOF
-					clientStatusArea.value = "STATUS: closing";
-					connectSocket.close(); // close the socket on our end
-					clientStatusArea.value = "STATUS: closed";
-					return;
+			if (!isBlackberry) {
+				function readCallback(e) {
+					if (e.bytesProcessed == -1) { // EOF
+						clientStatusArea.value = "STATUS: closing";
+						connectSocket.close(); // close the socket on our end
+						clientStatusArea.value = "STATUS: closed";
+						return;
+					}
+					var str = Ti.Codec.decodeString({source:readBuffer, length:e.bytesProcessed});
+					clientStatusArea.value = "RECV FROM LISTENER: " + str;
+					readBuffer.clear(); // clear the buffer before the next read
+					// queue up the next read
+					Ti.Stream.read(connectSocket,readBuffer,readCallback);
 				}
-				var str = Ti.Codec.decodeString({source:readBuffer, length:e.bytesProcessed});
-				clientStatusArea.value = "RECV FROM LISTENER: " + str;
-				readBuffer.clear(); // clear the buffer before the next read
 				
-				// queue up the next read
 				Ti.Stream.read(connectSocket,readBuffer,readCallback);
-			}
-			
-			Ti.Stream.read(connectSocket,readBuffer,readCallback);
+			} else {
+				function pumpCallback(e) {
+					if (e.bytesProcessed == -1) { // EOF
+						clientStatusArea.value = "STATUS: closing";
+						connectSocket.close(); // close the socket on our end
+						clientStatusArea.value = "STATUS: closed";
+						return;
+					}
+					else if (e.errorDescription == null || e.errorDescription == "") {
+						clientStatusArea.value = "DATA: "+e.buffer.toString();
+					}
+					else {
+						clientStatusArea.value = "READ ERROR: "+e.errorDescription;
+					}
+					
+				}
+				Ti.Stream.pump(connectSocket, pumpCallback, 1024, true);
+			}			
 		} catch (e) {
 			// IO error on socket. socket is closed and connectSocket.error is called
 			clientStatusArea.value = "STATUS: error - closed";
@@ -137,6 +191,9 @@ function sock_server_client() {
 	{
 		Ti.Android.currentActivity.addEventListener('pause', cleanup);
 		Ti.Android.currentActivity.addEventListener('destroy', cleanup);
+	}
+	if (isBlackberry) {
+		clientStatusArea.top = 140 * scaleY;
 	}
 
 	return win;

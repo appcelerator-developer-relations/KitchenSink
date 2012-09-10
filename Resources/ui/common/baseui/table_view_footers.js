@@ -1,4 +1,9 @@
 function tv_footers() {
+	//TODO remove this part when TableView footer will be supported for BlackBerry
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('TableView footer is not supported for BlackBerry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [

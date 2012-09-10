@@ -8,7 +8,7 @@ function tv_empty() {
 	}
 	var win = Titanium.UI.createWindow();
 	
-	var tableView = Ti.UI.createTableView({top:110,backgroundColor:'yellow'});
+	var tableView = Ti.UI.createTableView({top:110 * scaleY,backgroundColor:'yellow'});
 	
 	var isMW = (Ti.Platform.osname === 'mobileweb');
 	
@@ -16,16 +16,15 @@ function tv_empty() {
 		height:40 * scaleY,
 		width:200 * scaleX,
 		title:'Append (row obj)',
-		top:10
+		top:10 * scaleY
 	});
 	win.add(b1);
+	//TODO remove this lines of code when appendRow() will be implemented for Blackberry
+	if (isBlackberry) {
+		b1.enabled = false;
+	}
 	b1.addEventListener('click',function()
 	{
-		//TODO remove this lines of code when appendRow() will be implemented for Blackberry
-		if (isBlackberry) {
-			alert('TableView Append row is not supported for Blackberry yet');
-			return;
-		}
 		if (isMW) {
 			tableView.appendRow({title:'Foo'});
 		} else {
@@ -49,7 +48,7 @@ function tv_empty() {
 		height:40 * scaleY,
 		width:200 * scaleX,
 		title:'Set',
-		top:60
+		top:60 * scaleY
 	});
 	win.add(b2);
 	b2.addEventListener('click',function()

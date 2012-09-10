@@ -1,5 +1,10 @@
 function tv_api_rowheader() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableViewSection module with headerTitle property will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('TableViewSection module with headerTitle property is not supported for BlackBerry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [];

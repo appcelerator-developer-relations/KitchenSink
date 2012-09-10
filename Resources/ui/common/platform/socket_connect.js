@@ -1,4 +1,11 @@
 function sock_connect() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	};
 	var win = Ti.UI.createWindow();
 	
 	var connectingSocket = null;
@@ -17,10 +24,10 @@ function sock_connect() {
 	
 	var hostField = Ti.UI.createTextField({
 		value:'HOSTNAME',
-		top:20,
-		left:20,
-		width:140,
-		height:40,
+		top:20 * scaleY,
+		left:20 * scaleX,
+		width:140 * scaleX,
+		height:40 * scaleY,
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		autocorrect:false,
 		autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
@@ -30,10 +37,10 @@ function sock_connect() {
 	
 	var portField = Ti.UI.createTextField({
 		value:'PORT',
-		top:20,
-		right:20,
-		width:100,
-		height:40,
+		top:20 * scaleY,
+		right:20 * scaleX,
+		width:100 * scaleX,
+		height:40 * scaleY,
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		autocorrect:false,
 		autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
@@ -41,40 +48,71 @@ function sock_connect() {
 	});
 	win.add(portField);
 	
-	var writeArea = Ti.UI.createTextArea({
-		editable:true,
-		value:'Data to write',
-		height:100,
-		width:300,
-		top:80,
-		textAlign:'left',
-		borderWidth:2,
-		borderColor:'#bbb',
-		borderRadius:5,
-		suppressReturn:false	
-	});
+	if (isBlackberry) {
+		alert('Ti.UI.TextArea is not implemented for BlackBerry yet, so TextFields are used instead of TextAreas for write and status fields.');
+	}
+	var writeArea
+	if (!isBlackberry) {
+		writeArea = Ti.UI.createTextArea({
+			editable:true,
+			value:'Data to write',
+			height:100,
+			width:300,
+			top:80,
+			textAlign:'left',
+			borderWidth:2,
+			borderColor:'#bbb',
+			borderRadius:5,
+			suppressReturn:false
+		});
+	} else {
+		writeArea = Ti.UI.createTextField({
+			editable:true,
+			value:'Data to write',
+			height:100 * scaleY,
+			width:300 * scaleX,
+			top:80 * scaleY,
+			textAlign:'left',
+			borderWidth:2,
+			borderColor:'#bbb'
+		});
+	}
 	win.add(writeArea);
 	
-	var statusArea = Ti.UI.createTextArea({
-		editable:false,
-		value:'Socket status',
-		height:100,
-		width:300,
-		bottom:80,
-		textAlign:'left',
-		borderWidth:2,
-		borderColor:'#bbb',
-		borderRadius:5,
-		suppressReturn:false
-	});
+	var statusArea;
+	if (!isBlackberry) {
+		statusArea = Ti.UI.createTextArea({
+			editable:false,
+			value:'Socket status',
+			height:100 * scaleY,
+			width:300 * scaleX,
+			bottom:80 * scaleY,
+			textAlign:'left',
+			borderWidth:2,
+			borderColor:'#bbb',
+			borderRadius:5,
+			suppressReturn:false
+		});
+	} else {
+		statusArea = Ti.UI.createTextField({
+			editable:false,
+			value:'Socket status',
+			height:50 * scaleY,
+			width:300 * scaleX,
+			bottom:80 * scaleY,
+			textAlign:'left',
+			borderWidth:2,
+			borderColor:'#bbb'
+		});
+	}
 	win.add(statusArea);
 	
 	var connectButton = Ti.UI.createButton({
 		title:'Connect',
-		width:80,
-		height:40,
-		left:20,
-		bottom:20
+		width:80 * scaleX,
+		height:40 * scaleY,
+		left:20 * scaleX,
+		bottom:20 * scaleY
 	});
 	connectButton.addEventListener('click', function() {
 		if (connectingSocket == null) {
@@ -107,10 +145,10 @@ function sock_connect() {
 	
 	var disconnectButton = Ti.UI.createButton({
 		title:'Disconnect',
-		width:100,
-		height:40,
-		right:20,
-		bottom:20
+		width:100 * scaleX,
+		height:40 * scaleY,
+		right:20 * scaleX,
+		bottom:20 * scaleY
 	});
 	disconnectButton.addEventListener('click', function() {
 		if (connectingSocket != null) {
@@ -131,10 +169,10 @@ function sock_connect() {
 	
 	var writeButton = Ti.UI.createButton({
 		title:'Write',
-		width:80,
-		height:40,
-		bottom:20,
-		left:110
+		width:80 * scaleX,
+		height:40 * scaleY,
+		bottom:20 * scaleY,
+		left:110 * scaleX
 	});
 	writeButton.addEventListener('click', function() {
 		if (connectingSocket != null && connectingSocket.isWritable()) {
@@ -142,6 +180,19 @@ function sock_connect() {
 		}
 	});
 	win.add(writeButton);
+	if (isBlackberry) {
+		portField.left = 180 * scaleX;
+		writeArea.left = 20 * scaleX;
+		statusArea.left = 20 * scaleX;
+		statusArea.top = 120 * scaleY;
+		connectButton.top = 160 * scaleY;
+		connectButton.width = 120 * scaleX;
+		disconnectButton.top = 160 * scaleY;
+		disconnectButton.left = 250 * scaleX;
+		writeButton.top = 160 * scaleY;
+		writeButton.left = 160 * scaleX;
+		disconnectButton.width = 120 * scaleX;
+	}
 	return win;
 };
 

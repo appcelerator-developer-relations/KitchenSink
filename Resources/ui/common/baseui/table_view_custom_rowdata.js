@@ -1,5 +1,4 @@
 function tv_custom_rowdata() {
-	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [

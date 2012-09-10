@@ -1,5 +1,10 @@
 function tv_api_autoheight() {
 	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableViewRow will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('TableViewRow is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [];
