@@ -1,5 +1,13 @@
 function activity_indicator() {
-	var isIos = Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad';
+	var osname = Ti.Platform.osname;
+	var isIos = osname === 'iphone' || osname === 'ipad';
+	var sdkVersion = parseFloat(Ti.version);
+	var ActivityIndicatorStyle;
+	if (isIos) {
+		ActivityIndicatorStyle = Titanium.UI.iPhone.ActivityIndicatorStyle;
+	} else if (sdkVersion >= 3.0){
+		ActivityIndicatorStyle = Titanium.UI.ActivityIndicatorStyle;
+	}
 
 	var win = Ti.UI.createWindow({
 		backgroundColor : '#13386c'
@@ -13,10 +21,8 @@ function activity_indicator() {
 		width : Ti.UI.SIZE,
 		height : Ti.UI.SIZE
 	});
-	if (isIos) {
-		actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.PLAIN;
-	} else {
-		actInd.style = Ti.UI.ActivityIndicatorStyle.PLAIN;
+	if (ActivityIndicatorStyle) {
+		actInd.style = ActivityIndicatorStyle.PLAIN;
 	}
 
 	var button0 = Titanium.UI.createButton({
@@ -58,11 +64,7 @@ function activity_indicator() {
 	});
 
 	button2.addEventListener('click', function() {
-		if (isIos) {
-			actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.BIG;
-		} else {
-			actInd.style = Ti.UI.ActivityIndicatorStyle.BIG;
-		}
+		actInd.style = ActivityIndicatorStyle.BIG;
 		actInd.show();
 	});
 
@@ -77,11 +79,7 @@ function activity_indicator() {
 	});
 
 	button3.addEventListener('click', function() {
-		if (isIos) {
-			actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
-		} else {
-			actInd.style = Ti.UI.ActivityIndicatorStyle.DARK;
-		}
+		actInd.style = ActivityIndicatorStyle.DARK;
 		actInd.show();
 	});
 
@@ -96,7 +94,7 @@ function activity_indicator() {
 	});
 
 	button8.addEventListener('click', function() {
-		actInd.style = Ti.UI.ActivityIndicatorStyle.BIG_DARK;
+		actInd.style = ActivityIndicatorStyle.BIG_DARK;
 		actInd.show();
 	});
 
@@ -113,11 +111,7 @@ function activity_indicator() {
 		button4.top = 190;
 	}
 	button4.addEventListener('click', function() {
-		if (isIos) {
-			actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.PLAIN;
-		} else {
-			actInd.style = Ti.UI.ActivityIndicatorStyle.PLAIN;
-		}
+		actInd.style = ActivityIndicatorStyle.PLAIN;
 		actInd.font = {
 			fontFamily : 'Helvetica Neue',
 			fontSize : 15,
@@ -211,6 +205,7 @@ function activity_indicator() {
 
 	win.add(actInd);
 
+
 	// add iOS elements
 	if (isIos) {
 		win.add(button1);
@@ -222,12 +217,30 @@ function activity_indicator() {
 		win.add(button6);
 		win.add(button7);
 	} else {
-		win.add(button1);
-		win.add(button0);
-		win.add(button2);
-		win.add(button3);
-		win.add(button8);
-		win.add(button4);
+		if (sdkVersion < 3.0) {
+			if (Ti.Platform.osname === 'android') {
+				win.addEventListener('open', function(e) {
+					actInd.show();
+					actInd.message = 'Loading...';
+					setTimeout(function() {
+						actInd.hide();
+					}, 2000);
+				});
+			} else {
+				actInd.show();
+				actInd.message = 'Loading...';
+				setTimeout(function() {
+					actInd.hide();
+				}, 2000);
+			}
+		} else {// Use the new Activity Indicator (TIMOB-6092)
+			win.add(button1);
+			win.add(button0);
+			win.add(button2);
+			win.add(button3);
+			win.add(button8);
+			win.add(button4);
+		}
 	}
 
 	return win;
