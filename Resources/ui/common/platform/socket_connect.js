@@ -48,6 +48,9 @@ function sock_connect() {
 	});
 	win.add(portField);
 	
+	if (isBlackberry) {
+		alert('Ti.UI.TextArea is not implemented for BlackBerry yet, so TextFields are used insteda of TextAreas for write and status fields.');
+	}
 	var writeArea
 	if (!isBlackberry) {
 		writeArea = Ti.UI.createTextArea({

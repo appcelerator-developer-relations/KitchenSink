@@ -160,11 +160,10 @@ function sock_server_client() {
 					else {
 						clientStatusArea.value = "READ ERROR: "+e.errorDescription;
 					}
-					Ti.Stream.pump(connectSocket, pumpCallback, 1024, true);
+					
 				}
 				Ti.Stream.pump(connectSocket, pumpCallback, 1024, true);
-			}
-			
+			}			
 		} catch (e) {
 			// IO error on socket. socket is closed and connectSocket.error is called
 			clientStatusArea.value = "STATUS: error - closed";
