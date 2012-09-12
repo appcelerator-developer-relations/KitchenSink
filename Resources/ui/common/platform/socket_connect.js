@@ -119,7 +119,8 @@ function sock_connect() {
 			try {
 				connectingSocket = Ti.Network.Socket.createTCP({
 					host:hostField.value,
-					port:portField.value,
+					//TODO check with Appcelerator if port can be provided as String. By docs it should be a number and for BlackBerry port is set -1 because textField value is string if not using parseInt.
+					port: parseInt(portField.value),
 					connected:function(e) {
 						e.socket.write(Ti.createBuffer({value:"Well, hello there!"}));
 						Ti.Stream.pump(e.socket,pumpCallback,1024, true);

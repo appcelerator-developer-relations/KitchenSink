@@ -77,6 +77,7 @@ function slider_min_max() {
 		maxLabel.top = 250 * scaleY;
 		maxLabel.left = 300 * scaleX
 		posLabel.top = 250 * scaleY;
+		posLabel.width = 200 * scaleX;
 		
 		btn1.top = 30 * scaleY;
 		btn1.width = 200 * scaleX;

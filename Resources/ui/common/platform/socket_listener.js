@@ -162,20 +162,11 @@ function sock_listen() {
 	});
 	win.add(writeButton);
 	writeButton.addEventListener('click', function() {
-		if (!isBlackberry) {
-			var plBlob = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, 'paradise_lost.txt').read();
-			var input = Ti.Stream.createStream({source:plBlob, mode:Ti.Stream.MODE_READ});
-		
-			for (var index in connectedSockets) {
-				var sock = connectedSockets[index];
-				Ti.Stream.writeStream(input, sock, 4096);
-			}
-		} else {
-			var outData = Ti.createBuffer({value:"I'm a writer!"});
-			for (var index in connectedSockets) {
-				var sock = connectedSockets[index];
-				var bytesWritten = sock.write(outData);
-			}
+		var plBlob = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, 'paradise_lost.txt').read();
+		var input = Ti.Stream.createStream({source:plBlob, mode:Ti.Stream.MODE_READ});
+		for (var index in connectedSockets) {
+			var sock = connectedSockets[index];
+			Ti.Stream.writeStream(input, sock, 4096);
 		}
 		messageLabel.text = "I'm a writer!";
 	});
@@ -198,6 +189,9 @@ function sock_listen() {
 			}
 		}
 	});
+	if (isBlackberry) {
+		writeButton.enabled = false;
+	}
 	
 	return win;
 };
