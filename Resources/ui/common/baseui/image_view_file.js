@@ -1,4 +1,9 @@
 function image_view_file() {
+	//TODO remove these lines of code when Jira task: TIMOB-8580 will be implemeneted for Blackberry
+	if (Titanium.Platform.osname === 'blackberry'){
+		alert('Titanium.Filesystem module is not supported for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();;
 	
 	var f = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'/images/apple_logo.jpg');

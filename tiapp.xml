@@ -5,7 +5,7 @@
         <target device="iphone">true</target>
         <target device="ipad">true</target>
         <target device="android">true</target>
-        <target device="blackberry">false</target>
+        <target device="blackberry">true</target>
     </deployment-targets>
     <sdk-version>2.1.1.GA</sdk-version>
     <id>com.appcelerator.kitchensink</id>
@@ -55,5 +55,6 @@
             <service type="interval" url="testservice.js"/>
         </services>
     </android>
+    <blackberry xmlns="http://www.qnx.com/schemas/application/1.0"/>
     <modules/>
 </ti:app>

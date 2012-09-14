@@ -1,4 +1,11 @@
 function custom_events() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	//
@@ -6,9 +13,9 @@ function custom_events() {
 	//
 	var b1 = Titanium.UI.createButton({
 		title:'Fire Event 1',
-		width:200,
-		height:40,
-		top:10
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:10 * scaleY
 	});
 	
 	b1.addEventListener('click', function()
@@ -23,9 +30,9 @@ function custom_events() {
 	//
 	var b2 = Titanium.UI.createButton({
 		title:'Fire Event 2',
-		width:200,
-		height:40,
-		top:60
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:60 * scaleY
 	});
 	
 	b2.addEventListener('click', function()
@@ -41,9 +48,9 @@ function custom_events() {
 	//
 	var b3 = Titanium.UI.createButton({
 		title:'Fire Event 3',
-		width:200,
-		height:40,
-		top:110
+		width:200 * scaleX,
+		height:40 * scaleY,
+		top:110 * scaleY
 	});
 	
 	b3.addEventListener('click', function()

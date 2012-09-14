@@ -1,4 +1,10 @@
 function tv_headers() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	//TODO remove this part when TableView header will be supported for BlackBerry
+	if (isBlackberry) {
+		alert('TableView header is not supported for BlackBerry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [
@@ -65,15 +71,23 @@ function tv_headers() {
 		{title:'Potsie'}
 	];
 	
-	var search = Titanium.UI.createSearchBar({
-		showCancel:false
-	});
-	search.addEventListener('blur',function(){
-		if(Ti.Platform.name === "android"){
-			Ti.API.info('Going to hide soft Keyboard as we are shifting focus away from the SearchBar.');
-			Ti.UI.Android.hideSoftKeyboard();
-		}	
-	});
+	var search;
+	//TODO modify back this code when SearchBar will be implemented for Blackberry
+	if (!isBlackberry) {
+		search = Titanium.UI.createSearchBar({
+			showCancel:false
+		});
+		search.addEventListener('blur',function(){
+			if(Ti.Platform.name === "android"){
+				Ti.API.info('Going to hide soft Keyboard as we are shifting focus away from the SearchBar.');
+				Ti.UI.Android.hideSoftKeyboard();
+			}
+		});
+
+	} else {
+		alert('Titanium.UI.createSearchBar() is not supported for Blackberry yet');
+	}
+	
 	// create table view
 	var tableview = Titanium.UI.createTableView({
 		data:data,
@@ -87,6 +101,10 @@ function tv_headers() {
 		var section = e.section;
 		var row = e.row;
 		var rowdata = e.rowData;
+		//TODO when e.section will be implemented for Blackberry remove this
+		if (isBlackberry) {
+			e.section = {};
+		}
 		var msg = 'row ' + row + ' index ' + index + ' section ' + section  + ' row data ' + rowdata;
 		if (islongclick) {
 			e.section.headerTitle = e.section.headerTitle + ' section has been long-clicked';

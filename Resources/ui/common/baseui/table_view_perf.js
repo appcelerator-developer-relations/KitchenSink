@@ -1,6 +1,7 @@
 function tv_perf() {
-	var w = Ti.UI.createWindow();
-	var v = Ti.UI.createView();
+	var isBlackberry = Titanium.Platform.name === 'blackberry';	
+	var w = Ti.UI.createWindow();	
+	var v = Ti.UI.createView();	
 	var tv = Ti.UI.createTableView({
 		top:0,
 		height:280,
@@ -13,6 +14,12 @@ function tv_perf() {
 		height:"auto",
 		bottom:15
 	});
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+	if (isBlackberry) {
+		l.width = 700;
+		l.height = 70;
+		l.top = 1100;
+	}
 	v.add(tv);
 	v.add(l);
 	w.add(v);
@@ -24,7 +31,12 @@ function tv_perf() {
 	
 	for (var c=0;c<count;c++)
 	{
-		var row = Ti.UI.createTableViewRow({title:"Row "+(c+1), className: "row"});
+		var row;
+		if (isBlackberry) {
+			row = {title:"Row "+(c+1), className: "row"};
+		} else {
+			row = Ti.UI.createTableViewRow({title:"Row "+(c+1), className: "row"});
+		}		
 		data[c] = row;
 	}
 	

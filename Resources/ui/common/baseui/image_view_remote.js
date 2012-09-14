@@ -1,4 +1,8 @@
 function image_view_remote() {
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('BlackBerry does not support remote image functionality');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	var imageView = Titanium.UI.createImageView({

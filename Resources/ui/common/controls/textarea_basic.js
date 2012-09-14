@@ -1,4 +1,9 @@
 function textarea_basic() {
+	//TODO remove this lines when Jira TIMOB-8841 task will be implemented.
+	if (Titanium.Platform.osname === 'blackberry'){
+		alert('TextArea is not implemented for Blackberry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	
 	var l = Titanium.UI.createLabel({

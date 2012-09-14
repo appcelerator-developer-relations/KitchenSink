@@ -1,4 +1,9 @@
 function geolocation() {
+	//TODO review this part when Jira tasks: TIMOB-8581 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Geolocation module is not implemented for BlackBerry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	win.backgroundColor = '#fff';
 	win.openedflag = 0 ;

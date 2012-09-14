@@ -201,6 +201,11 @@ function prettyDate(time){
 
 
 function getTweets() {
+	//TODO review this part when Jira tasks: TIMOB-8587 and TIMOB-10275 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Network module is not implemented for BlackBerry yet');
+		return;
+	}
 	// set up a twitter screen name.
 	var screen_name = 'appcelerator';
 		win = Ti.UI.createWindow({

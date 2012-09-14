@@ -1,12 +1,19 @@
 function textfield_keyboard() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	
 	var tf1 = Titanium.UI.createTextField({
 		color:'#336699',
-		height:35,
-		top:10,
-		left:10,
-		width:250,
+		height:35 * scaleY,
+		top:10 * scaleY,
+		left:10 * scaleX,
+		width:250 * scaleX,
 		keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
 		returnKeyType:Titanium.UI.RETURNKEY_DEFAULT,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
@@ -21,10 +28,10 @@ function textfield_keyboard() {
 	
 	var b1 = Titanium.UI.createButton({
 		title:'ASCII',
-		height:40,
-		width:145,
-		left:10,
-		top:55
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:55 * scaleY
 	});
 	b1.addEventListener('click', function()
 	{
@@ -39,10 +46,10 @@ function textfield_keyboard() {
 	
 	var b2 = Titanium.UI.createButton({
 		title:'Numbers/Punc',
-		height:40,
-		width:145,
-		right:10,
-		top:55
+		height:40 * scaleY,
+		width:145 * scaleX,
+		right:10 * scaleX,
+		top:55 * scaleY
 	});
 	b2.addEventListener('click', function()
 	{
@@ -56,10 +63,10 @@ function textfield_keyboard() {
 	
 	var b3 = Titanium.UI.createButton({
 		title:'URL',
-		height:40,
-		width:145,
-		left:10,
-		top:105
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:105 * scaleY
 	});
 	b3.addEventListener('click', function()
 	{
@@ -73,10 +80,10 @@ function textfield_keyboard() {
 	
 	var b4 = Titanium.UI.createButton({
 		title:'Numbers Pad',
-		height:40,
-		width:145,
-		right:10,
-		top:105
+		height:40 * scaleY,
+		width:145 * scaleX,
+		right:10 * scaleX,
+		top:105 * scaleY
 	});
 	b4.addEventListener('click', function()
 	{
@@ -88,10 +95,10 @@ function textfield_keyboard() {
 	
 	var b5 = Titanium.UI.createButton({
 		title:'Phone Pad',
-		height:40,
-		width:145,
-		left:10,
-		top:155
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:155 * scaleY
 	});
 	b5.addEventListener('click', function()
 	{
@@ -103,10 +110,10 @@ function textfield_keyboard() {
 	
 	var b6 = Titanium.UI.createButton({
 		title:'Name/Phone',
-		height:40,
-		width:145,
-		right:10,
-		top:155
+		height:40 * scaleY,
+		width:145 * scaleX,
+		right:10 * scaleX,
+		top:155 * scaleY
 	});
 	b6.addEventListener('click', function()
 	{
@@ -120,10 +127,10 @@ function textfield_keyboard() {
 	
 	var b7 = Titanium.UI.createButton({
 		title:'Email',
-		height:40,
-		width:145,
-		left:10,
-		top:205
+		height:40 * scaleY,
+		width:145 * scaleX,
+		left:10 * scaleX,
+		top:205 * scaleY
 	});
 	b7.addEventListener('click', function()
 	{
@@ -150,6 +157,19 @@ function textfield_keyboard() {
 			tf1.focus();
 		});
 		win.add(b8);
+	}
+	if (isBlackberry) {
+		b2.left = 220 * scaleX;
+		b4.left = 220 * scaleX;
+		b6.left = 220 * scaleX;		
+		
+		b1.enabled = false;
+		b2.enabled = false;
+		b3.enabled = false;
+		b4.enabled = false;
+		b5.enabled = false;
+		b6.enabled = false;
+		b7.enabled = false;
 	}
 
 	return win;

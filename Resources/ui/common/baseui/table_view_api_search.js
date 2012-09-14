@@ -1,32 +1,42 @@
 function tv_api_search() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	if (isBlackberry) {
+		alert('Titanium.UI.createSearchBar(), Ti.UI.createTableViewRow() and Titanium.UI.createButtonBar() are not supported for Blackberry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// create table view data object
 	var data = [];
-	
-	data[0] = Ti.UI.createTableViewRow({hasChild:true,title:'Row 1'});
-	data[1] = Ti.UI.createTableViewRow({hasDetail:true,title:'Row 2'});
-	data[2] = Ti.UI.createTableViewRow({hasCheck:true,title:'Row 3'});
-	data[3] = Ti.UI.createTableViewRow({title:'Row 4'});
-	
-	var search = Titanium.UI.createSearchBar({
-		barColor:'#385292',
-		showCancel:false,
-		hintText:'search'
-	});
-	search.addEventListener('change', function(e)
-	{
-	e.value; // search string as user types
-	});
-	search.addEventListener('return', function(e)
-	{
-	search.blur();
-	});
-	search.addEventListener('cancel', function(e)
-	{
-	search.blur();
-	});
-	
+	var search;
+	if (isBlackberry) {
+		data[0] = {hasChild:true,title:'Row 1'};
+		data[1] = {hasDetail:true,title:'Row 2'};
+		data[2] = {hasCheck:true,title:'Row 3'};
+		data[3] = {title:'Row 4'};
+	} else {
+		data[0] = Ti.UI.createTableViewRow({hasChild:true,title:'Row 1'});
+		data[1] = Ti.UI.createTableViewRow({hasDetail:true,title:'Row 2'});
+		data[2] = Ti.UI.createTableViewRow({hasCheck:true,title:'Row 3'});
+		data[3] = Ti.UI.createTableViewRow({title:'Row 4'});
+		search = Titanium.UI.createSearchBar({
+			barColor:'#385292',
+			showCancel:false,
+			hintText:'search'
+		});
+		search.addEventListener('change', function(e)
+		{
+		e.value; // search string as user types
+		});
+		search.addEventListener('return', function(e)
+		{
+		search.blur();
+		});
+		search.addEventListener('cancel', function(e)
+		{
+		search.blur();
+		});
+	}
 	// create table view
 	var tableview = Titanium.UI.createTableView({
 		data:data,
@@ -46,17 +56,13 @@ function tv_api_search() {
 		Titanium.UI.createAlertDialog({title:'Table View',message:'row ' + row + ' index ' + index + ' section ' + section  + ' row data ' + rowdata}).show();
 	});
 	
+	
 	var hide = Titanium.UI.createButtonBar({
 		labels:['Hide', 'Show'],
 		backgroundColor:'#336699',
 		height:25,
 		width:120
 	});
-	
-	
-	// add table view to the window
-	win.add(tableview);
-	
 	hide.addEventListener('click', function(e)
 	{
 		Ti.API.info("search hidden = "+tableview.searchHidden);
@@ -72,6 +78,8 @@ function tv_api_search() {
 	if (Titanium.Platform.name == 'iPhone OS') {
 		win.setRightNavButton(hide);
 	}
+	// add table view to the window
+	win.add(tableview);
 	return win;
 };
 

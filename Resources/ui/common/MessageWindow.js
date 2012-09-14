@@ -9,6 +9,7 @@ function MessageWindow() {
 		//we should not try specifying anything here.
 		//orientationModes : [Titanium.UI.PORTRAIT]
 	});
+	/* BB TODO: createView not implemented yet
 	var messageView = Titanium.UI.createView({
 		id:'messageview',
 		height:30,
@@ -18,6 +19,7 @@ function MessageWindow() {
 		opacity:0.7,
 		touchEnabled:false
 	});
+	*/
 	var messageLabel = Titanium.UI.createLabel({
 		id:'messagelabel',
 		text:'',
@@ -30,8 +32,9 @@ function MessageWindow() {
 		},
 		textAlign:'center'
 	});
-		
+	/* BB TODO: createView not implemented yet
 	win.add(messageView);
+	*/
 	win.add(messageLabel);
 	
 	this.setLabel = function(_text) {

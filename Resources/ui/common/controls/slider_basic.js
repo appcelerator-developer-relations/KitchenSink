@@ -1,4 +1,11 @@
 function slider_basic() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	
 	//
@@ -12,8 +19,8 @@ function slider_basic() {
 			fontSize:15
 		},
 		textAlign:'center',
-		top:10,
-		width:300,
+		top:10 * scaleY,
+		width:300 * scaleX,
 		height:'auto'
 	});
 	
@@ -21,9 +28,9 @@ function slider_basic() {
 		min:0,
 		max:10,
 		value:5,
-		width:100,
+		width:100 * scaleX,
 		height:'auto',
-		top:30,
+		top:30 * scaleY,
 		selectedThumbImage:'/images/slider_thumb.png',
 		highlightedThumbImage:'/images/chat.png'
 	});
@@ -53,8 +60,8 @@ function slider_basic() {
 			fontSize:15
 		},
 		textAlign:'center',
-		top:70,
-		width:300,
+		top:70 * scaleY,
+		width:300 * scaleX,
 		height:'auto'
 	});
 	
@@ -62,9 +69,9 @@ function slider_basic() {
 		min:0,
 		max:100,
 		value:25,
-		width:268,
-		height:11,
-		top:90,
+		width:268 * scaleX,
+		height:11 * scaleY,
+		top:90 * scaleY,
 		leftTrackImage:'/images/slider_orangebar.png',
 		rightTrackImage:'/images/slider_lightbar.png',
 		thumbImage:'/images/slider_thumb.png'
@@ -73,6 +80,12 @@ function slider_basic() {
 	{
 		customSliderLabel.text = 'Custom Slider - value = ' + Math.round(e.value);
 	});
+	//TODO remove this lines when height = 'auto' will be supported for Blackberry
+	if (isBlackberry) {
+		basicSliderLabel.height = 20 * scaleY;
+		basicSlider.height = 100 * scaleY;
+		basicSlider.width = Ti.Platform.displayCaps.platformWidth;
+	}
 	
 	
 	//
@@ -80,19 +93,21 @@ function slider_basic() {
 	//
 	var changeButton = Titanium.UI.createButton({
 		title:'Change Basic Slider',
-		height:40,
-		width:200,
-		top:120
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:120 * scaleY
 	});
 	changeButton.addEventListener('click', function()
 	{
 		basicSlider.value = 2;
-		basicSlider.width = 268;
-		basicSlider.height = (Ti.Platform.osname == 'android') ? 50 : 11;
-		basicSlider.leftTrackImage = '/images/slider_orangebar.png';
-		basicSlider.rightTrackImage = '/images/slider_lightbar.png';
-		basicSlider.thumbImage = '/images/slider_thumb.png';
-		basicSlider.highlightedThumbImage = '/images/slider_thumb.png';
+		if (!isBlackberry) {
+			basicSlider.width = 268 * scaleX;
+			basicSlider.height = (Ti.Platform.osname == 'android') ? 50 * scaleY : 11 * scaleY;
+			basicSlider.leftTrackImage = '/images/slider_orangebar.png';
+			basicSlider.rightTrackImage = '/images/slider_lightbar.png';
+			basicSlider.thumbImage = '/images/slider_thumb.png';
+			basicSlider.highlightedThumbImage = '/images/slider_thumb.png';
+		}
 	});
 	
 	//
@@ -100,9 +115,9 @@ function slider_basic() {
 	//
 	var toggleButton = Titanium.UI.createButton({
 		title:'Hide/Show Slider',
-		height:40,
-		width:200,
-		top:170
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:170 * scaleY
 	});
 	
 	var visible = true;
@@ -129,9 +144,9 @@ function slider_basic() {
 	//
 	var navbarButton = Titanium.UI.createButton({
 		title:'Toggle Slider in Navbar',
-		height:40,
-		width:200,
-		top:220
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:220 * scaleY
 	});
 	var inNavbar = false;
 	navbarButton.addEventListener('click', function()
@@ -142,7 +157,7 @@ function slider_basic() {
 				min:0,
 				max:10,
 				value:5,
-				width:100
+				width:100 * scaleX
 			});
 			win.setRightNavButton(navbarSlider);
 			inNavbar = true;
@@ -159,9 +174,9 @@ function slider_basic() {
 	//
 	var toolbarButton = Titanium.UI.createButton({
 		title:'Toggle Slider in Toolbar',
-		height:40,
-		width:200,
-		top:270
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:270 * scaleY
 	
 	});
 	var inToolbar = false;
@@ -173,7 +188,7 @@ function slider_basic() {
 				min:0,
 				max:10,
 				value:5,
-				width:200
+				width:200 * scaleX
 			});
 			win.setToolbar([toolbarSlider],{animated:true});
 			inToolbar = true;
@@ -190,9 +205,9 @@ function slider_basic() {
 	//
 	var titleButton = Titanium.UI.createButton({
 		title:'Toggle Slider in Title',
-		height:40,
-		width:200,
-		top:320
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:320 * scaleY
 	});
 	
 	
@@ -211,7 +226,7 @@ function slider_basic() {
 				min:0,
 				max:10,
 				value:5,
-				width:80,
+				width:80 * scaleY,
 				height:'auto'
 			});
 			win.titleControl = titleSlider;

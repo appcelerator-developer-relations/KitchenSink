@@ -1,4 +1,11 @@
 function tab_group(_args) {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	// get tab group object
@@ -9,9 +16,9 @@ function tab_group(_args) {
 	//
 	var addTabButton = Titanium.UI.createButton({
 		title:'Add/Remove Tab',
-		top:10,
-		height:40,
-		width:200
+		top:10 * scaleY,
+		height:40 * scaleY,
+		width:200 * scaleX
 	});
 	
 	// create button event listener
@@ -39,9 +46,9 @@ function tab_group(_args) {
 	//
 	var animateTabButton = Titanium.UI.createButton({
 		title:'Animate Tab Group',
-		top:60,
-		height:40,
-		width:200
+		top:60 * scaleY,
+		height:40 * scaleY,
+		width:200 * scaleX
 	});
 	
 	var transformed = false;
@@ -73,9 +80,9 @@ function tab_group(_args) {
 	// 
 	var closeTabGroupButton = Titanium.UI.createButton({
 		title:'Close/Animate Tab Group',
-		top:110,
-		height:40,
-		width:200
+		top:110 * scaleY,
+		height:40 * scaleY,
+		width:200 *  scaleX
 	});
 	
 	closeTabGroupButton.addEventListener('click', function(e)
@@ -92,9 +99,9 @@ function tab_group(_args) {
 	// 
 	var setActiveTabButton = Titanium.UI.createButton({
 		title:'Set Active Tab (Index)',
-		top:160,
-		height:40,
-		width:200
+		top:160 * scaleY,
+		height:40 * scaleY,
+		width:200 * scaleX
 	});
 	
 	setActiveTabButton.addEventListener('click', function(e)
@@ -107,9 +114,9 @@ function tab_group(_args) {
 	// 
 	var setActiveTabObjectButton = Titanium.UI.createButton({
 		title:'Set Active Tab (Object)',
-		top:210,
-		height:40,
-		width:200
+		top:210 * scaleY,
+		height:40 * scaleY,
+		width:200 * scaleX
 	});
 	setActiveTabObjectButton.addEventListener('click', function(e)
 	{
@@ -121,9 +128,9 @@ function tab_group(_args) {
 	//
 	var customizationButton = Titanium.UI.createButton({
 		title:'Switch customization off',
-		top:260,
-		height:40,
-		width:200
+		top:260 * scaleY,
+		height:40 * scaleY,
+		width:200 * scaleX
 	});
 	customizationButton.addEventListener('click', function(e)
 	{
@@ -140,11 +147,15 @@ function tab_group(_args) {
 	});
 	
 	
+	var tabsCount = 0;
+	if (typeof tabGroup !== 'undefined' && typeof tabGroup.tabs !== 'undefined') {
+		tabsCount = tabGroup.tabs.length;
+	}
 	//
 	// CURRENT TAB GROUP
 	//
 	var openLabel = Titanium.UI.createLabel({
-		text:'Tab Group has ' + tabGroup.tabs.length + ' tabs',
+		text:'Tab Group has ' + tabsCount + ' tabs',
 		color:'#999',
 		font:{
 			fontFamily:'Helvetica Neue',
@@ -156,6 +167,13 @@ function tab_group(_args) {
 		height:'auto'
 	});
 	
+	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+	if (isBlackberry) {
+		openLabel.top = openLabel.top * scaleY;
+		openLabel.width = 300 * scaleX;
+		openLabel.height = 30 * scaleY;
+		setActiveTabObjectButton.width = 300 * scaleX;
+	}
 	// add views based on platform
 	if (Titanium.Platform.name == 'iPhone OS')
 	{

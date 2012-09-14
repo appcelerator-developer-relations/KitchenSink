@@ -1,12 +1,20 @@
 function tv_api_empty() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
 	var win = Ti.UI.createWindow();
 	// create table view data object
 	var data = [];
 	
-	data[0] = Ti.UI.createTableViewRow({hasChild:true,title:'Row 1'});
-	data[1] = Ti.UI.createTableViewRow({hasDetail:true,title:'Row 2'});
-	data[2] = Ti.UI.createTableViewRow({hasCheck:true,title:'Row 3'});
-	data[3] = Ti.UI.createTableViewRow({title:'Row 4'});
+	if (isBlackberry) {
+		data[0] = {hasChild:true,title:'Row 1'};
+		data[1] = {hasDetail:true,title:'Row 2'};
+		data[2] = {hasCheck:true,title:'Row 3'};
+		data[3] = {title:'Row 4'};
+	} else {
+		data[0] = Ti.UI.createTableViewRow({hasChild:true,title:'Row 1'});
+		data[1] = Ti.UI.createTableViewRow({hasDetail:true,title:'Row 2'});
+		data[2] = Ti.UI.createTableViewRow({hasCheck:true,title:'Row 3'});
+		data[3] = Ti.UI.createTableViewRow({title:'Row 4'});
+	}
 	
 	// create table view with empty data set and then append
 	var tableview = Titanium.UI.createTableView();

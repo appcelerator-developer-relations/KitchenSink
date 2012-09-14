@@ -1,4 +1,9 @@
 function picker_multi1() {
+	//TODO remove this lines when Jira TIMOB-9788 and TIMOB-8829 tasks will be implemented.
+	if (Titanium.Platform.osname === 'blackberry'){
+		alert('Custom Picker and PickerRow are not implemented for Blackberry yet');
+		return;
+	}
 	var win = Ti.UI.createWindow();
 	win.backgroundColor = 'black';
 	

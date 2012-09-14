@@ -56,12 +56,13 @@ function BaseUIWindow(title) {
 	// create table view event listener
 	tableview.addEventListener('click', function(e)
 	{
-		if (e.rowData.test)
-		{
+		if (e.rowData.test) {
 			var ExampleWindow = require(e.rowData.test),
 				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
 			if (Ti.Platform.name == "android") {
 				
+			} else if (Ti.Platform.name === "blackberry") {
+				win.backgroundColor = "#000";
 			} else {
 				win.backgroundColor = "#fff";
 				win.barColor = "#111";
@@ -109,6 +110,7 @@ function BaseUIWindow(title) {
 		borderRadius:10
 	});
 	
+	/* BB TODO: Not implemented yet createView
 	var view = Titanium.UI.createView({
 		backgroundColor:'#000',
 		opacity:0.7,
@@ -116,6 +118,7 @@ function BaseUIWindow(title) {
 		width:250,
 		borderRadius:10
 	});
+	*/
 	
 	var label = Titanium.UI.createLabel({
 		color:'#fff',
@@ -124,9 +127,12 @@ function BaseUIWindow(title) {
 		width:'auto',
 		height:'auto'
 	});
+	/* BB TODO: Not implemented yet
 	win.add(view);
+	*/
 	win.add(label);
 	
+	/* BB TODO: Not implemented yet Ti.App
 	Titanium.App.addEventListener('event_one', function(e)
 	{
 		label.text = 'base_ui.js: event one, array length = ' + e.data.length;
@@ -147,6 +153,7 @@ function BaseUIWindow(title) {
 		},1000);
 	
 	});
+	*/
 
 	
 	return self;

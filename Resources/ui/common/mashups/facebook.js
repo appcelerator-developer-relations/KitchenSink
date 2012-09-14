@@ -1,4 +1,9 @@
 function facebook(_args) {
+	//TODO review this part when Jira tasks: TIMOB-8579 will be implemented
+	if (Titanium.Platform.name === 'blackberry') {
+		alert('Titanium.Facebook module is not implemented for BlackBerry yet');
+		return;
+	}
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#fff'
 	});

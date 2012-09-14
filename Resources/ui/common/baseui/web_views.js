@@ -1,4 +1,9 @@
 function webviews(_args) {
+	//TODO remove this lines when WebView is implemented for Blackberry
+	if (Titanium.Platform.osname === 'blackberry') {
+		alert('WebView is not implemented for Blackberry yet');
+		return;
+	}
 	var win = Titanium.UI.createWindow({backgroundColor:'#fff'});
 	
 	

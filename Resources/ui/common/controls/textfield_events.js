@@ -1,4 +1,11 @@
 function textfield_events() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Ti.UI.createWindow();
 	
 	// initialize to all modes
@@ -8,22 +15,28 @@ function textfield_events() {
 		Titanium.UI.LANDSCAPE_RIGHT
 	]; 
 	
-	var scrolly = Titanium.UI.createScrollView({contentHeight:'auto'});
+	var scrolly;
+	if (isBlackberry) {
+		scrolly = Titanium.UI.createView({height:Ti.Platform.displayCaps.platformHeight, width: Ti.Platform.displayCaps.platformWidth});
+	} else {
+		scrolly = Titanium.UI.createScrollView({contentHeight:'auto'});
+	}
+	 
 	win.add(scrolly);
 	
 	var tf1 = Titanium.UI.createTextField({
 		color:'#336699',
-		height:35,
-		top:10,
-		left:10,
-		width:250,
+		height:35 * scaleY,
+		top:10 * scaleY,
+		left:10 * scaleX,
+		width:250 * scaleX,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 	});
 	
 	var l = Titanium.UI.createLabel({
-		top:50,
-		left:10,
-		width:300,
+		top:50 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		color:'#777',
 		font:{fontSize:13},
@@ -61,9 +74,9 @@ function textfield_events() {
 	// FOCUS
 	//
 	var focusLabel = Titanium.UI.createButton({
-		top:100,
-		height:40,
-		width:200,
+		top:100 * scaleY,
+		height:40 * scaleY,
+		width:200 * scaleX,
 		title:'Focus'
 	});
 	scrolly.add(focusLabel);
@@ -76,9 +89,9 @@ function textfield_events() {
 	// BLUR
 	//
 	var blurLabel = Titanium.UI.createButton({
-		top:150,
-		height:40,
-		width:200,
+		top:150 * scaleY,
+		height:40 * scaleY,
+		width:200 * scaleX,
 		title:'Blur'
 	});
 	scrolly.add(blurLabel);
@@ -91,9 +104,9 @@ function textfield_events() {
 	// HIDE/SHOW
 	//
 	var showHide = Titanium.UI.createButton({
-		top:200,
-		height:40,
-		width:200,
+		top:200 * scaleY,
+		height:40 * scaleY,
+		width:200 * scaleX,
 		title:'Hide/Show'
 	});
 	scrolly.add(showHide);
@@ -115,11 +128,19 @@ function textfield_events() {
 	var instructions = Ti.UI.createLabel({
 		text:'Rotate device while keyboard is up',
 		bottom:10,
-		height:30,
+		height:30 * scaleY,
 		color:'#777'
 	});
 	scrolly.add(instructions);
 	
+	if (isBlackberry) {
+		l.height = 40 * scaleY;
+		
+		instructions.top = 300 * scaleY;
+		
+		focusLabel.enabled = false;
+		blurLabel.enabled = false;
+	}
 	return win;
 }
 

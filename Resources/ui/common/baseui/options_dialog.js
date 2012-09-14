@@ -1,4 +1,12 @@
 function options_dialog() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if(isBlackberry)
+	{
+		scaleX += 1;
+		scaleY += 2;
+	}
 	var win = Titanium.UI.createWindow();
 	
 	win.orientationModes = [
@@ -13,7 +21,7 @@ function options_dialog() {
 		var showCancel = Ti.UI.createSwitch({
 			style : Ti.UI.Android.SWITCH_STYLE_CHECKBOX,
 			title: 'Show Cancel Button',
-			top : 160
+			top : 160 * scaleY
 		});
 		
 		var applyButtons = function() 
@@ -34,6 +42,11 @@ function options_dialog() {
 		destructive:1,
 		cancel:2,
 		title:'I am a title'
+	};
+	
+	if (isBlackberry) {
+		delete optionsDialogOpts.destructive;
+		delete optionsDialogOpts.cancel;
 	};
 	
 	if (isAndroid) {
@@ -59,25 +72,25 @@ function options_dialog() {
 	// BUTTON TO SHOW BASIC DIALOG
 	var button1 = Titanium.UI.createButton({
 		title:'Show Dialog 1',
-		height:40,
-		width:200,
-		top:10
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:10 * scaleY
 	});
 	button1.addEventListener('click', function()
 	{
 		if (isAndroid) {
 			dialog.androidView = null;
 			applyButtons();
-		}
+		}	
 		dialog.show();
 	});
 	
 	// BUTTON TO MODIFY DIALOG AND SHOW
 	var button2 = Titanium.UI.createButton({
 		title:'Modify and Show Dialog',
-		height:40,
-		width:200,
-		top:60
+		height:40 * scaleY,
+		width:200 * scaleX,
+		top:60 * scaleY
 	});
 	button2.addEventListener('click', function()
 	{
@@ -101,8 +114,8 @@ function options_dialog() {
 			fontSize:15
 		},
 		textAlign:'center',
-		top:110,
-		width:300
+		top:110 * scaleY,
+		width:300 * scaleX
 	});
 	
 	if (isAndroid) {
@@ -152,9 +165,9 @@ function options_dialog() {
 	if (!isAndroid) {
 		var button4 = Titanium.UI.createButton({
 			title:'Show w/hide, animated',
-			height:40,
-			width:200,
-			top:250
+			height:40 * scaleY,
+			width:200 * scaleX,
+			top:250 * scaleY
 		});
 		
 		button4.addEventListener('click', function()
@@ -169,9 +182,9 @@ function options_dialog() {
 		
 		var button5 = Titanium.UI.createButton({
 			title:'Show w/hide, nonanimated',
-			height:40,
-			width:200,
-			top:300
+			height:40 * scaleY,
+			width:200 * scaleX,
+			top:300 * scaleY
 		});
 		
 		button5.addEventListener('click', function()
@@ -184,6 +197,13 @@ function options_dialog() {
 			setTimeout(function(){dialog.hide({animated:false});},2000);
 		});
 		
+		//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+		if (isBlackberry) {
+			button4.top = 150 * scaleY;
+			button4.width = 300 * scaleX;
+			button5.top = 200 * scaleY;
+			button5.width = 300 * scaleX
+		}
 		win.add(button4);
 		win.add(button5);
 	}

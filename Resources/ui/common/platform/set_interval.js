@@ -1,4 +1,6 @@
 function set_interval() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+
 	var win = Titanium.UI.createWindow();
 	
 	var label = Ti.UI.createLabel({
@@ -16,6 +18,10 @@ function set_interval() {
 		count++;
 		label.text = "Interval fired " + count;
 	},10);
+	if (isBlackberry) {
+		label.width = Ti.Platform.displayCaps.platformWidth;
+		label.height = 80;
+	}
 
 	return win;
 };

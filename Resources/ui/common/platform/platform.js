@@ -1,17 +1,30 @@
 function ti_platform() {
+	var isBlackberry = Titanium.Platform.name === 'blackberry';
+	var scaleX = 1;
+	var scaleY = 1;
+	if (isBlackberry) {
+		scaleX += 1;
+		scaleY += 2;
+	};
 	var win = Titanium.UI.createWindow();
-	
-	var scrollview = Ti.UI.createScrollView({
-		layout:'vertical',
-		height:Ti.UI.FILL,
-	});
+	var scrollview;
+	if (isBlackberry) {
+		scrollview = Ti.UI.createView();
+	} else {
+		 scrollview = Ti.UI.createScrollView({
+			layout:'vertical',
+			height:Ti.UI.FILL,
+		});
+	}
 	
 	// for battery level to work, you have to turn it
 	// on first otherwise it will report -1.  if you
 	// add a battery listener, it will turn it on for you
 	// automagically
 	var needUpdate = false;
-	Titanium.Platform.batteryMonitoring = true;
+	if (!isBlackberry) {
+		Titanium.Platform.batteryMonitoring = true;
+	}
 	var batteryEventListener;
 	
 	win.addEventListener('close',function()
@@ -39,8 +52,8 @@ function ti_platform() {
 	
 	var l1 = Titanium.UI.createLabel({
 		text:'name/osname:' + Titanium.Platform.name+'/'+Titanium.Platform.osname,
-		top:2,
-		left:10,
+		top:2 * scaleY,
+		left:10 * scaleX,
 		width:'auto',
 		font:{fontSize:14},
 		color:'#777',
@@ -51,9 +64,9 @@ function ti_platform() {
 	
 	var l2 = Titanium.UI.createLabel({
 		text:'model:' + Titanium.Platform.model,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -63,9 +76,9 @@ function ti_platform() {
 	
 	var l3 = Titanium.UI.createLabel({
 		text:'version:' + Titanium.Platform.version,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -75,9 +88,9 @@ function ti_platform() {
 	
 	var l4 = Titanium.UI.createLabel({
 		text:'architecture:' + Titanium.Platform.architecture,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleY,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -87,8 +100,8 @@ function ti_platform() {
 	
 	var l5 = Titanium.UI.createLabel({
 		text:'macaddress:' + Titanium.Platform.macaddress,
-		top:2,
-		left:10,
+		top:2 * scaleY,
+		left:10 * scaleX,
 		width:'auto',
 		height:'auto',
 		font:{fontSize:14},
@@ -99,9 +112,9 @@ function ti_platform() {
 	
 	var l6 = Titanium.UI.createLabel({
 		text:'processor count:' + Titanium.Platform.processorCount,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -112,9 +125,9 @@ function ti_platform() {
 	
 	var l7 = Titanium.UI.createLabel({
 		text:'username:' + Titanium.Platform.username,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -126,9 +139,9 @@ function ti_platform() {
 	// may select the wrong interface on non-mobile devices.
 	var l8 = Titanium.UI.createLabel({
 		text:'address:' + Titanium.Platform.address,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -138,9 +151,9 @@ function ti_platform() {
 	
 	var l9 = Titanium.UI.createLabel({
 		text:'ostype:' + Titanium.Platform.ostype,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -154,9 +167,9 @@ function ti_platform() {
 	
 	var l11 = Titanium.UI.createLabel({
 		text:'battery state:' + batteryStateToString(Titanium.Platform.batteryState),
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -166,9 +179,9 @@ function ti_platform() {
 	
 	var l12 = Titanium.UI.createLabel({
 		text:'battery level:' + Titanium.Platform.batteryLevel,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -178,9 +191,9 @@ function ti_platform() {
 	
 	var l13 = Titanium.UI.createLabel({
 		text:'display width-x-height:' + Titanium.Platform.displayCaps.platformWidth + 'x' + Titanium.Platform.displayCaps.platformHeight,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -190,9 +203,9 @@ function ti_platform() {
 	
 	var l15 = Titanium.UI.createLabel({
 		text:'display density:' + Titanium.Platform.displayCaps.density,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -202,9 +215,9 @@ function ti_platform() {
 	
 	var l16 = Titanium.UI.createLabel({
 		text:'display dpi:' + Titanium.Platform.displayCaps.dpi,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
@@ -214,33 +227,34 @@ function ti_platform() {
 	
 	var l17 = Titanium.UI.createLabel({
 		text:'available memory:' + Titanium.Platform.availableMemory,
-		top:2,
-		left:10,
-		width:300,
+		top:2 * scaleY,
+		left:10 * scaleX,
+		width:300 * scaleX,
 		height:'auto',
 		font:{fontSize:14},
 		color:'#777'
 	});
 	
 	scrollview.add(l17);
-	
-	var l18 = Titanium.UI.createLabel({
-		text:'is24HourTimeFormat:' + Titanium.Platform.is24HourTimeFormat(),
-		top:2,
-		left:10,
-		width:300,
-		height:'auto',
-		font:{fontSize:14},
-		color:'#777'
-	});
-	
-	scrollview.add(l18);
+	if (!isBlackberry) {
+		var l18 = Titanium.UI.createLabel({
+			text:'is24HourTimeFormat:' + Titanium.Platform.is24HourTimeFormat(),
+			top:2,
+			left:10,
+			width:300,
+			height:'auto',
+			font:{fontSize:14},
+			color:'#777'
+		});
+
+		scrollview.add(l18);
+	}
 	
 	var b = Titanium.UI.createButton({
 		title:'Open URL',
-		height:30,
+		height:30 * scaleY,
 		width:'auto',
-		top:5
+		top:5 * scaleY
 	});
 	scrollview.add(b);
 	var openURL=1;
@@ -286,7 +300,9 @@ function ti_platform() {
 			Titanium.UI.createAlertDialog({title:'Platform', message:message}).show();
 		}
 	};
-	Titanium.Platform.addEventListener('battery', batteryEventListener);
+	if (!isBlackberry) {
+		Titanium.Platform.addEventListener('battery', batteryEventListener);
+	}
 	
 	Titanium.API.info("Current Phone Locale is "+Titanium.Platform.locale);
 	Titanium.API.info("OS name is " + Titanium.Platform.osname);
@@ -295,6 +311,71 @@ function ti_platform() {
 	if (Titanium.Platform.osname == 'iphone' || Titanium.Platform.osname == 'ipad') {
 		Titanium.API.info("Data network: " + Titanium.Platform.dataAddress);
 		Titanium.API.info("Netmask: " + Titanium.Platform.netmask);
+	}
+	if (isBlackberry) {
+		l1.width = 200 * scaleX;
+		l1.height = 20 * scaleY;
+		
+		l2.width = 200 * scaleX;
+		l2.height = 20 * scaleY;
+		l2.top = 2 + 20 * scaleY;
+		
+		l3.width = 200 * scaleX;
+		l3.height = 20 * scaleY;
+		l3.top = 2 + 40 * scaleY;
+		
+		l4.width = 200 * scaleX;
+		l4.height = 20 * scaleY;
+		l4.top = 2 + 60 * scaleY;
+		
+		l5.width = 200 * scaleX;
+		l5.height = 20 * scaleY;
+		l5.top = 2 + 80 * scaleY;
+		
+		l6.width = 200 * scaleX;
+		l6.height = 20 * scaleY;
+		l6.top = 2 + 100 * scaleY;
+		
+		l7.width = 200 * scaleX;
+		l7.height = 20 * scaleY;
+		l7.top = 2 + 120 * scaleY;
+		
+		l8.width = 200 * scaleX;
+		l8.height = 20 * scaleY;
+		l8.top = 2 + 140 * scaleY;
+		
+		l9.width = 200 * scaleX;
+		l9.height = 20 * scaleY;
+		l9.top = 2 + 160 * scaleY;
+		
+		l11.width = 200 * scaleX;
+		l11.height = 20 * scaleY;
+		l11.top = 2 + 180 * scaleY;
+		
+		l12.width = 200 * scaleX;
+		l12.height = 20 * scaleY;
+		l12.top = 2 + 200 * scaleY;
+		
+		l13.width = 200 * scaleX;
+		l13.height = 20 * scaleY;
+		l13.top = 2 + 220 * scaleY;
+		
+		l15.width = 200 * scaleX;
+		l15.height = 20 * scaleY;
+		l15.top = 2 + 240 * scaleY;
+		
+		l16.width = 200 * scaleX;
+		l16.height = 20 * scaleY;
+		l16.top = 2 + 260 * scaleY;
+		
+		l17.width = 200 * scaleX;
+		l17.height = 20 * scaleY;
+		l17.top = 2 + 280 * scaleY;
+		
+		b.width = 200 * scaleX;
+		b.height = 40 * scaleY;
+		b.top = 300 * scaleY;
+		b.enabled = false;
 	}
 
 	win.add(scrollview);
