@@ -46,15 +46,22 @@ function scroll_view_drag() {
 	message2.hide();
 	win.add(messageView);
 	
-	scrollView.addEventListener('dragstart', function(e) {
+	var event1 = 'dragStart';
+	var event2 = 'dragEnd';
+	if (Ti.version >= '3.0.0') {
+		event1 = 'dragstart';
+		event2 = 'dragend';
+	}
+
+	scrollView.addEventListener(event1, function(e) {
 	    Ti.API.info('Drag started');
 	    message1.text = "Drag Started!";
 	    message1.show();
 	    setTimeout(function(){message1.hide();},1000);
 	});
-	scrollView.addEventListener('dragend', function(e) {
-	    Ti.API.info('Drag End detected! Decelerating? ' + (e.decelerate ? 'Yes' : 'No'));
-	    message2.text = "Drag End detected! Decelerating :" + (e.decelerate ? 'Yes' : 'No');
+	scrollView.addEventListener(event2, function(e) {
+	    Ti.API.info(e.type+' detected! Decelerating? ' + (e.decelerate ? 'Yes' : 'No'));
+	    message2.text = e.type+" detected! Decelerating :" + (e.decelerate ? 'Yes' : 'No');
 	    message2.show();
 	    setTimeout(function(){message2.hide();},1000);
 	    
