@@ -48,7 +48,15 @@ function music_picker() {
 			}
 		}
 	
-		player.addEventListener('statechange', function() {
+		var event1 = 'stateChange';
+		var event2 = 'playingChange';
+		var event3 = 'volumeChange';
+		if (Ti.version >= '3.0.0') {
+			event1 = 'statechange';
+			event2 = 'playingchange';
+			event3 = 'volumechange';
+		}
+		player.addEventListener(event1, function() {
 			if (player.playbackState == Titanium.Media.MUSIC_PLAYER_STATE_STOPPED) {
 				title.text = '';
 				info.text = '';
@@ -69,7 +77,7 @@ function music_picker() {
 				}
 			}
 		});
-		player.addEventListener('playingchange', function() {
+		player.addEventListener(event2, function() {
 			if (player.playbackState == Titanium.Media.MUSIC_PLAYER_STATE_PLAYING) {
 				info.text = player.nowPlaying.artist + ' : ' + player.nowPlaying.albumTitle;
 				title.text = player.nowPlaying.title;
@@ -81,7 +89,7 @@ function music_picker() {
 				}
 			}
 		});
-		player.addEventListener('volumechange', function() {
+		player.addEventListener(event3, function() {
 			Ti.API.log('Volume change: '+player.volume);
 		});
 	}

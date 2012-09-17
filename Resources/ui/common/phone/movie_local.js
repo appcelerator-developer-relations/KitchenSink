@@ -59,8 +59,13 @@ function movie_local() {
 			win.close();
 		}
 	});
+
+	var event1 = 'playbackState';
+	if (Ti.version >= '3.0.0') {
+		event1 = 'playbackstate';
+	}
 	
-	activeMovie.addEventListener('playbackstate',function(e){
+	activeMovie.addEventListener(event1,function(e){
 	    Ti.API.info('Event PlaybackState Fired: '+e.playbackState);
 	    Ti.API.info('activeMovie.endPlaybackTime: '+activeMovie.endPlaybackTime);
 	    Ti.API.info('activeMovie.playableDuration: '+activeMovie.playableDuration);
