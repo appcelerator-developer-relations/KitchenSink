@@ -142,7 +142,12 @@ function tv_pull() {
 		}
 	});
 	
-	tableView.addEventListener('scrollend',function(e)
+	var event1 = 'scrollEnd';
+	if (Ti.version >= '3.0.0') {
+		event1 = 'scrollend';
+	}
+
+	tableView.addEventListener(event1,function(e)
 	{
 		if (pulling && !reloading && e.contentOffset.y <= -65.0)
 		{

@@ -104,7 +104,12 @@ function bonjour() {
 		tableView.setData(data);
 	};
 	
-	serviceBrowser.addEventListener('updatedservices', updateUI);
+	var event1 = 'updatedServices';
+	if (Ti.version >= '3.0.0') {
+		event1 = 'updatedservices';
+	}
+
+	serviceBrowser.addEventListener(event1, updateUI);
 	
 	// Cleanup
 	win.addEventListener('close', function(e) {
