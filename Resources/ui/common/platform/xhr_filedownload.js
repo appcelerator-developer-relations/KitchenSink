@@ -105,8 +105,8 @@ function xhr_download() {
 	
 		// open the client
 		if (Titanium.Platform.name == 'android') {
-			//android's WebView doesn't support embedded PDF content
-			c.open('GET', 'http://developer.appcelerator.com/blog/wp-content/themes/newapp/images/appcelerator_avatar.png?s=48');
+			//android's WebView doesn't support binary data type
+			c.open('GET', 'http://translate.google.com/?hl=en');
 		} else {
 			c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
 		}
