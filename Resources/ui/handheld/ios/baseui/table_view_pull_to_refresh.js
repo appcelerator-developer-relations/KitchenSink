@@ -97,6 +97,7 @@ function tv_pull() {
 	
 	var pulling = false;
 	var reloading = false;
+	var offset;
 	
 	function beginReloading()
 	{
@@ -124,7 +125,7 @@ function tv_pull() {
 	
 	tableView.addEventListener('scroll',function(e)
 	{
-		var offset = e.contentOffset.y;
+		offset = e.contentOffset.y;
 		if (offset <= -65.0 && !pulling)
 		{
 			var t = Ti.UI.create2DMatrix();
@@ -142,14 +143,14 @@ function tv_pull() {
 		}
 	});
 	
-	var event1 = 'scrollEnd';
+	var dragEndEvent = 'dragEnd';
 	if (Ti.version >= '3.0.0') {
-		event1 = 'scrollend';
+		dragEndEvent = 'dragend';
 	}
 
-	tableView.addEventListener(event1,function(e)
+	tableView.addEventListener(dragEndEvent,function(e)
 	{
-		if (pulling && !reloading && e.contentOffset.y <= -65.0)
+		if (pulling && !reloading && offset <= -65.0)
 		{
 			reloading = true;
 			pulling = false;
