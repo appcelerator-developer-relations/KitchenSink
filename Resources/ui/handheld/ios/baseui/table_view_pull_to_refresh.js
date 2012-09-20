@@ -125,7 +125,7 @@ function tv_pull() {
 	tableView.addEventListener('scroll',function(e)
 	{
 		var offset = e.contentOffset.y;
-		if (offset <= -65.0 && !pulling)
+		if (offset <= -65.0 && !pulling && !reloading)
 		{
 			var t = Ti.UI.create2DMatrix();
 			t = t.rotate(-180);
@@ -133,7 +133,7 @@ function tv_pull() {
 			arrow.animate({transform:t,duration:180});
 			statusLabel.text = "Release to refresh...";
 		}
-		else if (pulling && offset > -65.0 && offset < 0)
+		else if (pulling && (offset > -65.0 && offset < 0) && !reloading )
 		{
 			pulling = false;
 			var t = Ti.UI.create2DMatrix();
@@ -142,14 +142,14 @@ function tv_pull() {
 		}
 	});
 	
-	var event1 = 'scrollEnd';
+	var event1 = 'dragEnd';
 	if (Ti.version >= '3.0.0') {
-		event1 = 'scrollend';
+		event1 = 'dragend';
 	}
 
 	tableView.addEventListener(event1,function(e)
 	{
-		if (pulling && !reloading && e.contentOffset.y <= -65.0)
+		if (pulling && !reloading)
 		{
 			reloading = true;
 			pulling = false;
