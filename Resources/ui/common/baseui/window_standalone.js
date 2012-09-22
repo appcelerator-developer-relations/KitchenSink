@@ -4,7 +4,9 @@
 	//  to open windows outside of tab groups.
 	//
 function win_standalone(_args) {	
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	win.orientationModes = [
 		Titanium.UI.PORTRAIT,

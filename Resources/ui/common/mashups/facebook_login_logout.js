@@ -1,6 +1,7 @@
 function fb_login_logout(_args) {
 	/*globals Titanium, Ti, alert, JSON */
 	var win = Ti.UI.createWindow({
+		title:_args.title,
 		backgroundColor:'#fff'
 	});
 	Titanium.Facebook.appid = "495338853813822";

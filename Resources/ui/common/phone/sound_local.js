@@ -1,9 +1,11 @@
-function sound_local() {
+function sound_local(_args) {
 	if (Titanium.Media.audioPlaying) {
 		Titanium.Media.audioSessionMode = Titanium.Media.AUDIO_SESSION_MODE_AMBIENT;
 	}
 	
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	//TODO: USE OBJECT
 	var sound = Titanium.Media.createSound();

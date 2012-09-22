@@ -1,5 +1,8 @@
 function image_views(_args) {
-	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
+	var win = Ti.UI.createWindow({
+		title:_args.title,
+		backgroundColor:'#fff'
+	});
 	// create table view data object
 	var data = [
 		{title:'Basic', hasChild:true, test:'ui/common/baseui/image_view_basic'},
@@ -39,7 +42,8 @@ function image_views(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test);
-				win = new ExampleWindow(_args);
+			_args.title = e.rowData.title;
+			win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

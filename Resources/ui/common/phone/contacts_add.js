@@ -1,5 +1,7 @@
-function contacts_add() {
-	var win = Ti.UI.createWindow();
+function contacts_add(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	var scrollview = Ti.UI.createScrollView({
 		contentWidth:'auto',
 		contentHeight:'auto',

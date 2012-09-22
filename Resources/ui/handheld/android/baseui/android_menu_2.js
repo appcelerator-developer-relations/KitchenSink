@@ -1,6 +1,8 @@
-function android_menu2() {
+function android_menu2(_args) {
 	//var activity = Ti.Android.currentActivity;
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	win.backgroundColor = 'white';
 	

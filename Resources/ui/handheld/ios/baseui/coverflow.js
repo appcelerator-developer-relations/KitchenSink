@@ -1,5 +1,7 @@
 function coverflow(_args) {
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	// create table view data object
 	var data = [
 		{title:'Coverflow Local Files', hasChild:true, test:'ui/handheld/ios/baseui/coverflow_view'},
@@ -18,7 +20,8 @@ function coverflow(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test);
-				win = new ExampleWindow(_args);
+			_args.title = e.rowData.title;
+			win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

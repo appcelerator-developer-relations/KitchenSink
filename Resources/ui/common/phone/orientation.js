@@ -1,5 +1,7 @@
-function orientation() {
-	var win = Titanium.UI.createWindow();
+function orientation(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	//
 	// SUPPORTED ORIENTATION MODES

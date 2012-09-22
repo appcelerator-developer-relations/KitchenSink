@@ -1,7 +1,9 @@
-function tv_set() {
+function tv_set(_args) {
 	//JGH: FIXME - remove HTML
 	
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var data = [
 		{title:'Set 1 (no animation)', header:'Section 0'},

@@ -49,8 +49,10 @@ function openEmail() {
 }
 */
 
-function email_dialog() {
-	var win = Ti.UI.createWindow();
+function email_dialog(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	// initialize to all modes
 	win.orientationModes = [

@@ -1,5 +1,7 @@
-function view_events2() {
-	var win = Titanium.UI.createWindow();
+function view_events2(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var l = Ti.UI.createLabel({
 		text:'',

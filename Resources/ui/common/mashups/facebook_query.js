@@ -1,6 +1,7 @@
-function fb_query() {
+function fb_query(_args) {
 	/*globals Ti, Titanium, JSON, alert */
 	var win = Ti.UI.createWindow({
+		title:_args.title,
 		backgroundColor:'#fff'
 	});
 	//

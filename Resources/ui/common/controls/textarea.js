@@ -22,8 +22,9 @@ function textarea(_args) {
 	// create table view event listener
 	tableview.addEventListener('click', function(e) {
 		if (e.rowData.test) {
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow(_args);
+			var ExampleWindow = require(e.rowData.test);
+			_args.title = e.rowData.title;
+			win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

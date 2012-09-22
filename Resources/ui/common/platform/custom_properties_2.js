@@ -1,5 +1,7 @@
-function custom_props2() {
-	var win = Titanium.UI.createWindow();
+function custom_props2(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	//This can't happen until the window is opened. Otherwise properties attached to the window wont exist yet. -AD
 	win.addEventListener('open', function() {

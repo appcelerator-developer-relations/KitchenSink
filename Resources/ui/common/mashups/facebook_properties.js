@@ -1,6 +1,7 @@
-function fb_properties() {
+function fb_properties(_args) {
 	/*globals Titanium, Ti, alert, require, setTimeout, setInterval, JSON*/
 	var win = Ti.UI.createWindow({
+		title:_args.title,
 		backgroundColor:'#fff'
 	});
 	var sv = Ti.UI.createScrollView({

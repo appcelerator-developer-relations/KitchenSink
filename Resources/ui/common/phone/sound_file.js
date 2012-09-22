@@ -1,5 +1,7 @@
-function sound_file() {
-	var win = Titanium.UI.createWindow();
+function sound_file(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'etc/cricket.wav');
 	

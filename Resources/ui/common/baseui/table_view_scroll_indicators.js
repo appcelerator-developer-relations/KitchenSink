@@ -1,5 +1,7 @@
-function tv_scroll() {
-	var win = Ti.UI.createWindow();
+function tv_scroll(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	var showScrollIndicators = false;
 	

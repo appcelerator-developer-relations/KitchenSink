@@ -2,7 +2,9 @@ function Navigation_controller(){
 
 	NavController = {};
 
-	NavController.mainWindow = Ti.UI.createWindow();
+	NavController.mainWindow = Ti.UI.createWindow({
+		title:_args.title
+	});
 
 	// WINDOWS
 	NavController.win = Ti.UI.createWindow({title:'Navigation Group',backgroundColor:'#336699'});
