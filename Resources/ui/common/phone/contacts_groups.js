@@ -1,4 +1,4 @@
-function contacts_group(_args) {	
+function contacts_group(_args) {
 	var win = Ti.UI.createWindow({
 		title:_args.title
 	});

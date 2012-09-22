@@ -7,7 +7,7 @@
 function prefs(_args) {
 	var win = Ti.UI.createWindow({
 		title:_args.title
-	});	
+	});
 	var btn = Titanium.UI.createButton({
 		title:	'Click to Open Preferences'
 	});

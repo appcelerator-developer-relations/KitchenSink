@@ -1,4 +1,4 @@
-function contacts_remove(_args) {	
+function contacts_remove(_args) {
 	var win = Titanium.UI.createWindow({
 		title:_args.title
 	});

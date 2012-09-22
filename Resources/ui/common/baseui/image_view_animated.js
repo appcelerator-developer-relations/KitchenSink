@@ -1,4 +1,4 @@
-function image_view_anim(_args) {	
+function image_view_anim(_args) {
 	var win = Titanium.UI.createWindow({
 		title:_args.title
 	});

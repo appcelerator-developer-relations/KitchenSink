@@ -1,7 +1,7 @@
 function tv_custom_rowdata(_args) {
 	var win = Ti.UI.createWindow({
 		title:_args.title
-	});	
+	});
 	// create table view data object
 	var data = [
 		{title:'Row 1', hasChild:true, foo:'123'},

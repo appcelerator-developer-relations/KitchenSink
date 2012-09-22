@@ -5,7 +5,7 @@
 	// and start a background fetch of new data and seamlessly append
 	// the new data to the table automatically
 	//
-function tv_dynamic(_args) {	
+function tv_dynamic(_args) {
 	var win = Ti.UI.createWindow({
 		title:_args.title
 	});
