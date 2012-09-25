@@ -1,6 +1,6 @@
 function sound_record() {
 	var win = Titanium.UI.createWindow();
-	
+	var currentSessionMode = Titanium.Media.audioSessionMode;
 	Titanium.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAY_AND_RECORD;
 	var recording = Ti.Media.createAudioRecorder();
 	
@@ -19,6 +19,10 @@ function sound_record() {
 		if (!e.available && recording.recording) {
 			b1.fireEvent('click', {});
 		}
+	});
+	
+	win.addEventListener('close',function(e) {
+		Titanium.Media.audioSessionMode = currentSessionMode;
 	});
 	
 	var file;
