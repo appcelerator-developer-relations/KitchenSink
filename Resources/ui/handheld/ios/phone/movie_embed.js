@@ -77,8 +77,10 @@ function movie_embed() {
 			win.close();
 			dlg.show();
 		} else {
-			dlg.show();
+			activeMovie.setFullscreen(false);
+			activeMovie.stop();
 			win.close();
+			dlg.show();
 		}
 	});
 	
