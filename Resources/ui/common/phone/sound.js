@@ -27,17 +27,27 @@ function sound(_args) {
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});
-	
-	// create table view event listener
-	tableview.addEventListener('click', function(e)
-	{
-		if (e.rowData.test)
-		{
-			var ExampleWindow = require(e.rowData.test),
+
+	// Create table view event listener
+	// There is a delay before the "Remote URL" window is opened. The "isTestOpening" flag is added 
+	// to block any click event during the window is opening. (TIMOB-10095)
+	var isTestOpening = false;
+	tableview.addEventListener('click', function(e) {
+		if (!isTestOpening) {
+			if (e.rowData.test) {
+				isTestOpening = true;
+				var ExampleWindow = require(e.rowData.test);
 				win = new ExampleWindow();
-			_args.containingTab.open(win,{animated:true});
+				win.addEventListener("open", function() {
+					isTestOpening = false;
+				});
+				_args.containingTab.open(win, {
+					animated : true
+				});
+			}
 		}
 	});
+
 	
 	// add table view to the window
 	self.add(tableview);
