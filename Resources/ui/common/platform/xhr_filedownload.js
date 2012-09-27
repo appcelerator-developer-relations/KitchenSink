@@ -85,11 +85,22 @@ function xhr_download() {
 	{
 		ind.value = 0;
 		c = Titanium.Network.createHTTPClient();
-	
+
 		c.onload = function()
 		{
+			var data;
+			// Android only supports data of html-string
+			if (Titanium.Platform.name == 'android') {
+				var text = "<img src=\"data:image/png;base64," + this.responseData.toBase64() + "\" />";
+				var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "test.html");
+				f.write(text);
+				data = f.read();
+			} else {
+				data = this.responseData;
+			}
+
 			var wv = Ti.UI.createWebView({
-				data:this.responseData,
+				data:data,
 				bottom:0,
 				left:0,
 				right:0,
@@ -105,8 +116,8 @@ function xhr_download() {
 	
 		// open the client
 		if (Titanium.Platform.name == 'android') {
-			//android's WebView doesn't support binary data type
-			c.open('GET', 'http://translate.google.com/?hl=en');
+			//android's WebView doesn't support embedded PDF content
+			c.open('GET', 'http://developer.appcelerator.com/blog/wp-content/themes/newapp/images/appcelerator_avatar.png?s=48');
 		} else {
 			c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
 		}
