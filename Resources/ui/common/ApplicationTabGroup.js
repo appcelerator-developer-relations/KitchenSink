@@ -132,7 +132,7 @@ function ApplicationTabGroup() {
 	self.addEventListener('focus', function(e) {
 		//IOS fires with source tabGroup. Android with source tab
 		if( (e.source == baseUITab) || (e.source == controlsTab) || (e.source == phoneTab) || (e.source == platformTab) || (e.source == mashupsTab) || (e.source == self)){
-			// On iOS, when the "More..." tab is clicked, e.tab is undefined.
+			// On iOS, the "More..." tab is actually a tab container, not a tab. When it is clicked, e.tab is undefined.
 			if (e.tab) {
 				messageLabel.text = 'tab changed to ' + e.index + ' old index ' + e.previousIndex;
 				messageWin.open();
