@@ -1,5 +1,8 @@
 function image_views(_args) {
-	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
+	var win = Ti.UI.createWindow();
+	if (Titanium.Platform.osname !== 'blackberry') {
+		win.backgroundColor = '#fff';
+	}
 	// create table view data object
 	var data = [
 		{title:'Basic', hasChild:true, test:'ui/common/baseui/image_view_basic'},

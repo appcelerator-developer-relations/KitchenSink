@@ -134,8 +134,9 @@ function textfield_events() {
 	scrolly.add(instructions);
 	
 	if (isBlackberry) {
-		l.height = 40 * scaleY;
-		
+		l.font = { fontSize:8 };
+		l.width = 'auto';
+		instructions.font = { fontSize:8 };
 		instructions.top = 300 * scaleY;
 		
 		focusLabel.enabled = false;

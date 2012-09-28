@@ -313,67 +313,64 @@ function ti_platform() {
 		Titanium.API.info("Netmask: " + Titanium.Platform.netmask);
 	}
 	if (isBlackberry) {
-		l1.width = 200 * scaleX;
-		l1.height = 20 * scaleY;
+		l1.font = { fontSize:8 };
 		
-		l2.width = 200 * scaleX;
-		l2.height = 20 * scaleY;
+		l2.width = 'auto';
 		l2.top = 2 + 20 * scaleY;
+		l2.font = { fontSize:8 };
 		
-		l3.width = 200 * scaleX;
-		l3.height = 20 * scaleY;
+		l3.width = 'auto';
 		l3.top = 2 + 40 * scaleY;
+		l3.font = { fontSize:8 };
 		
-		l4.width = 200 * scaleX;
-		l4.height = 20 * scaleY;
+		l4.width = 'auto';
 		l4.top = 2 + 60 * scaleY;
+		l4.font = { fontSize:8 };
 		
-		l5.width = 200 * scaleX;
-		l5.height = 20 * scaleY;
 		l5.top = 2 + 80 * scaleY;
+		l5.font = { fontSize:8 };
 		
-		l6.width = 200 * scaleX;
-		l6.height = 20 * scaleY;
+		l6.width = 'auto';
 		l6.top = 2 + 100 * scaleY;
+		l6.font = { fontSize:8 };
 		
-		l7.width = 200 * scaleX;
-		l7.height = 20 * scaleY;
+		l7.width = 'auto';
 		l7.top = 2 + 120 * scaleY;
+		l7.font = { fontSize:8 };
 		
-		l8.width = 200 * scaleX;
-		l8.height = 20 * scaleY;
+		l8.width = 'auto';
 		l8.top = 2 + 140 * scaleY;
+		l8.font = { fontSize:8 };
 		
-		l9.width = 200 * scaleX;
-		l9.height = 20 * scaleY;
+		l9.width = 'auto';
 		l9.top = 2 + 160 * scaleY;
+		l9.font = { fontSize:8 };
 		
-		l11.width = 200 * scaleX;
-		l11.height = 20 * scaleY;
+		l11.width = 'auto';
 		l11.top = 2 + 180 * scaleY;
+		l11.font = { fontSize:8 };
 		
-		l12.width = 200 * scaleX;
-		l12.height = 20 * scaleY;
+		l12.width = 'auto';
 		l12.top = 2 + 200 * scaleY;
+		l12.font = { fontSize:8 };
 		
-		l13.width = 200 * scaleX;
-		l13.height = 20 * scaleY;
+		l13.width = 'auto';
 		l13.top = 2 + 220 * scaleY;
+		l13.font = { fontSize:8 };
 		
-		l15.width = 200 * scaleX;
-		l15.height = 20 * scaleY;
+		l15.width = 'auto';
 		l15.top = 2 + 240 * scaleY;
+		l15.font = { fontSize:8 };
 		
-		l16.width = 200 * scaleX;
-		l16.height = 20 * scaleY;
+		l16.width = 'auto';
 		l16.top = 2 + 260 * scaleY;
+		l16.font = { fontSize:8 };
 		
-		l17.width = 200 * scaleX;
-		l17.height = 20 * scaleY;
+		l17.width = 'auto';
 		l17.top = 2 + 280 * scaleY;
+		l17.font = { fontSize:8 };
 		
-		b.width = 200 * scaleX;
-		b.height = 40 * scaleY;
+		b.height = 'auto';
 		b.top = 300 * scaleY;
 		b.enabled = false;
 	}

@@ -1,8 +1,10 @@
 function PhoneWindow(title) {
 	var self = Ti.UI.createWindow({
 		title:title,
-		backgroundColor:'white'
 	});
+	if (Titanium.Platform.osname !== 'blackberry') {
+		self.backgroundColor = 'white';
+	}
 	
 	var isMobileWeb = Titanium.Platform.osname == 'mobileweb';
 	

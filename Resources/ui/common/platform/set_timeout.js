@@ -29,6 +29,11 @@ function set_timeout() {
 		label.text = "3 sec timer fired in\n" + (new Date().getTime()-started)/1000 + " seconds";
 	},3000);
 
+	if (Titanium.Platform.name === 'blackberry') {
+		label.font = {fontSize:10};
+		label.top = 600;
+	}
+
 	return win;
 };
 

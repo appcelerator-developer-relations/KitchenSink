@@ -21,7 +21,7 @@ function slider_min_max() {
 	win.add(maxLabel);
 	
 	var posLabel = Ti.UI.createLabel({
-		bottom: 10 * scaleY, width:100 * scaleX, left: 120 * scaleX,
+		bottom: 10 * scaleY, width:100, left: 120 * scaleX,
 		text : 'Pos: 0'
 	});
 	win.add(posLabel);
@@ -42,7 +42,7 @@ function slider_min_max() {
 	
 	var btn1 = Ti.UI.createButton({
 		'title' : '0/0/100',
-		left : 10 * scaleX, top: 10 * scaleY, height:30 * scaleY, width:80 * scaleX
+		left : 10 * scaleX, top: 10, height:30, width:80
 	});
 	btn1.addEventListener('click', function() {
 		slider.min = 0;
@@ -53,7 +53,7 @@ function slider_min_max() {
 	
 	var btn2 = Ti.UI.createButton({
 		'title' : '0/5/10',
-		left : 10 * scaleX, top: 40 * scaleY, height:30 * scaleY, width:80 * scaleX
+		left : 10 * scaleX, top: 40, height:30, width:80
 	});
 	btn2.addEventListener('click', function() {
 		slider.min = 0;
@@ -64,7 +64,7 @@ function slider_min_max() {
 	
 	var btn3 = Ti.UI.createButton({
 		'title' : '-5/75/105',
-		left : 10 * scaleX, top: 70 * scaleY, height:30 * scaleY, width:80 * scaleX
+		left : 10 * scaleX, top: 70, height:30, width:80
 	});
 	btn3.addEventListener('click', function() {
 		slider.min = -5;

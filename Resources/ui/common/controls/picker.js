@@ -1,8 +1,10 @@
 function picker(_args) {
 	var self = Ti.UI.createWindow({
 		title:_args.title,
-		backgroundColor:'white'
 	});
+	if (Titanium.Platform.osname !== 'blackberry') {
+		self.backgroundColor = 'white';
+	}
 	
 	// create table view data object
 	var isAndroid = Ti.Platform.osname === 'android';

@@ -1,8 +1,10 @@
 function textarea(_args) {
 	var self = Ti.UI.createWindow({
 		title:_args.title,
-		backgroundColor:'white'
 	});
+	if (Titanium.Platform.osname !== 'blackberry') {
+		self.backgroundColor = 'white';
+	}
 
 	// create label view data object
 	var data = [

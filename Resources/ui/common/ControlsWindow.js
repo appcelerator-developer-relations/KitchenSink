@@ -1,8 +1,10 @@
 function ControlsWindow(title) {
 	var self = Ti.UI.createWindow({
 		title:title,
-		backgroundColor:'white'
 	});
+	if (Titanium.Platform.osname !== 'blackberry') {
+		self.backgroundColor = 'white';
+	}
 	
 	// create table view data object
 	var data = [

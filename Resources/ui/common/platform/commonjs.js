@@ -9,7 +9,7 @@ function commonjs() {
 	var win = Ti.UI.createWindow();
 	
 	var view = Ti.UI.createView({
-		backgroundColor:"white",
+		backgroundColor:isBlackberry? undefined : "white",
 		layout:"vertical"
 	});
 	
