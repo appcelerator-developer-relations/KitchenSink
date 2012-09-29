@@ -18,15 +18,19 @@ function PhoneWindow(title) {
 	if (Ti.Platform.model != 'Kindle Fire' && Ti.Platform.osname != 'mobileweb') {
 		data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts'});
 	}
-	data.push({title:'Sound', hasChild:!isMobileWeb, test:'ui/common/phone/sound', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
-	data.push({title:'Photo Gallery', hasChild:!isMobileWeb, test:'ui/common/phone/photo_gallery', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
-	
+	if (!isMobileWeb) {
+		data.push(
+			{title:'Sound', hasChild:true, test:'ui/common/phone/sound'},
+			{title:'Photo Gallery', hasChild:true, test:'ui/common/phone/photo_gallery'}
+		);
+	}
+
 	data.push({title:'Orientation', hasChild:true, test:'ui/common/phone/orientation'});
 	
 	
 	//Donot include camera if it is iPad 1st gen.
-	if ((Titanium.Platform.model !== 'iPad1,1') && ( Ti.Platform.model != 'Kindle Fire')) {
-		data.push({title:'Camera', hasChild:!isMobileWeb, test:'ui/common/phone/camera', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
+	if ((Titanium.Platform.model !== 'iPad1,1') && ( Ti.Platform.model != 'Kindle Fire') && (!isMobileWeb)) {
+		data.push({title:'Camera', hasChild:true, test:'ui/common/phone/camera'});
 	}
 	
 	// add iphone specific tests
