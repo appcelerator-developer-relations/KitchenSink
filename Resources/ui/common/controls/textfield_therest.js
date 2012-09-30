@@ -334,7 +334,7 @@ function textfield_rest() {
 		b8.enabled = false;
 		b9.enabled = false;
 		
-		l.height = 40 * scaleY;
+		l.font = { fontSize:8 };
 	}
 	win.add(l);
 

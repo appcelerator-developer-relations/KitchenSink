@@ -102,6 +102,9 @@ function views_zindex() {
 	
 	if (isBlackberry) {
 		l2.top = 250 * scaleY;
+		l.height = l.width = l2.height = l2.width = 'auto';
+		l.font = { fontSize:6 };
+		l2.font = { fontSize:6 };
 	}
 	win.add(l2);
 	

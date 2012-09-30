@@ -94,8 +94,7 @@ if (Ti.version < 2.0 ) {
 	Ti.API.info("should be def, was = "+L("welcome_message2","def"));
 	Ti.API.info("should be 1, was = "+String.format('%d',1));
 	
-	// TODO: This is failing
-	//Ti.API.info("should be 1.0, was = "+String.format('%1.1f',1));
+	Ti.API.info("should be 1.0, was = "+String.format('%1.1f',1));
 	
 	Ti.API.info("should be hello, was = "+String.format('%s','hello'));
 	

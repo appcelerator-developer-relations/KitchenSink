@@ -8,7 +8,7 @@ function win_standalone(_args) {
 	var scaleX = 1;
 	var scaleY = 1;
 	if (isBlackberry) {
-		scaleX += 1;
+		scaleX += 1.5;
 		scaleY += 2;
 	}	
 	var win = Titanium.UI.createWindow();
@@ -30,7 +30,7 @@ function win_standalone(_args) {
 	var b1 = Titanium.UI.createButton({
 		title:'Open (Plain)',
 		width:200 * scaleX,
-		height:40 * scaleY,
+		height:isBlackberry ? 'auto' : 40,
 		top:10 * scaleY
 	});
 	
@@ -44,12 +44,9 @@ function win_standalone(_args) {
 		// create a button to close window
 		var b = Titanium.UI.createButton({
 			title:'Close',
-			height:30 * scaleY,
-			width:150 * scaleX
+			height:isBlackberry ? 'auto' : 30,
+			width:isBlackberry ? 'auto' : 150
 		});
-		if (isBlackberry) {
-			b.height = 40 * scaleY;
-		}
 		w.add(b);
 		b.addEventListener('click', function()
 		{
@@ -66,7 +63,7 @@ function win_standalone(_args) {
 		var b2 = Titanium.UI.createButton({
 			title:'Open (Nav Bar Covered)',
 			width:200 * scaleX,
-			height:40 * scaleY,
+			height:isBlackberry ? 'auto' : 40,
 			top:60 * scaleY
 		});
 		
@@ -114,7 +111,7 @@ function win_standalone(_args) {
 		var b3 = Titanium.UI.createButton({
 			title:'Traditional Modal',
 			width:200 * scaleX,
-			height:40 * scaleY,
+			height:isBlackberry ? 'auto' : 40,
 			top:110 * scaleY
 		});
 		
@@ -143,9 +140,9 @@ function win_standalone(_args) {
 	//
 	var b4 = Titanium.UI.createButton({
 		title:'Open (Animation Fun)',
-		width:200 * scaleX,
-		height:40 * scaleY,
-		top:160 * scaleY
+		width:200,
+		height:40,
+		top:160
 	});
 	
 	b4.addEventListener('click', function()
@@ -205,9 +202,9 @@ function win_standalone(_args) {
 	//
 	var b5 = Titanium.UI.createButton({
 		title:'Open (Nav Bar Visible)',
-		width:200 * scaleX,
-		height:40 * scaleY,
-		top:210 * scaleY
+		width:200,
+		height:40,
+		top:210
 	});
 	
 	b5.addEventListener('click', function()
@@ -258,7 +255,7 @@ function win_standalone(_args) {
 	var b6 = Titanium.UI.createButton({
 		title:'Open (Fullscreen)',
 		width:200 * scaleX,
-		height:40 * scaleY,
+		height:isBlackberry ? 'auto' : 40,
 		top:260 * scaleY
 	});
 	
@@ -271,17 +268,14 @@ function win_standalone(_args) {
 		// create a button to close window
 		var b = Titanium.UI.createButton({
 			title:'Close',
-			height:30 * scaleY,
-			width:150 * scaleX
+			height:isBlackberry ? 'auto' : 30,
+			width:isBlackberry ? 'auto' : 150
 		});
 		w.add(b);
 		b.addEventListener('click', function()
 		{
 			w.close();
 		});
-		if (isBlackberry) {
-			b.height = 40 * scaleY;
-		}
 	
 		w.open({fullscreen:true});
 	});
@@ -292,9 +286,9 @@ function win_standalone(_args) {
 	//
 	var b7 = Titanium.UI.createButton({
 		title:'Open (Toolbar)',
-		width:200 * scaleX,
-		height:40 * scaleY,
-		top:310 * scaleY
+		width:200,
+		height:40,
+		top:310
 	});
 	
 	b7.addEventListener('click', function()

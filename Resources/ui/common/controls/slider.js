@@ -1,8 +1,10 @@
 function slider(_args) {
 	var self = Ti.UI.createWindow({
 		title:_args.title,
-		backgroundColor:'white'
 	});
+	if (Titanium.Platform.osname !== 'blackberry') {
+		self.backgroundColor = 'white';
+	}
 	
 	var data = [
 		{title:'Basic', hasChild:true, test:'ui/common/controls/slider_basic'},

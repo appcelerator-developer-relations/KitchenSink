@@ -1,7 +1,8 @@
 function BaseUIWindow(title) {
+	var isBlackberry = Titanium.Platform.osname === 'blackberry';
 	var self = Ti.UI.createWindow({
 		title:title,
-		backgroundColor:'white'
+		backgroundColor: isBlackberry ? undefined : 'white'
 	});
 	
 	var isMobileWeb = Titanium.Platform.osname == 'mobileweb';
@@ -61,8 +62,6 @@ function BaseUIWindow(title) {
 				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
 			if (Ti.Platform.name == "android") {
 				
-			} else if (Ti.Platform.name === "blackberry") {
-				win.backgroundColor = "#000";
 			} else {
 				win.backgroundColor = "#fff";
 				win.barColor = "#111";
@@ -110,7 +109,6 @@ function BaseUIWindow(title) {
 		borderRadius:10
 	});
 	
-	/* BB TODO: Not implemented yet createView
 	var view = Titanium.UI.createView({
 		backgroundColor:'#000',
 		opacity:0.7,
@@ -118,7 +116,6 @@ function BaseUIWindow(title) {
 		width:250,
 		borderRadius:10
 	});
-	*/
 	
 	var label = Titanium.UI.createLabel({
 		color:'#fff',
@@ -127,9 +124,7 @@ function BaseUIWindow(title) {
 		width:'auto',
 		height:'auto'
 	});
-	/* BB TODO: Not implemented yet
 	win.add(view);
-	*/
 	win.add(label);
 	
 	/* BB TODO: Not implemented yet Ti.App

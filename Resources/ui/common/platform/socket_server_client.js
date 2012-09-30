@@ -8,7 +8,8 @@ function sock_server_client() {
 	};
 	var win = Ti.UI.createWindow();
 	
-	win.add(Ti.UI.createLabel({text:"Listening socket output:", color:'white', top: 40}));
+	win.add(Ti.UI.createLabel({text:"Listening socket output:", color:'white', top: 40,
+				   font:isBlackberry ? {fontSize:8} : {} }));
 	var listenerStatusArea;
 	if (isBlackberry) {
 		listenerStatusArea = Ti.UI.createTextField({
@@ -38,7 +39,8 @@ function sock_server_client() {
 	}
 	win.add(listenerStatusArea);
 	
-	win.add(Ti.UI.createLabel({text:"Client socket output:", color:'white', bottom: 220}));
+	win.add(Ti.UI.createLabel({text:"Client socket output:", color:'white', bottom: 220,
+				   font:isBlackberry ? {fontSize:8} : {}, top:isBlackberry ? 600 : undefined }));
 	var clientStatusArea;
 	if (isBlackberry) {
 		clientStatusArea = Ti.UI.createTextField({
@@ -193,7 +195,7 @@ function sock_server_client() {
 		Ti.Android.currentActivity.addEventListener('destroy', cleanup);
 	}
 	if (isBlackberry) {
-		clientStatusArea.top = 140 * scaleY;
+		clientStatusArea.top = 700;
 	}
 
 	return win;

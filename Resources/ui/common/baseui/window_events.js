@@ -106,7 +106,7 @@ function window_events() {
 	var l0 = Titanium.UI.createLabel({
 		text:'try to trigger each event',
 		bottom:50 * scaleX,
-		width:300 * scaleY,
+		width:300,
 		height:'auto',
 		textAlign:'center'
 	});
@@ -117,7 +117,7 @@ function window_events() {
 		text:'touchstart not fired',
 		top:90 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:14,fontFamily:'Helvetica Neue'}
 	});
@@ -128,7 +128,7 @@ function window_events() {
 		text:'touchmove not fired',
 		top:110 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -139,7 +139,7 @@ function window_events() {
 		text:'touchend not fired',
 		top:130 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -150,7 +150,7 @@ function window_events() {
 		text:'touchcancel not fired',
 		top:270 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -161,7 +161,7 @@ function window_events() {
 		text:'singletap not fired',
 		top:150 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -172,7 +172,7 @@ function window_events() {
 		text:'doubletap not fired',
 		top:170 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -183,7 +183,7 @@ function window_events() {
 		text:'twofingertap not fired',
 		top:190 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -194,7 +194,7 @@ function window_events() {
 		text:'swipe not fired',
 		top:210 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -205,7 +205,7 @@ function window_events() {
 		text:'click not fired',
 		top:230 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -216,7 +216,7 @@ function window_events() {
 		text:'dblclick not fired',
 		top:250 * scaleY,
 		left:10 * scaleX,
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		font:{fontSize:13,fontFamily:'Helvetica Neue'}
 	});
@@ -385,45 +385,37 @@ function window_events() {
 			},200);
 		});
 	}
-	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+
 	if (isBlackberry) {
-		focusLabel.top = 15 * scaleY;
-		blurLabel.height = 15 * scaleY;
-		blurLabel.width = 200 * scaleX;	
+		l0.top = 1000;
 		
-		openLabel.height = 15 * scaleY;
-		openLabel.width = 200 * scaleX;	
+		l0.width = 'auto';
+		l1.width = 'auto';
+		l2.width = 'auto';
+		l3.width = 'auto';
+		l4.width = 'auto';
+		l5.width = 'auto';
+		l6.width = 'auto';
+		l7.width = 'auto';
+		l8.width = 'auto';
+		l9.width = 'auto';
+		l10.width = 'auto';
 		
-		closeLabel.height = 15 * scaleY;
-		closeLabel.width = 200 * scaleX;	
-		
-		l0.height = 15 * scaleY;
-		l1.height = 15 * scaleY;
-		l2.height = 15 * scaleY;
-		l3.height = 15 * scaleY;
-		l4.height = 15 * scaleY;
-		l5.height = 15 * scaleY;
-		l6.height = 15 * scaleY;
-		l7.height = 15 * scaleY;
-		l8.height = 15 * scaleY;
-		l9.height = 15 * scaleY;
-		l10.height = 15 * scaleY;
-		
-		focusLabel.color = 'white';
-		blurLabel.color = 'white';
-		openLabel.color = 'white';
-		closeLabel.color = 'white';
-		l0.color = 'white';
-		l1.color = 'white';
-		l2.color = 'white';
-		l3.color = 'white';
-		l4.color = 'white';
-		l5.color = 'white';
-		l6.color = 'white';
-		l7.color = 'white';
-		l8.color = 'white';
-		l9.color = 'white';
-		l10.color = 'white';
+		focusLabel.font = { fontSize:8 };
+		blurLabel.font = { fontSize:8 };
+		openLabel.font = { fontSize:8 };
+		closeLabel.font = { fontSize:8 };
+		l0.font = { fontSize:8 };
+		l1.font = { fontSize:8 };
+		l2.font = { fontSize:8 };
+		l3.font = { fontSize:8 };
+		l4.font = { fontSize:8 };
+		l5.font = { fontSize:8 };
+		l6.font = { fontSize:8 };
+		l7.font = { fontSize:8 };
+		l8.font = { fontSize:8 };
+		l9.font = { fontSize:8 };
+		l10.font = { fontSize:8 };
 	}
 	return win;
 };

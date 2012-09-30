@@ -43,7 +43,7 @@ function view_evt_interaction() {
 	
 	var l = Ti.UI.createLabel({
 		text:'click on box',
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		top:10 * scaleY,
 		font:{fontSize:13}
@@ -51,24 +51,25 @@ function view_evt_interaction() {
 	win.add(l);
 	var l2 = Ti.UI.createLabel({
 		text:'click on label',
-		width:300 * scaleX,
+		width:300,
 		height:'auto',
 		top:25 * scaleY,
 		font:{fontSize:13}
 	});
 	win.add(l2);
-	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
+
 	if (isBlackberry) {
-		label.width = 50 * scaleX;
-		label.height = 15 * scaleY;
 		label.top = 100 * scaleX;
-		label.left = 100 * scaleX
+		label.font = {fontSize: 10};
 		
-		l.height = 15 * scaleY;
-		l2.height = 15 * scaleY;
-		
+		view1.top = 100 * scaleY;
 		view2.top = 100 * scaleY;
 		view2.left = 100 * scaleX;
+
+		l.font = {fontSize: 8};
+		l.width = 'auto';
+		l2.font = {fontSize: 8};
+		l2.width = 'auto';
 	}
 	view2.addEventListener('click',function()
 	{

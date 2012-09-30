@@ -85,15 +85,11 @@ function view_pointconv() {
 		width:'auto'
 	});
 	
-	//TODO review this part of code if layout height/widht - 'auto' and right/bottom properties will be implemented for BB
 	if (isBlackberry) {
-		label1.width = 300 * scaleX;
-		label1.height = 40 * scaleY;
 		label1.top = 250 * scaleY;
-		
-		label2.width = 300 * scaleX;
-		label2.height = 40 * scaleY;
+		label1.font = { fontSize:'6' };
 		label2.top = 290 * scaleY;
+		label2.font = { fontSize:'6' };
 	}
 	win.add(greenView);
 	win.add(yellowView);

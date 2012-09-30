@@ -14,8 +14,8 @@ function win_props() {
 	//
 	var button = Titanium.UI.createButton({
 		title:'Change BG Color',
-		width:220 * scaleX,
-		height:40 * scaleY,
+		width:isBlackberry ? 'auto' : 220,
+		height:isBlackberry ? 'auto' : 40,
 		top:10 * scaleY
 	});
 	button.addEventListener('click', function()
@@ -30,8 +30,8 @@ function win_props() {
 	//
 	var buttonImage = Titanium.UI.createButton({
 		title:'Change BG Image',
-		width:220 * scaleX,
-		height:40 * scaleY,
+		width:isBlackberry ? 'auto' : 220,
+		height:isBlackberry ? 'auto' : 40,
 		top:60 * scaleY
 	});
 	buttonImage.addEventListener('click', function()
@@ -45,8 +45,8 @@ function win_props() {
 	//
 	var buttonWidthHeight = Titanium.UI.createButton({
 		title:'Toggle Height/Width',
-		width:220 * scaleX,
-		height:40 * scaleY,
+		width:isBlackberry ? 'auto' : 220,
+		height:isBlackberry ? 'auto' : 40,
 		top:110 * scaleY
 	});
 	var full=true;
@@ -83,8 +83,8 @@ function win_props() {
 	//
 	var buttonOpacity = Titanium.UI.createButton({
 		title:'Toggle Opacity',
-		width:220 * scaleX,
-		height:40 * scaleY,
+		width:isBlackberry ? 'auto' : 220,
+		height:isBlackberry ? 'auto' : 40,
 		top:160 * scaleY
 	});
 	var opacity=true;
@@ -109,60 +109,39 @@ function win_props() {
 	//
 	var buttonLayout = Titanium.UI.createButton({
 		title:'Layout/Dimension Properties',
-		width:220 * scaleX,
-		height:40 * scaleY,
-		top:210 * scaleY 
+		width:220,
+		height:40,
+		top:210
 	});
 	var layout=true;
 	var win1 = null;
 	var win2 = null;
 	buttonLayout.addEventListener('click', function()
-	{	
+	{
 		if (layout)
 		{
-			//TODO remove this when TIMOB-10524 bug will be fixed
-			if (!isBlackberry) {
 				win1 = Titanium.UI.createWindow({
-					height:50 * scaleY,
-					width:200 * scaleX,
-					bottom:50 * scaleY,
-					left:10 * scaleX,
+					height:50,
+					width:200,
+					bottom:50,
+					left:10,
 					backgroundColor:'#336699',
 					borderRadius:10,
 					zIndex:3
 				});
 				win2 = Titanium.UI.createWindow({
-					height:50 * scaleY,
-					width:200 * scaleX,
-					bottom:60 * scaleY,
-					left:20 * scaleX,
+					height:50,
+					width:200,
+					bottom:60,
+					left:20,
 					backgroundColor:'pink',
 					borderRadius:10,
 					zIndex:1
 				});
-			} else {
-				win1 = Titanium.UI.createWindow({
-					height:50 * scaleY,
-					width:200 * scaleX,
-					bottom:50 * scaleY,
-					left:10 * scaleX,
-					backgroundColor:'#336699',
-					borderRadius:10
-				});
-				win2 = Titanium.UI.createWindow({
-					height:50 * scaleY,
-					width:200 * scaleX,
-					bottom:60 * scaleY,
-					left:20 * scaleX,
-					backgroundColor:'pink',
-					borderRadius:10
-				});
-			}
 			
 			win1.open();
 			win2.open();
 			layout=false;
-
 			win.addEventListener('close', function() {
 				win1.close();
 				win2.close();
@@ -183,9 +162,9 @@ function win_props() {
 	//
 	var buttonBorder = Titanium.UI.createButton({
 		title:'Toggle Border Properties',
-		width:220 * scaleX,
-		height:40 * scaleY,
-		top:260 * scaleY
+		width:220,
+		height:40,
+		top:260
 	});
 	var border=true;
 	buttonBorder.addEventListener('click', function()
@@ -213,6 +192,8 @@ function win_props() {
 	}
 	if (isBlackberry) {
 		buttonImage.enabled = false;
+		/* On BB a window covers the whole screen and masks everything underneath */
+		win.remove(buttonLayout);
 	}
 	
 	return win;

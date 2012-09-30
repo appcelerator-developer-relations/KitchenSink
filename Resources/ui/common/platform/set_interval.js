@@ -19,8 +19,7 @@ function set_interval() {
 		label.text = "Interval fired " + count;
 	},10);
 	if (isBlackberry) {
-		label.width = Ti.Platform.displayCaps.platformWidth;
-		label.height = 80;
+		label.font = {fontSize:10};
 	}
 
 	return win;

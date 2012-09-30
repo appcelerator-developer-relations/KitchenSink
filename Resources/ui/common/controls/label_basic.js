@@ -4,7 +4,7 @@ function label_basic() {
 	var scaleY = 1;
 	if (isBlackberry) {
 		scaleX += 1;
-		scaleY += 2;
+		scaleY += 1.75;
 	};
 	var win = Ti.UI.createWindow();
 	
@@ -25,14 +25,10 @@ function label_basic() {
 		shadowColor:'#aaa',
 		shadowOffset:{x:5,y:5},
 		color:'#900',
-		font:{fontSize:48, fontStyle:'italic'},
+		font:{fontSize:isBlackberry ? 24 : 48, fontStyle:'italic'},
 		top:170 * scaleY,
 		textAlign:'center'
 	});
-	
-	if (isBlackberry) {
-		l2.width = 400 * scaleX;		
-	};
 	
 	win.add(l2);
 	
@@ -73,7 +69,7 @@ function label_basic() {
 		{
 			l2.color = '#ff9900';
 			l2.shadowColor = '#336699';
-			l2.font = {fontSize:20};
+			l2.font = {fontSize:isBlackberry ? 15 : 20};
 			changed=true;
 			size.text = (isBlackberry) ? l2.getHeight() + ' ' + l2.getWidth() :
 										l2.size.height + ' ' + l2.size.width;  // where is size defined?
@@ -82,7 +78,7 @@ function label_basic() {
 		{
 			l2.color = '#900';
 			l2.shadowColor = '#aaa';
-			l2.font = {fontSize:48};
+			l2.font = {fontSize:isBlackberry ? 24 : 48};
 			size.text = (isBlackberry) ? l2.getHeight() + ' ' + l2.getWidth() : 
 										l2.size.height + ' ' + l2.size.width;
 			changed=false;

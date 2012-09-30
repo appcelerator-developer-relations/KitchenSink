@@ -3,7 +3,7 @@ function slider_basic() {
 	var scaleX = 1;
 	var scaleY = 1;
 	if (isBlackberry) {
-		scaleX += 1;
+		scaleX += 1.5;
 		scaleY += 2;
 	}
 	var win = Ti.UI.createWindow();
@@ -28,7 +28,7 @@ function slider_basic() {
 		min:0,
 		max:10,
 		value:5,
-		width:100 * scaleX,
+		width:100,
 		height:'auto',
 		top:30 * scaleY,
 		selectedThumbImage:'/images/slider_thumb.png',
@@ -60,8 +60,8 @@ function slider_basic() {
 			fontSize:15
 		},
 		textAlign:'center',
-		top:70 * scaleY,
-		width:300 * scaleX,
+		top:70,
+		width:300,
 		height:'auto'
 	});
 	
@@ -69,9 +69,9 @@ function slider_basic() {
 		min:0,
 		max:100,
 		value:25,
-		width:268 * scaleX,
-		height:11 * scaleY,
-		top:90 * scaleY,
+		width:268,
+		height:11,
+		top:90,
 		leftTrackImage:'/images/slider_orangebar.png',
 		rightTrackImage:'/images/slider_lightbar.png',
 		thumbImage:'/images/slider_thumb.png'
@@ -80,11 +80,10 @@ function slider_basic() {
 	{
 		customSliderLabel.text = 'Custom Slider - value = ' + Math.round(e.value);
 	});
-	//TODO remove this lines when height = 'auto' will be supported for Blackberry
+
 	if (isBlackberry) {
-		basicSliderLabel.height = 20 * scaleY;
-		basicSlider.height = 100 * scaleY;
 		basicSlider.width = Ti.Platform.displayCaps.platformWidth;
+		basicSliderLabel.font = { fontSize:8 };
 	}
 	
 	
@@ -101,8 +100,8 @@ function slider_basic() {
 	{
 		basicSlider.value = 2;
 		if (!isBlackberry) {
-			basicSlider.width = 268 * scaleX;
-			basicSlider.height = (Ti.Platform.osname == 'android') ? 50 * scaleY : 11 * scaleY;
+			basicSlider.width = 268;
+			basicSlider.height = (Ti.Platform.osname == 'android') ? 50 : 11;
 			basicSlider.leftTrackImage = '/images/slider_orangebar.png';
 			basicSlider.rightTrackImage = '/images/slider_lightbar.png';
 			basicSlider.thumbImage = '/images/slider_thumb.png';
@@ -144,9 +143,9 @@ function slider_basic() {
 	//
 	var navbarButton = Titanium.UI.createButton({
 		title:'Toggle Slider in Navbar',
-		height:40 * scaleY,
-		width:200 * scaleX,
-		top:220 * scaleY
+		height:40,
+		width:200,
+		top:220
 	});
 	var inNavbar = false;
 	navbarButton.addEventListener('click', function()
@@ -157,7 +156,7 @@ function slider_basic() {
 				min:0,
 				max:10,
 				value:5,
-				width:100 * scaleX
+				width:100
 			});
 			win.setRightNavButton(navbarSlider);
 			inNavbar = true;
@@ -174,9 +173,9 @@ function slider_basic() {
 	//
 	var toolbarButton = Titanium.UI.createButton({
 		title:'Toggle Slider in Toolbar',
-		height:40 * scaleY,
-		width:200 * scaleX,
-		top:270 * scaleY
+		height:40,
+		width:200,
+		top:270
 	
 	});
 	var inToolbar = false;
@@ -188,7 +187,7 @@ function slider_basic() {
 				min:0,
 				max:10,
 				value:5,
-				width:200 * scaleX
+				width:200
 			});
 			win.setToolbar([toolbarSlider],{animated:true});
 			inToolbar = true;
@@ -205,9 +204,9 @@ function slider_basic() {
 	//
 	var titleButton = Titanium.UI.createButton({
 		title:'Toggle Slider in Title',
-		height:40 * scaleY,
-		width:200 * scaleX,
-		top:320 * scaleY
+		height:40,
+		width:200,
+		top:320
 	});
 	
 	
@@ -226,7 +225,7 @@ function slider_basic() {
 				min:0,
 				max:10,
 				value:5,
-				width:80 * scaleY,
+				width:80,
 				height:'auto'
 			});
 			win.titleControl = titleSlider;

@@ -22,9 +22,6 @@ function switch_control() {
 		top:10 * scaleY,
 		height:'auto'
 	});
-	if (isBlackberry) {
-		basicSwitchLabel.height = 40 * scaleY;
-	}
 	
 	var basicSwitch = Titanium.UI.createSwitch({
 		value:false,
@@ -32,6 +29,7 @@ function switch_control() {
 	});
 	
 	if (isBlackberry) {
+		basicSwitchLabel.font = { fontSize:8 };
 		alert('Custom EventListener is not supported for Blackberry yet');
 	}
 	basicSwitch.addEventListener('change',function(e)

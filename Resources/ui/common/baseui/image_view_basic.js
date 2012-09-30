@@ -23,19 +23,18 @@ function image_view_basic() {
 	
 	var l = Titanium.UI.createLabel({
 		text:'Click Image',
-		bottom:30 * scaleY,
+		bottom:30,
 		color:'#999',
 		height:'auto',
-		width:300 * scaleX,
+		width:300,
 		textAlign:'center'
 	});
 	win.add(l);
 	
-	//TODO review this part of code if layout height'auto' property will be implemented for BB
 	if (isBlackberry){
-		l.height = 40 * scaleY;
-		l.top = 200 * scaleY;
-		l.width = Titanium.Platform.displayCaps.platformWidth;
+		l.top = 600;
+		l.width = 'auto';
+		l.font = { fontSize:5 };
 		imageView.image = '/images/flower.jpg';
 	}
 	function clicker()
