@@ -59,7 +59,6 @@ function sound(_args) {
 					animated : true
 				});
 			}
-
 		});
 	}
 
