@@ -32,6 +32,7 @@ function tab_group(_args) {
 			var newtab = tabGroup.tabs[5];
 			tabGroup.removeTab(newtab);
 		}
+		openLabel.text = 'Tab Group has ' + tabGroup.tabs.length + ' tabs';
 	});
 	
 	//
