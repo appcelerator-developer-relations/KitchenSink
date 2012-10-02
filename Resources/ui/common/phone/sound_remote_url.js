@@ -1,11 +1,28 @@
 function sound_remote_url() {
 	var win = Titanium.UI.createWindow();
+	var isIOS = Titanium.Platform.name == 'iPhone OS';
 	
 	var url = "http://www.archive.org/download/CelebrationWav/1.wav";
 	
-	// Loading remote url takes time and blocks the window to open.
-	// Will set the url after the window opens.
+	// On iOS, loading remote url takes time and blocks the window to open.
+	// Set the url after the window opens on iOS.
 	var sound = Titanium.Media.createSound();
+	if (isIOS) {
+		// Show Actvity Indicator when loading the remote url.
+		var actInd = Titanium.UI.createActivityIndicator({
+			bottom : 10,
+			style : Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+			message : "Loading URL ..."
+		});
+		win.add(actInd);
+		actInd.show();
+		win.addEventListener('open', function() {
+			sound.url = url;
+			actInd.hide();
+		});
+	} else {
+		sound.url = url;
+	}
 
 	//
 	// PLAY
@@ -191,14 +208,6 @@ function sound_remote_url() {
 	win.addEventListener('close', function()
 	{
 		clearInterval(i);
-	});
-
-	//
-	//  OPEN EVENT - Set URL after the window opens.
-	//
-	win.addEventListener('open', function()
-	{
-		sound.url = url;
 	});
 
 	return win;
