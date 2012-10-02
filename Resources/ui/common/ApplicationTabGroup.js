@@ -103,20 +103,15 @@ function ApplicationTabGroup() {
 	});
 	messageWin.add(messageView);
 	messageWin.add(messageLabel);
-	/*
+	
 	self.addEventListener('close', function(e) {
-		messageLabel.text = 'tab group close event';
-		messageWin.open();
-		
-		if (Ti.Platform.osname == "iphone") {
-			self.open();
+		if (e.source == self){
+			if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {
+				self.open();
+			}
 		}
-		
-		setTimeout(function() {
-			messageWin.close({opacity:0,duration:500});
-		},1000);
 	});
-	*/
+	
 	self.addEventListener('open',function(e) {
 		if (e.source == self){
 			Titanium.UI.setBackgroundColor('#fff');
