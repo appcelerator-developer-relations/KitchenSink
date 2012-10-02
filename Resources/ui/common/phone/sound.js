@@ -1,6 +1,4 @@
 function sound(_args) {
-	var isIOS = (Titanium.Platform.name == 'iPhone OS');
-
 	var self = Ti.UI.createWindow();
 	// create table view data object
 	var data = [
@@ -12,7 +10,7 @@ function sound(_args) {
 	
 	];
 	
-	if (isIOS)
+	if (Titanium.Platform.name == 'iPhone OS')
 	{
 		data.push({title:'Record', hasChild:true, test:'ui/handheld/ios/phone/sound_record'});
 		data.push({title:'Audio Session Mode', hasChild:true, test:'ui/handheld/ios/phone/sound_session_mode'});
@@ -31,36 +29,13 @@ function sound(_args) {
 	});
 
 	// Create table view event listener
-	// On iOS, there is a delay before the "Remote URL" window is opened. The "isTestOpening" flag is added 
-	// to block any click event during the window is opening. (TIMOB-10095)
-	if (isIOS) {
-		var isTestOpening = false;
-		tableview.addEventListener('click', function(e) {
-			if (!isTestOpening) {
-				if (e.rowData.test) {
-					isTestOpening = true;
-					var ExampleWindow = require(e.rowData.test);
-					win = new ExampleWindow();
-					win.addEventListener("open", function() {
-						isTestOpening = false;
-					});
-					_args.containingTab.open(win, {
-						animated : true
-					});
-				}
-			}
-		});
-	} else {
-		tableview.addEventListener('click', function(e) {
-			if (e.rowData.test) {
-				var ExampleWindow = require(e.rowData.test);
-				win = new ExampleWindow();
-				_args.containingTab.open(win, {
-					animated : true
-				});
-			}
-		});
-	}
+	tableview.addEventListener('click', function(e) {
+		if (e.rowData.test) {
+			var ExampleWindow = require(e.rowData.test);
+			win = new ExampleWindow();
+			_args.containingTab.open(win, {animated : true});
+		}
+	});
 
 	
 	// add table view to the window

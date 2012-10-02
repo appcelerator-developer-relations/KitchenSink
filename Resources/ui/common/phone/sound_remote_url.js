@@ -3,9 +3,10 @@ function sound_remote_url() {
 	
 	var url = "http://www.archive.org/download/CelebrationWav/1.wav";
 	
-	// load from remote url
-	var sound = Titanium.Media.createSound({url:url});
-	
+	// Loading remote url takes time and blocks the window to open.
+	// Will set the url after the window opens.
+	var sound = Titanium.Media.createSound();
+
 	//
 	// PLAY
 	//
@@ -191,6 +192,15 @@ function sound_remote_url() {
 	{
 		clearInterval(i);
 	});
+
+	//
+	//  OPEN EVENT - Set URL after the window opens.
+	//
+	win.addEventListener('open', function()
+	{
+		sound.url = url;
+	});
+
 	return win;
 };
 
