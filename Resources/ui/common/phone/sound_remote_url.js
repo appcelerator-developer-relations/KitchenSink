@@ -4,7 +4,7 @@ function sound_remote_url() {
 	
 	var url = "http://www.archive.org/download/CelebrationWav/1.wav";
 	
-	// On iOS, loading remote url takes time and blocks the window to open.
+	// On iOS, loading remote url takes time and blocks window opening.
 	// Set the url after the window opens on iOS.
 	var sound = Titanium.Media.createSound();
 	if (isIOS) {
