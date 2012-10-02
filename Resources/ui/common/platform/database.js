@@ -1,5 +1,7 @@
-function db() {
-	var win = Titanium.UI.createWindow();
+function db(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var l = Titanium.UI.createLabel({
 		text:'See Log for output',

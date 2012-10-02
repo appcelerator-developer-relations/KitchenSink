@@ -1,5 +1,6 @@
-function app_events() {
+function app_events(_args) {
 	var win = Titanium.UI.createWindow({
+		title:_args.title,
 		navBarHidden:true
 	});
 	

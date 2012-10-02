@@ -1,5 +1,7 @@
-function xml_rss() {
-	var win = Ti.UI.createWindow();
+function xml_rss(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	// create table view data object
 	var data = [];

@@ -1,5 +1,7 @@
-function sound_remote_url() {
-	var win = Titanium.UI.createWindow();
+function sound_remote_url(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var url = "http://www.archive.org/download/CelebrationWav/1.wav";
 	

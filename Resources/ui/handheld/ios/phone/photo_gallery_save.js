@@ -1,5 +1,7 @@
 function gallery_save(_args) {
-	var self = Ti.UI.createWindow();
+	var self = Ti.UI.createWindow({
+		title:_args.title
+	});
 	// create table view data object
 	var data = [
 		{title:'From File', hasChild:true, test:'ui/handheld/ios/phone/photo_gallery_file'},
@@ -23,8 +25,9 @@ function gallery_save(_args) {
 	{
 		if (e.rowData.test)
 		{
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow();
+			var ExampleWindow = require(e.rowData.test);
+			_args.title = e.rowData.title;
+			win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

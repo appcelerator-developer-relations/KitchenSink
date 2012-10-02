@@ -1,5 +1,7 @@
 function music(_args) {
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	// create slider view data object
 	var data = [
 		{title:'Music picker', hasChild:true, test:'ui/handheld/ios/phone/music_picker'},
@@ -16,8 +18,9 @@ function music(_args) {
 	{
 		if (e.rowData.test)
 		{
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow();
+			var ExampleWindow = require(e.rowData.test);
+			_args.title = e.rowData.title;
+			win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

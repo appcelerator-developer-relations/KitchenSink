@@ -1,5 +1,7 @@
 function contacts(_args) {
-	var self = Ti.UI.createWindow();
+	var self = Ti.UI.createWindow({
+		title:_args.title
+	});
 	// create table view data object
 	var data = [
 		{title:'Contacts picker', hasChild:true, test:'ui/common/phone/contacts_picker'},
@@ -25,8 +27,9 @@ function contacts(_args) {
 	{
 		if (e.rowData.test)
 		{
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow(_args);
+			var ExampleWindow = require(e.rowData.test);
+			_args.title = e.rowData.title;
+			win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

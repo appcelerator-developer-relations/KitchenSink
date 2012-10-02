@@ -1,5 +1,8 @@
 function ipad_feature(_args) {
-	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
+	var win = Ti.UI.createWindow({
+		title:_args.title,
+		backgroundColor:'#fff'
+	});
 	
 	//create table view data object
 	var data = [

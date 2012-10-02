@@ -1,5 +1,7 @@
-function view_events() {
-	var win = Titanium.UI.createWindow();
+function view_events(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var view = Titanium.UI.createView();
 	

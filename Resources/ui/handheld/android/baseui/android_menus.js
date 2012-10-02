@@ -1,5 +1,7 @@
 function android_menus(_args) {
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	//create table view data object
 	var data = [];
 	
@@ -18,8 +20,9 @@ function android_menus(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test);
-				win = new ExampleWindow(_args);
-				win.navBarHidden = false;
+			win = new ExampleWindow(_args);
+			_args.title = e.rowData.title;
+			win.navBarHidden = false;
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

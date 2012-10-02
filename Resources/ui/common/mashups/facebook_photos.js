@@ -1,6 +1,9 @@
-function fb_photos() {
+function fb_photos(_args) {
 	/*globals Titanium, Ti, alert, require, setTimeout, setInterval, JSON*/
-	var win = Ti.UI.createWindow({backgroundColor:'#fff'});
+	var win = Ti.UI.createWindow({
+		title:_args.title,
+		backgroundColor:'#fff'
+	});
 	Titanium.Facebook.appid = "495338853813822";
 	Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
 	

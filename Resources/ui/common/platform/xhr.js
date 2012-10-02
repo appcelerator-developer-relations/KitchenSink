@@ -1,5 +1,7 @@
 function xhr(_args) {
-	var self = Ti.UI.createWindow(),
+	var self = Ti.UI.createWindow({
+		title:_args.title
+	}),
 		
 		// if we're mobile web, don't make the rows touch enabled
 		isMobileWeb = Ti.Platform.osname == "mobileweb";
@@ -31,8 +33,9 @@ function xhr(_args) {
 	{
 		if (e.rowData.test)
 		{
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow();
+			var ExampleWindow = require(e.rowData.test);
+			_args.title = e.rowData.title;
+			win = new ExampleWindow(_args);
 			_args.containingTab.open(win,{animated:true});
 		}
 	});
