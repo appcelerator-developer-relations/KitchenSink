@@ -2,7 +2,7 @@ function sound_record(_args) {
 	var win = Titanium.UI.createWindow({
 		title:_args.title
 	});
-	
+	var currentSessionMode = Titanium.Media.audioSessionMode;
 	Titanium.Media.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAY_AND_RECORD;
 	var recording = Ti.Media.createAudioRecorder();
 	
@@ -21,6 +21,10 @@ function sound_record(_args) {
 		if (!e.available && recording.recording) {
 			b1.fireEvent('click', {});
 		}
+	});
+	
+	win.addEventListener('close',function(e) {
+		Titanium.Media.audioSessionMode = currentSessionMode;
 	});
 	
 	var file;
@@ -189,7 +193,7 @@ function sound_record(_args) {
 		else
 		{
 			Ti.API.info("recording file size: "+file.size);
-			sound = Titanium.Media.createSound({sound:file});
+			sound = Titanium.Media.createSound({url:file});
 			sound.addEventListener('complete', function()
 			{
 				b2.title = 'Playback Recording';

@@ -49,4 +49,4 @@ function gallery_video() {
 	return win;
 };
 
-module.exports = gallery_video();
+module.exports = gallery_video;

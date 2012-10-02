@@ -87,11 +87,22 @@ function xhr_download(_args) {
 	{
 		ind.value = 0;
 		c = Titanium.Network.createHTTPClient();
-	
+
 		c.onload = function()
 		{
+			var data;
+			// Android only supports data of html-string
+			if (Titanium.Platform.name == 'android') {
+				var text = "<img src=\"data:image/png;base64," + this.responseData.toBase64() + "\" />";
+				var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "test.html");
+				f.write(text);
+				data = f.read();
+			} else {
+				data = this.responseData;
+			}
+
 			var wv = Ti.UI.createWebView({
-				data:this.responseData,
+				data:data,
 				bottom:0,
 				left:0,
 				right:0,

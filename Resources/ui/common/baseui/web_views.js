@@ -42,8 +42,17 @@ function webviews(_args) {
 		Ti.API.info('MODEL:'+Ti.Platform.model);
 		if (Titanium.Platform.model !== 'Simulator')
 		{
-			data.push({title:'Youtube Video', auto:true, hasChild:true, url:'/etc/youtube.html'});
+			Ti.include("/etc/version.js");
+	
+			if (isiOS6Plus())
+			{
+				data.push({title:'Youtube Video', auto:true, hasChild:true, url:'/etc/youtubeiOS6.html'});
+			}
+			else{
+				data.push({title:'Youtube Video', auto:true, hasChild:true, url:'/etc/youtube.html'});
+			}
 		}
+		
 	}
 	
 	// create table view
