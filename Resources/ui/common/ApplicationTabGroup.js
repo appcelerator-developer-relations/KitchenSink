@@ -130,28 +130,27 @@ function ApplicationTabGroup() {
 	});
 	
 	self.addEventListener('focus', function(e) {
-		//IOS fires with source tabGroup. Android with source tab
-		if( (e.source == baseUITab) || (e.source == controlsTab) || (e.source == phoneTab) || (e.source == platformTab) || (e.source == mashupsTab) || (e.source == self)){
-			// On iOS, the "More..." tab is actually a tab container, not a tab. When it is clicked, e.tab is undefined.
-			if (e.tab) {
-				messageLabel.text = 'tab changed to ' + e.index + ' old index ' + e.previousIndex;
-				messageWin.open();
+		// iOS fires with source tabGroup. Android with source tab
+		// On iOS, the "More..." tab is actually a tab container, not a tab. When it is clicked, e.tab is undefined.
+		if ((e.source == baseUITab) || (e.source == controlsTab) || (e.source == phoneTab) || (e.source == platformTab) || (e.source == mashupsTab) || (e.source == self && e.tab)) {
 
-				setTimeout(function() {
-					Ti.API.info('tab = ' + e.tab.title + ', prevTab = ' + (e.previousTab ? e.previousTab.title : null));
-					messageLabel.text = 'active title ' + e.tab.title + ' old title ' + (e.previousTab ? e.previousTab.title : null);
-				}, 1000);
+			messageLabel.text = 'tab changed to ' + e.index + ' old index ' + e.previousIndex;
+			messageWin.open();
 
-				setTimeout(function() {
-					messageWin.close({
-						opacity : 0,
-						duration : 500
-					});
-				}, 2000);
-			}
+			setTimeout(function() {
+				Ti.API.info('tab = ' + e.tab.title + ', prevTab = ' + (e.previousTab ? e.previousTab.title : null));
+				messageLabel.text = 'active title ' + e.tab.title + ' old title ' + (e.previousTab ? e.previousTab.title : null);
+			}, 1000);
 
+			setTimeout(function() {
+				messageWin.close({
+					opacity : 0,
+					duration : 500
+				});
+			}, 2000);
 		}
-	});
+
+	}); 
 	
 	self.addEventListener('blur', function(e) {
 		Titanium.API.info('tab blur - new index ' + e.index + ' old index ' + e.previousIndex);
