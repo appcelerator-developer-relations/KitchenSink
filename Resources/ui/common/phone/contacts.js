@@ -2,6 +2,7 @@ function contacts(_args) {
 	var self = Ti.UI.createWindow();
 	// create table view data object
 	var data = [
+		{title:'Permissions', hasChild:true, test:'ui/common/phone/contacts_permissions'},
 		{title:'Contacts picker', hasChild:true, test:'ui/common/phone/contacts_picker'},
 		{title:'Display people', hasChild:true, test:'ui/common/phone/contacts_db'},
 		{title:'Search By ID', hasChild:true, test:'ui/common/phone/contacts_searchById'}
