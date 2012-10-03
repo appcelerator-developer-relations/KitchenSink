@@ -80,7 +80,7 @@ function orientation() {
 	// set orientation - landscape 
 	//
 	var b1 = Titanium.UI.createButton({
-		title:'Set Landscape ',
+		title:'Set Landscape Left',
 		width:200,
 		height:40,
 		top:40
@@ -158,8 +158,7 @@ function orientation() {
 			Titanium.UI.UPSIDE_PORTRAIT, 
 			Titanium.UI.LANDSCAPE_LEFT, 
 			Titanium.UI.LANDSCAPE_RIGHT, 
-			Titanium.UI.FACE_UP, 
-			Titanium.UI.FACE_DOWN
+			
 		];
 	
 		var close = Titanium.UI.createButton({
