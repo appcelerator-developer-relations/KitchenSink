@@ -22,38 +22,53 @@ function contacts(_args) {
 		Ti.Contacts.requestAuthorization(requestPermission);
 	})
 	
+	self.add(infoLabel);
+	self.add(b1);
+	
 	var requestPermission = function(e) {
 		var privs = Ti.Contacts.contactsAuthorization;
 		if (privs===Ti.Contacts.AUTHORIZATION_AUTHORIZED){
-			self.remove(infoLabel);
-			self.remove(b1);
 			performAddressBookFunction();
 		}
 		else {
 			if (privs===Ti.Contacts.AUTHORIZATION_RESTRICTED){
-				self.remove(b1);
+				b1.visible = false;
+				b1.enabled = false;
+				infoLabel.visible = true;
 				infoLabel.text ='Contact authorization restricted. User can not grant permission. '
 			}
 			else if (privs===Ti.Contacts.AUTHORIZATION_DENIED){
-				self.remove(b1);
+				b1.visible = false;
+				b1.enabled = false;
+				infoLabel.visible = true;
 				infoLabel.text ='Contact authorization denied. User has disallowed contacts use.'
 			}
 			else if (privs===Ti.Contacts.AUTHORIZATION_UNKNOWN){
 				infoLabel.text ='Contact authorization unknown. Request permission from user.'
-				self.remove(b1);
-				self.add(b1);
+				infoLabel.visible = true;
+				b1.visible = true;
+				b1.enabled = true;
 			}
 			else {
 				infoLabel.text = 'Got unknown value for Ti.Contacts.contactsAuthorization';
-				self.remove(b1);
+				infoLabel.visible = true;
+				b1.visible = false;
+				b1.enabled = false;
 			}
 		}
 		
 	}
 	var performUnsupported = function() {
 		infoLabel.text = 'The Contacts API requires user permission to run successfully. This version of the Titanium SDK does not support contact authorization. Please update to SDK 2.1.3 or later.'
+		infoLabel.visible = true;
+		b1.visible = false;
+		b1.enabled = false;
 	}
 	var performAddressBookFunction = function() {
+		infoLabel.visible = false;
+		b1.visible = false;
+		b1.enabled = false;
+
 		// create table view data object
 		var data = [
 			{title:'Contacts picker', hasChild:true, test:'ui/common/phone/contacts_picker'},
