@@ -87,7 +87,7 @@ function orientation() {
 	});
 	b1.addEventListener('click', function()
 	{
-		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
+		win.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
 	});
 	win.add(b1);
 	
@@ -134,7 +134,6 @@ function orientation() {
 				Titanium.UI.LANDSCAPE_LEFT,
 				Titanium.UI.LANDSCAPE_RIGHT
 			]; 
-			Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
 		});
 		win.add(landscape);
 	}
