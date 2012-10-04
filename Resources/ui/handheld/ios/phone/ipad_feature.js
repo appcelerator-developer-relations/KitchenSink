@@ -30,7 +30,7 @@ function ipad_feature(_args) {
 			if (ExampleWindow == undefined) {
 				Ti.API.info('FAILURE REQURE!');
 			};	
-				win = new ExampleWindow();
+			win = new ExampleWindow({title: e.rowData.title});
 
 			Ti.API.info('Going to open :: '+win);
 			win.open();

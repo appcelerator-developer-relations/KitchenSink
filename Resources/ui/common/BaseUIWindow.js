@@ -58,8 +58,8 @@ function BaseUIWindow(title) {
 	{
 		if (e.rowData.test)
 		{
-			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
+			var ExampleWindow = require(e.rowData.test);
+			win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
 			if (Ti.Platform.name == "android") {
 				
 			} else {

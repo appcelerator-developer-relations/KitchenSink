@@ -152,7 +152,7 @@ function orientation(_args) {
 	b4.addEventListener('click', function()
 	{
 		var SubWin = require('ui/common/phone/vibrate');
-		var subwin = new SubWin();
+		var subwin = new SubWin({title: "Open A Window"});
 		subwin.backgroundColor = 'purple';
 	
 		subwin.orientationModes = [ 

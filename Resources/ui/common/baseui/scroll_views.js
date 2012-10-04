@@ -33,8 +33,7 @@ function scroll_views(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test);
-			_args.title = e.rowData.title;
-			win = new ExampleWindow(_args);
+			win = new ExampleWindow({title: e.rowData.title, containingTab: _args.containingTab, tabGroup: _args.tabGroup});
 	
 			if (e.rowData.barColor)
 			{

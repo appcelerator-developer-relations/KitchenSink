@@ -1,4 +1,4 @@
-function Navigation_controller(){
+function Navigation_controller(_args){
 
 	NavController = {};
 

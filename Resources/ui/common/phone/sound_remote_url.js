@@ -1,4 +1,4 @@
-function sound_remote_url() {
+function sound_remote_url(_args) {
 	var win = Titanium.UI.createWindow({
 		title:_args.title
 	});

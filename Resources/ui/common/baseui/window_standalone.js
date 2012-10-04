@@ -113,8 +113,7 @@ function win_standalone(_args) {
 		b3.addEventListener('click', function()
 		{
 			var Win = require('ui/common/phone/vibrate'),
-				w = new Win();
-				w.title = 'Modal Window';
+				w = new Win({title: 'Modal Window'});
 				w.barColor = 'black';
 	
 			var b = Titanium.UI.createButton({
@@ -257,6 +256,7 @@ function win_standalone(_args) {
 	b6.addEventListener('click', function()
 	{
 		var w = Titanium.UI.createWindow({
+			title: 'New Window (Fullscreen)',
 			backgroundColor:'#336699'
 		});
 	

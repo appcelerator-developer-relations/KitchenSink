@@ -22,8 +22,7 @@ function vertical_layout(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test);
-			_args.title = e.rowData.title;
-			win = new ExampleWindow(_args);
+			win = new ExampleWindow({title: e.rowData.title});
 			_args.containingTab.open(win,{animated:true});
 		}
 	});
