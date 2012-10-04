@@ -82,14 +82,14 @@ function orientation(_args) {
 	// set orientation - landscape 
 	//
 	var b1 = Titanium.UI.createButton({
-		title:'Set Landscape ',
+		title:'Set Landscape Left',
 		width:200,
 		height:40,
 		top:40
 	});
 	b1.addEventListener('click', function()
 	{
-		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
+		win.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
 	});
 	win.add(b1);
 	
@@ -136,7 +136,6 @@ function orientation(_args) {
 				Titanium.UI.LANDSCAPE_LEFT,
 				Titanium.UI.LANDSCAPE_RIGHT
 			]; 
-			Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
 		});
 		win.add(landscape);
 	}
@@ -161,8 +160,7 @@ function orientation(_args) {
 			Titanium.UI.UPSIDE_PORTRAIT, 
 			Titanium.UI.LANDSCAPE_LEFT, 
 			Titanium.UI.LANDSCAPE_RIGHT, 
-			Titanium.UI.FACE_UP, 
-			Titanium.UI.FACE_DOWN
+			
 		];
 	
 		var close = Titanium.UI.createButton({
