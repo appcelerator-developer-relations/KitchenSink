@@ -16,11 +16,16 @@ function views(_args) {
 		{title:'Remove Views', hasChild:true, test:'ui/common/baseui/remove_views'},
 		{title:'zIndex', hasChild:true, test:'ui/common/baseui/views_zindex'},
 		{title:'Email Dialog', hasChild:true, test:'ui/common/baseui/email_dialog'},
-		{title:'Point Conversion', hasChild:true, test:'ui/common/baseui/view_point_conversion'},
-		{title:'View w/ Size', hasChild:!isMobileWeb, test:'ui/common/baseui/view_with_size', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
-		{title:'Map View', hasChild:!isMobileWeb, test:'ui/common/baseui/map_view', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"}
+		{title:'Point Conversion', hasChild:true, test:'ui/common/baseui/view_point_conversion'}
 	];
 	
+	if (!isMobileWeb) {
+		data.push(
+			{title:'View w/ Size', hasChild:true, test:'ui/common/baseui/view_with_size'},
+			{title:'Map View', hasChild:true, test:'ui/common/baseui/map_view'}
+		);
+	}
+
 	if (Titanium.Platform.name == 'iPhone OS')
 	{
 		// Android team, implement the following then move this entry above
