@@ -58,8 +58,8 @@ function BaseUIWindow(title) {
 	{
 		if (e.rowData.test)
 		{
-			var ExampleWindow = require(e.rowData.test);
-			win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
+			var ExampleWindow = require(e.rowData.test),
+				win = new ExampleWindow({title:e.rowData.title,containingTab:self.containingTab,tabGroup:self.tabGroup});
 			if (Ti.Platform.name == "android") {
 				
 			} else {
@@ -101,7 +101,7 @@ function BaseUIWindow(title) {
 	//
 	//  ADD EVENT LISTENERS FOR CUSTOM EVENTS
 	//
-	var win_customEvents = Titanium.UI.createWindow({
+	var win = Titanium.UI.createWindow({
 		height:30,
 		width:250,
 		bottom:110,
@@ -123,26 +123,26 @@ function BaseUIWindow(title) {
 		width:'auto',
 		height:'auto'
 	});
-	win_customEvents.add(view);
-	win_customEvents.add(label);
+	win.add(view);
+	win.add(label);
 	
 	Titanium.App.addEventListener('event_one', function(e)
 	{
 		label.text = 'base_ui.js: event one, array length = ' + e.data.length;
-		win_customEvents.open();
+		win.open();
 		setTimeout(function()
 		{
-			win_customEvents.close({opacity:0,duration:500});
+			win.close({opacity:0,duration:500});
 		},1000);
 	});
 	
 	Titanium.App.addEventListener('event_two', function(e)
 	{
 		label.text = 'base_ui.js: event two, name = ' + e.name;
-		win_customEvents.open();
+		win.open();
 		setTimeout(function()
 		{
-			win_customEvents.close({opacity:0,duration:500});
+			win.close({opacity:0,duration:500});
 		},1000);
 	
 	});
