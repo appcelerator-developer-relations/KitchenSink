@@ -5,7 +5,7 @@ function image_view_encode() {
 	// to fetch this image OK
 	
 	var test_img = Titanium.UI.createImageView({
-			image: 'http://www.zoomout.gr/assets/media/PICTURES/' + encodeURIComponent('ΜΟΥΣΙΚΗ') + '/651_thumb1.jpg'
+			image: 'http://appcelerator.qe.test.data.s3.amazonaws.com/KSResources/image/' + encodeURIComponent('ΜΟΥΣΙΚΗ') + '/appc_logo200.png'
 	
 	}); 
 	
