@@ -3,7 +3,7 @@ function android_menu3(_args) {
 	var win = Ti.UI.currentWindow;
 	
 	win.backgroundColor = 'white';
-	win.title = _args.title
+	win.title = _args.title;
 	
 	var b1 = Ti.UI.createButton({
 		title : 'Open Window',
