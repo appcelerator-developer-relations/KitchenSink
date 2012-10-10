@@ -153,7 +153,7 @@ function sock_listen() {
 	});
 	win.add(writeButton);
 	writeButton.addEventListener('click', function() {
-		var plBlob = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, 'paradise_lost.txt').read();
+		var plBlob = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '/etc/paradise_lost.txt').read();
 		var input = Ti.Stream.createStream({source:plBlob, mode:Ti.Stream.MODE_READ});
 	
 		for (var index in connectedSockets) {
