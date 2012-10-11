@@ -1,5 +1,7 @@
 function contacts(_args) {
-	var self = Ti.UI.createWindow();
+	var self = Ti.UI.createWindow({
+		title:_args.title
+	});
 	// create table view data object
 	Ti.include("/etc/version.js");
 	
@@ -95,8 +97,7 @@ function contacts(_args) {
 			if (e.rowData.test)
 			{
 				var ExampleWindow = require(e.rowData.test);
-				_args.title = e.rowData.title;
-				win = new ExampleWindow(_args);
+				win = new ExampleWindow({title: e.rowData.title, containingTab: _args.containingTab, tabGroup: _args.tabGroup});
 				_args.containingTab.open(win,{animated:true});
 			}
 		});

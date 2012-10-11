@@ -1,5 +1,8 @@
 function webviews(_args) {
-	var win = Titanium.UI.createWindow({backgroundColor:'#fff'});
+	var win = Titanium.UI.createWindow({
+		title:_args.title,
+		backgroundColor:'#fff'
+	});
 	
 	
 	// create table view data object
@@ -64,6 +67,7 @@ function webviews(_args) {
 		var rowdata = e.rowData;
 		var webview = null;
 		var w = Ti.UI.createWindow({
+			title: e.rowData.title,
 			activity : {
 				onCreateOptionsMenu : function(e) {
 					var menuItem = e.menu.add({ title : 'Reload' });

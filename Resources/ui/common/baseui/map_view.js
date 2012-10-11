@@ -1,5 +1,7 @@
-function mapview() {
-	var win = Titanium.UI.createWindow();
+function mapview(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var isAndroid = false;
 	if (Titanium.Platform.name == 'android') {

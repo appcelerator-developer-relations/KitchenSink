@@ -1,5 +1,7 @@
-function textfield_events() {
-	var win = Ti.UI.createWindow();
+function textfield_events(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	// initialize to all modes
 	win.orientationModes = [

@@ -1,5 +1,7 @@
-function xhr_xml() {
-	var self = Ti.UI.createWindow();
+function xhr_xml(_args) {
+	var self = Ti.UI.createWindow({
+		title:_args.title
+	});
 	var xhr = Titanium.Network.createHTTPClient();
 	
 	xhr.onload = function()
