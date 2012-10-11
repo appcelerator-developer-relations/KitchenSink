@@ -6,7 +6,6 @@ function scroll_view_noclip(_args) {
 	var win = Ti.UI.createWindow({
 		title:_args.title
 	});
-	win.title = 'All Friends';
 	
 	var cover = Titanium.UI.createView({
 		backgroundImage:'/images/scrollable_view/bg.png',
