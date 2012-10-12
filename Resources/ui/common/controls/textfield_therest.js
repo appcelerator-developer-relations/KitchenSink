@@ -1,5 +1,7 @@
-function textfield_rest() {
-	var win = Ti.UI.createWindow();
+function textfield_rest(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	var tf1 = Titanium.UI.createTextField({
 		color:'#336699',

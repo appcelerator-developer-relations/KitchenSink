@@ -1,5 +1,7 @@
-function options_dialog() {
-	var win = Titanium.UI.createWindow();
+function options_dialog(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	win.orientationModes = [
 		Titanium.UI.PORTRAIT,

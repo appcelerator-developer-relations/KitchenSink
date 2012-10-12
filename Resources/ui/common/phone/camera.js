@@ -1,5 +1,7 @@
 function camera(_args) {
-	var self = Ti.UI.createWindow();
+	var self = Ti.UI.createWindow({
+		title:_args.title
+	});
 	// create table view data object
 	var data = [
 		{title:'Camera Basic', hasChild:true, test:'ui/common/phone/camera_basic'}
@@ -37,7 +39,7 @@ function camera(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow();
+				win = new ExampleWindow({title: e.rowData.title});
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

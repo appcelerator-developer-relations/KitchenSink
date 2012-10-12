@@ -1,5 +1,7 @@
-function xhr_binary() {
-	var win = Titanium.UI.createWindow();
+function xhr_binary(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var l = Titanium.UI.createLabel({
 		text:'Downloading image...',

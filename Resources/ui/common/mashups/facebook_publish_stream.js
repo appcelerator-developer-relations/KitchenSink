@@ -1,6 +1,9 @@
-function fb_pub_stream() {
+function fb_pub_stream(_args) {
 	/*globals Titanium, Ti, alert, require, setTimeout, setInterval, JSON*/
-	var win = Ti.UI.createWindow({backroundColor:'#fff'});
+	var win = Ti.UI.createWindow({
+		title:_args.title,
+		backroundColor:'#fff'
+	});
 	Titanium.Facebook.appid = "495338853813822";
 	Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
 	

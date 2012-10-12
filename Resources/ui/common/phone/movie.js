@@ -1,5 +1,7 @@
 function movie(_args) {
-	var self = Ti.UI.createWindow();
+	var self = Ti.UI.createWindow({
+		title:_args.title
+	});
 	// create table view data object
 	var data = [
 		{title:'Local', hasChild:true, test:'ui/common/phone/movie_local'}
@@ -33,7 +35,7 @@ function movie(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test),
-				win = new ExampleWindow();
+				win = new ExampleWindow({title: e.rowData.title});
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

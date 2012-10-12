@@ -1,8 +1,9 @@
-function android_menu3() {
+function android_menu3(_args) {
 	//var activity = Ti.Android.currentActivity;
 	var win = Ti.UI.currentWindow;
 	
 	win.backgroundColor = 'white';
+	win.title = _args.title;
 	
 	var b1 = Ti.UI.createButton({
 		title : 'Open Window',
@@ -13,6 +14,7 @@ function android_menu3() {
 	// Here is an example of creating the menu handlers after window creation but before open.
 	b1.addEventListener('click', function(e) {
 		var w = Ti.UI.createWindow({
+			title: 'New Window',
 			backgroundColor : 'blue',
 			navBarHidden : false
 		});

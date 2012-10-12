@@ -1,5 +1,7 @@
-function tv_empty() {
-	var win = Titanium.UI.createWindow();
+function tv_empty(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var tableView = Ti.UI.createTableView({top:110,backgroundColor:'yellow'});
 	
