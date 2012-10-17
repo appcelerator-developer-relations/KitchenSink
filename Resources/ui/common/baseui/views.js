@@ -51,7 +51,7 @@ function views(_args) {
 	// create table view
 	for (var i = 0; i < data.length; i++ ) {
 		var d = data[i];
-		if (d.touchEnabled !== false) {
+		if (d.touchEnabled) {
 			d.color = '#000';
 		}
 		d.font = {fontWeight:'bold'};
