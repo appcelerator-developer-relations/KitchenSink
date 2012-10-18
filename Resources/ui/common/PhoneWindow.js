@@ -62,7 +62,7 @@ function PhoneWindow(title) {
 	// create table view
 	for (var i = 0; i < data.length; i++ ) {
 		var d = data[i];
-		// On Android, if touchEnabled is not set explicitely, its value is undefined.
+		// On Android, if touchEnabled is not set explicitly, its value is undefined.
 		if (d.touchEnabled !== false) {
 			d.color = '#000';
 		}
