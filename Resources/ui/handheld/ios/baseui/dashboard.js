@@ -3,6 +3,7 @@ function dashboard(_args) {
 		title:_args.title
 	});
 	win.backgroundColor = '#13386c';
+	win.orientationModes = [Ti.UI.PORTRAIT];
 	
 	var data = [];
 	var labels = ['account','cases','calls','contacts','emps','leads','meetings','opps','tasks'];
