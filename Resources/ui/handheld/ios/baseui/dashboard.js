@@ -1,6 +1,7 @@
 function dashboard() {
 	var win = Titanium.UI.createWindow();
 	win.backgroundColor = '#13386c';
+	win.orientationModes = [Ti.UI.PORTRAIT];
 	
 	var data = [];
 	var labels = ['account','cases','calls','contacts','emps','leads','meetings','opps','tasks'];
