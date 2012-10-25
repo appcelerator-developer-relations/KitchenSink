@@ -12,14 +12,14 @@ function textfield_soft(_args) {
 	win.add(label);
 	
 	var tf1 = Ti.UI.createTextField({
-		top: 50, left: 10, right: 10, height:40,
+		top: 50, left: 10, right: 10, height:40, hintText: 'Text 1', color: 'black',
 		softKeyboardOnFocus : Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS
 	});
 	
 	win.add(tf1);
 	
 	var tf2 = Ti.UI.createTextField({
-		top: 95, left: 10, right: 10, height:40,
+		top: 95, left: 10, right: 10, height:40, hintText: 'Text 2', color: 'black',
 		softKeyboardOnFocus : Ti.UI.Android.SOFT_KEYBOARD_DEFAULT_ON_FOCUS
 	});
 	
@@ -29,7 +29,7 @@ function textfield_soft(_args) {
 	win.add(tf2);
 	
 	var tf3 = Ti.UI.createTextField({
-		top: 140, left: 10, right: 10, height:40,
+		top: 140, left: 10, right: 10, height:40, hintText: 'Text 3', color: 'black',
 		softKeyboardOnFocus : Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS
 	});
 	
