@@ -1,6 +1,7 @@
 function xhr(_args) {
 	var self = Ti.UI.createWindow({
-		title:_args.title
+		title:_args.title,
+		backgroundColor:'#fff'
 	}),
 		
 		// if we're mobile web, don't make the rows touch enabled
@@ -24,6 +25,7 @@ function xhr(_args) {
 		data.push({title:'File Upload', hasChild:true, test:'ui/handheld/ios/platform/xhr_fileupload'});
 	}
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});
