@@ -1,6 +1,7 @@
 function camera(_args) {
 	var self = Ti.UI.createWindow({
-		title:_args.title
+		title:_args.title,
+		backgroundColor:'#fff'
 	});
 	// create table view data object
 	var data = [
@@ -29,6 +30,7 @@ function camera(_args) {
 	}
 	
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});

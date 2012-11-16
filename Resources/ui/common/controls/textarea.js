@@ -15,6 +15,7 @@ function textarea(_args) {
 		data.push({title:'Auto Link', hasChild:true, test:'ui/handheld/ios/controls/textarea_autodetect'});
 	}
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});
