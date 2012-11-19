@@ -1,6 +1,7 @@
 function android_menus(_args) {
 	var win = Ti.UI.createWindow({
-		title:_args.title
+		title:_args.title,
+		backgroundColor:'#fff'
 	});
 	//create table view data object
 	var data = [];
@@ -10,6 +11,7 @@ function android_menus(_args) {
 	data.push({title:'Menu Handlers (Activity Property)', hasChild:true, test:'ui/handheld/android/baseui/android_menu_3'});
 	
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});
