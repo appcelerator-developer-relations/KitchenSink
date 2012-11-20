@@ -10,6 +10,13 @@ function picker_date4() {
 		countDownDuration:duration
 	});
 	
+	var timob1462fix = false;
+	
+	if (Titanium.Platform.name == 'iPhone OS')
+	{
+		timob1462fix = (Ti.version >= '3.0.0');
+	}
+
 	// turn on the selection indicator (off by default)
 	picker.selectionIndicator = true;
 	
@@ -69,7 +76,18 @@ function picker_date4() {
 	
 	picker.addEventListener('change',function(e)
 	{
-		label.text = e.value.toLocaleString();
+		if (timob1462fix == true)
+		{
+			if (button.title == 'Start')
+			{
+				label.text = 'Duration (ms): '+e.countDownDuration;
+				duration = e.countDownDuration;
+			}
+		}
+		else
+		{
+			label.text = e.value.toLocaleString();
+		}
 	});
 
 	return win;
