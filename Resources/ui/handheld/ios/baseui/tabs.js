@@ -85,7 +85,7 @@ function tabs(_args) {
 	
 	changeIconButton.addEventListener('click', function(e)
 	{
-		if (tab.icon.indexOf('KS_nav_views.png') != -1)
+		if (tab.icon.toString().indexOf('KS_nav_views.png') != -1)
 		{
 			tab.icon = '/images/tabs/KS_nav_mashup.png';		
 		}
@@ -145,6 +145,8 @@ function tabs(_args) {
 			tabGroup.tabs[3].icon = Titanium.UI.iPhone.SystemIcon.FAVORITES;
 			tabGroup.tabs[4].icon = Titanium.UI.iPhone.SystemIcon.HISTORY;
 			systemIcon=true;
+			//Can not change title of system icons
+			changeTitleButton.enabled = false;
 		}
 		else
 		{
@@ -154,6 +156,7 @@ function tabs(_args) {
 			tabGroup.tabs[3].icon = '/images/tabs/KS_nav_platform.png';
 			tabGroup.tabs[4].icon = '/images/tabs/KS_nav_mashup.png';
 			systemIcon=false;
+			changeTitleButton.enabled = true;
 		}
 	});
 	
@@ -170,6 +173,17 @@ function tabs(_args) {
 	win.add(changeIconButton);
 	win.add(setActiveTabButton);
 	win.add(label);
+	
+	win.addEventListener('close',function(){
+		//Reset tabs on window close.
+		tabGroup.tabs[0].icon = '/images/tabs/KS_nav_views.png';
+		tabGroup.tabs[1].icon = '/images/tabs/KS_nav_ui.png';
+		tabGroup.tabs[2].icon = '/images/tabs/KS_nav_phone.png';
+		tabGroup.tabs[3].icon = '/images/tabs/KS_nav_platform.png';
+		tabGroup.tabs[4].icon = '/images/tabs/KS_nav_mashup.png';
+		tab.title = 'Base UI';
+		tab.badge = null;
+	})
 	return win;
 };
 
