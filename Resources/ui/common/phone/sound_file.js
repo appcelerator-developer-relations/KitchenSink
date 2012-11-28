@@ -2,7 +2,7 @@ function sound_file(_args) {
 	var win = Titanium.UI.createWindow({
 		title:_args.title
 	});
-	
+	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'etc/cricket.wav');
 	
 	// load from file object
@@ -21,7 +21,12 @@ function sound_file(_args) {
 	play.addEventListener('click', function()
 	{
 		sound.play();
-		pb.max = sound.duration;
+		if (timob7502fix) {
+			pb.max = sound.duration*1000;
+		}
+		else {
+			pb.max = sound.duration;
+		}
 	});
 	win.add(play);
 	
