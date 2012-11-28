@@ -1,6 +1,9 @@
 function sound_remote_url() {
 	var win = Titanium.UI.createWindow();
 	var isIOS = Titanium.Platform.name == 'iPhone OS';
+
+	//TIMOB-7502. TIme moved to ms but duration is still reported in seconds
+	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));
 	
 	var url = "http://www.archive.org/download/CelebrationWav/1.wav";
 	
@@ -37,7 +40,12 @@ function sound_remote_url() {
 	play.addEventListener('click', function()
 	{
 		sound.play();
-		pb.max = sound.duration;
+		if (timob7502fix) {
+			pb.max = sound.duration*1000;
+		}
+		else {
+			pb.max = sound.duration;
+		}
 	});
 	win.add(play);
 	
