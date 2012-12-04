@@ -1,6 +1,9 @@
 function activity_indicator() {
 	var osname = Ti.Platform.osname;
-	var isIos = osname === 'iphone' || osname === 'ipad';
+
+	var isIos = (osname === 'iphone' || osname === 'ipad');
+	var isAndroid = (osname === 'android');
+
 	var sdkVersion = parseFloat(Ti.version);
 	var ActivityIndicatorStyle;
 	if (isIos) {
@@ -13,6 +16,7 @@ function activity_indicator() {
 		backgroundColor : '#13386c'
 	});
 
+	var indicatorAdded = false
 	//
 	// BASE INDICATOR
 	//
@@ -34,8 +38,14 @@ function activity_indicator() {
 	});
 
 	button0.addEventListener('click', function() {
-		actInd.message = null;
-		actInd.hide();
+		if(indicatorAdded == true)
+		{
+			actInd.message = null;
+			actInd.width = Ti.UI.SIZE;
+			actInd.hide();
+			win.remove(actInd);
+			indicatorAdded = false
+		}
 	});
 
 	//
@@ -50,7 +60,15 @@ function activity_indicator() {
 	});
 
 	button1.addEventListener('click', function() {
-		actInd.show();
+		if (ActivityIndicatorStyle) {
+			actInd.style = ActivityIndicatorStyle.PLAIN;
+		}
+		if(indicatorAdded == false)
+		{
+			win.add(actInd);
+			actInd.show();
+			indicatorAdded = true;
+		}
 	});
 
 	//
@@ -64,8 +82,15 @@ function activity_indicator() {
 	});
 
 	button2.addEventListener('click', function() {
-		actInd.style = ActivityIndicatorStyle.BIG;
-		actInd.show();
+		if (ActivityIndicatorStyle) {
+			actInd.style = ActivityIndicatorStyle.BIG;
+		}
+		if(indicatorAdded == false)
+		{
+			win.add(actInd);
+			actInd.show();
+			indicatorAdded = true;
+		}
 	});
 
 	//
@@ -79,8 +104,15 @@ function activity_indicator() {
 	});
 
 	button3.addEventListener('click', function() {
-		actInd.style = ActivityIndicatorStyle.DARK;
-		actInd.show();
+		if (ActivityIndicatorStyle) {
+			actInd.style = ActivityIndicatorStyle.DARK;
+		}
+		if(indicatorAdded == false)
+		{
+			win.add(actInd);
+			actInd.show();
+			indicatorAdded = true;
+		}
 	});
 
 	//
@@ -94,8 +126,15 @@ function activity_indicator() {
 	});
 
 	button8.addEventListener('click', function() {
-		actInd.style = ActivityIndicatorStyle.BIG_DARK;
-		actInd.show();
+		if (ActivityIndicatorStyle) {
+			actInd.style = ActivityIndicatorStyle.BIG_DARK;
+		}
+		if(indicatorAdded == false)
+		{
+			win.add(actInd);
+			actInd.show();
+			indicatorAdded = true;
+		}
 	});
 
 	//
@@ -111,7 +150,9 @@ function activity_indicator() {
 		button4.top = 190;
 	}
 	button4.addEventListener('click', function() {
-		actInd.style = ActivityIndicatorStyle.PLAIN;
+		if (ActivityIndicatorStyle) {
+			actInd.style = ActivityIndicatorStyle.PLAIN;
+		}
 		actInd.font = {
 			fontFamily : 'Helvetica Neue',
 			fontSize : 15,
@@ -120,7 +161,12 @@ function activity_indicator() {
 		actInd.color = 'white';
 		actInd.message = 'Loading...';
 		actInd.width = 210;
-		actInd.show();
+		if(!indicatorAdded)
+		{
+			win.add(actInd);
+			actInd.show();
+			indicatorAdded = true;
+		}
 	});
 
 	//
@@ -136,23 +182,16 @@ function activity_indicator() {
 	});
 
 	button5.addEventListener('click', function() {
-		toolActInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.PLAIN;
-		toolActInd.font = {
-			fontFamily : 'Helvetica Neue',
-			fontSize : 15,
-			fontWeight : 'bold'
-		};
+		toolActInd.style = ActivityIndicatorStyle.PLAIN;
+		toolActInd.font = {fontFamily : 'Helvetica Neue',fontSize : 15,fontWeight : 'bold'};
 		toolActInd.color = 'white';
 		toolActInd.message = 'Loading...';
-		win.setToolbar([toolActInd], {
-			animated : true
-		});
+		win.setToolbar([toolActInd], {animated : true});
 		toolActInd.show();
+		button5.enabled = false;
 		setTimeout(function() {
-			toolActInd.hide();
-			win.setToolbar(null, {
-				animated : true
-			});
+			win.setToolbar(null, {animated : true});
+			button5.enabled = true;
 		}, 3000);
 
 	});
@@ -173,10 +212,10 @@ function activity_indicator() {
 
 		win.setRightNavButton(navActInd);
 		navActInd.show();
+		button6.enabled = false;
 		setTimeout(function() {
-			navActInd.hide();
 			win.setRightNavButton(null);
-
+			button6.enabled = true;
 		}, 3000);
 
 	});
@@ -192,19 +231,28 @@ function activity_indicator() {
 	});
 
 	button7.addEventListener('click', function() {
+		if(indicatorAdded)
+		{
+			actInd.message = null;
+			actInd.width = Ti.UI.SIZE;
+			actInd.hide();
+			win.remove(actInd);
+		}
 		win.setTitleControl(actInd);
 		actInd.show();
-
+		indicatorAdded = true;
+		button0.enabled = false;
+		button4.enabled = false;
 		setTimeout(function() {
 			actInd.hide();
 			win.setTitleControl(null);
+			indicatorAdded = false;
+			button0.enabled = true;
+			button4.enabled = true;
 			win.title = 'Activity Indicator';
 
 		}, 3000);
 	});
-
-	win.add(actInd);
-
 
 	// add iOS elements
 	if (isIos) {
@@ -218,8 +266,9 @@ function activity_indicator() {
 		win.add(button7);
 	} else {
 		if (sdkVersion < 3.0) {
-			if (Ti.Platform.osname === 'android') {
+			if (isAndroid) {
 				win.addEventListener('open', function(e) {
+					win.add(actInd);
 					actInd.show();
 					actInd.message = 'Loading...';
 					setTimeout(function() {
@@ -227,6 +276,7 @@ function activity_indicator() {
 					}, 2000);
 				});
 			} else {
+				win.add(actInd);
 				actInd.show();
 				actInd.message = 'Loading...';
 				setTimeout(function() {
