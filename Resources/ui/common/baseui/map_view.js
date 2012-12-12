@@ -89,10 +89,12 @@ function mapview() {
 	var hyb = null;
 	var zoomin = null;
 	var zoomout = null;
+	var annotationsRemoved = false;
 			
 	var wireClickHandlers = function() {
 		removeAll.addEventListener('click', function() {
 			mapview.removeAllAnnotations();
+			annotationsRemoved = true;
 		});
 	
 		atl.addEventListener('click', function() {
@@ -100,7 +102,9 @@ function mapview() {
 			mapview.setLocation(regionAtlanta);
 		
 			// activate annotation
-			mapview.selectAnnotation(mapview.annotations[0].title,true);
+			if(!annotationsRemoved){
+				mapview.selectAnnotation(atlanta,true);
+			}
 			Ti.API.error("CLICKED ATL");
 		});
 		
@@ -110,7 +114,9 @@ function mapview() {
 			mapview.setLocation(regionSV);
 		
 			// activate annotation
-			mapview.selectAnnotation(mapview.annotations[1].title,true);
+			if(!annotationsRemoved){
+				mapview.selectAnnotation(apple,true);
+			}
 		});
 		
 		sat.addEventListener('click',function() {
