@@ -48,7 +48,14 @@ function BaseUIWindow(title) {
 	}
 	
 	// create table view
-	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
+	for (var i = 0; i < data.length; i++ ) {
+		var d = data[i];
+		// On Android, if touchEnabled is not set explicitly, its value is undefined.
+		if (d.touchEnabled !== false) {
+			d.color = '#000';
+		}
+		d.font = {fontWeight:'bold'};
+	};
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});

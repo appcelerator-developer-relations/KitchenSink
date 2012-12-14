@@ -85,7 +85,7 @@ function ios_socket() {
 	win.add(writeButton);
 	writeButton.addEventListener('click', function() {
 		try {
-			var plFile = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, 'paradise_lost.txt');
+			var plFile = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '/etc/paradise_lost.txt');
 			var text = plFile.read();
 		
 			socket.write(text);
