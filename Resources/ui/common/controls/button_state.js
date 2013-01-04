@@ -11,6 +11,7 @@ function button_states(_args) {
 	  enabled:true,
 	  focusable:true,
 	  title:'B1',
+	  backgroundColor: 'white',
 	  backgroundImage:'/images/slightlylargerimage.png'
 	});
 	
@@ -22,6 +23,7 @@ function button_states(_args) {
 	  focusable:true,
 	  enabled:true,
 	  title:'B2',
+	  backgroundColor: 'white',
 	  backgroundDisabledImage:'/images/slightlylargerimage.png'
 	});
 	
@@ -33,6 +35,7 @@ function button_states(_args) {
 	  enabled:true,
 	  focusable:true,
 	  title:'B3',
+	  backgroundColor: 'white',
 	  backgroundFocusedImage:'/images/slightlylargerimage.png'
 	});
 	
@@ -44,6 +47,7 @@ function button_states(_args) {
 	  focusable:true,
 	  enabled:true,
 	  title:'B4',
+	  backgroundColor: 'white',
 	  backgroundSelectedImage:'/images/slightlylargerimage.png'
 	});
 	
