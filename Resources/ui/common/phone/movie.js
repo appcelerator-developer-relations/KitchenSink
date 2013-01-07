@@ -1,5 +1,8 @@
 function movie(_args) {
-	var self = Ti.UI.createWindow();
+	var self = Ti.UI.createWindow({
+		title:_args.title,
+		backgroundColor:'#fff'
+	});
 	// create table view data object
 	var data = [
 		{title:'Local', hasChild:true, test:'ui/common/phone/movie_local'}
@@ -23,6 +26,7 @@ function movie(_args) {
 	}
 	
 	// create table view
+	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
 	var tableview = Titanium.UI.createTableView({
 		data:data
 	});
