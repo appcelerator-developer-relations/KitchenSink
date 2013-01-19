@@ -1,8 +1,7 @@
 function android_menu3() {
-	//var activity = Ti.Android.currentActivity;
-	var win = Ti.UI.currentWindow;
-	
-	win.backgroundColor = 'white';
+	var win = Ti.UI.createWindow({
+		backgroundColor: 'white'
+	});
 	
 	var b1 = Ti.UI.createButton({
 		title : 'Open Window',
