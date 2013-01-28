@@ -43,11 +43,13 @@ function win_props() {
 		top:110
 	});
 	var full=true;
+	var oldColor = null;
 	buttonWidthHeight.addEventListener('click', function()
 	{
 		Ti.API.info('in width height');
 		if (full)
 		{
+			oldColor = win.backgroundColor;
 			win.height = 300;
 			win.width = 300;
 			win.backgroundColor = 'black';
@@ -58,7 +60,7 @@ function win_props() {
 			// unset them to go back to previous layout
 			win.height = null;
 			win.width = null;
-			win.backgroundColor = null;
+			win.backgroundColor = oldColor;
 			full=true;
 		}
 	});
