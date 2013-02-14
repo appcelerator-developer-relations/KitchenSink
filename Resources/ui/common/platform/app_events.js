@@ -53,6 +53,22 @@ function app_events(_args) {
 		});
 	}
 	
+	
+	
+	if(Titanium.Platform.name == 'iPhone OS'){
+		var timeLabel = Ti.UI.createLabel({
+			top:150,
+			text:'No Time Change event, received. Try Changing the devices time zone (Setting > General > Date & Time> TimeZone',
+			textAlign:'center',
+			width:'auto'
+		});
+		win.add(timeLabel)
+		Titanium.App.addEventListener('significanttimechange',function(e)
+		{
+			Ti.API.info("Time Change Event Received !! ");
+			timeLabel.text = "Time Change event received.";
+		});
+	}
 	return win;
 };
 
