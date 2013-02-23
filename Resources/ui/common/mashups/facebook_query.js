@@ -1,5 +1,12 @@
 function fb_query(_args) {
 	/*globals Ti, Titanium, JSON, alert */
+	var facebook;
+	if (Titanium.Platform.osname == 'mobileweb') {
+		facebook = Titanium.Facebook;
+	} else {
+		facebook = require('facebook');
+	}
+
 	var win = Ti.UI.createWindow({
 		title:_args.title,
 		backgroundColor:'#fff'
@@ -7,17 +14,12 @@ function fb_query(_args) {
 	//
 	// Login Button
 	//
-	Titanium.Facebook.appid = "495338853813822";
-	Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
-	var fbButton = Titanium.Facebook.createLoginButton({
+	facebook.appid = "495338853813822";
+	facebook.permissions = ['publish_stream', 'read_stream'];
+	var fbButton = facebook.createLoginButton({
 		bottom:10
 	});
-	if(Titanium.Platform.name == 'iPhone OS') {
-		fbButton.style = Ti.Facebook.BUTTON_STYLE_NORMAL;
-	}
-	else {
-		fbButton.style ='normal';
-	}
+	fbButton.style = facebook.BUTTON_STYLE_NORMAL;
 	win.add(fbButton);
 	
 	var b1 = Ti.UI.createButton({
@@ -48,10 +50,10 @@ function fb_query(_args) {
 	
 		// run query, populate table view and open window
 		var query = "SELECT uid, name, pic_square, status FROM user ";
-		query +=  "where uid IN (SELECT uid2 FROM friend WHERE uid1 = " + Titanium.Facebook.uid + ")";
+		query +=  "where uid IN (SELECT uid2 FROM friend WHERE uid1 = " + facebook.uid + ")";
 		query += "order by last_name limit 20";
-		Ti.API.info('user id ' + Titanium.Facebook.uid);
-		Titanium.Facebook.request('fql.query', {query: query},  function(r) {
+		Ti.API.info('user id ' + facebook.uid);
+		facebook.request('fql.query', {query: query},  function(r) {
 			if (!r.success) {
 				if (r.error) {
 					alert(r.error);
@@ -116,7 +118,7 @@ function fb_query(_args) {
 	}
 	
 	b1.addEventListener('click', function() {
-		if (!Titanium.Facebook.loggedIn)
+		if (!facebook.loggedIn)
 		{
 			Ti.UI.createAlertDialog({title:'Facebook', message:'Login before running query'}).show();
 			return;
