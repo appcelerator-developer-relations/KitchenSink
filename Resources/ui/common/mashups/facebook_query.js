@@ -1,10 +1,11 @@
 function fb_query(_args) {
 	/*globals Ti, Titanium, JSON, alert */
+	var platformName = Titanium.Platform.osname;
 	var facebook;
-	if (Titanium.Platform.osname == 'mobileweb') {
-		facebook = Titanium.Facebook;
-	} else {
+	if (platformName == 'android' || platformName == 'iphone') {
 		facebook = require('facebook');
+	} else {
+		facebook = Titanium.Facebook;
 	}
 
 	var win = Ti.UI.createWindow({
