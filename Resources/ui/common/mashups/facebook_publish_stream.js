@@ -1,11 +1,19 @@
 function fb_pub_stream(_args) {
 	/*globals Titanium, Ti, alert, require, setTimeout, setInterval, JSON*/
+	var platformName = Titanium.Platform.osname;
+	var facebook;
+	if (platformName == 'android' || platformName == 'iphone') {
+		facebook = require('facebook');
+	} else {
+		facebook = Titanium.Facebook;
+	}
+
 	var win = Ti.UI.createWindow({
 		title:_args.title,
 		backroundColor:'#fff'
 	});
-	Titanium.Facebook.appid = "495338853813822";
-	Titanium.Facebook.permissions = ['publish_stream', 'read_stream'];
+	facebook.appid = "495338853813822";
+	facebook.permissions = ['publish_stream', 'read_stream'];
 	
 	function showRequestResult(e) {
 		var s = '';
@@ -31,24 +39,17 @@ function fb_pub_stream(_args) {
 		alert(s);
 	}
 	
-	var login = Titanium.Facebook.createLoginButton({
+	var login = facebook.createLoginButton({
 		top: 10
 	});
-	if(Titanium.Platform.name == 'iPhone OS')
-	{
-		login.style = Ti.Facebook.BUTTON_STYLE_NORMAL;
-	}
-	else
-	{
-		login.style ='normal';
-	}
+	login.style = facebook.BUTTON_STYLE_NORMAL;
 	win.add(login);
 	
 	var actionsView = Ti.UI.createView({
-		top: 55, left: 0, right: 0, visible: Titanium.Facebook.loggedIn, height: 'auto'
+		top: 55, left: 0, right: 0, visible: facebook.loggedIn, height: 'auto'
 	});
 	
-	Titanium.Facebook.addEventListener('login', function(e) {
+	facebook.addEventListener('login', function(e) {
 		if (e.success) {
 			actionsView.show();
 		}
@@ -57,7 +58,7 @@ function fb_pub_stream(_args) {
 		}
 	});
 	
-	Titanium.Facebook.addEventListener('logout', function(e){
+	facebook.addEventListener('logout', function(e){
 		Ti.API.info('logout event');
 		actionsView.hide();
 	});
@@ -76,7 +77,7 @@ function fb_pub_stream(_args) {
 		if( (text === '')){
 			Ti.UI.createAlertDialog({ tile:'ERROR', message:'No text to Publish !! '}).show();
 		}else {
-			Titanium.Facebook.requestWithGraphPath('me/feed', {message: text}, "POST", showRequestResult);
+			facebook.requestWithGraphPath('me/feed', {message: text}, "POST", showRequestResult);
 		}	
 	});
 	actionsView.add(statusBtn);
@@ -95,7 +96,7 @@ function fb_pub_stream(_args) {
 			description: "This section of the site is dedicated to JavaScript-the-language, the parts that are not specific to web pages or other host environments...",
 			test: [ {foo:'Encoding test', bar:'Durp durp'}, 'test' ]
 		};
-		Titanium.Facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
+		facebook.requestWithGraphPath('me/feed', data, 'POST', showRequestResult);
 	});
 	actionsView.add(wall);
 	
@@ -114,7 +115,7 @@ function fb_pub_stream(_args) {
 			picture: "http://developer.appcelerator.com/assets/img/DEV_titmobile_image.png",
 			description: "You've got the ideas, now you've got the power. Titanium translates your hard won web skills..."
 		};
-		Titanium.Facebook.dialog("feed", data, showRequestResult);
+		facebook.dialog("feed", data, showRequestResult);
 	});
 	actionsView.add(wallDialog);
 	
