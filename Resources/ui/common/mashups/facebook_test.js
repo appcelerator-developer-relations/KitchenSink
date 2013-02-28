@@ -1,4 +1,4 @@
-function facebook(_args) {
+function facebook_test(_args) {
 	var self = Ti.UI.createWindow({
 		title:_args.title,
 		backgroundColor:'#fff'
@@ -33,4 +33,4 @@ function facebook(_args) {
 	return self;
 };
 
-module.exports = facebook;
+module.exports = facebook_test;
