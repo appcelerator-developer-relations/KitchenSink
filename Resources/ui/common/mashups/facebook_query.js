@@ -2,7 +2,7 @@ function fb_query(_args) {
 	/*globals Ti, Titanium, JSON, alert */
 	var platformName = Titanium.Platform.osname;
 	var facebook;
-	if (platformName == 'android' || platformName == 'iphone') {
+	if (platformName == 'android' || platformName == 'iphone' || platformName == 'ipad') {
 		facebook = require('facebook');
 	} else {
 		facebook = Titanium.Facebook;
