@@ -72,11 +72,12 @@ function list_views(_args) {
 		sectionApiSection.setItems(sectionApiDataSet);
 		sections.push(sectionApiSection);
 		
-		var eventApiSection = Ti.UI.createListSection({ headerTitle: 'List View Eventing'});
+		var eventApiSection = Ti.UI.createListSection({ headerTitle: 'List View Eventing. Run in ORDER'});
 		var eventApiDataSet = [
 		{properties: { title: 'Sanity Check', itemId: 'list_eventsanity', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
 		{properties: { title: 'Event Bubbling', itemId: 'list_eventbubble', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
 		{properties: { title: 'Child Events', itemId: 'list_eventchild', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
+		{properties: { title: 'itemclick + child click', itemId: 'list_eventchild2', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
 		];
 		eventApiSection.setItems(eventApiDataSet);
 		sections.push(eventApiSection);
