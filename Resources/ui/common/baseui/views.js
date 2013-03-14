@@ -10,6 +10,7 @@ function views(_args) {
 	var data = [
 		{title:'Events Propagation', hasChild:true, test:'ui/common/baseui/view_event_propagation'},
 		{title:'Events Interaction', hasChild:true, test:'ui/common/baseui/view_event_interaction'},
+		{title:'List View (NEW)', hasChild:true, test:'ui/common/baseui/list_views'},
 		{title:'Image Views', hasChild:true, test:'ui/common/baseui/image_views'},
 		{title:'Scroll Views', hasChild:true, test:'ui/common/baseui/scroll_views'},
 		{title:'Table Views', hasChild:true, test:'ui/common/baseui/table_views'},
@@ -54,8 +55,11 @@ function views(_args) {
 	// create table view
 	for (var i = 0; i < data.length; i++ ) {
 		var d = data[i];
+		if (i == 2) {
+			d.color='#00cc00'
+		}
 		// On Android, if touchEnabled is not set explicitly, its value is undefined.
-		if (d.touchEnabled !== false) {
+		else if (d.touchEnabled !== false) {
 			d.color = '#000';
 		}
 		d.font = {fontWeight:'bold'};
