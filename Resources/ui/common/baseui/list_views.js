@@ -41,6 +41,8 @@ function list_views(_args) {
 		{properties: { title: 'Default Template', itemId: 'list_deftemplate', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}}
 		];
 		if (isIOS) {
+			basicDataSet.push({properties: { title: 'Selection Style', itemId: 'list_selection_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}})
+			basicDataSet.push({properties: { title: 'Sroll Indicator Style', itemId: 'list_scroll_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}})
 			basicDataSet.push({properties: { title: 'Allows Selection Behavior', itemId: 'list_selection', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}})
 		}
 		if (isAndroid) {

@@ -1,7 +1,8 @@
 function getData(){
-    var data = [];
+    var data = [{template:Ti.UI.LIST_ITEM_TEMPLATE_DEFAULT, properties: {title:'My background is yellow', backgroundColor:'yellow'}}];
     
-    for (i=0;i<100;i++){
+    for (i=1;i<100;i++){
+    	
     	data.push({template:Ti.UI.LIST_ITEM_TEMPLATE_DEFAULT, properties: {title:'ITEM '+i}})
     }
     return data;
