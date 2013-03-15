@@ -1,6 +1,6 @@
 function getSection(count){
 	var data = [{properties:{title:'Delete Section '+count}}]
-	var section = Ti.UI.createListSection({headerTitle:'SECTION HEADER'})
+	var section = Ti.UI.createListSection({headerTitle:'SECTION HEADER '+count})
 	section.setItems(data);
 	return section;
 }

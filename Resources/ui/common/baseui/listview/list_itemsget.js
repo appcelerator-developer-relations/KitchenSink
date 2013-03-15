@@ -21,7 +21,6 @@ function list_getitems(_args) {
 	});
 	
 	listView.addEventListener('itemclick',function(e){
-		Ti.API.info(e);
 		var message = 'No itemId in event';
 		if(e.itemId == 'title'){
 			message = e.section.getItemAt(e.itemIndex).properties.title;

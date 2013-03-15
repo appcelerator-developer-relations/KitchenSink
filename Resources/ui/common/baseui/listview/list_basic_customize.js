@@ -18,7 +18,7 @@ function getDataSubtitleTemplate(){
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SUBTITLE, properties: {title:'TITLE',subtitle:'RED COLOR TITLE',color:'red'}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SUBTITLE, properties: {title:'TITLE',subtitle:'FONT ITALIC',font:{ fontStyle: 'italic' }}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SUBTITLE, properties: {title:'LOCAL IMAGE',subtitle:'apple logo',image:'images/apple_logo.jpg'}},
-    {template:Ti.UI.LIST_ITEM_TEMPLATE_SUBTITLE, properties: {title:'REMOTE IMAGE',subtitle:'WONT WORK ON IOS',image:'http://placehold.it/50x50'}},
+    {template:Ti.UI.LIST_ITEM_TEMPLATE_SUBTITLE, properties: {title:'REMOTE IMAGE',subtitle:'WONT WORK ON IOS',image:'http://placehold.it/27x27'}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SUBTITLE, properties: {title:'ALL THREE',subtitle:'RED ITALIC FONT AND LOCAL IMAGE',font:{ fontStyle: 'italic' },color:'red',image:'images/apple_logo.jpg'}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SUBTITLE, properties: {subtitle:'CAN NOT CUSTOMIZE SUBTITLE'}}
     ];
@@ -32,7 +32,7 @@ function getDataSettingsTemplate(){
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS, properties: {title:'TITLE',subtitle:'RED COLOR TITLE',color:'red'}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS, properties: {title:'TITLE',subtitle:'FONT ITALIC',font:{ fontStyle: 'italic' }}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS, properties: {title:'LOCAL IMAGE',subtitle:'apple logo',image:'images/apple_logo.jpg'}},
-    {template:Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS, properties: {title:'REMOTE IMAGE',subtitle:'WONT WORK ON IOS',image:'http://placehold.it/50x50'}},
+    {template:Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS, properties: {title:'REMOTE IMAGE',subtitle:'WONT WORK ON IOS',image:'http://placehold.it/27x27'}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS, properties: {title:'ALL THREE',subtitle:'RED ITALIC FONT AND LOCAL IMAGE',font:{ fontStyle: 'italic' },color:'red',image:'images/apple_logo.jpg'}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS, properties: {title:'CAN NOT', subtitle:'CUSTOMIZE SUBTITLE'}}
     ];
@@ -44,7 +44,7 @@ function getDataDefaultTemplate(){
     {template:Ti.UI.LIST_ITEM_TEMPLATE_DEFAULT, properties: {title:'RED COLOR TITLE',color:'red'}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_DEFAULT, properties: {title:'FONT ITALIC',font:{ fontStyle: 'italic' }}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_DEFAULT, properties: {title:'LOCAL IMAGE',image:'images/apple_logo.jpg'}},
-    {template:Ti.UI.LIST_ITEM_TEMPLATE_DEFAULT, properties: {title:'REMOTE IMAGE WONT WORK ON IOS',image:'http://placehold.it/50x50'}},
+    {template:Ti.UI.LIST_ITEM_TEMPLATE_DEFAULT, properties: {title:'REMOTE IMAGE WONT WORK ON IOS',image:'http://placehold.it/27x27'}},
     {template:Ti.UI.LIST_ITEM_TEMPLATE_DEFAULT, properties: {title:'ALL THREE RED ITALIC FONT AND LOCAL IMAGE',font:{ fontStyle: 'italic' },color:'red',image:'images/apple_logo.jpg'}},
     ];
     return data;
