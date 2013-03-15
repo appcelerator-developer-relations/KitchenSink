@@ -25,7 +25,9 @@ function list_views(_args) {
 	}
 
 	if (isValidVersion && isValidPlatform && listViewDefined) {
-		var listView = Ti.UI.createListView();
+		var listView = Ti.UI.createListView({
+			headerTitle:'THIS IS A LIST VIEW TOO',
+		});
 		if (isIOS) {
 			listView.style=Ti.UI.iPhone.ListViewStyle.GROUPED
 		}
@@ -38,7 +40,8 @@ function list_views(_args) {
 		{properties: { title: 'Background Colors& Scroll Indicator', itemId: 'list_background_color', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
 		{properties: { title: 'Headers and Footers', itemId: 'list_headers_footers', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
 		{properties: { title: 'Row Height', itemId: 'list_row_height', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Default Template', itemId: 'list_deftemplate', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}}
+		{properties: { title: 'Default Template', itemId: 'list_deftemplate', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
+		{properties: { title: 'Scroll To', itemId: 'list_scrollto', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}}
 		];
 		if (isIOS) {
 			basicDataSet.push({properties: { title: 'Selection Style', itemId: 'list_selection_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}})
@@ -83,9 +86,17 @@ function list_views(_args) {
 		];
 		eventApiSection.setItems(eventApiDataSet);
 		sections.push(eventApiSection);
-		
+
+		var performanceSection = Ti.UI.createListSection({ headerTitle: 'List View Performance'});
+		var performanceDataSet = [
+		{properties: { title: 'Remote Images in ListView', itemId: 'list_performance_remote_images', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
+		{properties: { title: 'Contacts', itemId: 'list_performance_contacts', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
+		]
+		performanceSection.setItems(performanceDataSet);
+		sections.push(performanceSection);
+
 		listView.setSections(sections);
-		
+
 		listView.addEventListener('itemclick',function(e){
 			Ti.API.info('GOT ITEM CLICK WITH itemIndex: '+e.itemIndex+' and sectionIndex: '+e.sectionIndex);
 			if (e.itemId) {
