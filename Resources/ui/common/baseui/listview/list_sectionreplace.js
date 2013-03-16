@@ -1,5 +1,5 @@
 function getSection(replaceCount){
-	var data = [{properties:{title:'I am Replaced',itemId:'0'}}]
+	var data = [{properties:{title:'I am Replaced',itemId:'0',height:44}}]
 	
 	var section = Ti.UI.createListSection({headerTitle:'REPLACED SECTION '+replaceCount})
 	section.setItems(data);
@@ -10,7 +10,7 @@ function getSection(replaceCount){
 function getInitSection(){
 	var sections = [];
 	for(i=0;i<4;i++){
-		var data = [{properties:{title:'Replace',itemId:'1'}}]
+		var data = [{properties:{title:'Replace',itemId:'1',height:44}}]
 		var section = Ti.UI.createListSection({headerTitle:'REPLACE SECTION'})
 		section.setItems(data);
 		sections.push(section);

@@ -43,16 +43,17 @@ function list_scrollto(_args) {
 	win.add(listView);
 	
 	var isIOS = (Titanium.Platform.name == 'iPhone OS');
-	
-	var message = ['NONE','TOP','MIDDLE','BOTTOM'];
-	var pos = {
-		'NONE':Ti.UI.iPhone.ListViewScrollPosition.NONE,
-		'TOP':Ti.UI.iPhone.ListViewScrollPosition.TOP,
-		'MIDDLE':Ti.UI.iPhone.ListViewScrollPosition.MIDDLE,
-		'BOTTOM':Ti.UI.iPhone.ListViewScrollPosition.BOTTOM,
+	if (isIOS) {
+		var message = ['NONE','TOP','MIDDLE','BOTTOM'];
+		var pos = {
+			'NONE':Ti.UI.iPhone.ListViewScrollPosition.NONE,
+			'TOP':Ti.UI.iPhone.ListViewScrollPosition.TOP,
+			'MIDDLE':Ti.UI.iPhone.ListViewScrollPosition.MIDDLE,
+			'BOTTOM':Ti.UI.iPhone.ListViewScrollPosition.BOTTOM,
+		}
+		
+		var counter = 0;
 	}
-	
-	var counter = 0;
 	
 	button.addEventListener('click',function(){
 		var sectionIndex = Math.floor(Math.random()*173)%10;

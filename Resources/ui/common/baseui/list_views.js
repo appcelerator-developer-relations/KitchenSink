@@ -35,18 +35,18 @@ function list_views(_args) {
 
 		var basicSection = Ti.UI.createListSection({ headerTitle: 'Basic Functions'});
 		var basicDataSet = [
-		{properties: { title: 'Built in templates', itemId: 'list_basic', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Customize Built in templates', itemId: 'list_basic_customize', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Background Colors& Scroll Indicator', itemId: 'list_background_color', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Headers and Footers', itemId: 'list_headers_footers', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Row Height', itemId: 'list_row_height', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Default Template', itemId: 'list_deftemplate', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Scroll To', itemId: 'list_scrollto', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}}
+		{properties: { title: 'Built in templates', itemId: 'list_basic', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Customize Built in templates', itemId: 'list_basic_customize', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Background Colors& Scroll Indicator', itemId: 'list_background_color', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Headers and Footers', itemId: 'list_headers_footers', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Row Height', itemId: 'list_row_height', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Default Template', itemId: 'list_deftemplate', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Scroll To', itemId: 'list_scrollto', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}}
 		];
 		if (isIOS) {
-			basicDataSet.push({properties: { title: 'Selection Style', itemId: 'list_selection_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}})
-			basicDataSet.push({properties: { title: 'Sroll Indicator Style', itemId: 'list_scroll_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}})
-			basicDataSet.push({properties: { title: 'Allows Selection Behavior', itemId: 'list_selection', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}})
+			basicDataSet.push({properties: { title: 'Selection Style', itemId: 'list_selection_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}})
+			basicDataSet.push({properties: { title: 'Sroll Indicator Style', itemId: 'list_scroll_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}})
+			basicDataSet.push({properties: { title: 'Allows Selection Behavior', itemId: 'list_selection', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}})
 		}
 		if (isAndroid) {
 			//TODO
@@ -56,41 +56,41 @@ function list_views(_args) {
 
 		var listApiSection = Ti.UI.createListSection({ headerTitle: 'List API - Section Management'});
 		var listApiDataSet = [
-		{properties: { title: 'Append Section', itemId: 'list_sectionappend', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Delete Section', itemId: 'list_sectiondelete', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Insert Section', itemId: 'list_sectioninsert', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Replace Section', itemId: 'list_sectionreplace', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}}
+		{properties: { title: 'Append Section', itemId: 'list_sectionappend', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Delete Section', itemId: 'list_sectiondelete', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Insert Section', itemId: 'list_sectioninsert', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Replace Section', itemId: 'list_sectionreplace', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}}
 		];
 		listApiSection.setItems(listApiDataSet);
 		sections.push(listApiSection);
 
 		var sectionApiSection = Ti.UI.createListSection({ headerTitle: 'Section API - Item Management'});
 		var sectionApiDataSet = [
-		{properties: { title: 'Set Items', itemId: 'list_itemsset', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Append Items', itemId: 'list_itemsappend', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Insert Items', itemId: 'list_itemsinsert', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Replace Items', itemId: 'list_itemsreplace', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Delete Items', itemId: 'list_itemsdelete', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Update Items', itemId: 'list_itemsupdate', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Get Items (otherData)', itemId: 'list_itemsget', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
+		{properties: { title: 'Set Items', itemId: 'list_itemsset', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Append Items', itemId: 'list_itemsappend', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Insert Items', itemId: 'list_itemsinsert', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Replace Items', itemId: 'list_itemsreplace', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Delete Items', itemId: 'list_itemsdelete', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Update Items', itemId: 'list_itemsupdate', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Get Items (otherData)', itemId: 'list_itemsget', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
 		];
 		sectionApiSection.setItems(sectionApiDataSet);
 		sections.push(sectionApiSection);
 		
 		var eventApiSection = Ti.UI.createListSection({ headerTitle: 'List View Eventing. Run in ORDER'});
 		var eventApiDataSet = [
-		{properties: { title: 'Sanity Check', itemId: 'list_eventsanity', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Event Bubbling', itemId: 'list_eventbubble', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Child Events', itemId: 'list_eventchild', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'itemclick + child click', itemId: 'list_eventchild2', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
+		{properties: { title: 'Sanity Check', itemId: 'list_eventsanity', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Event Bubbling', itemId: 'list_eventbubble', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Child Events', itemId: 'list_eventchild', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'itemclick + child click', itemId: 'list_eventchild2', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
 		];
 		eventApiSection.setItems(eventApiDataSet);
 		sections.push(eventApiSection);
 
-		var performanceSection = Ti.UI.createListSection({ headerTitle: 'List View Performance'});
+		var performanceSection = Ti.UI.createListSection({ headerTitle: 'List View Performance'});     
 		var performanceDataSet = [
-		{properties: { title: 'Remote Images in ListView', itemId: 'list_performance_remote_images', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
-		{properties: { title: 'Contacts', itemId: 'list_performance_contacts', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL}},
+		{properties: { title: 'Remote Images in ListView', itemId: 'list_performance_remote_images', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+		{properties: { title: 'Contacts', itemId: 'list_performance_contacts', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
 		]
 		performanceSection.setItems(performanceDataSet);
 		sections.push(performanceSection);

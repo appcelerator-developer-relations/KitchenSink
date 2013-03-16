@@ -1,7 +1,7 @@
 function getData(){
 	var data = [
-		{properties:{title:'Alert will show title (deja vu)',itemId:'title'}},
-		{properties:{title:'Alert Foobar (custom property)',itemId:'custom'},customData:'Foobar'},
+		{properties:{title:'Alert will show title (deja vu)',itemId:'title',height:44}},
+		{properties:{title:'Alert Foobar (custom property)',itemId:'custom',height:44},customData:'Foobar'},
 	];
 	return data;
 }
