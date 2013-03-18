@@ -1,8 +1,4 @@
-var data2 = [
-	{template:'myCell',taskLabel:{text:'Task 1',color:'#ff0000'},taskTrack:{value:0.2}},
-	{template:'myCell',taskLabel:{text:'Task 2',color:'#ffcc00'},taskTrack:{value:0.5}},
-	{template:'myCell',taskLabel:{text:'Task 3',color:'#00cc00'},taskTrack:{value:0.8}},
-]
+var data2 = [];
 
 function handleUpdate(e){
 	var item = data2[e.itemIndex];
@@ -32,6 +28,11 @@ function setupTest(win){
 	{properties:{title:'Mark Me Done',height:50,itemId:'0',font:{fontWeight:'normal'}}},
 	{properties:{title:'Mark Me Critical',height:50,itemId:'1',font:{fontWeight:'normal'}}},
 	]
+	data2 = [
+	{template:'myCell',taskLabel:{text:'Task 1',color:'#ff0000'},taskTrack:{value:0.2}},
+	{template:'myCell',taskLabel:{text:'Task 2',color:'#ffcc00'},taskTrack:{value:0.5}},
+	{template:'myCell',taskLabel:{text:'Task 3',color:'#00cc00'},taskTrack:{value:0.8}},
+	]
 	section1.setItems(data1);
 	
 	var myTemplate = {
@@ -45,11 +46,11 @@ function setupTest(win){
 		{
 			type:'Ti.UI.Slider',
 			bindId:'taskTrack',
-			properties:{right:0,width:'45%',min:0,max:1},
+			properties:{left:'45%',width:'45%',min:0,max:1},
 			events:{
 				'change':handleChangeEvent,
-				'touchend':handleUpdate,
-				'touchcancel':handleUpdate
+				'touchend':handleUpdate,//For iOS
+				'stop':handleUpdate//For Android. Undocumented. Needs to move to touchend
 			}
 		}
 		]
