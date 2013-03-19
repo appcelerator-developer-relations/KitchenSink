@@ -47,6 +47,7 @@ function list_views(_args) {
 			basicDataSet.push({properties: { title: 'Selection Style', itemId: 'list_selection_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}})
 			basicDataSet.push({properties: { title: 'Sroll Indicator Style', itemId: 'list_scroll_style', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}})
 			basicDataSet.push({properties: { title: 'Allows Selection Behavior', itemId: 'list_selection', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}})
+			basicDataSet.push({properties: { title: 'Keyboard Behavior', itemId: 'list_kb', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}})
 		}
 		if (isAndroid) {
 			//TODO
