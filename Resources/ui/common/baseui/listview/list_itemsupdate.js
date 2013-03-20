@@ -67,8 +67,8 @@ function setupTest(win){
 	]
 
 	var data3 = [
-	{template:'myCell2',taskLabel:{text:'Event 0 is NOGO',color:'#ff0000'},taskSwitch:{value:0}},
-	{template:'myCell2',taskLabel:{text:'Event 1 is GO',color:'#00cc00'},taskSwitch:{value:1}},
+	{template:'myCell2',taskLabel:{text:'Event 0 is NOGO',color:'#ff0000'},taskSwitch:{value:false}},
+	{template:'myCell2',taskLabel:{text:'Event 1 is GO',color:'#00cc00'},taskSwitch:{value:true}},
 	]
 
 	var myTemplate = {
