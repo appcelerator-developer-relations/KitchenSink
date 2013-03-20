@@ -1,6 +1,6 @@
 function list_kb(_args) {
 	var win = Ti.UI.createWindow({
-		title:'Update Items',
+		title:'Keyboard Behavior',
 		layout:'vertical'
 	});
 	

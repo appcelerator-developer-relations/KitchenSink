@@ -1,39 +1,46 @@
+function isValidVar(check){
+	if (check !== undefined && check !== null){
+		return true;
+	}
+	return false;
+}
+
 function genData (persons){
 	var data = [];
 	for(i=0;i<persons.length;i++){
 		var person = persons[i];
 		var phoneObj = person.phone;
 		var phonestr = ' No Home, Work or Mobile number';
-		if(phoneObj['home'] !== undefined && phoneObj['home'] !== null) {
+		if(isValidVar(phoneObj['home'])) {
 			phoneStr = 'Home: '+phoneObj['home']
-		} else if (phoneObj['work'] !== undefined && phoneObj['work'] !== null) {
+		} else if (isValidVar(phoneObj['work'])) {
 			phoneStr = 'Work: '+phoneObj['work']
-		} else if (phoneObj['mobile'] !== undefined && phoneObj['mobile'] !== null) {
+		} else if (isValidVar(phoneObj['mobile'])) {
 			phoneStr = 'Mobile: '+phoneObj['mobile']
 		} 
 		var nameStr = '';
 		
-		if(person.fullName !== undefined && person.fullName !== null) {
+		if(isValidVar(person.fullName)) {
 			nameStr = person.fullName;
 		} else {
-			if(person.perfix !== undefined && person.perfix !== null) {
+			if(isValidVar(person.perfix)) {
 				nameStr += person.perfix+' ';
 			}
-			if(person.firstName !== undefined && person.firstName !== null) {
+			if(isValidVar(person.firstName)) {
 				nameStr += person.firstName+' ';
 			}
-			if(person.middleName !== undefined && person.middleName !== null) {
+			if(isValidVar(person.middleName)) {
 				nameStr += person.middleName+' ';
 			}
-			if(person.lastName !== undefined && person.lastName !== null) {
+			if(isValidVar(person.lastName)) {
 				nameStr += person.lastName+' ';
 			}
-			if(person.suffix !== undefined && person.suffix !== null) {
+			if(isValidVar(person.suffix)) {
 				nameStr += person.suffix;
 			}
 		}
 		var imageObj = 'http://placehold.it/50x50'; 
-		if(person.image !== undefined && person.image !== null) {
+		if(isValidVar(person.image)) {
 			imageObj = person.image;
 		}
 

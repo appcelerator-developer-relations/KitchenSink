@@ -68,7 +68,7 @@ function list_deleteitems(_args) {
 	var counter1 = 1;
 	
 	listView.addEventListener('itemclick',function(e){
-		if(e.itemId !== undefined)
+		if(e.itemId !== undefined && e.itemId !== null)
 		{
 			var deleteCount = parseInt(e.itemId);
 			var pos = e.itemIndex;

@@ -1,9 +1,15 @@
+function isValidVar(check){
+	if (check !== undefined && check !== null){
+		return true;
+	}
+	return false;
+}
 function clickHandler(e){
 	var message = 'Type:'+e.type+'\nSection title:'+e.section.headerTitle+'\nsectionIndex:'+e.sectionIndex+'\nitemIndex:'+e.itemIndex;
-	if(e.bindId !== undefined){
+	if(isValidVar(e.bindId)){
 		message += '\nbindId:'+e.bindId;
 	}
-	if(e.itemId !== undefined){
+	if(isValidVar(e.itemId)){
 		message += '\nitemId:'+e.itemId;
 	}
 	alert(message);

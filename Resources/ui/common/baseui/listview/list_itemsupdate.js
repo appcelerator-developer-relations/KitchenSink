@@ -27,17 +27,12 @@ function handleSwitchChangeEvent(e){
 			item.taskLabel.color = '#ff0000'
 			item.taskLabel.text = 'Event '+e.itemIndex+' is NOGO'
 		}
-		Ti.API.info(e);
-		Ti.API.info(item);
 		e.section.updateItemAt(e.itemIndex,item);
 	}
 }
 
 function handleSliderUpdate(e){
 	var item = e.section.getItemAt(e.itemIndex);
-
-	Ti.API.info(e);
-
 	if (e.value > 0.99) {
 		e.section.updateItemAt(e.itemIndex,{properties:{title:item.taskLabel.text+' is done', color:'#00cc00',accessoryType:Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK}})
 	} else {
@@ -148,7 +143,7 @@ function setupTest(win){
 
 	var listView = Ti.UI.createListView({
 		templates:{'myCell':myTemplate, 'myCell1':myTemplate1, 'myCell2':myTemplate2},
-		sections:[section0,section1,section2]
+		sections:[section0,section1,section2,section3]
 	})
 	
 	listView.addEventListener('itemclick',function(e){
