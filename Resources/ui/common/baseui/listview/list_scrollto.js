@@ -63,7 +63,7 @@ function list_scrollto(_args) {
 		if(isIOS) {
 			counter = counter%4;
 			desc.text = 'scrollToItem('+sectionIndex+','+itemIndex+','+message[counter]+'('+pos[message[counter]]+'))'
-			listView.scrollToItem(sectionIndex,itemIndex,pos[message[counter]]);
+			listView.scrollToItem(sectionIndex,itemIndex,{position:pos[message[counter]]});
 			counter++;
 		} else {
 			desc.text = 'scrollToItem('+sectionIndex+','+itemIndex+')';
