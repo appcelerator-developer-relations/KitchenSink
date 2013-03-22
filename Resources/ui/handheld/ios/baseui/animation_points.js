@@ -37,7 +37,9 @@ function anim_point(_args) {
 	win.add(b);
 	b.addEventListener('click', function()
 	{
-		circle.animate({center:{x:circle.animatedCenter.x,y:circle.animatedCenter.y }});
+		var newLeft = circle.animatedCenter.x - circle.width/2;
+		var newTop = circle.animatedCenter.y - circle.height/2;
+		circle.animate({left:newLeft,top:newTop});
 	});
 	circle.animate(a, function()
 	{
