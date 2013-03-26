@@ -2,7 +2,7 @@ function sound_remote_url() {
 	var win = Titanium.UI.createWindow(),
 		isIOS = Titanium.Platform.name === 'iPhone OS',
 		isAndroid = Ti.Platform.name === 'android',
-		isTizen = Ti.Platform.name === 'tizen';
+		isTizen = Ti.Platform.osname === 'tizen';
 
 	//TIMOB-7502. TIme moved to ms but duration is still reported in seconds
 	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));

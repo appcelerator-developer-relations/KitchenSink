@@ -1,10 +1,10 @@
 function sound_file_url() {
 	var win = Titanium.UI.createWindow(),
-		isTizen = Ti.Platform.name === 'tizen',
+		isTizen = Ti.Platform.osname === 'tizen',
 		isAndroid = Ti.Platform.name === 'android',
 		timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS')),
 		file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'etc/cricket.wav'),
-		file2 = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,Ti.Platform.name === 'tizen'? 'etc/Kalimba.mp3':'etc/pop.caf');
+		file2 = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,Ti.Platform.osname === 'tizen'? 'etc/Kalimba.mp3':'etc/pop.caf');
 	
 	// load from file object but use the nativepath
 	var sound = Titanium.Media.createSound({url:file.nativePath});

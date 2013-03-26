@@ -1,5 +1,5 @@
 function sound(_args) {
-	var isTizen = Titanium.Platform.name === 'tizen',
+	var isTizen = Titanium.Platform.osname === 'tizen',
 		self = Ti.UI.createWindow({
 			title:_args.title,
 			backgroundColor:'#fff'

@@ -1,5 +1,5 @@
 function sound_local() {
-	var isTizen = Ti.Platform.name === 'tizen',
+	var isTizen = Ti.Platform.osname === 'tizen',
 		isAndroid = Ti.Platform.name === 'android';
 
 	// audioSessionMode unsupported in Tizen
