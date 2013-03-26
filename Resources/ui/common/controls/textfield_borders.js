@@ -73,7 +73,7 @@ function textfield_border() {
 		clearOnEdit:true
 	});
 
-	if ((Titanium.Platform.name === 'iPhone OS') || (Titanium.Platform.name === 'tizen')) {
+	if ((Titanium.Platform.name === 'iPhone OS') || (Titanium.Platform.osname === 'tizen')) {
 		scrolly.add(tf1);
 		scrolly.add(tf2);
 		scrolly.add(tf3);

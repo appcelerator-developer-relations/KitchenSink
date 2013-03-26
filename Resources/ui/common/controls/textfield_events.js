@@ -114,7 +114,7 @@ function textfield_events() {
 	
 	var instructions = Ti.UI.createLabel({
 		text:'Rotate device while keyboard is up',
-		bottom:10,
+		top:260,
 		height:30,
 		color:'#777'
 	});
