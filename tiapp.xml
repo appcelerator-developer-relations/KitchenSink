@@ -7,7 +7,6 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.0.2.GA</sdk-version>
     <id>com.appcelerator.kitchensink</id>
     <name>KitchenSink</name>
     <version>3.0.2.GA</version>
@@ -55,5 +54,7 @@
             <service type="interval" url="testservice.js"/>
         </services>
     </android>
-    <modules/>
+    <modules>
+        <module platform="tizen">tizen</module>
+    </modules>
 </ti:app>
