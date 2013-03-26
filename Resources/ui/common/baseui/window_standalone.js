@@ -69,8 +69,6 @@ function win_standalone(_args) {
 					height:Titanium.Platform.displayCaps.platformHeight,
 					width:Titanium.Platform.displayCaps.platformWidth,
 					backgroundColor:'#336699',
-					bottom:0,
-					right:0,
 					transform : t
 				},
 				t1 = Titanium.UI.create2DMatrix().scale(1),
