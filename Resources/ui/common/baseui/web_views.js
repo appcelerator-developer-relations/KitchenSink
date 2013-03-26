@@ -1,7 +1,6 @@
 function webviews(_args) {
-	var isTizen = Titanium.Platform.name === 'tizen';
+	var isTizen = Titanium.Platform.name === 'TIZEN';
 		win = Titanium.UI.createWindow({backgroundColor:'#fff'});
-	
 	
 	// create table view data object
 	var data = [
