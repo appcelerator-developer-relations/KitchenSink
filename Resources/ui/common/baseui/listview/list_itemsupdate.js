@@ -122,7 +122,8 @@ function setupTest(win){
 			bindId:'bindField',
 			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black'},
 			events:{
-				'blur':handleKBUpdate
+				'blur':handleKBUpdate,
+				'return':handleKBUpdate
 			}
 		}
 		]
@@ -164,8 +165,13 @@ function setupTest(win){
 }
 
 function list_updateitems(_args) {
+	var softInput = 'none'
+	if (Titanium.Platform.osname == 'android') {
+		softInput = Ti.UI.Android.SOFT_INPUT_ADJUST_PAN
+	}
 	var win = Ti.UI.createWindow({
 		title:'Update Items',
+		windowSoftInputMode:softInput
 	});
 	
 	setupTest(win);
