@@ -120,7 +120,7 @@ function setupTest(win){
 		{
 			type:'Ti.UI.TextField',
 			bindId:'bindField',
-			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black'},
+			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black', backgroundColor:'white'},
 			events:{
 				'blur':handleKBUpdate,
 				'return':handleKBUpdate
