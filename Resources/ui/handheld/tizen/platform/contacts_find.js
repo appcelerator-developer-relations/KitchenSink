@@ -82,7 +82,7 @@ function find_contacts(args) {
 			
 			contactsTable.data = tableData;
 		}, function(err) {
-			alert('Error occured: ' = err);
+			alert('Error occured: ' + err);
 		});
 	});
 	
