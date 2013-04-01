@@ -3,7 +3,7 @@ function label_linkify() {
 			backgroundColor: 'white'
 		}),
 		l = Ti.UI.createLabel({
-			autoLink: Ti.UI.LINKIFY_ALL,
+			autoLink: Ti.UI.AUTOLINK_ALL,
 			left: 5, 
 			top: 5, 
 			right: 5, 
@@ -55,19 +55,19 @@ function label_linkify() {
 		});
 
 	btnAll.addEventListener('click', function(e) {
-		l.autoLink = Ti.UI.LINKIFY_ALL;
+		l.autoLink = Ti.UI.AUTOLINK_ALL;
 	});
 	btnEmail.addEventListener('click', function(e) {
-		l.autoLink = Ti.UI.LINKIFY_EMAIL_ADDRESSES;
+		l.autoLink = Ti.UI.AUTOLINK_EMAIL_ADDRESSES;
 	});
 	btnNONE.addEventListener('click', function(){
-		l.autoLink = Ti.UI.LINKIFY_NONE;
+		l.autoLink = Ti.UI.AUTOLINK_NONE;
 	});
 	btnPhone.addEventListener('click', function(e) {
-		l.autoLink = Ti.UI.LINKIFY_PHONE_NUMBERS;
+		l.autoLink = Ti.UI.AUTOLINK_PHONE_NUMBERS;
 	});
 	btnWeb.addEventListener('click', function(e) {
-		l.autoLink = Ti.UI.LINKIFY_WEB_URLS;
+		l.autoLink = Ti.UI.AUTOLINK_URLS;
 	});
 	ta.addEventListener('return', function(e) {
 		l.text = e.value;
