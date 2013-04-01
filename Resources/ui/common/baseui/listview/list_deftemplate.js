@@ -81,7 +81,7 @@ function list_background_color(_args) {
 	})
 	
 	function updateDefault(){
-		if (Ti.Gesture.isLandscape()){
+		if (win.orientation != Ti.UI.PORTRAIT){
 			listView.defaultItemTemplate = 'two';
 		} else {
 			listView.defaultItemTemplate = 'one';
