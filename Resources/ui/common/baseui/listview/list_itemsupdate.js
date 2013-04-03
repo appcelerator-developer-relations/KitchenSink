@@ -1,8 +1,12 @@
 function handleKBUpdate(e){
-	var item = e.section.getItemAt(e.itemIndex);
-	item.bindField.value = e.value;
-	item.taskLabel.text = 'Got '+e.value;
-	e.section.updateItemAt(e.itemIndex,item);
+	try {
+		var item = e.section.getItemAt(e.itemIndex);
+		item.bindField.value = e.value;
+		item.taskLabel.text = 'Got '+e.value;
+		e.section.updateItemAt(e.itemIndex,item);
+	} catch (err) {
+		Ti.API.error('Error in handleKBUpdate. Window closing ? '+err.message)
+	}
 }
 
 function handleSwitchChangeEvent(e){
@@ -120,9 +124,10 @@ function setupTest(win){
 		{
 			type:'Ti.UI.TextField',
 			bindId:'bindField',
-			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black'},
+			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black', backgroundColor:'lightgray'},
 			events:{
-				'blur':handleKBUpdate
+				'blur':handleKBUpdate,
+				'return':handleKBUpdate
 			}
 		}
 		]
@@ -164,8 +169,13 @@ function setupTest(win){
 }
 
 function list_updateitems(_args) {
+	var softInput = 'none'
+	if (Titanium.Platform.osname == 'android') {
+		softInput = Ti.UI.Android.SOFT_INPUT_ADJUST_PAN
+	}
 	var win = Ti.UI.createWindow({
 		title:'Update Items',
+		windowSoftInputMode:softInput
 	});
 	
 	setupTest(win);
