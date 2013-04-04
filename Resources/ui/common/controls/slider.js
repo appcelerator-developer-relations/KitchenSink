@@ -13,7 +13,7 @@ function slider(_args) {
 		data.push({title:'Min/Max Range', hasChild:true, test:'ui/handheld/android/controls/slider_range'});
 	}
 	
-	if (Titanium.Platform.name === 'tizen') {
+	if (Titanium.Platform.osname === 'tizen') {
 		data.push({ title: 'Min/Max Range', hasChild: true, test: 'ui/handheld/tizen/controls/slider_range' });
 	}
 	

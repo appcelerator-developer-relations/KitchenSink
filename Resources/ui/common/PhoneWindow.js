@@ -36,8 +36,8 @@ function PhoneWindow(title) {
 		data.push({title:'Screenshot', hasChild:true, test:'ui/handheld/ios/phone/screenshot'});
 		data.push({title:'Save to Gallery', hasChild:true, test:'ui/handheld/ios/phone/photo_gallery_save'});
 	}
-	
-	//add tizen specific tests
+
+	// Add tizen specific tests.
 	if (isTizen) {
 		data.push({title: 'Screenshot', hasChild: true, test: 'ui/handheld/tizen/phone/screenshot'});
 		data.push({title: 'Save to Gallery', hasChild: true, test: 'ui/handheld/tizen/phone/photo_gallery_save'});

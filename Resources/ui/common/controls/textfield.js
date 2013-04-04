@@ -23,9 +23,7 @@ function textfield_list(_args) {
 		data.push({title:'Textfield in scrollview', hasChild:true, test:'ui/handheld/ios/controls/textfield_scrollview'});
 	} else if (Titanium.Platform.name == 'android') {
 		data.push({title:'Soft Input Focus', hasChild:true, test:'ui/handheld/android/controls/textfield_softinputfocus'});
-	} else if (Titanium.Platform.name === 'tizen') {
-		data.push({ title: 'Soft Input Focus', hasChild: true, test: 'ui/handheld/tizen/controls/textfield_softinputfocus' });
-	} 
+	}
 	
 	// create table view
 	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };
