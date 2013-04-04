@@ -17,7 +17,7 @@ function PhoneWindow(title) {
 		data.push({title:'Accelerometer', hasChild:true, test:'ui/common/phone/accelerometer'});
 	}
 	
-	if ( !(Ti.Platform.model === 'Kindle Fire' || isMobileWeb || isTizen) ) {
+	if ( !(Ti.Platform.model === 'Kindle Fire' || isMobileWeb) ) {
 		data.push({title:'Contacts', hasChild:true, test:'ui/common/phone/contacts'});
 	}
 	data.push({title:'Sound', hasChild:!isMobileWeb, test:'ui/common/phone/sound', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"});
