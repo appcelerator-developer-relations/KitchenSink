@@ -130,7 +130,8 @@ function email_dialog() {
 			
 				}
 			});
-		})
+		});
+		dialog.show();
 	});
 	
 	return win;
