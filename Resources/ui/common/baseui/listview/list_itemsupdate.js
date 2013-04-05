@@ -133,7 +133,7 @@ function setupTest(win){
 		{
 			type:'Ti.UI.TextField',
 			bindId:'bindField',
-			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black', backgroundColor:'lightgray'},
+			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black', backgroundColor:'lightgray',value:''},
 			events:{
 				'blur':handleKBUpdate,
 				'return':handleKBUpdate
