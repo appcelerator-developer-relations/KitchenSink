@@ -1,6 +1,6 @@
 function tizen_exit_hide_launch(_args) {
 	var win = Ti.UI.createWindow(),
-		CALC_APP_ID = 'org.tizen.calculator',
+		MEMO_APP_ID = 'org.tizen.memo',
 		butttonHeightOffset = 10, 
 		butttonHeight = 40,
 		butttonWidth = 200,
@@ -45,7 +45,7 @@ function tizen_exit_hide_launch(_args) {
 
 	// Create button for Launch
 	var buttonLaunch = Titanium.UI.createButton({
-		title: 'Launch Calculator',
+		title: 'Launch Text Editor',
 		height: butttonHeight,
 		width: butttonWidth,
 		top: 3 * butttonHeightOffset + 2 * butttonHeight
@@ -54,7 +54,7 @@ function tizen_exit_hide_launch(_args) {
 	// Call tizen.application.exit when button has been pressed
 	buttonLaunch.addEventListener('click', function() {
 		try {
-			Tizen.Apps.launch(CALC_APP_ID);
+			Tizen.Apps.launch(MEMO_APP_ID);
 		} catch (e) {
 			_args.showErrorDialog(e, 'Could not Launch Calculator');
 		}
