@@ -1,3 +1,7 @@
+// A client-server sample application to test Tizen Bluetooth functionality.
+// This is the server part. The client part is in the adjacent Kitchen Sink test.
+// To execute the test, run both parts simultaneously on two Tizen devices.
+
 function btServer() {
 
 	var btAdapter = require('tizen').Bluetooth.getDefaultAdapter(),
@@ -57,7 +61,7 @@ function btServer() {
                 
                 print('The remote device has been connected');
                 
-                //callbacks of socket
+                // callbacks of socket
                 socket.addEventListener('socketmessagereceived', function() {
                     var data = socket.readData(), 
                         recvMsg = '',

@@ -1,3 +1,6 @@
+// Test of Tizen.Apps.getAppsContext.
+// This test is Tizen only.
+
 function tizen_appscontext(_args) {
 	var self = Titanium.UI.createWindow(),
 		Tizen = require('tizen'),
@@ -10,12 +13,11 @@ function tizen_appscontext(_args) {
 			contextsCount = contexts.length,
 			tableview = Ti.UI.createTableView({});
 
+		// Generate app context info to show in the table view
 		for (; i < contextsCount; i++) {
 			data.push({
 				// AlertDialog title
 				title: contexts[i].appId + '\n<font size="1">' + contexts[i].id + '</font>',
-				// app_id consist application id used in showAppInfoById
-				// Do not remove it
 				app_id: contexts[i].appId,
 				id: contexts[i].id
 			});
@@ -31,4 +33,5 @@ function tizen_appscontext(_args) {
 	return self;
 
 }
+
 module.exports = tizen_appscontext;

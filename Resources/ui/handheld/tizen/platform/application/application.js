@@ -1,3 +1,6 @@
+// Tests of Tizen's application control functionality.
+// These tests are Tizen only.
+
 function tizen_application(_args) {
 	var self = Titanium.UI.createWindow(), 
 		tableview = Ti.UI.createTableView({

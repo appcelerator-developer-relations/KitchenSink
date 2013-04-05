@@ -1,8 +1,16 @@
+// Test for contact functionality. Although the contact functionality is exposed through the
+// regular Titanium Contacts API, this test makes use of some Tizen-specific calls and features,
+// therefore it's Tizen-only.
+//
+// This test verifies contact editing. It is initiated from the "contacts_find" test.
+
 function edit_contact(args) {
 	var win = Ti.UI.createWindow({
 			title: args.title
 		}),
+		// the contact selected in the "contacts_find" test:
 		person = Ti.Contacts.getPersonByID(args.contactId),
+		// stuff related to contact editing UI:
 		labelLeftPos = 10,
 		labelWidth = '40%',
 		height = 30,
@@ -12,8 +20,7 @@ function edit_contact(args) {
 		address = (person.address.home &&  (person.address.home.length > 0)) ? person.address.home[0] : {},
 		email = (person.email.home && (person.email.home.length > 0)) ? person.email.home[0] : '',
 		phoneNumber = (person.phone.home && (person.phone.home.length > 0)) ? person.phone.home[0] : '';
-	
-	
+		
 	// Add controls for first name
 	var firstNameLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
@@ -152,8 +159,7 @@ function edit_contact(args) {
 	});
 	win.add(streetInput);
 	
-	top += height + 10;		
-	
+	top += height + 10;			
 	
 	// Add controls for ZIP
 	var zipLabel = Ti.UI.createLabel({
@@ -185,6 +191,7 @@ function edit_contact(args) {
 	});	
 	win.add(updateButton);			
 	
+	// Contact updating
 	updateButton.addEventListener('click', function(e) {
 		var firstName = firstNameInput.value.trim(),
 			lastName = lastNameInput.value.trim(),
@@ -212,6 +219,7 @@ function edit_contact(args) {
 					ZIP: zip					
 				}];
 			}
+			// If the array was empty, add the first item. Otherwise, overwrite the first item.
 			(Object.prototype.toString.call(person.email.home) === '[object Array]') ? person.email.home[0] = email : person.email.home = [email];
 			(Object.prototype.toString.call(person.phone.home) === '[object Array]') ? person.phone.home[0] = phoneNumber : person.phone.home = [phoneNumber];
 			

@@ -1,3 +1,7 @@
+// A client-server sample application to test Tizen Bluetooth functionality.
+// This is the client part. The server part is in the adjacent Kitchen Sink test.
+// To execute the test, run both parts simultaneously on two Tizen devices.
+
 function btClient() {
 	var addressOfServer,
         btAdapter = require('tizen').Bluetooth.getDefaultAdapter(),
@@ -52,7 +56,7 @@ function btClient() {
 
                 client.socket = socket;
                 
-                //callbacks of socket
+                // callbacks of socket
                 socket.addEventListener('socketmessagereceived', function() {
                     data = socket.readData();
                     len = data.length;
@@ -88,7 +92,7 @@ function btClient() {
         
         // UI
         win = Ti.UI.createWindow({backgroundColor:'#fff'}),
-         // Bluetooth On/Off
+        // Bluetooth On/Off
         btSwitch = Ti.UI.createSwitch({
             top : 10,
             titleOn : 'Bluetooth enabled',
@@ -105,7 +109,7 @@ function btClient() {
 			borderWidth: 2,
 			borderColor: '#cccccc'
 		}),
-        // load view of devices
+        // Load view of devices
         discoverDevices = function() {
             devicesView.show();
             btAdapter.discoverDevices();
@@ -190,7 +194,7 @@ function btClient() {
                 function() {
                     print('Bluetooth has been powered ' + (btSwitch.value ? 'on' : 'off'));
                     btAdapter.powered ? discoverDevices() :  (function() {
-                        //stop WORKING
+                        // stop working
                         devicesView.setData([]);
                         connectButton.enabled = sendButton.enabled = false;
                     })()
@@ -204,19 +208,18 @@ function btClient() {
         }
     });
     
-	//Bond server
+	// Bond server
 	connectButton.addEventListener('click', function() {
 		client.bond(addressOfServer);
 	});
     
-    //Send msg
+    // Send msg
 	sendButton.addEventListener('click', function() {
         var currentdate = new Date(),
             strTime = "Time: " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 		client.sendMsg(strTime);
 	});
-    
-           
+               
    	win.add(btSwitch);
     win.add(devicesView);
    	win.add(connectButton);
@@ -225,8 +228,7 @@ function btClient() {
     
     btAdapter.powered && discoverDevices();
     	
-   	return win;
-   
+   	return win;   
 };
 
 module.exports = btClient;

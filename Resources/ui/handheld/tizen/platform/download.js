@@ -1,3 +1,6 @@
+// Test of Tizen HTTP file download functionality.
+// Tizen only.
+
 function tizenDownload(title) {
 	var messageWin = require('ui/handheld/tizen/tizenToast'),
 		downloadRequest = void 0,
@@ -57,6 +60,7 @@ function tizenDownload(title) {
 		});
 	}
 
+	// Initiate the download.
 	function startDownload() {
 		// Listener object must be "local" for call "Tizen.Download.start". Don't move this declaration it out of this function.
 		var listener = {
@@ -101,6 +105,7 @@ function tizenDownload(title) {
 			}
 		};
 
+		// Request the download start from Tizen.
 		try {
 			if (downloadRequest) {
 				messageWin.showToast('Please, stop current download before start new one.', 3000);

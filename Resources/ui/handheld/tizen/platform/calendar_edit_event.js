@@ -1,3 +1,7 @@
+// Test for Tizen calendar functionality. Test of editing calendar events.
+// This test is part of the "calendar_events_list" test.
+// Tizen only.
+
 function edit_event(args) {
 	var self = Ti.UI.createWindow({
 			title: args.title
@@ -12,7 +16,8 @@ function edit_event(args) {
 		top = 10,
 		inputLeftPos = '45%',
 		inputWidth = '50%',
-		// Add controls for summary
+
+		// Add controls for summary display
 		summaryLabel = Ti.UI.createLabel({
 			left: labelLeftPos,
 			top: top,
@@ -35,7 +40,7 @@ function edit_event(args) {
 
 	top += height + 10;
 
-	// Add controls for description
+	// Shows calendar event description
 	var descriptionLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
 		top: top,
@@ -58,7 +63,7 @@ function edit_event(args) {
 
 	top += height + 10;
 
-	// Add controls for location
+	// Shows calendar event location
 	var locationLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
 		top: top,
@@ -81,6 +86,7 @@ function edit_event(args) {
 
 	top += height + 10;
 
+	// Shows calendar event time
 	var timeLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
 		top: top,
@@ -93,6 +99,7 @@ function edit_event(args) {
 
 	top += height + 20;
 
+	// Selects alternative time for the calendar event
 	var timePicker = Ti.UI.createPicker({
 		type: Ti.UI.PICKER_TYPE_DATE_AND_TIME,
 		value: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startDate.getHours(), startDate.getMinutes(), 0),

@@ -1,3 +1,7 @@
+// Test fors contact functionality. Although the contact functionality is exposed through the
+// regular Titanium Contacts API, these tests make use of some Tizen-specific calls and features,
+// therefore they are Tizen-only.
+
 function tizen_contacts(args) {
 	var self = Ti.UI.createWindow({
 			title: args.title
@@ -17,9 +21,9 @@ function tizen_contacts(args) {
 		}
 	});
 	
-	
 	self.add(tableview);
 	
 	return self;
 }
+
 module.exports = tizen_contacts;

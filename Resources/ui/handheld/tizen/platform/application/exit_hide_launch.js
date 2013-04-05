@@ -1,6 +1,6 @@
 function tizen_exit_hide_launch(_args) {
 	var win = Ti.UI.createWindow(),
-		MEMO_APP_ID = 'org.tizen.memo',
+		memoAppId = 'org.tizen.memo',
 		butttonHeightOffset = 10, 
 		butttonHeight = 40,
 		butttonWidth = 200,
@@ -55,7 +55,7 @@ function tizen_exit_hide_launch(_args) {
 	// Call tizen.application.exit when button has been pressed
 	buttonLaunch.addEventListener('click', function() {
 		try {
-			Tizen.Apps.launch(MEMO_APP_ID);
+			Tizen.Apps.launch(memoAppId);
 		} catch (e) {
 			helper.showErrorDialog(e, 'Could not Launch Calculator');
 		}

@@ -1,3 +1,7 @@
+// Tests of the Tizen messaging (SMS) functionality.
+//
+// Tizen only.
+
 function sms(args) {
 	var self = Ti.UI.createWindow({
 			title: 'Messaging: sms'

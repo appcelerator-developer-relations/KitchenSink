@@ -1,3 +1,5 @@
+// Tests for Tizen calendar functionality.
+
 function tizen_calendar(args) {
 	var self = Ti.UI.createWindow({
 			title: args.title
