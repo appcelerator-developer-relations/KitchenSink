@@ -5,7 +5,7 @@ function picker_custom1() {
 	var picker = Ti.UI.createPicker({backgroundColor:'#ff9900'});
 
 	if (Ti.Platform.osname === 'tizen') {
-		// On Mobile Web, by default, the picker fills the entire view it is contained,
+		// On Mobile Web/Tizen, by default, the picker fills the entire view it is contained,
 		// unless the size is provided.
 		picker.width = 100;
 		picker.height = 110;

@@ -43,6 +43,7 @@ function tv_set() {
 					data[c]=row;
 				}
 
+				// Exclude iOS-specific stuff from being tested on Tizen
 				if (!isTizen) {
 					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
 					animationStyle = { animationStyle: Titanium.UI.iPhone.RowAnimationStyle.NONE };
@@ -60,6 +61,7 @@ function tv_set() {
 	
 				];
 				
+				// Exclude iOS-specific stuff from being tested on Tizen
 				if (!isTizen) {
 					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
 				 	animationStyle = { animationStyle: Titanium.UI.iPhone.RowAnimationStyle.DOWN };
@@ -81,6 +83,7 @@ function tv_set() {
 	
 				];
 
+				// Exclude iOS-specific stuff from being tested on Tizen
 				if (!isTizen) {
 					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
 			    	animationStyle = { animationStyle: Titanium.UI.iPhone.RowAnimationStyle.UP };

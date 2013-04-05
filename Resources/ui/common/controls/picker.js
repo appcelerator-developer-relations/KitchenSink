@@ -43,6 +43,7 @@ function picker(_args) {
 		data.push({title:'Android "useSpinner" - time', hasChild:true, test:'ui/handheld/android/controls/picker_android_spinner_time'});
 		data.push({title:'Android "useSpinner" - time (2)', hasChild:true, test:'ui/handheld/android/controls/picker_android_spinner_time2'});
 	} else if(isTizen) {
+		// On Tizen, make available all tests, except those specifically excluded by the "notizen" attribute.
 		data = [];
 		for (; i < itemsCount; i++) {
 			if (!items[i].notizen) {

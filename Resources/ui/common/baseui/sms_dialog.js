@@ -1,3 +1,8 @@
+// For this test: Base UI --> View --> SMS Dialog
+//
+// What's tested:
+//   - creating an SMS dialog and sending an SMS
+
 function sms_dialog() {
 	var win = Ti.UI.createWindow();
 
