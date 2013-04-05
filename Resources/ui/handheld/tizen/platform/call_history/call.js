@@ -1,3 +1,6 @@
+// Tests for Tizen call history functionality. 
+// Tizen only.
+
 function call(args) {
 	var self = Ti.UI.createWindow({
 			title: 'Call'

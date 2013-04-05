@@ -1,3 +1,6 @@
+// Test for Tizen calendar functionality. Test of Tizen.Calendar.createCalendarEvent.
+// This test is Tizen only.
+
 function add_event(args) {
 	var self = Ti.UI.createWindow({
 			title: args.title
@@ -10,6 +13,7 @@ function add_event(args) {
 		top = 10,
 		inputLeftPos = '45%',
 		inputWidth = '50%',
+
 		// Add controls for summary
 		summaryLabel = Ti.UI.createLabel({
 			left: labelLeftPos,
@@ -32,7 +36,7 @@ function add_event(args) {
 
 	top += height + 10;
 
-	// Add controls for description
+	// Shows calendar event description
 	var descriptionLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
 		top: top,
@@ -54,7 +58,7 @@ function add_event(args) {
 
 	top += height + 10;
 
-	// Add controls for location
+	// Shows calendar event location
 	var locationLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
 		top: top,
@@ -76,6 +80,7 @@ function add_event(args) {
 
 	top += height + 10;
 
+	// Shows calendar event time
 	var timeLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
 		top: top,
@@ -88,6 +93,7 @@ function add_event(args) {
 
 	top += height + 10;
 
+	// Selects time for new calendar event
 	var timePicker = Ti.UI.createPicker({
 		type: Ti.UI.PICKER_TYPE_DATE_AND_TIME,
 		value: new Date(), 
@@ -146,4 +152,5 @@ function add_event(args) {
 
 	return self;
 }
+
 module.exports = add_event;
