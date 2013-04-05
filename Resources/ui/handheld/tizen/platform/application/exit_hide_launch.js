@@ -1,6 +1,6 @@
 function tizen_exit_hide_launch(_args) {
 	var win = Ti.UI.createWindow(),
-		CALC_APP_ID = 'tlp6xwqzos.Calculator', 
+		CALC_APP_ID = 'org.tizen.calculator',
 		butttonHeightOffset = 10, 
 		butttonHeight = 40,
 		butttonWidth = 200,

@@ -202,7 +202,6 @@ function sound_file() {
 	{
 		clearInterval(i);
 		isTizen && (sound.release());
-		}
 	});
 	
 	return win;
