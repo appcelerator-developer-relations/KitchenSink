@@ -1,6 +1,13 @@
+// Test functionality of Tizen alarms (absolute and relative).
+// This test is Tizen-only.
+
 function tizen_alarm() {
+	
+	// Create the main user interface for this test.
+
 	var Tizen = require('tizen'),
-		dictionary = [],
+		// "dictionary" contains info about all alarms created during the test
+		dictionary = [],		
 		win = Titanium.UI.createWindow(),
 		button_bar = Ti.UI.createView({
 			backgroundColor: '#555555',
@@ -72,9 +79,12 @@ function tizen_alarm() {
 
 	win.add(tabView);
 	win.add(button_bar);
+	
 	return win;
 
-	function createAbsoluteAlarm(){
+	// Create and show a configuration window that lets configure and add an absolute alarm 
+	// (alarm whose time is a fixed date-time).
+	function createAbsoluteAlarm() {
 		var win = Ti.UI.createWindow({
 			backgroundColor: '#555555'
 		}),
@@ -172,6 +182,7 @@ function tizen_alarm() {
 		win.open();
 	}
 
+	// Create a date/time picker for alarm time selection
 	function createPicker() {
 		var picker = Ti.UI.createPicker({
 			type: Ti.UI.PICKER_TYPE_DATE_AND_TIME,
@@ -182,6 +193,7 @@ function tizen_alarm() {
 		return picker;
 	}
 
+	// Add (register with Tizen) an absolute alarm (alarm whose time is fixed)
 	function addAbsoluteAlarm(time, period) {
 		var period = Math.floor(period),
 			alarm = Tizen.Alarm.createAlarmAbsolute({
@@ -201,6 +213,8 @@ function tizen_alarm() {
 		addRow(alarm);
 	}
 
+	// Create and show a configuration window that lets configure and add a relative alarm 
+	// (alarm whose time is relative to the currrent date-time).
 	function createRelativeAlarm(){
 		var win = Ti.UI.createWindow({
 				backgroundColor: '#555555'
@@ -307,9 +321,10 @@ function tizen_alarm() {
 		win.add(cancelButton);
 
 		win.open();
-
 	}
 
+	// Add (register with Tizen) a relative alarm (alarm whose time is relative with respect to
+	// the current date-time
 	function addRelativeAlarm(delay, period) {
 		period = Math.floor(period);
 		delay = Math.floor(delay);
@@ -331,6 +346,8 @@ function tizen_alarm() {
 		addRow(alarm);
 	}
 
+	// Add a new row to the main table view (a table that consists of controls that allow
+	// viewing and manipulating the displayed alarms).
 	function addRow(alarm) {
 		var row = createRow(alarm);
 
@@ -338,34 +355,37 @@ function tizen_alarm() {
 		tabView.setData(dictionary);
 	}
 
+	// Create a new row in the main table view (a table that consists of controls that allow
+	// viewing and manipulating the displayed alarms). 
 	function createRow(alarm) {
-		var text1, 
-			text2, 
-			remaining,
-			view = Ti.UI.createView({
+		var text1, 		// a scratch variable to store alarm info for display
+			text2, 		// a scratch variable to store alarm info for display
+			remaining,	// a scratch variable to store time remaining until an alarm goes off
+			view = Ti.UI.createView({	      // part ot composite view that will be added to the new table view row
 				layout: 'horizontal'
 			}),
-			childView = Ti.UI.createView({
+			childView = Ti.UI.createView({    // part ot composite view that will be added to the new table view row
 				width: 220,
 				layout: 'vertical'
 			}),
-			label1 = Ti.UI.createLabel({
+			label1 = Ti.UI.createLabel({      // a text label that will go into the table view row
 				font: { fontSize:18 },
 				color: '#555555'
 			}),
-			label2 = Ti.UI.createLabel({
+			label2 = Ti.UI.createLabel({      // a text label that will go into the table view row
 				color: '#555555'
 			}),
-			button = Ti.UI.createButton({
+			button = Ti.UI.createButton({     // delete button that will go into the table view row
 				color: '#555555',
 				title: 'Delete',
 				right: 20
 			}),
-			row = Ti.UI.createTableViewRow({
+			row = Ti.UI.createTableViewRow({   // the new table view row
 				alarmId: alarm.id,
 				touchEnabled: true,
 				height: 50
 			});
+
 		if (alarm.toString() ==  '[object TizenAlarmAlarmAbsolute]') {
 			remaining = alarm.getNextScheduledDate();
 			text1 = remaining.toDateString();
@@ -388,7 +408,7 @@ function tizen_alarm() {
 
 			try {
 				Tizen.Alarm.remove(alarm.id);
-			} catch(e) {}
+			} catch(e) { Ti.API.error('An error occurred while deleting the alarm'); }
 			
 			for(; i < len; i++) {
 				if (dictionary[i].alarmId === id) {
