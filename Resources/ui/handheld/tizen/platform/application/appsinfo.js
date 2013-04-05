@@ -14,7 +14,7 @@ function tizen_appsinfo(_args) {
 		for (; i < applicationsCount; i++) {
 			data.push({
 				// AlertDialog title
-				title: applications[i].name + '\n<font size="1">' + applications[i].id + '</font>',
+				title: applications[i].name + '\n<b>' + applications[i].id + '</b>',
 				app_id: applications[i].id,
 				app_name: applications[i].name
 			});

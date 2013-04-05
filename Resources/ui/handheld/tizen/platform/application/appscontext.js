@@ -17,7 +17,7 @@ function tizen_appscontext(_args) {
 		for (; i < contextsCount; i++) {
 			data.push({
 				// AlertDialog title
-				title: contexts[i].appId + '\n<font size="1">' + contexts[i].id + '</font>',
+				title: contexts[i].appId + '\n<b>' + contexts[i].id + '</b>',
 				app_id: contexts[i].appId,
 				id: contexts[i].id
 			});
