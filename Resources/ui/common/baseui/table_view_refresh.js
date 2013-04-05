@@ -12,7 +12,7 @@ function tv_refresh() {
 	function setData()
 	{
 		var data = [];
-		for (var i=0;i<30;i++)
+		for (var i=0; i<30; i++)
 		{
 			var row = Ti.UI.createTableViewRow({height:50});
 			var l1 = Ti.UI.createLabel({text:'Label ' +  i, font:{fontSize:14}, color:'#888', left:5});
@@ -25,7 +25,7 @@ function tv_refresh() {
 	}
 	
 	var refresh = Titanium.UI.createButton();
-	if ( !(isMobileWeb || isTizen) ){
+	if ( !(isMobileWeb || isTizen) ) {
 		refresh.systemButton = Titanium.UI.iPhone.SystemButton.REFRESH;
 	}
 	refresh.addEventListener('click', function()
@@ -34,7 +34,7 @@ function tv_refresh() {
 		setTimeout(function()
 		{
 			setData();
-		},1000);
+		}, 1000);
 	});
 	
 	if (Ti.Platform.name == 'iPhone OS') {

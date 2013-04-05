@@ -1,3 +1,5 @@
+// Ti.Media.AudioPlayer test.
+
 function audio_player() {
 	var win = Titanium.UI.createWindow();
 	
@@ -39,6 +41,7 @@ function audio_player() {
 		color:'#555',
 		textAlignment:'center'
 	});
+
 	var stateLabel = Titanium.UI.createLabel({
 		text:'State: Not Started',
 		top:180,
@@ -55,6 +58,7 @@ function audio_player() {
 		width:100,
 		height:40
 	});
+
 	var streamSize2 = Ti.UI.createButton({
 		title:'Default buffer',
 		top:240,
@@ -62,6 +66,7 @@ function audio_player() {
 		width:100,
 		height:40
 	});
+
 	var streamSize3 = Ti.UI.createButton({
 		title:'Large buffer',
 		top:240,

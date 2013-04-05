@@ -65,6 +65,7 @@ function email_dialog() {
 			message: 'Select a picture from gallery and try to send it using Email',
 			ok: 'Ok'
 		});
+
 		dialog.addEventListener('click', function (e) {
 			Titanium.Media.openPhotoGallery({
 				allowEditing:true,
@@ -95,7 +96,7 @@ function email_dialog() {
 					// attach a blob
 					emailDialog.addAttachment(event.media);
 					
-					//The file should be present on Tizen devices
+					// Adding attachments is not supported on Tizen yet (this is a current Tizen limitation).
 					if (Ti.Platform.osname != 'tizen') {
 						// attach a file
 						var f = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, 'etc/cricket.wav');
