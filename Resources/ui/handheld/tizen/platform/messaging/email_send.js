@@ -1,7 +1,13 @@
+// Test of the Tizen messaging (email) functionality (email sending).
+//
+// Tizen only.
+
 function emailSend(args) {
 	var win = Ti.UI.createWindow({
 			title: 'Send email'
 		}),
+		
+		// Email composition UI
 		emailLabel = Ti.UI.createLabel({
 			text: 'Email:',
 			left: 5,
@@ -88,7 +94,7 @@ function emailSend(args) {
 		Tizen.Messaging.getMessageServices(serviceType, servicesListCB, errorCB);
 	}
 
-	// Check email message data. Tizen is not support it function yet.
+	// Verify if email message data entered by user is valid.
 	function checkMessageData() {
 		if (emailField.value === '') {
 			Ti.API.info('The following error occurred: Recipients list is empty.');
@@ -110,6 +116,7 @@ function emailSend(args) {
 		return true;
 	}
 
+	// Message sending error callback.
 	function errorCB(error) {
 		Ti.API.info('The following error occurred: ' + error.message);
 		Ti.UI.createAlertDialog({
@@ -119,6 +126,7 @@ function emailSend(args) {
 		}).show();
 	}
 
+	// Create a draft email message for test/demo purposes.
 	addDraftEmailBtn.addEventListener('click', function(e) {
 		function addDraftMessage() {
 			function draftMessageAdded() {
@@ -157,6 +165,7 @@ function emailSend(args) {
 		initEmailService(addDraftMessage);
 	});
 
+	// Send the email entered in the UI fields.
 	sendEmailBtn.addEventListener('click', function(e) {
 		function sendNewEmail() {
 			function emailSent(recipients) {

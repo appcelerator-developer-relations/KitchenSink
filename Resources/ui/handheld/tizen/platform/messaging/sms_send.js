@@ -1,7 +1,13 @@
+// Test of the Tizen messaging (SMS) functionality (SMS sending).
+//
+// Tizen only.
+
 function smsSend(args) {
 	var win = Ti.UI.createWindow({
 			title: 'Send new sms'
 		}),
+
+		// SMS sending UI
 		numberLabel = Ti.UI.createLabel({
 			text: 'Phone number',
 			left: 5,
@@ -51,7 +57,7 @@ function smsSend(args) {
 		Tizen = require('tizen'),
 		smsService;
 
-	// Initialize smsservice
+	// Initialize smsservice (the Tizen object that offers access to messaging functionality)
 	function initSmsService(callBack) {
 		function servicesListCB(services) {
 			var servicesCount = services.length;
@@ -75,7 +81,7 @@ function smsSend(args) {
 		Tizen.Messaging.getMessageServices(serviceType, servicesListCB, errorCB);
 	}
 
-	// Check message data. Tizen function doesn't check it yet 
+	// Check message data. Tizen function doesn't check it yet .
 	function checkMessageData() {
 		if (textField.value === '') {
 			Ti.API.info('The following error occurred: Recipients list is empty.');
@@ -108,7 +114,7 @@ function smsSend(args) {
 		}).show();
 	}
 
-	// Add draft message
+	// Add draft SMS for testing/demo purposes
 	addDraftSMSBtn.addEventListener('click', function(e) {
 		function addDraftMessage() {
 			function draftMessageAdded() {
@@ -132,7 +138,6 @@ function smsSend(args) {
 					}
 				});
 
-				// Add draft SMS
 				checkMessageData() && smsService.messageStorage.addDraftMessage(msg, draftMessageAdded, errorCB);
 			} catch (exc){
 				Ti.API.info('Exception has been thrown when try to add draft message');

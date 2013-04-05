@@ -1,12 +1,19 @@
+// Test of the Tizen messaging (email) functionality. Test operations with messages in email folders
+// (message search, message enumeration, message removal). This test is part of the
+// "email_folders" test.
+//
+// Tizen only.
+
 function emailFolderMessages(args) {
 	var Tizen = require('tizen'),
 		folderName = args.folderName,
-		emailService = args.emailService,
+		emailService = args.emailService,	// Tizen email service object, required for messaging
 		folderId = args.folderId.toString(),
 		win = Ti.UI.createWindow({
 			title: folderName
 		});
 
+	// Error callback
 	function errorCB(error) {
 		Ti.API.info('The following error occurred: ' + error.message);
 
@@ -35,15 +42,17 @@ function emailFolderMessages(args) {
 			return;
 		}
 
-		// Define the success body loaded callback.
+		// "Body successfully loaded" callback.
 		function messageBodyLoaded(message) {
 			Ti.API.info('Body for message: ' + message.subject + ' from: ' + message.from + 'loaded.');
 		}
 
+		// "Error while loading body" callback.
 		function loadBodyErrorCB(error) {
 			Ti.API.info('Can not load message body: ' + error.message);
 		}
 
+		// Populate the list of messages in the folder.
 		for (; i < messagesCount; i++) {
 			var message = messages[i];
 
@@ -73,6 +82,7 @@ function emailFolderMessages(args) {
 					right: 5
 				});
 
+			// Message removal.
 			(function(index) {
 				delBtn.addEventListener('click', function() {
 					// Success remove of message
@@ -114,7 +124,7 @@ function emailFolderMessages(args) {
 		});
 	}
 
-	// Search for messages
+	// Request Tizen message search.
 	try {
 		Ti.API.info('Start to find messages in ' + folderName + ' folder.');
 

@@ -1,7 +1,13 @@
+// Test of the Tizen messaging (email) functionality (email viewing).
+//
+// Tizen only.
+
 function showMessage(args) {
 	var win = Ti.UI.createWindow({
 			title: 'Email detail'
 		}),
+
+		// Message data UI
 		subjectLbl = Ti.UI.createLabel({
 			text: 'Subject:',
 			top: 10,
@@ -33,6 +39,7 @@ function showMessage(args) {
 			left: 90,
 			width: 200
 		}),
+
 		emailService = args.emailService,
 		message = args.message,
 		folderName = args.folderName;
@@ -52,6 +59,7 @@ function showMessage(args) {
 		}
 	}
 
+	// Called when message loading failed.
 	function errorCallback(error) {	
 		Ti.API.info('Cannot load message body: ' + error.message);
 		Ti.UI.createAlertDialog({
