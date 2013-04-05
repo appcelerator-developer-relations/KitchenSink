@@ -4,6 +4,9 @@ function xhr_xml() {
 	
 	xhr.onload = function()
 	{
+		// Twitter does not offer an XML API any more.
+		// This test has been modified to use, and display attributes from, a different XML file.
+
 		Ti.API.info('www.w3schools.com/xml/note.xml ' + this.responseXML + ' text ' + this.responseText);
 
 		var doc = this.responseXML.documentElement,

@@ -1,3 +1,5 @@
+// Tizen-specific tests.
+
 function tizen(_args) {
 	var self = Titanium.UI.createWindow(),
 		data = [

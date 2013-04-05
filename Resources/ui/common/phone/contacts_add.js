@@ -29,7 +29,7 @@ function contacts_add() {
 		width:200
 	});
 
-	//fixed the view for Tizen
+	// fixed the view for Tizen
 	isTizen && (f1.right = 5);
 
 	v1.add(l1);

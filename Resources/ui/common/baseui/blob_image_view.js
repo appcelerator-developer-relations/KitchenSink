@@ -1,5 +1,9 @@
 // For this test: Base UI -> Views -> Element Screenshot
 
+// What's tested:
+//   - View::toImage method
+//   - Assigning a blob to an ImageView
+
 function blobImageView() {
 	var win = Titanium.UI.createWindow(),
 		imageView = Titanium.UI.createImageView({

@@ -185,8 +185,9 @@ function textfield_rest() {
 				break;
 		}
 	});
-	//TextField.clearButtonMode is iOS-only property, so we don't add this test for Tizen
-	if(Ti.Platform.osname !== 'tizen'){
+
+	// TextField.clearButtonMode is iOS-only property, so we don't add this test for Tizen
+	if(Ti.Platform.osname !== 'tizen') {
 		win.add(b7);
 	}
 	
@@ -253,8 +254,9 @@ function textfield_rest() {
 				break;
 		}
 	});
-	//TextField.verticalAlign is not supported in Tizen
-	if(Ti.Platform.osname !== 'tizen'){
+	
+	// TextField.verticalAlign is not supported in Tizen
+	if(Ti.Platform.osname !== 'tizen') {
 		win.add(b8);
 	}
 	
@@ -278,8 +280,9 @@ function textfield_rest() {
 			resizing = false;
 		}
 	});
-	//TextField.minimumFontSize is iOS-only property, so we don't add this test for Tizen
-	if(Ti.Platform.osname !== 'tizen'){
+
+	// TextField.minimumFontSize is iOS-only property, so we don't add this test for Tizen
+	if(Ti.Platform.osname !== 'tizen') {
 		win.add(b9);
 	}
 	
