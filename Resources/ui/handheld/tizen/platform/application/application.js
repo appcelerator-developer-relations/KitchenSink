@@ -1,3 +1,6 @@
+// Tests of Tizen's application control functionality.
+// These tests are Tizen only.
+
 function tizen_application(_args) {
 	var self = Titanium.UI.createWindow(), 
 		tableview = Ti.UI.createTableView({
@@ -25,9 +28,10 @@ function tizen_application(_args) {
 		}
 	});
 
-	// Function shows AlertDialog with app information
-	// e.rowData.app_id - should contain application id
-	// e.rowData.title - Should contain dialog title
+	// Helper function commonly used in application tests.
+	// Shows an AlertDialog with information about a desired application.
+	//   - e.rowData.app_id contains application id;
+	//   - e.rowData.title contains dialog title.
 	function _showAppInfoById(e) {
 		if (e.rowData && e.rowData.app_id) {
 			var appInfo;
@@ -51,8 +55,8 @@ function tizen_application(_args) {
 		}
 	}
 
-	// Function shows AlertDialog with error message
-	// And logs this error
+	// Helper function commonly used in application tests.
+	// Shows an AlertDialog with an error message and logs this error.
 	function _showErrorDialog(logMessage, userMessage) {
 		Ti.API.error(logMessage);
 		Titanium.UI.createAlertDialog({
@@ -64,4 +68,5 @@ function tizen_application(_args) {
 
 	return self;
 }
+
 module.exports = tizen_application;
