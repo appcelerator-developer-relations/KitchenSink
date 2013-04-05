@@ -1,6 +1,7 @@
 function tizen_appscontext(_args) {
 	var self = Titanium.UI.createWindow(),
-		Tizen = require('tizen');
+		Tizen = require('tizen'),
+		helper = new (require('ui/handheld/tizen/platform/application/helper'));
 
 	// Return information available about a running application.
 	Tizen.Apps.getAppsContext(function(contexts) {
@@ -22,10 +23,10 @@ function tizen_appscontext(_args) {
 		tableview.data = data;
 
 		// Show dialog with Application information
-		tableview.addEventListener('click', _args.showAppInfoById);
+		tableview.addEventListener('click', helper.showAppInfoById);
 		self.add(tableview);
 
-	}, _args.showErrorDialog);
+	}, helper.showErrorDialog);
 
 	return self;
 
