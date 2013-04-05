@@ -1,9 +1,18 @@
+function areSame(var1, var2){
+	if (var1 == undefined) {
+		var1 = '';
+	}
+	return var1 === var2;
+}
+
 function handleKBUpdate(e){
 	try {
 		var item = e.section.getItemAt(e.itemIndex);
-		item.bindField.value = e.value;
-		item.taskLabel.text = 'Got '+e.value;
-		e.section.updateItemAt(e.itemIndex,item);
+		if(areSame(item.bindField.value,e.value) == false) {
+			item.bindField.value = e.value;
+			item.taskLabel.text = 'Got '+e.value;
+			e.section.updateItemAt(e.itemIndex,item);
+		}
 	} catch (err) {
 		Ti.API.error('Error in handleKBUpdate. Window closing ? '+err.message)
 	}
@@ -124,7 +133,7 @@ function setupTest(win){
 		{
 			type:'Ti.UI.TextField',
 			bindId:'bindField',
-			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black', backgroundColor:'lightgray'},
+			properties:{ right:0, width:'50%', borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, color:'black', backgroundColor:'lightgray',value:''},
 			events:{
 				'blur':handleKBUpdate,
 				'return':handleKBUpdate
