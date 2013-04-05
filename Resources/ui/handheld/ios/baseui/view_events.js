@@ -129,7 +129,7 @@ function view_events(_args) {
 	view.addEventListener('touchstart', function(e)
 	{
 		l1.color = 'red';
-		l1.text = 'touchstart fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l1.text = 'touchstart fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l1.color = '#333';
@@ -138,7 +138,7 @@ function view_events(_args) {
 	view.addEventListener('touchmove', function(e)
 	{
 		l2.color = 'red';
-		l2.text = 'touchmove fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l2.text = 'touchmove fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l2.color = '#333';
@@ -148,7 +148,7 @@ function view_events(_args) {
 	view.addEventListener('touchend', function(e)
 	{
 		l3.color = 'red';
-		l3.text = 'touchend fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l3.text = 'touchend fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l3.color = '#333';
@@ -157,7 +157,7 @@ function view_events(_args) {
 	view.addEventListener('touchcancel', function(e)
 	{
 		l4.color = 'red';
-		l4.text = 'touchcancel fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l4.text = 'touchcancel fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l4.color = '#333';
@@ -166,7 +166,7 @@ function view_events(_args) {
 	view.addEventListener('singletap', function(e)
 	{
 		l5.color = 'red';
-		l5.text = 'singletap fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l5.text = 'singletap fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l5.color = '#333';
@@ -175,7 +175,7 @@ function view_events(_args) {
 	view.addEventListener('doubletap', function(e)
 	{
 		l6.color = 'red';
-		l6.text = 'doubletap fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l6.text = 'doubletap fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l6.color = '#333';
@@ -184,7 +184,7 @@ function view_events(_args) {
 	view.addEventListener('twofingertap', function(e)
 	{
 		l7.color = 'red';
-		l7.text = 'twofingertap fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l7.text = 'twofingertap fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l7.color = '#333';
@@ -193,7 +193,7 @@ function view_events(_args) {
 	view.addEventListener('swipe', function(e)
 	{
 		l8.color = 'red';
-		l8.text = 'swipe fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+") direction " + e.direction;
+		l8.text = 'swipe fired x ' + e.x + ' y ' + e.y + " direction " + e.direction;
 		setTimeout(function()
 		{
 			l8.color = '#333';
@@ -202,7 +202,7 @@ function view_events(_args) {
 	view.addEventListener('click', function(e)
 	{
 		l9.color = 'red';
-		l9.text = 'click fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l9.text = 'click fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l9.color = '#333';
@@ -211,7 +211,7 @@ function view_events(_args) {
 	view.addEventListener('dblclick', function(e)
 	{
 		l10.color = 'red';
-		l10.text = 'dblclick fired x ' + e.x + ' y ' + e.y + " ("+e.globalPoint.x+","+e.globalPoint.y+")";
+		l10.text = 'dblclick fired x ' + e.x + ' y ' + e.y;
 		setTimeout(function()
 		{
 			l10.color = '#333';
