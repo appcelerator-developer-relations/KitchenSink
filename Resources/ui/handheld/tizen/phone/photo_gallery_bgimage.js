@@ -1,6 +1,8 @@
-// Test of Tizen-specific Titanium.Media.openPhotoGallery.
-
 function gallery_bg() {
+	// Test of Tizen-specific Titanium.Media.openPhotoGallery.
+	//Kitchen Sink path:  Phone - Save to Gallery - Background Image
+	//Save the image to photoGallery and set this image as background
+
 	var win = Titanium.UI.createWindow();
 	
 	var f = Ti.App.Properties.getString("filename");

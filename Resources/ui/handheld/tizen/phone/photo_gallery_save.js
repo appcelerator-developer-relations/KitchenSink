@@ -7,13 +7,6 @@ function gallery_save(_args) {
 		{title:'Background Image', hasChild:true, test:'ui/handheld/tizen/phone/photo_gallery_bgimage'}
 	];
 	
-	/*
-	if (Ti.Media.isCameraSupported()) {
-		data.push({title:'From Camera', hasChild:true, test:'ui/handheld/tizen/phone/photo_gallery_camera'});
-		data.push({title:'From Video', hasChild:true, test:'ui/handheld/tizen/phone/photo_gallery_video'});
-	}
-	*/
-	
 	// create table view
 	var tableview = Titanium.UI.createTableView({
 		data:data

@@ -1,4 +1,8 @@
 function screenshot() {
+	// Test of Tizen-specific Titanium.Media.takeScreenshot.
+	//Kitchen Sink path:  Phone - Screenshot
+	//Take a screen-shot of a screen and put in the ImageView as image
+
 	var win = Titanium.UI.createWindow();
 	
 	var imageView = Titanium.UI.createImageView({
