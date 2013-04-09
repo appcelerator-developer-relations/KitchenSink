@@ -118,7 +118,7 @@ function contacts_group(_args) {
 	
 	win.addEventListener('close',function(){
 		Ti.Contacts.removeEventListener('reload',reloadHandler);
-	})
+	});
 	
 	return win;
 };
