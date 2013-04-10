@@ -47,15 +47,11 @@ function views(_args) {
 		}
 		data.push({title:'Hi-Res Image remote', wintitle:"Remote dog", hasChild:true, test:'ui/handheld/ios/baseui/hi_res_image_remote'});
 	}
-<<<<<<< HEAD
-=======
 
 	if (Titanium.Platform.osname === 'tizen') {
-		data.push({title: 'Element Screenshot', hasChild: true, test: 'ui/common/baseui/blob_image_view', touchEnabled: true, color: '#aaa'});
 		data.push({title: 'SMS Dialog', hasChild: true, test: 'ui/common/baseui/sms_dialog'});
 	}
->>>>>>> 09c6a0bf86c962567638926b5679616d2073c3d2
-	
+
 	// create table view
 	for (var i = 0; i < data.length; i++ ) {
 		var d = data[i];
