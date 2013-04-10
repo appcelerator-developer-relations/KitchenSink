@@ -169,44 +169,7 @@ function options_dialog() {
 			dialog.androidView = root;
 			dialog.show();
 		});
-	} else if (isTizen){
-
-		// Demonstrate the tizenView property, similar to the androidView property
-
-		var button3 = Titanium.UI.createButton({
-			title:'Option dialog with tizenView',
-			height:Titanium.UI.SIZE,
-			width:200,
-			top:220
-		});
-		button3.addEventListener('click', function()
-		{
-			// For now, you must give the containing view dimensions in order for it to appear.
-			var root = Ti.UI.createView({
-				width : "100%", 
-				height : 110
-			});
-			var view = Ti.UI.createView({
-				width : 300, height: '100'
-			});
-			root.add(view);
-
-			var l = Ti.UI.createLabel({
-				text : 'I am a label',
-				top: 10, left: 10, bottom: 10, right: 10,
-				color : 'white',
-				borderRadius : 10,
-				backgroundColor : 'blue'
-			}); 
-			view.add(l);
-			
-			dialog.title = 'Tizen with a View';
-			dialog.options = ['OK'];
-			dialog.tizenView = root;
-			dialog.show();
-		});
 	}
-	
 	
 	win.add(button1);
 	win.add(button2);
@@ -214,7 +177,7 @@ function options_dialog() {
 	
 	if (isAndroid || isTizen) {
 		win.add(showCancel);
-		win.add(button3);
+		isAndroid && win.add(button3);
 	}
 	
 	if (!isAndroid) {
