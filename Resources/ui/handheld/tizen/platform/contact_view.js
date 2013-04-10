@@ -1,7 +1,14 @@
+// Test for contact functionality. Although the contact functionality is exposed through the
+// regular Titanium Contacts API, this test makes use of some Tizen-specific calls and features,
+// therefore it's Tizen-only.
+//
+// This test verifies contact viewing. It is initiated from the "contacts_find" test.
+
 function view_contact(args) {
 	var win = Ti.UI.createWindow({
 			title: args.title
 		}),
+		// the contact selected in the "contacts_find" test:
 		person = Ti.Contacts.getPersonByID(args.contactId),
 		labelLeftPos = 10,
 		labelWidth = '40%',

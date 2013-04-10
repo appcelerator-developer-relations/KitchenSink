@@ -3,11 +3,11 @@ function PlatformWindow(title) {
 		title:title,
 		backgroundColor:'white'
 	});
-	
+
 	var isMobileWeb = Titanium.Platform.osname === 'mobileweb',
 		isTizen = Titanium.Platform.osname === 'tizen';
-	
-	// create table view data object
+
+	// Create table view data object.
 	var data = [
 		{title:'XHR', hasChild:true, test:'ui/common/platform/xhr'},
 		{title:'Network', hasChild: !isTizen, test:'ui/common/platform/network', touchEnabled: !isTizen},
@@ -29,13 +29,13 @@ function PlatformWindow(title) {
 		{title:'Clipboard', hasChild:true, test:'ui/common/platform/clipboard'},
 		{title:'Sockets', hasChild: !(isMobileWeb || isTizen), test:'ui/common/platform/sockets', touchEnabled: !(isMobileWeb || isTizen), color:isMobileWeb?"#aaa":"#000"}
 	];
-	
-	//add tizen specific tests
+
+	// Add tizen specific tests.
 	if (isTizen) {
 		data.push({title: 'Tizen', hasChild: true,  test: 'ui/common/platform/tizen'});
-	}	
-	
-	if (Titanium.Platform.name == 'iPhone OS' || isMobileWeb) {
+	}
+
+	if (Titanium.Platform.name == 'iPhone OS' || isMobileWeb || isTizen) {
 		data.push({title:'Passing Data (windows)', hasChild:true, test:'ui/common/platform/custom_properties'});
 	}
 	

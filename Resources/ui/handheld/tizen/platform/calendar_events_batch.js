@@ -1,3 +1,6 @@
+// Test for Tizen calendar functionality. Test of batch operations on calendar events.
+// Tizen only.
+
 function events_batch(args) {
 	var  ADD_BATCH = 1,
 		 UPDATE_BATCH = 2,

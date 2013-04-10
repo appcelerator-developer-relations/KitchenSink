@@ -1,11 +1,12 @@
 function tizen_exit_hide_launch(_args) {
 	var win = Ti.UI.createWindow(),
-		CALC_APP_ID = 'tlp6xwqzos.Calculator', 
+		memoAppId = 'org.tizen.memo',
 		butttonHeightOffset = 10, 
 		butttonHeight = 40,
 		butttonWidth = 200,
 		Tizen = require('tizen'),
-		kitchenSinkApp = Tizen.Apps.getCurrentApplication();
+		kitchenSinkApp = Tizen.Apps.getCurrentApplication(),
+		helper = require('ui/handheld/tizen/platform/application/helper');
 
 	// Create button for Exit
 	var buttonExit = Titanium.UI.createButton({
@@ -20,7 +21,7 @@ function tizen_exit_hide_launch(_args) {
 		try {
 			kitchenSinkApp.exit();
 		} catch (e) {
-			_args.showErrorDialog(e, 'Could not Exit from KitchenSink');
+			helper.showErrorDialog(e, 'Could not Exit from KitchenSink');
 		}
 	});
 	win.add(buttonExit);
@@ -38,14 +39,14 @@ function tizen_exit_hide_launch(_args) {
 		try {
 			kitchenSinkApp.hide();
 		} catch (e) {
-			_args.showErrorDialog(e, 'Could not Hide KitchenSink');
+			helper.showErrorDialog(e, 'Could not Hide KitchenSink');
 		}
 	});
 	win.add(buttonHide);
 
 	// Create button for Launch
 	var buttonLaunch = Titanium.UI.createButton({
-		title: 'Launch Calculator',
+		title: 'Launch Text Editor',
 		height: butttonHeight,
 		width: butttonWidth,
 		top: 3 * butttonHeightOffset + 2 * butttonHeight
@@ -54,9 +55,9 @@ function tizen_exit_hide_launch(_args) {
 	// Call tizen.application.exit when button has been pressed
 	buttonLaunch.addEventListener('click', function() {
 		try {
-			Tizen.Apps.launch(CALC_APP_ID);
+			Tizen.Apps.launch(memoAppId);
 		} catch (e) {
-			_args.showErrorDialog(e, 'Could not Launch Calculator');
+			helper.showErrorDialog(e, 'Could not Launch Calculator');
 		}
 	});
 	win.add(buttonLaunch);

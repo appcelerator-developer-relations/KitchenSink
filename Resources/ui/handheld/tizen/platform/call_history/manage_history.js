@@ -1,3 +1,8 @@
+// Test for Tizen calendar functionality. Test of viewing and removing of call history entries
+// (one by one, or all at once).
+//
+// Tizen only.
+
 function manageHistory() {
 	var win = Ti.UI.createWindow({
 			title: 'All history'
@@ -38,6 +43,7 @@ function manageHistory() {
 		Ti.API.info(Tizen);
 		Ti.API.info(Tizen.CallHistory);
 
+	// Call history event enumeration callback.
 	function onSuccess(results) {
 		var resultsCount = results.length,
 			i = 0;
@@ -89,6 +95,7 @@ function manageHistory() {
 			tableView.addEventListener('click', removeRow);
 			removeAllHistoryBtn.addEventListener('click', removeAll);
 
+			// Populate the table containing call history entries.
 			for (; i < resultsCount; i++) {
 				tableView.appendRow({ title: results[i].remoteParties[0].remoteParty + ' (' + results[i].direction + ')' });
 			}

@@ -1,3 +1,5 @@
+// Tizen-specific test for Ti.UI.Slider.minRange and Ti.UI.Slider.maxRange.
+
 function slider_range() {
 	var win = Ti.UI.createWindow({
 			backgroundColor: 'white'

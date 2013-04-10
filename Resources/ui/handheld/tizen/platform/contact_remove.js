@@ -1,13 +1,22 @@
+// Test for contact functionality. Although the contact functionality is exposed through the
+// regular Titanium Contacts API, this test makes use of some Tizen-specific calls and features,
+// therefore it's Tizen-only.
+//
+// This test verifies contact removing.
+
 function remove_contact(args) {
 	var wnd = Ti.UI.createWindow({
 			title: args.title
 		}),
 		contactsTable = Ti.UI.createTableView();
 
+	// Enumerate all contacts in the system to display them in a table view.
+	// Table view rows will contain "delete" buttons.
 	Ti.Contacts.Tizen.getAllPeople(function(persons) {
 		var contactsCount = persons.length,
 			i = 0,
 			data = [];
+
 		for (; i < contactsCount; i++) {
 				var row = Ti.UI.createTableViewRow({
 						height: 40,
@@ -30,6 +39,7 @@ function remove_contact(args) {
 				row.add(contactLabel);
 				row.add(delButton);
 
+				// The removal happens here.
 				(function(index) {
 					delButton.addEventListener('click', function(e) {
 						var rowsCount = data.length,

@@ -1,3 +1,8 @@
+// Test of the Tizen messaging (email) functionality. Test operations with email folders:
+// enumerate existing folders and initiate per-folder tests.
+//
+// Tizen only.
+
 function emailFolders(args) {
 	var win = Ti.UI.createWindow({
 			title: 'Email folders'
@@ -9,7 +14,7 @@ function emailFolders(args) {
 		Tizen = require('tizen'),
 		emailService;
 
-	// Initialize email service
+	// Initialize email service (Tizen object which allows email functionality).
 	function initEmailService(callBack) {
 		function servicesListCB(services) {
 			var servicesCount = services.length;
@@ -33,6 +38,7 @@ function emailFolders(args) {
 		Tizen.Messaging.getMessageServices(serviceType, servicesListCB, errorCB);
 	}
 
+	// Called when something's wrong.
 	function errorCB(error) {
 		Ti.API.info('The following error occurred: ' + error.message);
 		Ti.UI.createAlertDialog({
@@ -42,7 +48,7 @@ function emailFolders(args) {
 		}).show();
 	}
 
-	// Return list of folders on email
+	// Return list of folders of the email account
 	function findFolders() {
 		Ti.API.info('Start to find folders');
 
@@ -93,6 +99,7 @@ function emailFolders(args) {
 			win.add(tableView);
 		}
 
+		// Search for email folders
 		try {
 			Ti.API.info('Start to search list of folders from email account.');
 
@@ -102,7 +109,6 @@ function emailFolders(args) {
 				matchValue: emailService.id
 			});
 
-			// Search for email folders
 			emailService.messageStorage.findFolders(attributeFilter, foldersListCB, errorCB);
 		} catch(exc) {
 			Ti.API.info('Exception has been thrown.');

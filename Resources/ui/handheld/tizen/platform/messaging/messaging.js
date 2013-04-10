@@ -1,3 +1,7 @@
+// Test of the Tizen messaging (email and SMS) functionality.
+//
+// Tizen only.
+
 function messaging(args) {
 	var self = Ti.UI.createWindow({
 			title: 'Messaging'

@@ -1,4 +1,8 @@
 function gallery_bg() {
+	// Test of Tizen-specific Titanium.Media.openPhotoGallery.
+	//Kitchen Sink path:  Phone - Save to Gallery - Background Image
+	//Save the image to photoGallery and set this image as background
+
 	var win = Titanium.UI.createWindow();
 	
 	var f = Ti.App.Properties.getString("filename");
@@ -21,7 +25,7 @@ function gallery_bg() {
 			{
 				var image = event.media;
 				
-				// create new file name and remove old
+				// create new file and remove old one
 				var filename = Titanium.Filesystem.applicationDataDirectory + "/" + new Date().getTime() + ".jpg";
 				Ti.App.Properties.setString("filename", filename);
 				if (bgImage != null)
@@ -36,7 +40,6 @@ function gallery_bg() {
 			},
 			cancel:function()
 			{
-		
 			},
 			error:function(error)
 			{

@@ -1,4 +1,8 @@
 function gallery_xhr() {
+	// Test of Tizen-specific Titanium.Media.saveToPhotoGallery.
+	//Kitchen Sink path:  Phone - Save to Gallery - From XHR
+	//Save the image to photoGallery from web server http://static.appcelerator.com/images/header/appc_logo.png
+
 	var win = Ti.UI.createWindow();
 	var xhr = Titanium.Network.createHTTPClient();
 	

@@ -44,10 +44,10 @@ function xhr_download() {
 		{
 			Ti.API.info('IN ONLOAD ');
 			ind.value = 1.0;
-			var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,filename);
+			var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, filename);
 			isAndroid && f.write(this.responseData);
 
-			//WebView does`t work with HTML5-based files on Tizen/MobileWeb, only url to files on Tizen`s device or web.    
+			// WebView does`t work with HTML5-based files on Tizen/MobileWeb, only url to files on Tizen`s device or web.    
 			var wv = Ti.UI.createWebView({
 				url:f.nativePath,
 				bottom:0,
@@ -69,17 +69,16 @@ function xhr_download() {
 	
 		// open the client
 		if (isAndroid) {
-			//android's WebView doesn't support embedded PDF content
+			// android's WebView doesn't support embedded PDF content
 			c.open('GET', 'http://developer.appcelerator.com/blog/wp-content/themes/newapp/images/appcelerator_avatar.png?s=48');
 		} else if (isTizen) {
 			c.open('GET','https://mobile.twitter.com/session/new');
-			//Property "file" is path to file. It is not object "file" !!!
-			//See documentation about Titanium.Network.HTTPClient
-			c.file=filename; 
-		}else {
+			// Property "file" is path to file. It is not object "file".
+			// See documentation about Titanium.Network.HTTPClient
+			c.file = filename; 
+		} else {
 			c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
-			//Maybe it is wrong because "c.file" must be 'String'.  
-			c.file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,filename);
+			c.file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, filename);
 		}
 		
 		// send the data
@@ -141,7 +140,7 @@ function xhr_download() {
 	
 		// open the client
 		if (isAndroid || isTizen) {
-			//android's WebView doesn't support embedded PDF content
+			// android's WebView doesn't support embedded PDF content
 			c.open('GET', 'http://developer.appcelerator.com/blog/wp-content/themes/newapp/images/appcelerator_avatar.png?s=48');
 		} else {
 			c.open('GET','http://www.appcelerator.com/assets/The_iPad_App_Wave.pdf');
@@ -200,8 +199,8 @@ function xhr_download() {
 		c.open('GET','http://titanium-studio.s3.amazonaws.com/latest/Titanium_Studio.exe');
 		ind.message = 'Downloading large file';
 		if (isTizen) {
-			//Property "file" is a path to a file. It is not an object of the type "File".
-			//See documentation about Titanium.Network.HTTPClient
+			// Property "file" is a path to a file. It is not an object of the type "File".
+			// See documentation about Titanium.Network.HTTPClient
 			c.file = 'tiStudio.exe';
 		} else {
 			c.file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'tiStudio.exe');

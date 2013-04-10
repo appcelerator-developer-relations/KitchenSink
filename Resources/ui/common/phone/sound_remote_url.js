@@ -198,7 +198,7 @@ function sound_remote_url() {
 		// setToolbar is not supported on Tizen; simply add the progress bar to the window
 		pb.top = 210;
 		win.add(pb);
-	}else if (!isAndroid) {
+	} else if (!isAndroid) {
 		win.setToolbar([flexSpace,pb,flexSpace]);
 	}
 	pb.show();

@@ -1,3 +1,7 @@
+// Test for Tizen calendar functionality. Test of listing calendar events.
+// Upon event selection, event editing is also tested in the "calendar_edit_event" test.
+// Tizen only.
+
 function events_list(args) {
 	var self = Ti.UI.createWindow({
 			title: args.title
@@ -20,6 +24,7 @@ function events_list(args) {
 		args.containingTab.open(wnd, { animated: true });
 	});
 
+	// Emumerate all events
 	calendar.find(function (events) {
 		var list = fillEventsTable(events);
 
@@ -36,17 +41,21 @@ function events_list(args) {
 		}, onError);
 	});
 
+	// Populate the table with the calendar events. Clicking on a table row will
+	// initiate editing of the corresponding event.
 	function fillEventsTable(events) {
 		var data = [],
 			eventsCount = events.length,
 			i = 0;
 
+		// Create table rows that correspond to calendar events
 		for (; i < eventsCount; i++) {
 			var row = Ti.UI.createTableViewRow({
 					height: 40,
 					id: i,
 					eventId: events[i].id
 				}),
+				// Event summary label
 				label = Ti.UI.createLabel({
 					top: 5,
 					left: 5,
@@ -54,6 +63,7 @@ function events_list(args) {
 					height: 30,
 					text: events[i].summary	
 				}),
+				// Event deletion button
 				delButton = Ti.UI.createButton({
 					top: 5,
 					left: 220,

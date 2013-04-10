@@ -1,3 +1,8 @@
+// Test of the Tizen messaging (SMS) functionality (SMS history enumeration, entry viewing,
+// and entry removal).
+//
+// Tizen only.
+
 function smsHistory(args) {
 	var win = Ti.UI.createWindow({
 			title: 'sms history'
@@ -15,6 +20,7 @@ function smsHistory(args) {
 				DRAFTS = 3,
 				SENTBOX = 4;
 
+			// Table view that will show the message history summary.
 			var tableView = Ti.UI.createTableView({
 					headerTitle: 'Click to delete.',
 					rowHeight: 25
@@ -57,6 +63,7 @@ function smsHistory(args) {
 				}
 			}
 
+			// Populate the table view with message history data.
 			if (messageCount > 0) {
 				var box = ['INBOX', 'OUTBOX', 'DRAFTS', 'SENTBOX'];
 
@@ -81,6 +88,7 @@ function smsHistory(args) {
 			}
 		}
 
+		// Initiate message history population (start message search).
 		if (services.length > 0) {
 			var smsService = services[0],
 				attributeFilter = Tizen.createAttributeFilter({

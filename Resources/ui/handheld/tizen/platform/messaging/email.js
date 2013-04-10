@@ -1,3 +1,5 @@
+// Tests of the Tizen messaging (email) functionality.
+
 function email(args) {
 	var self = Ti.UI.createWindow({
 			title: 'Messaging: email'

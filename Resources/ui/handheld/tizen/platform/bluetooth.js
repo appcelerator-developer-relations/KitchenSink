@@ -1,3 +1,5 @@
+// Tizen Bluetooth tests.
+
 function bluetooth(args) {
 	var self = Ti.UI.createWindow({
 		title: args.title

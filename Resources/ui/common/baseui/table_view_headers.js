@@ -66,10 +66,10 @@ function tv_headers() {
 	];
 	
 
-	var isTizen = Ti.Platform.name === "tizen",
+	var isTizen = Ti.Platform.osname === 'tizen',
 		search;
 
-	// Search bars are not supported in Tizen
+	// Search bars are not supported in Tizen and MobileWeb
 	if (!isTizen) {
 		search = Titanium.UI.createSearchBar({
 			showCancel:false
@@ -78,7 +78,7 @@ function tv_headers() {
 			if(Ti.Platform.name === "android"){
 				Ti.API.info('Going to hide soft Keyboard as we are shifting focus away from the SearchBar.');
 				Ti.UI.Android.hideSoftKeyboard();
-			}	
+			}
 		});
 	}
 
