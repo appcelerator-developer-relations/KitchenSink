@@ -1,5 +1,8 @@
-function picker_multi1() {
-	var win = Ti.UI.createWindow(),
+
+function picker_multi1(_args) {
+	var win = Ti.UI.createWindow({
+			title:_args.title
+		}),
 		isTizen = Ti.Platform.osname === 'tizen';
 	win.backgroundColor = 'black';
 	

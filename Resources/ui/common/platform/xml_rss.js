@@ -1,4 +1,7 @@
-function xml_rss(args) {
+function xml_rss(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	// loadXMLData() seems to contain outdated code (as of Feb 2013).
 	// (This entire test was disabled for the Mobile Web platform, so the function was unused).

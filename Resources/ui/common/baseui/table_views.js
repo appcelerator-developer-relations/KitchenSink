@@ -1,7 +1,10 @@
 function table_views(_args) {
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
-		win = Ti.UI.createWindow();
+		win = Ti.UI.createWindow({
+			title:_args.title
+		});
+
 	if (Ti.Platform.name == 'android') 
 	{
 		win.backgroundColor = '#4e5c4d';
@@ -98,7 +101,7 @@ function table_views(_args) {
 		if (e.rowData.test)
 		{
 			var ExampleWindow = require(e.rowData.test);
-				win = new ExampleWindow();
+			win = new ExampleWindow({title: e.rowData.title, containingTab: _args.containingTab, tabGroup: _args.tabGroup});
 			_args.containingTab.open(win,{animated:true});
 		}
 	});

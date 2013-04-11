@@ -6,7 +6,9 @@
 function win_standalone(_args) {	
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
-		win = Titanium.UI.createWindow();
+		win = Titanium.UI.createWindow({
+			title:_args.title
+		});
 	
 	win.orientationModes = [
 		Titanium.UI.PORTRAIT,
@@ -288,6 +290,7 @@ function win_standalone(_args) {
 	b6.addEventListener('click', function()
 	{
 		var w = Titanium.UI.createWindow({
+			title: 'New Window (Fullscreen)',
 			backgroundColor:'#336699'
 		});
 	

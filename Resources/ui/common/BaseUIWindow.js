@@ -70,8 +70,7 @@ function BaseUIWindow(title) {
 			if (Ti.Platform.name == "android") {
 				
 			} else {
-				win.backgroundColor = "#fff";
-				win.barColor = "#111";
+				win.backgroundColor = "#fff"
 			}
 	
 	

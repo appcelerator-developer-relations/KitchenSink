@@ -1,4 +1,4 @@
-function sound_local() {
+function sound_local(_args) {
 	var isTizen = Ti.Platform.osname === 'tizen',
 		isAndroid = Ti.Platform.name === 'android';
 
@@ -7,7 +7,12 @@ function sound_local() {
 		Titanium.Media.audioSessionMode = Titanium.Media.AUDIO_SESSION_MODE_AMBIENT;
 	}
 	
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
+	
+	//TIMOB-7502. TIme moved to ms but duration is still reported in seconds
+	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));
 	
 	//TIMOB-7502. TIme moved to ms but duration is still reported in seconds
 	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));

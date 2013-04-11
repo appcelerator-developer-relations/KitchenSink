@@ -1,8 +1,11 @@
-function contacts_add() {
+function contacts_add(_args) {
 
 	var isTizen = (Ti.Platform.osname === 'tizen');
 
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
+
 	var scrollview = Ti.UI.createScrollView({
 		contentWidth:'auto',
 		contentHeight:'auto',

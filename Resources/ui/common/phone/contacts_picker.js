@@ -1,5 +1,7 @@
-function contacts_picker() {
-	var win = Ti.UI.createWindow();
+function contacts_picker(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	var values = {cancel:function() {info.text = 'Cancelled';}};
 	

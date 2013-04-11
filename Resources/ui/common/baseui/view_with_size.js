@@ -1,5 +1,7 @@
-function viewsize() {
-	var win = Ti.UI.createWindow();
+function viewsize(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	// this test should test that we have a red 100x100 view in the 
 	// center of the screen by using the size property to set it

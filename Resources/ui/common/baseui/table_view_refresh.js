@@ -1,7 +1,9 @@
-function tv_refresh() {
+function tv_refresh(_args) {
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
-		win = Ti.UI.createWindow();
+		win = Ti.UI.createWindow({
+			title:_args.title
+		});
 	
 	
 	var tv = Ti.UI.createTableView();

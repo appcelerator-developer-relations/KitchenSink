@@ -1,8 +1,10 @@
-function tv_set() {
+function tv_set(_args) {
 	//JGH: FIXME - remove HTML
 	
 	var isTizen = Ti.Platform.osname === 'tizen',
-		win = Titanium.UI.createWindow(),
+		win = Titanium.UI.createWindow({
+			title:_args.title
+		}),
 		animationStyle;
 	
 	var data = [

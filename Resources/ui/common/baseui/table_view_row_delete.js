@@ -1,7 +1,10 @@
-function tv_row_delete() {
+function tv_row_delete(_args) {
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
-		win = Titanium.UI.createWindow();
+		win = Titanium.UI.createWindow({
+			title:_args.title
+		});
+
 	
 	// create table view data object
 	var data = [

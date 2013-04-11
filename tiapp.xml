@@ -50,7 +50,9 @@
                     </intent-filter>
                 </activity>
             </application>
+            <uses-sdk android:targetSdkVersion="11"/>
         </manifest>
+        <tool-api-level>11</tool-api-level>
         <activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity"/>
         <services>
             <service type="interval" url="testservice.js"/>
@@ -94,5 +96,7 @@
     </tizen>
     <modules>
         <module platform="tizen">tizen</module>
+        <module platform="android">facebook</module>
+        <module platform="iphone">facebook</module>
     </modules>
 </ti:app>

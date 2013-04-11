@@ -1,6 +1,8 @@
-function tv_row_insert() {
+function tv_row_insert(_args) {
 	var isTizen = Titanium.Platform.name === 'tizen',
-		win = Titanium.UI.createWindow();
+		win = Titanium.UI.createWindow({
+			title:_args.title
+		});
 	
 	// create table view data
 	var data = [

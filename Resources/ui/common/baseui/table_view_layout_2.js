@@ -1,7 +1,9 @@
-function tv_layout2() {
+function tv_layout2(_args) {
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
-		win = Titanium.UI.createWindow();
+		win = Titanium.UI.createWindow({
+		title:_args.title
+		});
 
 	win.barColor = '#385292';
 

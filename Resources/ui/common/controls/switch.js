@@ -1,5 +1,7 @@
-function switch_control() {
-	var win = Ti.UI.createWindow();
+function switch_control(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	
 	//
 	// BASIC SWITCH

@@ -1,8 +1,10 @@
 	//
 	//  This is a test that is meant to verify that a row object can have a header
 	//  and the table view has no table view header - the header should be displayed
-function tv_section_header() {
-	var win = Titanium.UI.createWindow();
+function tv_section_header(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var inputData = [
 		{title:'row 1', header:'Header 1'},

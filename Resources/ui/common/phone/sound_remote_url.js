@@ -1,12 +1,14 @@
-function sound_remote_url() {
-	var win = Titanium.UI.createWindow(),
+function sound_remote_url(_args) {
+	var win = Titanium.UI.createWindow({
+			title:_args.title
+		}),
 		isIOS = Titanium.Platform.name === 'iPhone OS',
 		isAndroid = Ti.Platform.name === 'android',
 		isTizen = Ti.Platform.osname === 'tizen';
 
 	//TIMOB-7502. TIme moved to ms but duration is still reported in seconds
 	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));
-	
+
 	var url = "http://iphonegu.com/wp-content/uploads/2012/06/One-Direction-What-Makes-You-Beautiful.mp3";
 	
 	// On iOS, loading remote url takes time and blocks window opening.

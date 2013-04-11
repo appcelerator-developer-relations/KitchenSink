@@ -16,6 +16,12 @@ function ControlsWindow(title) {
 		{title:'Text Area', hasChild:true, test:'ui/common/controls/textarea'}
 	];
 	
+	if (Titanium.Platform.name == 'android') {
+		if (Ti.Platform.Android.API_LEVEL > 10) {
+			data.push({title:'Action Bar', hasChild:true, test:'ui/handheld/android/controls/actionbar'});
+		}
+	}
+
 	if (Ti.Platform.osname !== 'mobileweb') {
 		data.push({title:'Button States', hasChild:true, test:'ui/common/controls/button_state'});
 		data.push({title:'Picker', hasChild:true, test:'ui/common/controls/picker'});
@@ -32,6 +38,7 @@ function ControlsWindow(title) {
 		data.push({title:'System Buttons', hasChild:true, test:'ui/handheld/ios/controls/system_buttons'});
 		data.push({title:'Toolbar', hasChild:true, test:'ui/handheld/ios/controls/toolbar'});
 	}
+	
 	
 	// create table view
 	for (var i = 0; i < data.length; i++ ) { data[i].color = '#000'; data[i].font = {fontWeight:'bold'} };

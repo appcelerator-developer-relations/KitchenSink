@@ -1,4 +1,4 @@
-function scroll_view_scroll() {
+function scroll_view_scroll(_args) {
 	function getOrientation(o)
 	{  //Came from orientation.js, but we didn't need the buttons and such
 		switch (o)
@@ -21,9 +21,12 @@ function scroll_view_scroll() {
 	}
 	
 	
+
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
-		win = Titanium.UI.createWindow();
+		win = Titanium.UI.createWindow({
+			title:_args.title
+		});
 
 	win.backgroundColor = '#ccc';
 	
