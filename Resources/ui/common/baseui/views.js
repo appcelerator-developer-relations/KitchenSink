@@ -53,10 +53,9 @@ function views(_args) {
 	}
 
 	if (Titanium.Platform.osname === 'tizen') {
-		data.push({title: 'Element Screenshot', hasChild: true, test: 'ui/common/baseui/blob_image_view', touchEnabled: true, color: '#aaa'});
 		data.push({title: 'SMS Dialog', hasChild: true, test: 'ui/common/baseui/sms_dialog'});
 	}
-	
+
 	// create table view
 	for (var i = 0; i < data.length; i++ ) {
 		var d = data[i];
