@@ -88,8 +88,6 @@ function contacts(_args) {
 			data.push({title:'Remove contact',hasChild:true, test:'ui/common/phone/contacts_remove'});
 		}
 
-		data.push({title:'Contact images',hasChild:true, test:'ui/common/phone/contacts_image'});
-
 		if (Ti.Platform.osname !== 'android' && Ti.Platform.osname !== 'tizen') {
 			data.push({title:'Groups',hasChild:true, test:'ui/common/phone/contacts_groups'});
 		}
