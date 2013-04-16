@@ -64,7 +64,7 @@ function tizenSystemInfo(title) {
 			var storagesInfo = '',
 				i = 0,
 				storages = response.data,
-				units = storages.units,
+				units = storages.getUnits(),
 				storagesCount = units.length;
 
 			for (; i < storagesCount; i++) {

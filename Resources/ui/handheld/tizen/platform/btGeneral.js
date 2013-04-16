@@ -250,9 +250,9 @@ function tizenBluetooth(title) {
 
 		dialog.show();
 
-		btAdapter.discoverDevices();
+		btAdapter.startDiscovery();
 		
-		// object with callbacks for discoverDevices() method
+		// object with callbacks for startDiscovery() method
 		btAdapter.removeEventListener('discoverystarted');
 		btAdapter.addEventListener('discoverystarted', function() {
 			Ti.API.info('discoverystarted');
