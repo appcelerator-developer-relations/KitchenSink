@@ -1,4 +1,4 @@
-function scroll_view_scroll() {
+function scroll_view_scroll(_args) {
 	function getOrientation(o)
 	{  //Came from orientation.js, but we didn't need the buttons and such
 		switch (o)
@@ -21,7 +21,9 @@ function scroll_view_scroll() {
 	}
 	
 	
-	var win = Titanium.UI.createWindow();
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	win.backgroundColor = '#ccc';
 	
 	// initialize to all modes

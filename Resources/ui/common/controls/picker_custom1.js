@@ -1,5 +1,7 @@
-function picker_custom1() {
-	var win = Ti.UI.createWindow();
+function picker_custom1(_args) {
+	var win = Ti.UI.createWindow({
+		title:_args.title
+	});
 	win.backgroundColor = 'black';
 	
 	var picker = Ti.UI.createPicker({backgroundColor:'#ff9900'});

@@ -1,5 +1,7 @@
-function geolocation() {
-	var win = Titanium.UI.createWindow();
+function geolocation(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	win.backgroundColor = '#fff';
 	win.openedflag = 0 ;
 	win.focusedflag = 0;

@@ -7,14 +7,14 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.0.2.GA</sdk-version>
+    <sdk-version>3.1.0.GA</sdk-version>
     <id>com.appcelerator.kitchensink</id>
     <name>KitchenSink</name>
-    <version>3.0.2.GA</version>
+    <version>3.1.0.GA</version>
     <publisher>appcelerator</publisher>
     <url>http://appcelerator.com</url>
     <description>not specified</description>
-    <copyright>2012 by appcelerator</copyright>
+    <copyright>2013 by appcelerator</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
@@ -49,11 +49,16 @@
                     </intent-filter>
                 </activity>
             </application>
+            <uses-sdk android:targetSdkVersion="11"/>
         </manifest>
+        <tool-api-level>11</tool-api-level>
         <activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity"/>
         <services>
             <service type="interval" url="testservice.js"/>
         </services>
     </android>
-    <modules/>
+    <modules>
+        <module platform="android">facebook</module>
+        <module platform="iphone">facebook</module>
+    </modules>
 </ti:app>

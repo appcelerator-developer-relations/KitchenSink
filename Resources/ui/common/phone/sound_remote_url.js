@@ -1,5 +1,7 @@
-function sound_remote_url() {
-	var win = Titanium.UI.createWindow();
+function sound_remote_url(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	var isIOS = Titanium.Platform.name == 'iPhone OS';
 
 	//TIMOB-7502. TIme moved to ms but duration is still reported in seconds

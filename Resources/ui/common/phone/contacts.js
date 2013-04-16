@@ -82,7 +82,9 @@ function contacts(_args) {
 			data.push({title:'Add contact',hasChild:true, test:'ui/common/phone/contacts_add'});
 			data.push({title:'Remove contact',hasChild:true, test:'ui/common/phone/contacts_remove'});
 		}
-			data.push({title:'Contact images',hasChild:true, test:'ui/common/phone/contacts_image'});
+		
+		data.push({title:'Contact images',hasChild:true, test:'ui/common/phone/contacts_image'});
+		
 		if (Ti.Platform.osname !== 'android') {
 			data.push({title:'Groups',hasChild:true, test:'ui/common/phone/contacts_groups'});
 		}
@@ -99,8 +101,7 @@ function contacts(_args) {
 			if (e.rowData.test)
 			{
 				var ExampleWindow = require(e.rowData.test);
-				_args.title = e.rowData.title;
-				win = new ExampleWindow(_args);
+				win = new ExampleWindow({title: e.rowData.title, containingTab: _args.containingTab, tabGroup: _args.tabGroup});
 				_args.containingTab.open(win,{animated:true});
 			}
 		});

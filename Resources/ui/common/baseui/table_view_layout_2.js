@@ -1,5 +1,7 @@
-function tv_layout2() {
-	var win = Titanium.UI.createWindow();
+function tv_layout2(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	win.barColor = '#385292';
 	
 	if (Ti.Platform.osname !== 'mobileweb') {

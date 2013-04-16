@@ -1,5 +1,7 @@
-function sound_file_url() {
-	var win = Titanium.UI.createWindow();
+function sound_file_url(_args) {
+	var win = Titanium.UI.createWindow({
+		title:_args.title
+	});
 	
 	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));	
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'etc/cricket.wav');
