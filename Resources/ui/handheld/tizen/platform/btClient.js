@@ -112,7 +112,7 @@ function btClient() {
         // Load view of devices
         discoverDevices = function() {
             devicesView.show();
-            btAdapter.discoverDevices();
+            btAdapter.startDiscovery();
             btAdapter.removeEventListener('discoveryfinished');
             btAdapter.addEventListener('discoveryfinished', function(devices) {
                 var row, title,
