@@ -46,7 +46,7 @@ function listeners() {
 		},
 		Tizen = require('tizen');
 
-		addListenerBtn.addEventListener('click', function(e) {
+		addListenerBtn.addEventListener('click', function () {
 			var alertDialog = Ti.UI.createAlertDialog({
 					ok: 'Ok'
 				});
@@ -60,7 +60,7 @@ function listeners() {
 				alertDialog.message = 'Listener added';
 				alertDialog.show();
 
-				removeListenerBtn.addEventListener('click', function(e) {
+				removeListenerBtn.addEventListener('click', function () {
 					try {
 						// Unregister a previously registered listener
 						Tizen.CallHistory.removeChangeListener(handle);

@@ -23,12 +23,6 @@ function manageHistory() {
 			rowHeight: 25,
 			top: 60
 		}),
-		delBtn = Ti.UI.createButton({
-			title: 'Delete',
-			right: 5,
-			height: 10,
-			width: 10
-		}),
 		Tizen = require('tizen'),
 		filter = Tizen.createAttributeFilter({
 			attributeName: 'type',
@@ -36,7 +30,7 @@ function manageHistory() {
 			matchValue: 'TEL'
 		}),
 		sortMode = Tizen.createSortMode({
-			attributeName: 'startTime', 
+			attributeName: 'startTime',
 			order: Tizen.SORT_MODE_ORDER_DESC
 		});
 
@@ -44,79 +38,78 @@ function manageHistory() {
 		Ti.API.info(Tizen.CallHistory);
 
 	// Call history event enumeration callback.
-	function onSuccess(results) {
-		var resultsCount = results.length,
-			i = 0;
-		Ti.API.info('Results length: ' + resultsCount);
+	function onFind(response) {
+		if (response.success) {
+			var results = response.entries,
+				resultsCount = results.length,
+				i = 0;
+			Ti.API.info('Results length: ' + resultsCount);
 
-		if (resultsCount > 0) {
-			function removeRow(item) {
-				if (item.rowData.title) {
-					Ti.API.info('item.index: ' + item.index);
+			if (resultsCount > 0) {
+				function removeRow(item) {
+					if (item.rowData.title) {
+						Ti.API.info('item.index: ' + item.index);
 
-					try {
-						Tizen.CallHistory.remove(results[item.index]);
-						tableView.deleteRow(item.index);
+						try {
+							Tizen.CallHistory.remove(results[item.index]);
+							tableView.deleteRow(item.index);
 
-						if (tableView.sections[0].rowCount === 0) {
+							if (tableView.sections[0].rowCount === 0) {
+								win.remove(tableView);
+								win.remove(removeAllHistoryBtn);
+								win.add(emptyHistoryLbl);
+							}
+						} catch (removeExc) {
+							Ti.UI.createAlertDialog({
+								message: removeExc.message,
+								title: 'The following error occurred: ',
+								ok: 'Ok'
+							}).show();
+						}
+					}
+				}
+
+				function removeAll() {
+					Tizen.CallHistory.removeAll(function (response) {
+						if (response.success) {
+							Ti.API.info('All history removed.');
 							win.remove(tableView);
 							win.remove(removeAllHistoryBtn);
 							win.add(emptyHistoryLbl);
+						} else {
+							Ti.UI.createAlertDialog({
+								message: response.error,
+								title: 'The following error occurred: ',
+								ok: 'Ok'
+							}).show();
 						}
-					} catch (removeExc) {
-						Ti.UI.createAlertDialog({
-							message: removeExc.message,
-							title: 'The following error occurred: ',
-							ok: 'Ok'
-						}).show();
-					}
+					});
 				}
+
+				tableView.addEventListener('click', removeRow);
+				removeAllHistoryBtn.addEventListener('click', removeAll);
+
+				// Populate the table containing call history entries.
+				for (; i < resultsCount; i++) {
+					tableView.appendRow({ title: results[i].remoteParties[0].remoteParty + ' (' + results[i].direction + ')' });
+				}
+
+				win.add(tableView);
+				win.add(removeAllHistoryBtn);
+			} else if (resultsCount === 0) {
+				win.add(emptyHistoryLbl);
 			}
-
-			function removeAll(e) {
-				Tizen.CallHistory.removeAll(
-					function() {
-						Ti.API.info('All history removed.');
-
-						win.remove(tableView);
-						win.remove(removeAllHistoryBtn);
-						win.add(emptyHistoryLbl);
-					},
-					function(error) {
-						Ti.UI.createAlertDialog({
-							message: removeExc.message,
-							title: 'The following error occurred: ',
-							ok: 'Ok'
-						}).show();
-					}
-				);
-			}
-
-			tableView.addEventListener('click', removeRow);
-			removeAllHistoryBtn.addEventListener('click', removeAll);
-
-			// Populate the table containing call history entries.
-			for (; i < resultsCount; i++) {
-				tableView.appendRow({ title: results[i].remoteParties[0].remoteParty + ' (' + results[i].direction + ')' });
-			}
-
-			win.add(tableView);
-			win.add(removeAllHistoryBtn);
-		} else if (resultsCount === 0) {
-			win.add(emptyHistoryLbl);
+		} else {
+			Ti.API.error('ERROR');
+			Ti.UI.createAlertDialog({
+				message: response.error,
+				title: 'The following error occurred: ',
+				ok: 'Ok'
+			}).show();
 		}
 	}
 
-	function onError(error) {
-		Ti.API.error('ERROR');
-		Ti.UI.createAlertDialog({
-			message: exep.message,
-			title: 'The following error occurred: ',
-			ok: 'Ok'
-		}).show();
-	}
-
-	Tizen.CallHistory.find(onSuccess, onError, filter, sortMode);
+	Tizen.CallHistory.find(onFind, filter, sortMode);
 
 	return win;
 }
