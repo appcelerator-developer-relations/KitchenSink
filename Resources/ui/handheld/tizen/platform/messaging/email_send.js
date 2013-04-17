@@ -2,11 +2,11 @@
 //
 // Tizen only.
 
-function emailSend(args) {
+function emailSend() {
 	var win = Ti.UI.createWindow({
 			title: 'Send email'
 		}),
-		
+
 		// Email composition UI
 		emailLabel = Ti.UI.createLabel({
 			text: 'Email:',
@@ -29,7 +29,7 @@ function emailSend(args) {
 		subjectField = Ti.UI.createTextField({
 			borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 			keyboardType: Ti.UI.KEYBOARD_DEFAULT,
-			top: 50, 
+			top: 50,
 			left: 150,
 			width: 150,
 			height: 25
@@ -47,7 +47,7 @@ function emailSend(args) {
 			borderRadius: 5,
 			color: '#888',
 			font: {
-				fontSize: 20, 
+				fontSize: 20,
 				fontWeight: 'bold'
 			},
 			keyboardType: Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
@@ -74,24 +74,29 @@ function emailSend(args) {
 	function initEmailService(callBack) {
 		Ti.API.info('Start search email service.');
 
-		function servicesListCB(services) {
-			Ti.API.info(services.length + " service(s) found.");
+		Tizen.Messaging.getMessageServices(serviceType, function (response) {
+			if (response.success) {
+				var services = response.services;
+				Ti.API.info(services.length + ' service(s) found.');
 
-			if (services.length === 0) {
-				Ti.API.info('The following error occurred: Services list is empty.');
-				Ti.UI.createAlertDialog({
-					message: 'Services not found!',
-					title: 'The following error occurred: ',
-					ok: 'Ok'
-				}).show();
-				return;
+				if (services.length === 0) {
+					Ti.API.info('The following error occurred: Services list is empty.');
+					Ti.UI.createAlertDialog({
+						message: 'Services not found!',
+						title: 'The following error occurred: ',
+						ok: 'Ok'
+					}).show();
+					return;
+				}
+
+				services[0] && (emailService = services[0]);
+				callBack && callBack();
+			} else {
+				errorCB({
+					message: response.error
+				});
 			}
-
-			services[0] && (emailService = services[0]);
-			callBack && callBack();
-		}
-
-		Tizen.Messaging.getMessageServices(serviceType, servicesListCB, errorCB);
+		});
 	}
 
 	// Verify if email message data entered by user is valid.
@@ -127,18 +132,24 @@ function emailSend(args) {
 	}
 
 	// Create a draft email message for test/demo purposes.
-	addDraftEmailBtn.addEventListener('click', function(e) {
+	addDraftEmailBtn.addEventListener('click', function() {
 		function addDraftMessage() {
-			function draftMessageAdded() {
-				Ti.API.info('Draft message saved successfully');
-				Ti.UI.createAlertDialog({
-					title: 'Info',
-					title: 'Draft message saved successfully',
-					ok: 'Ok'
-				}).show();
+			function draftMessageAdded(response) {
+				if (response.success) {
+					Ti.API.info('Draft message saved successfully');
+					Ti.UI.createAlertDialog({
+						title: 'Info',
+						message: 'Draft message saved successfully',
+						ok: 'Ok'
+					}).show();
 
-				// Clear message data
-				emailField.value = textArea.value = subjectField.value = '';
+					// Clear message data
+					emailField.value = textArea.value = subjectField.value = '';
+				} else {
+					errorCB({
+						message: response.error
+					});
+				}
 			}
 
 			try {
@@ -152,12 +163,12 @@ function emailSend(args) {
 						to: [emailField.value]
 					}
 				});
-				
+
 				// Add new draft email message
-				checkMessageData() && emailService.messageStorage.addDraftMessage(msg, draftMessageAdded, errorCB);
+				checkMessageData() && emailService.messageStorage.addDraftMessage(msg, draftMessageAdded);
 			} catch (exc){
 				Ti.API.info('Exception has been thrown when called addDraftMessage.');
-				
+
 				errorCB(exc);
 			}
 		}
@@ -166,20 +177,27 @@ function emailSend(args) {
 	});
 
 	// Send the email entered in the UI fields.
-	sendEmailBtn.addEventListener('click', function(e) {
+	sendEmailBtn.addEventListener('click', function() {
 		function sendNewEmail() {
-			function emailSent(recipients) {
-				var recipientsCount = recipients.length;
+			function emailSentCB(response) {
+				if (response.success) {
+					var recipients = response.recipients,
+						recipientsCount = recipients.length;
 
-				Ti.API.info('Email sent successfully to ' + recipientsCount + ' recipient(s).');
-				Ti.UI.createAlertDialog({
-					title: 'Info',
-					message: 'Email sent successfully to ' + recipientsCount + ' recipients.',
-					ok: 'Ok'
-				}).show();
+					Ti.API.info('Email sent successfully to ' + recipientsCount + ' recipient(s).');
+					Ti.UI.createAlertDialog({
+						title: 'Info',
+						message: 'Email sent successfully to ' + recipientsCount + ' recipients.',
+						ok: 'Ok'
+					}).show();
 
-				// Clear message data
-				emailField.value = subjectField.value = textArea.value = '';
+					// Clear message data
+					emailField.value = subjectField.value = textArea.value = '';
+				} else {
+					errorCB({
+						'message': response.error
+					});
+				}
 			}
 
 			try {
@@ -187,15 +205,15 @@ function emailSend(args) {
 
 				var msg = Tizen.Messaging.createMessage({
 					type: serviceType,
-					messageInitDict: { 
-						subject: subjectField.value, 
-						plainBody: textArea.value, 
+					messageInitDict: {
+						subject: subjectField.value,
+						plainBody: textArea.value,
 						to: [emailField.value]
 					}
 				});
-				
+
 				// Add new email message
-				checkMessageData() && emailService.sendMessage(msg, emailSent, errorCB);
+				checkMessageData() && emailService.sendMessage(msg, emailSentCB);
 			} catch (exc){
 				Ti.API.info('Exception has been thrown when called sendMessage.');
 

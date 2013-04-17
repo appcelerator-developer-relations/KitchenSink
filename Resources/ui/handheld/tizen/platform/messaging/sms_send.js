@@ -2,7 +2,7 @@
 //
 // Tizen only.
 
-function smsSend(args) {
+function smsSend() {
 	var win = Ti.UI.createWindow({
 			title: 'Send new sms'
 		}),
@@ -16,7 +16,7 @@ function smsSend(args) {
 		textField = Ti.UI.createTextField({
 			borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 			keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
-			top: 10, 
+			top: 10,
 			left: 150,
 			width: 150,
 			height: 25
@@ -34,7 +34,7 @@ function smsSend(args) {
 			borderRadius: 5,
 			color: '#888',
 			font: {
-				fontSize: 20, 
+				fontSize: 20,
 				fontWeight: 'bold'
 			},
 			keyboardType: Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
@@ -44,14 +44,14 @@ function smsSend(args) {
 			height : 70
 		}),
 		sendSMSBtn = Titanium.UI.createButton({
-		   title: 'Send',
-		   top: 130,
-		   left: 5
+			title: 'Send',
+			top: 130,
+			left: 5
 		}),
 		addDraftSMSBtn = Titanium.UI.createButton({
-		   title: 'Add draft',
-		   top: 130,
-		   left: 70
+			title: 'Add draft',
+			top: 130,
+			left: 70
 		}),
 		serviceType = 'messaging.sms',
 		Tizen = require('tizen'),
@@ -59,26 +59,33 @@ function smsSend(args) {
 
 	// Initialize smsservice (the Tizen object that offers access to messaging functionality)
 	function initSmsService(callBack) {
-		function servicesListCB(services) {
-			var servicesCount = services.length;
+		function servicesListCB(response) {
+			if (response.success) {
+				var services = response.services,
+					servicesCount = services.length;
 
-			Ti.API.info(servicesCount + ' service(s) found.');
+				Ti.API.info(servicesCount + ' service(s) found.');
 
-			if (servicesCount === 0) {
-				Ti.API.info('The following error occurred: services list is empty.');
-				Ti.UI.createAlertDialog({
-					message: 'Services not found!',
-					title: 'The following error occurred: ',
-					ok: 'Ok'
-				}).show();
-				return;
+				if (servicesCount === 0) {
+					Ti.API.info('The following error occurred: services list is empty.');
+					Ti.UI.createAlertDialog({
+						message: 'Services not found!',
+						title: 'The following error occurred: ',
+						ok: 'Ok'
+					}).show();
+					return;
+				}
+
+				services[0] && (smsService = services[0]);
+				callBack && callBack();
+			} else {
+				errorCB({
+					message: response.error
+				});
 			}
-
-			services[0] && (smsService = services[0]);
-			callBack && callBack();
 		}
 
-		Tizen.Messaging.getMessageServices(serviceType, servicesListCB, errorCB);
+		Tizen.Messaging.getMessageServices(serviceType, servicesListCB);
 	}
 
 	// Check message data. Tizen function doesn't check it yet .
@@ -115,16 +122,22 @@ function smsSend(args) {
 	}
 
 	// Add draft SMS for testing/demo purposes
-	addDraftSMSBtn.addEventListener('click', function(e) {
+	addDraftSMSBtn.addEventListener('click', function() {
 		function addDraftMessage() {
-			function draftMessageAdded() {
-				Ti.API.info('Draft message saved successfully');
-				Ti.UI.createAlertDialog({
-					title: 'Draft message saved successfully',
-					ok: 'Ok'
-				}).show();
+			function draftMessageAdded(response) {
+				if (response.success) {
+					Ti.API.info('Draft message saved successfully');
+					Ti.UI.createAlertDialog({
+						title: 'Draft message saved successfully',
+						ok: 'Ok'
+					}).show();
 
-				textField.value = textArea.value = '';
+					textField.value = textArea.value = '';
+				} else {
+					errorCB({
+						message: response.error
+					});
+				}
 			}
 
 			try {
@@ -132,13 +145,13 @@ function smsSend(args) {
 
 				var msg = Tizen.Messaging.createMessage({
 					type: serviceType,
-					messageInitDict: { 
-						plainBody: textArea.value, 
-						to: [textField.value] 
+					messageInitDict: {
+						plainBody: textArea.value,
+						to: [textField.value]
 					}
 				});
 
-				checkMessageData() && smsService.messageStorage.addDraftMessage(msg, draftMessageAdded, errorCB);
+				checkMessageData() && smsService.messageStorage.addDraftMessage(msg, draftMessageAdded);
 			} catch (exc){
 				Ti.API.info('Exception has been thrown when try to add draft message');
 				errorCB(exc);
@@ -149,19 +162,26 @@ function smsSend(args) {
 	});
 
 	// Send SMS
-	sendSMSBtn.addEventListener('click', function(e) {
+	sendSMSBtn.addEventListener('click', function() {
 		function sendNewMessage() {
-			function messageSent(recipients) {
-				var recipientsCount = recipients.length;
+			function messageSentCB (response) {
+				if (response.success) {
+					var recipients = response.recipients,
+						recipientsCount = recipients.length;
 
-				Ti.API.info('Message sent successfully to ' + recipientsCount + ' recipient(s).');
-				Ti.UI.createAlertDialog({
-					title: 'Info',
-					message: 'Message sent successfully to ' + recipientsCount + ' recipients.',
-					ok: 'Ok'
-				}).show();
+					Ti.API.info('Message sent successfully to ' + recipientsCount + ' recipient(s).');
+					Ti.UI.createAlertDialog({
+						title: 'Info',
+						message: 'Message sent successfully to ' + recipientsCount + ' recipients.',
+						ok: 'Ok'
+					}).show();
 
-				textField.value = textArea.value = '';
+					textField.value = textArea.value = '';
+				} else {
+					errorCB({
+						message: response.error
+					});
+				}
 			}
 
 			try {
@@ -169,14 +189,14 @@ function smsSend(args) {
 
 				var msg = Tizen.Messaging.createMessage({
 					type: serviceType,
-					messageInitDict: { 
-						plainBody: textArea.value, 
-						to: [textField.value] 
+					messageInitDict: {
+						plainBody: textArea.value,
+						to: [textField.value]
 					}
 				});
-				
+
 				// Send new SMS
-				smsService.sendMessage(msg, messageSent, errorCB);
+				smsService.sendMessage(msg, messageSentCB);
 			} catch (exc){
 				Ti.API.info('Exception has been thrown when try to send message');
 
