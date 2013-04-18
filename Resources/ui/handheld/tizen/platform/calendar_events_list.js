@@ -25,20 +25,29 @@ function events_list(args) {
 	});
 
 	// Emumerate all events
-	calendar.find(function (events) {
-		var list = fillEventsTable(events);
+	calendar.find(function (response) {
+		if (response.success) {
+			var events = response.items, 
+				list = fillEventsTable(events);
 
-		(list.length == 0) && self.add(emptyList);
-		tableview.data = list;
-	}, onError);
+			(list.length === 0) && self.add(emptyList);
+			tableview.data = list;
+		} else {
+			onError(response.error);
+		}
+	});
 
 	self.add(tableview);
 
 	// Update events table after editing single event
 	Ti.App.addEventListener('UpdateEventsTable',  function(e) {
-		calendar.find(function (events) {
-			tableview.data = fillEventsTable(events);
-		}, onError);
+		calendar.find(function (response) {
+			if (response.success) {
+				tableview.data = fillEventsTable(response.items);
+			} else {
+				onError(response.error);
+			}
+		});
 	});
 
 	// Populate the table with the calendar events. Clicking on a table row will
@@ -93,7 +102,7 @@ function events_list(args) {
 					calendar.remove(events[index].id);
 					tableview.data = data;
 
-					(data.length == 0) && self.add(emptyList);
+					(data.length === 0) && self.add(emptyList);
 
 					alert('Event was removed successfully');
 				});	
@@ -109,7 +118,7 @@ function events_list(args) {
 	}
 
 	function onError(err) {
-		alert('Error: ' + err.message);
+		alert('Error: ' + err);
 	}
 
 	return self;

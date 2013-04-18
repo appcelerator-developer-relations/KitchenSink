@@ -2,9 +2,9 @@
 // Tizen only.
 
 function events_batch(args) {
-	var  ADD_BATCH = 1,
-		 UPDATE_BATCH = 2,
-		 DELETE_BATCH = 3;
+	var ADD_BATCH = 1,
+		UPDATE_BATCH = 2,
+		DELETE_BATCH = 3;
 
 	var self = Ti.UI.createWindow({
 			title: args.title
@@ -79,10 +79,14 @@ function events_batch(args) {
 		eventsArr[2] = eventsArr[0].clone();
 		eventsArr[2].summary += ' copy 2';
 
-		calendar.addBatch(eventsArr, function() {
-			summaryInput.value = '';
-			alert('Events were added successfully');
-		}, onError);
+		calendar.addBatch(eventsArr, function(response) {
+			if(response.success) {
+				summaryInput.value = '';
+				alert('Events were added successfully');
+			} else {
+				onError(response.error);
+			}
+		});
 
 	}
 
@@ -92,53 +96,71 @@ function events_batch(args) {
 			alert('Please enter summary');
 			return ;
 		}
-		calendar.find(function(events) {
-			var eventsArr = [],
-				i = events.length - 1,
-				j = 0;
+		calendar.find(function(response) {
+			if (response.success) {
+				var eventsArr = [],
+					events = response.items,
+					i = events.length - 1,
+					j = 0;
 
-			if (i < 2) {
-				alert('You should have at least three events. Now you have ' + events.length + ' events');
-				return ;
-			}
+				if (i < 2) {
+					alert('You should have at least three events. Now you have ' + events.length + ' events');
+					return ;
+				}
 
-			for (; i >= 0, j < 3; i--, j++) {
-				events[i].summary = value;
-				eventsArr.push(events[i]);
+				for (; i >= 0, j < 3; i--, j++) {
+					events[i].summary = value;
+					eventsArr.push(events[i]);
+				}
+				calendar.updateBatch(eventsArr, function(response) {
+					if (response.success) {
+						summaryInput.value = '';
+						alert('Events were updated successfully');
+					} else {
+						onError(response.error);
+					}
+				});
+			} else {
+				onError(response.error);
 			}
-			calendar.updateBatch(eventsArr, function() {
-				summaryInput.value = '';
-				alert('Events were updated successfully');
-			}, onError)
-		}, onError)	
+		});
 	}
 
 	function deleteBatch() {
-		calendar.find(function(events) {
-			var eventsArr = [],
-				i = events.length - 1,
-				j = 0;
+		calendar.find(function(response) {
+			if (response.success) {
+				var eventsArr = [],
+					events = response.items,
+					i = events.length - 1,
+					j = 0;
 
-			if (i < 2) {
-				alert('You should have at least three events. Now you have ' + events.length + ' events');
-				return ;
-			}
+				if (i < 2) {
+					alert('You should have at least three events. Now you have ' + events.length + ' events');
+					return ;
+				}
 
-			for (; i >= 0 && j < 3; i--, j++) {
-				eventsArr.push(events[i].id);
+				for (; i >= 0 && j < 3; i--, j++) {
+					eventsArr.push(events[i].id);
+				}
+				try {
+					calendar.removeBatch(eventsArr, function(response) {
+						if (response.success) {
+							alert('Events were removed successfully');
+						} else {
+							onError(response.error);
+						}
+					});
+				} catch (err) {
+					alert('Exception: ' + err.message);
+				}
+			} else {
+				onError(response.error);
 			}
-			try {
-				calendar.removeBatch(eventsArr, function() {
-					alert('Events were removed successfully');
-				}, onError);
-			} catch (err) {
-				alert('Exception: ' + err.message);
-			}
-		}, onError)
+		});
 	}
 
 	function onError(err) {
-		alert('Error: ' + err.message);
+		alert('Error: ' + err);
 	}
 
 	return self;
