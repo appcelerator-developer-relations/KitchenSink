@@ -51,7 +51,7 @@ function showMessage(args) {
 		subjectValueLbl.text = message.subject;
 		bodyValueLbl.text = message.body.plainBody;
 
-		if (folderName == 'Sent Mail') {
+		if (folderName === 'Sent Mail') {
 			fromLbl.text = 'To';
 			fromValueLbl.text = message.to[0];
 		} else {
@@ -59,22 +59,24 @@ function showMessage(args) {
 		}
 	}
 
-	// Called when message loading failed.
-	function errorCallback(error) {	
-		Ti.API.info('Cannot load message body: ' + error.message);
-		Ti.UI.createAlertDialog({
-			message: error.message,
-			title: 'Cannot load message body',
-			ok: 'Ok'
-		}).show();
-	}
-
 	// Load message body if it's not loaded yet
 	if (!message.body.loaded) {
 		Ti.API.info('Start to load message body.');
 
 		try {
-			emailService.loadMessageBody(message, setMessageDetail, errorCallback);
+			emailService.loadMessageBody(message, function (response) {
+				if (response.success) {
+					setMessageDetail(response.message);
+				} else {
+					var error = response.error;
+					Ti.API.error('Cannot load message body: ' + error);
+					Ti.UI.createAlertDialog({
+						message: error,
+						title: 'Cannot load message body',
+						ok: 'Ok'
+					}).show();
+				}
+			});
 		} catch (exc) {
 			Ti.API.info('Exception has been thrown.');
 			Ti.API.info('Cannot load message body: ' + exc.message);
@@ -94,7 +96,7 @@ function showMessage(args) {
 	win.add(fromValueLbl);
 	win.add(bodyLbl);
 	win.add(bodyValueLbl);
-	
+
 	return win;
 }
 
