@@ -34,9 +34,9 @@ function tizenNFC(title) {
 
 	// Format nfc record to html
 	function formatRecordInfo(record) {
+		var result;
 		try {
-			var result,
-                className = record.toString();
+			var className = record.toString();
 
             Ti.API.info(className);
 
@@ -93,56 +93,62 @@ function tizenNFC(title) {
 	}
 
 	// Read incoming message and put data to UI
-	function readMessage(message) {
-		Ti.API.info('NDEF successfully received.');
-        Ti.API.info(JSON.stringify(message));
+	function readMessage(response) {
+		if (response.success) {
+			var message = response.ndefMessage;
+			Ti.API.info('NDEF successfully received.');
+			Ti.API.info(JSON.stringify(message));
 
-        if (message.recordCount > 0) {
+			if (message.recordCount > 0) {
 
-            if (message.recordCount == 1) {
-				ndefRecordLabel.text = formatRecordInfo(message.records[0]);
-				picker.hide();
+				if (message.recordCount == 1) {
+					ndefRecordLabel.text = formatRecordInfo(message.records[0]);
+					picker.hide();
+				} else {
+					fillPicker(message);
+				}
+
 			} else {
-				fillPicker(message);
+				ndefRecordLabel.text = 'There are no records in NDEF.';
 			}
-
 		} else {
-			ndefRecordLabel.text = 'There are no records in NDEF.';
+			// show reading errors
+			ndefRecordLabel.text = 'NDEF read error.  \n' + response.error;
 		}
 	}
 
 	// Start listening to incoming NFC messages
-	function setTagDetect() {
-		// show reading errors
-		function readMessageErr(e) {
-			ndefRecordLabel.text = 'NDEF read error.  \n' + e.name + ' : ' + e.message;
-		}
+	function setTagDetect(response) {
+		if (response.success) {
+			var onSuccess = {
+				onattach: function(tag) {
+					nfcTag = tag;
+					var isNDEF = nfcTag.isSupportedNDEF;
+					nfcDetectionLabel.text = 'Tag found:' + nfcTag.type;
 
-		var onSuccess = {
-			onattach: function(tag) {
-				nfcTag = tag;
-				var isNDEF = nfcTag.isSupportedNDEF;
-				nfcDetectionLabel.text = 'Tag found:' + nfcTag.type;
-
-				if (isNDEF) {
-                    nfcTag.readNDEF(readMessage, readMessageErr);
-				} else {
-					Ti.API.info('This Tag does not support NDEF');
+					if (isNDEF) {
+						nfcTag.readNDEF(readMessage);
+					} else {
+						Ti.API.info('This Tag does not support NDEF');
+					}
+				},
+				ondetach: function () {
+					//update UI when NFC is detached
+					nfcTag = null;
+					picker.hide();
+					nfcDetectionLabel.text = 'Tag successfully detached. \n Searching for new NFC tags around...';
+					ndefRecordLabel.text = '';
 				}
-			},
-			ondetach: function () {
-				//update UI when NFC is detached
-				nfcTag = null;
-				picker.hide();
-				nfcDetectionLabel.text = 'Tag successfully detached. \n Searching for new NFC tags around...';
-				ndefRecordLabel.text = '';
-			}
-		};
+			};
 
-		try {
-            nfcAdapter.setTagListener(onSuccess);
-		} catch (e) {
-			Ti.API.warn(e.name + ' : ' + e.message);
+			try {
+				nfcAdapter.setTagListener(onSuccess);
+			} catch (e) {
+				Ti.API.warn(e.name + ' : ' + e.message);
+			}
+		} else {
+			nfcSwitch.value = false;
+			nfcDetectionLabel.text = 'Failed to power on NFC: ' + response.error;
 		}
 	}
 
@@ -150,7 +156,7 @@ function tizenNFC(title) {
 	function unsetTagDetect() {
 		try {
 			nfcAdapter.unsetTagListener();
-			clearPicker()
+			clearPicker();
 			picker.hide();
 			nfcTag = null;
 			nfcDetectionLabel.text = 'Tag listener is turned off';
@@ -161,17 +167,17 @@ function tizenNFC(title) {
 	}
 
 	function switchNfc(turnOn){
+		function onPowerOnFails(e) {
+			nfcSwitch.value = false;
+			nfcDetectionLabel.text = 'Failed to power on NFC: ' + e.message;
+		}
+		
 		if (turnOn) {
 			nfcDetectionLabel.text = 'Searching for new NFC tags around...';
 
-			function onPowerOnFails(e) {
-				nfcSwitch.value = false;
-				nfcDetectionLabel.text = 'Failed to power on NFC: ' + e.message;
-			}
-
 			try {
 				nfcAdapter = nfc.getDefaultAdapter();
-                nfcAdapter.setPowered(true, setTagDetect, onPowerOnFails);
+				nfcAdapter.setPowered(true, setTagDetect);
 			} catch (e) {
 				onPowerOnFails(e);
 				nfcAdapter = null;
@@ -238,6 +244,6 @@ function tizenNFC(title) {
 	picker.hide();
 
 	return win;
-};
+}
 
 module.exports = tizenNFC;
