@@ -19,32 +19,33 @@ function listeners() {
 			rowHeight: 20,
 			top: 110
 		}),
-		onListenerCB = {
-			onadded: function(newItems) {
-				var i = 0,
-					itemsCount = newItems.length;
-				Ti.API.info('New Items have been added');
-
-				for (; i < itemsCount; i++) {
-					Ti.API.info(newItems[i].remoteParties[0].remoteParty + ': ' + newItems[i].startTime);
-
-					tableView.appendRow({ title: newItems[i].remoteParties[0].remoteParty + ': ' + newItems[i].startTime });
-				}
-			},
-			onchanged: function(changedItems) {
-				var i = 0,
-					itemsCount = changedItems.length;
-
-				Ti.API.info('Items changed');
-
-				for (; i < itemsCount; i++) {
-					Ti.API.info(changedItems[i].remoteParties[0].remoteParty + ': ' + changedItems[i].direction);
-
-					tableView.appendRow({ title: changedItems[i].remoteParties[0].remoteParty + ': ' + changedItems[i].direction });
-				}
-			}
-		},
 		Tizen = require('tizen');
+
+	function onItemsAdded (e) {
+		var i = 0,
+			items = e.items,
+			itemsCount = items.length;
+		Ti.API.info('New Items have been added.');
+		for (; i < itemsCount; i++) {
+			Ti.API.info(items[i].remoteParties[0].remoteParty + ': ' + items[i].startTime);
+
+			tableView.appendRow({ title: items[i].remoteParties[0].remoteParty + ': ' + items[i].startTime });
+		}
+	}
+
+	function onItemsChanged (e) {
+		var i = 0,
+			items = e.items,
+			itemsCount = items.length;
+
+		Ti.API.info('Items changed');
+
+		for (; i < itemsCount; i++) {
+			Ti.API.info(items[i].remoteParties[0].remoteParty + ': ' + items[i].direction);
+
+			tableView.appendRow({ title: items[i].remoteParties[0].remoteParty + ': ' + items[i].direction });
+		}
+	}
 
 		addListenerBtn.addEventListener('click', function () {
 			var alertDialog = Ti.UI.createAlertDialog({
@@ -53,7 +54,8 @@ function listeners() {
 
 			try {
 				// Register a call history callback
-				var handle = Tizen.CallHistory.addChangeListener(onListenerCB);
+				Tizen.CallHistory.addEventListener('itemsadded', onItemsAdded);
+				Tizen.CallHistory.addEventListener('itemschanged', onItemsChanged);
 
 				addListenerBtn.enabled = false;
 
@@ -63,7 +65,8 @@ function listeners() {
 				removeListenerBtn.addEventListener('click', function () {
 					try {
 						// Unregister a previously registered listener
-						Tizen.CallHistory.removeChangeListener(handle);
+						Tizen.CallHistory.removeEventListener('itemsadded', onItemsAdded);
+						Tizen.CallHistory.removeEventListener('itemschanged', onItemsChanged);
 						win.remove(removeListenerBtn);
 
 						alertDialog.message = 'Listener removed';

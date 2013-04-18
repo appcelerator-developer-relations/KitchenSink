@@ -39,6 +39,45 @@ function manageHistory() {
 
 	// Call history event enumeration callback.
 	function onFind(response) {
+		function removeRow(item) {
+			if (item.rowData.title) {
+				Ti.API.info('item.index: ' + item.index);
+
+				try {
+					Tizen.CallHistory.remove(results[item.index]);
+					tableView.deleteRow(item.index);
+
+					if (tableView.sections[0].rowCount === 0) {
+						win.remove(tableView);
+						win.remove(removeAllHistoryBtn);
+						win.add(emptyHistoryLbl);
+					}
+				} catch (removeExc) {
+					Ti.UI.createAlertDialog({
+						message: removeExc.message,
+						title: 'The following error occurred: ',
+						ok: 'Ok'
+					}).show();
+				}
+			}
+		}
+
+		function removeAll() {
+			Tizen.CallHistory.removeAll(function (response) {
+				if (response.success) {
+					Ti.API.info('All history removed.');
+					win.remove(tableView);
+					win.remove(removeAllHistoryBtn);
+					win.add(emptyHistoryLbl);
+				} else {
+					Ti.UI.createAlertDialog({
+						message: response.error,
+						title: 'The following error occurred: ',
+						ok: 'Ok'
+					}).show();
+				}
+			});
+		}
 		if (response.success) {
 			var results = response.entries,
 				resultsCount = results.length,
@@ -46,46 +85,6 @@ function manageHistory() {
 			Ti.API.info('Results length: ' + resultsCount);
 
 			if (resultsCount > 0) {
-				function removeRow(item) {
-					if (item.rowData.title) {
-						Ti.API.info('item.index: ' + item.index);
-
-						try {
-							Tizen.CallHistory.remove(results[item.index]);
-							tableView.deleteRow(item.index);
-
-							if (tableView.sections[0].rowCount === 0) {
-								win.remove(tableView);
-								win.remove(removeAllHistoryBtn);
-								win.add(emptyHistoryLbl);
-							}
-						} catch (removeExc) {
-							Ti.UI.createAlertDialog({
-								message: removeExc.message,
-								title: 'The following error occurred: ',
-								ok: 'Ok'
-							}).show();
-						}
-					}
-				}
-
-				function removeAll() {
-					Tizen.CallHistory.removeAll(function (response) {
-						if (response.success) {
-							Ti.API.info('All history removed.');
-							win.remove(tableView);
-							win.remove(removeAllHistoryBtn);
-							win.add(emptyHistoryLbl);
-						} else {
-							Ti.UI.createAlertDialog({
-								message: response.error,
-								title: 'The following error occurred: ',
-								ok: 'Ok'
-							}).show();
-						}
-					});
-				}
-
 				tableView.addEventListener('click', removeRow);
 				removeAllHistoryBtn.addEventListener('click', removeAll);
 
