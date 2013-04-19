@@ -14,7 +14,7 @@ function remove_contact(args) {
 	// Table view rows will contain "delete" buttons.
 	Ti.Contacts.Tizen.getAllPeople(function(response) {
 		if (response.success) {
-			var persons = response.data,
+			var persons = response.persons,
 				contactsCount = persons.length,
 				i = 0,
 				data = [];
@@ -65,7 +65,7 @@ function remove_contact(args) {
 			}
 			contactsTable.data = data;
 		} else {
-			alert('Error occured: ' + response.err);
+			alert('Error occured: ' + response.error);
 		}
 	});
 

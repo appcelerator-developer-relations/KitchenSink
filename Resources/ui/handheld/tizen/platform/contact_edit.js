@@ -20,7 +20,7 @@ function edit_contact(args) {
 		address = (person.address.home &&  (person.address.home.length > 0)) ? person.address.home[0] : {},
 		email = (person.email.home && (person.email.home.length > 0)) ? person.email.home[0] : '',
 		phoneNumber = (person.phone.home && (person.phone.home.length > 0)) ? person.phone.home[0] : '';
-		
+
 	// Add controls for first name
 	var firstNameLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
@@ -29,21 +29,21 @@ function edit_contact(args) {
 		width: labelWidth,
 		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
 		text: 'First name:'
-	});	
+	});
 	win.add(firstNameLabel);
-	
+
 	var firstNameInput = Ti.UI.createTextField({
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		top: top,
 		left: inputLeftPos,
 		width: inputWidth,
 		height: height,
-		value: person.firstName || ''		
+		value: person.firstName || ''
 	});
 	win.add(firstNameInput);
-	
+
 	top += height + 10;
-	
+
 	// Add controls for last name
 	var lastNameLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
@@ -54,19 +54,19 @@ function edit_contact(args) {
 		text: 'Last name:'
 	}); 
 	win.add(lastNameLabel);
-	
+
 	var lastNameInput = Ti.UI.createTextField({
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		top: top,
 		left: inputLeftPos,
 		width: inputWidth,
 		height: height,
-		value: person.lastName || ''		
+		value: person.lastName || ''
 	});
 	win.add(lastNameInput);
-	
+
 	top += height + 10;
-	
+
 	// Add controls for email
 	var emailLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
@@ -77,7 +77,7 @@ function edit_contact(args) {
 		text: 'Home email:'
 	}); 
 	win.add(emailLabel);
-	
+
 	var emailInput = Ti.UI.createTextField({
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		top: top,
@@ -88,9 +88,9 @@ function edit_contact(args) {
 		value: email
 	});
 	win.add(emailInput);
-	
+
 	top += height + 10;	
-	
+
 	// Add controls for phone number
 	var phoneNumberLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
@@ -101,7 +101,7 @@ function edit_contact(args) {
 		text: 'Home phone number:'
 	}); 
 	win.add(phoneNumberLabel);
-	
+
 	var phoneNumberInput = Ti.UI.createTextField({
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		top: top,
@@ -112,9 +112,9 @@ function edit_contact(args) {
 		value: phoneNumber
 	});
 	win.add(phoneNumberInput);
-	
-	top += height + 10;		
-	
+
+	top += height + 10;
+
 	// Add controls for city
 	var cityLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
@@ -125,7 +125,7 @@ function edit_contact(args) {
 		text: 'Home city:'
 	}); 
 	win.add(cityLabel);
-	
+
 	var cityInput = Ti.UI.createTextField({
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		top: top,
@@ -135,9 +135,9 @@ function edit_contact(args) {
 		value: address.City || ''
 	});
 	win.add(cityInput);
-	
-	top += height + 10;		
-	
+
+	top += height + 10;
+
 	// Add controls for street
 	var streetLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
@@ -148,7 +148,7 @@ function edit_contact(args) {
 		text: 'Home street:'
 	}); 
 	win.add(streetLabel);
-	
+
 	var streetInput = Ti.UI.createTextField({
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		top: top,
@@ -158,9 +158,9 @@ function edit_contact(args) {
 		value: address.Street || ''
 	});
 	win.add(streetInput);
-	
-	top += height + 10;			
-	
+
+	top += height + 10;	
+
 	// Add controls for ZIP
 	var zipLabel = Ti.UI.createLabel({
 		left: labelLeftPos,
@@ -171,7 +171,7 @@ function edit_contact(args) {
 		text: 'Home ZIP:'
 	}); 
 	win.add(zipLabel);
-	
+
 	var zipInput = Ti.UI.createTextField({
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		top: top,
@@ -182,15 +182,15 @@ function edit_contact(args) {
 		keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD	
 	});
 	win.add(zipInput);
-	
+
 	top += height + 20;	
-	
+
 	var updateButton = Ti.UI.createButton({
 		title: 'Update contact',
 		top: top
-	});	
-	win.add(updateButton);			
-	
+	});
+	win.add(updateButton);
+
 	// Contact updating
 	updateButton.addEventListener('click', function(e) {
 		var firstName = firstNameInput.value.trim(),
@@ -211,24 +211,24 @@ function edit_contact(args) {
 			if (Object.prototype.toString.call(person.address.home) === '[object Array]') {
 				person.address.home[0].City = city
 				person.address.home[0].Street = street;
-				person.address.home[0].ZIP = zip;				
+				person.address.home[0].ZIP = zip;
 			} else {
 				person.address.home = [{
 					City: city,
 					Street: street,
-					ZIP: zip					
+					ZIP: zip
 				}];
 			}
 			// If the array was empty, add the first item. Otherwise, overwrite the first item.
 			(Object.prototype.toString.call(person.email.home) === '[object Array]') ? person.email.home[0] = email : person.email.home = [email];
 			(Object.prototype.toString.call(person.phone.home) === '[object Array]') ? person.phone.home[0] = phoneNumber : person.phone.home = [phoneNumber];
-			
+
 			Ti.Contacts.save([person]);
-						
+
 			alert('Contact was updated successfully. Contact ID = ' + person.id);
 		}
 	});	
 	
-	return win;		
+	return win;
 }
 module.exports = edit_contact;

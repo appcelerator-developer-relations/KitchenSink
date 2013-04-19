@@ -27,7 +27,7 @@ function find_contacts(args) {
 	searchButton.addEventListener('click', function(e) {
 		Ti.Contacts.Tizen.getPeopleWithName(searchInput.value, function(response) {
 			if (response.success) {
-				var persons = response.data,
+				var persons = response.persons,
 					contactsCount = persons.length,
 					i = 0,
 					tableData = [];
