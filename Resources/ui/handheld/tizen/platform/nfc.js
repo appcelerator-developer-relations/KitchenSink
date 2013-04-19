@@ -7,28 +7,6 @@ function tizenNFC(title) {
 		nfcAdapter,
 		nfcTag;
 
-	// Event listener for tagattached event.
-	function onTagAttached (e) {
-		nfcTag = e.tag;
-		var isNDEF = nfcTag.isSupportedNDEF;
-		nfcDetectionLabel.text = 'Tag found:' + nfcTag.type;
-
-		if (isNDEF) {
-			nfcTag.readNDEF(readMessage);
-		} else {
-			Ti.API.info('This Tag does not support NDEF');
-		}
-	}
-
-	// Event listener for tagdetached event.
-	function onTagDetached () {
-		// Update UI when NFC is detached.
-		nfcTag = null;
-		picker.hide();
-		nfcDetectionLabel.text = 'Tag successfully detached. \n Searching for new NFC tags around...';
-		ndefRecordLabel.text = '';
-	}
-		
 	// Convert NFC record type to string
 	function NfcRecordTypeToString(tnfType) {
 		switch (tnfType) {
@@ -142,9 +120,29 @@ function tizenNFC(title) {
 	// Start listening to incoming NFC messages
 	function setTagDetect(response) {
 		if (response.success) {
+			var onSuccess = {
+				onattach: function(tag) {
+					nfcTag = tag;
+					var isNDEF = nfcTag.isSupportedNDEF;
+					nfcDetectionLabel.text = 'Tag found:' + nfcTag.type;
+
+					if (isNDEF) {
+						nfcTag.readNDEF(readMessage);
+					} else {
+						Ti.API.info('This Tag does not support NDEF');
+					}
+				},
+				ondetach: function () {
+					//update UI when NFC is detached
+					nfcTag = null;
+					picker.hide();
+					nfcDetectionLabel.text = 'Tag successfully detached. \n Searching for new NFC tags around...';
+					ndefRecordLabel.text = '';
+				}
+			};
+
 			try {
-				nfcAdapter.addEventListener('tagattached', onTagAttached);
-				nfcAdapter.addEventListener('tagatdetached', onTagDetached);
+				nfcAdapter.setTagListener(onSuccess);
 			} catch (e) {
 				Ti.API.warn(e.name + ' : ' + e.message);
 			}
@@ -157,8 +155,7 @@ function tizenNFC(title) {
 	// Turned off detecting NFC tags
 	function unsetTagDetect() {
 		try {
-			nfcAdapter.removeEventListener('tagattached', onTagAttached);
-			nfcAdapter.removeEventListener('tagatdetached', onTagDetached);
+			nfcAdapter.unsetTagListener();
 			clearPicker();
 			picker.hide();
 			nfcTag = null;
