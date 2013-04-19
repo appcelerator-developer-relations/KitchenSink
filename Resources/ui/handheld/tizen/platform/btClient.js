@@ -96,8 +96,8 @@ function btClient() {
 					client.socket = null;
 				});
 
-				socket.addEventListener('socketerror', function(e) {
-					print('Server socket error:' + e.message);
+				socket.addEventListener('socketerror', function(event) {
+					print('Server socket error:' + event.error);
 					client.socket.close();
 				});
 
@@ -132,26 +132,25 @@ function btClient() {
 		}), // Load view of devices
 		discoverDevices = function() {
 			devicesView.show();
-			btAdapter.startDiscovery();
 			btAdapter.removeEventListener('discoveryfinished');
-			btAdapter.addEventListener('discoveryfinished', function(devices) {
+			btAdapter.addEventListener('discoveryfinished', function(event) {
 				var row,
 					title,
 					tableData = [],
 					addrs = {},
 					i = 0,
-					length = devices.length;
+					length = event.devices.length;
 
 				for (; i < length; i++) {
-					if (addrs[ devices[i].address ]) {
+					if (addrs[ event.devices[i].address ]) {
 						continue;
 					}
 					// create new row
-					title = devices[i].name + '(' + devices[i].address + ')';
-					addrs[ devices[i].address ] = title;
+					title = event.devices[i].name + '(' + event.devices[i].address + ')';
+					addrs[ event.devices[i].address ] = title;
 					row = Ti.UI.createTableViewRow({
-						title: (addrs[ devices[i].address ] = title),
-						address: devices[i].address,
+						title: (addrs[ event.devices[i].address ] = title),
+						address: event.devices[i].address,
 						hasChild: false,
 						itemIdOwn: i
 					});
@@ -172,8 +171,8 @@ function btClient() {
 			});
 
 			btAdapter.removeEventListener('discoveryerror');
-			btAdapter.addEventListener('discoveryerror', function(e) {
-				print('Failed to search devices: ' + e.message + '(' + e.name + ')');
+			btAdapter.addEventListener('discoveryerror', function(event) {
+				print('Failed to search devices: ' + event.error);
 				connectButton.enabled = false;
 			});
         },

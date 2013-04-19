@@ -60,15 +60,15 @@ function btServer() {
 
 				print('The RFCOMMService has been registered');
 
-				handler.addEventListener('remotedeviceconnected', function(socket) {
+				handler.addEventListener('remotedeviceconnected', function(event) {
 					server.numberOfClients += 1;
-					server.socket = socket;
+					server.socket = event.socket;
 
 					print('The remote device has been connected');
 
 					// callbacks of socket
-					socket.addEventListener('socketmessagereceived', function() {
-                    var data = socket.readData(), 
+					event.socket.addEventListener('socketmessagereceived', function() {
+                    var data = event.socket.readData(),
                         recvMsg = '',
                         i = 0,
                         len = data.length;
@@ -81,15 +81,15 @@ function btServer() {
 						print('msg: ' + messageObj.text);
 					});
 
-					socket.addEventListener('socketclosed', function() {
+					event.socket.addEventListener('socketclosed', function() {
 						server.socket = null;
 						server.connection = false;
 						server.numberOfClients = 0;
 						print('The server socket has been closed');
 					});
 
-					socket.addEventListener('socketerror', function(e) {
-						print('Server socket error:' + e.message);
+					event.socket.addEventListener('socketerror', function(event) {
+						print('Server socket error:' + event.error);
 						server.socket.close();
 					});
 				});

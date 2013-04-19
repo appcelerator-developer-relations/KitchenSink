@@ -273,8 +273,6 @@ function tizenBluetooth(title) {
 
 		dialog.show();
 
-		btAdapter.startDiscovery();
-
 		// object with callbacks for startDiscovery() method
 		btAdapter.removeEventListener('discoverystarted');
 		btAdapter.addEventListener('discoverystarted', function() {
@@ -283,45 +281,45 @@ function tizenBluetooth(title) {
 		});
 
 		btAdapter.removeEventListener('devicefound');
-		btAdapter.addEventListener('devicefound', function(device) {
+		btAdapter.addEventListener('devicefound', function(event) {
 			Ti.API.info('devicefound');
-			setInfoLabelText('Found device: ' + device.name);
-			itemsList[device.address] = {
-				name: device.name,
-				address: device.address,
-				isBonded: device.isBonded
+			setInfoLabelText('Found device: ' + event.device.name);
+			itemsList[event.device.address] = {
+				name: event.device.name,
+				address: event.device.address,
+				isBonded: event.device.isBonded
 			}
 			updateList();
 		});
 
 		btAdapter.removeEventListener('devicedisappeared');
-		btAdapter.addEventListener('devicedisappeared', function(address) {
+		btAdapter.addEventListener('devicedisappeared', function(event) {
 			Ti.API.info('devicedisappeared');
-			setInfoLabelText('Device disappeared: ' + address);
-			itemsList[address] = undefined;
+			setInfoLabelText('Device disappeared: ' + event.address);
+			itemsList[event.address] = undefined;
 			updateList();
 		});
 
 		btAdapter.removeEventListener('discoveryfinished');
-		btAdapter.addEventListener('discoveryfinished', function(devices) {
+		btAdapter.addEventListener('discoveryfinished', function(event) {
 			Ti.API.info('discoveryfinished');
 			setTableViewClickHandler();
-			setInfoLabelText('Found ' + devices.length + ' device' + (devices.length == 1 ? '' : 's'));
+			setInfoLabelText('Found ' + event.devices.length + ' device' + (event.devices.length == 1 ? '' : 's'));
 			itemsList = {};
-			for (var i = 0; i < devices.length; i++) {
-				itemsList[devices[i].address] = {
-					name: devices[i].name,
-					address: devices[i].address,
-					isBonded: devices[i].isBonded
+			for (var i = 0; i < event.devices.length; i++) {
+				itemsList[event.devices[i].address] = {
+					name: event.devices[i].name,
+					address: event.devices[i].address,
+					isBonded: event.devices[i].isBonded
 				}
 			}
 			updateList();
 		});
 
 		btAdapter.removeEventListener('discoveryerror');
-		btAdapter.addEventListener('discoveryerror', function(e) {
+		btAdapter.addEventListener('discoveryerror', function(event) {
 			Ti.API.info('discoveryerror');
-			setInfoLabelText('Failed to search devices: ' + e.message + '(' + e.name + ')');
+			setInfoLabelText('Failed to search devices: ' + event.error);
 		});
 	});
 
