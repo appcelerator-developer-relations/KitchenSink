@@ -31,6 +31,8 @@ function sms_dialog() {
 				Ti.API.info('SMS was sent');
 			} else if (e.result === SMSDialog.CANCELLED) {
 				Ti.API.info('SMS was cancelled');
+			} else if (e.result === SMSDialog.FAILED) {
+				Ti.API.info('SMS was failed');
 			}
 		})
 
