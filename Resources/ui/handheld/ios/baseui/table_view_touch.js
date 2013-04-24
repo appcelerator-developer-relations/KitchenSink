@@ -36,6 +36,10 @@ function tv_touch(_args) {
 		e.row.children[0].color = '#336699';
 	});
 	
+	tableview.addEventListener('touchcancel', function(e)
+	{
+		e.row.children[0].color = '#336699';
+	});
 	
 	// add table view to the window
 	win.add(tableview);
