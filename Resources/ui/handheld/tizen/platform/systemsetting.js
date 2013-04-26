@@ -98,6 +98,7 @@ function systemsetting(args) {
 						settingType,
 						e.rowData.title, 
 						// Callback
+						function(response){
 							if(response.success) {
 								Titanium.UI.createAlertDialog({
 									title: 'System setting',
