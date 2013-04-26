@@ -97,20 +97,19 @@ function systemsetting(args) {
 					Tizen.SystemSetting.setProperty(
 						settingType,
 						e.rowData.title, 
-						// SuccessCallback
-						function() {
-							Titanium.UI.createAlertDialog({
-								title: 'System setting',
-								message: settingType + ' has been changed.'
-							}).show();
-						},
-						// ErrorCallback
-						function(e) {
-							Titanium.UI.createAlertDialog({
-								title:'System setting',
-								message:e.message
-							}).show();
-						} 
+						// Callback
+							if(response.success) {
+								Titanium.UI.createAlertDialog({
+									title: 'System setting',
+									message: settingType + ' has been changed.'
+								}).show();
+							} else {
+								Titanium.UI.createAlertDialog({
+									title: 'System setting',
+									message: response.error
+								}).show();
+							}
+						}
 					);
 				});
 			},
