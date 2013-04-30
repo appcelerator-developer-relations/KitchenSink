@@ -5,7 +5,9 @@ function gallery_file() {
 
 	var win = Ti.UI.createWindow();
 	var f = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'images/appcelerator_small.png');
-	
+
+	// Will fail on Tizen until https://jira.appcelerator.org/browse/TIMOB-12416 is fixed.
+
 	Titanium.Media.saveToPhotoGallery(f, {
 		success: function(e) {
 			Titanium.UI.createAlertDialog({
