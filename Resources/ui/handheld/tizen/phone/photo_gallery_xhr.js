@@ -1,7 +1,10 @@
 function gallery_xhr() {
 	// Test of Tizen-specific Titanium.Media.saveToPhotoGallery.
-	//Kitchen Sink path:  Phone - Save to Gallery - From XHR
-	//Save the image to photoGallery from web server http://static.appcelerator.com/images/header/appc_logo.png
+	// Kitchen Sink path:  Phone - Save to Gallery - From XHR
+	// Save the image to photoGallery from web server http://static.appcelerator.com/images/header/appc_logo.png
+
+	// Fails on Tizen (and Mobile Web), because binary download from the Internet is currently broken
+	// (see https://jira.appcelerator.org/browse/TIMOB-12394)
 
 	var win = Ti.UI.createWindow();
 	var xhr = Titanium.Network.createHTTPClient();
@@ -15,10 +18,9 @@ function gallery_xhr() {
 					message:'Check your photo gallery for an appcelerator logo'
 				}).show();		
 			},
-			error: function(e) {
+			error: function() {
 				Titanium.UI.createAlertDialog({
-					title:'Error saving',
-					message:e.message
+					title:'Error saving'
 				}).show();
 			}
 		});
