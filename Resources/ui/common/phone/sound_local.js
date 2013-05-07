@@ -14,9 +14,6 @@ function sound_local(_args) {
 	//TIMOB-7502. TIme moved to ms but duration is still reported in seconds
 	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));
 	
-	//TIMOB-7502. TIme moved to ms but duration is still reported in seconds
-	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));
-	
 	//TODO: USE OBJECT
 	var sound = Titanium.Media.createSound();
 	sound.url='/etc/cricket.wav'; // For testing #1913

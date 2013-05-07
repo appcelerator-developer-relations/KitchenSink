@@ -1,5 +1,5 @@
 function webviews(_args) {
-	var isTizen = Titanium.Platform.name === 'TIZEN';
+	var isTizen = Titanium.Platform.name === 'TIZEN',
 		win = Titanium.UI.createWindow({
 			title:_args.title,
 			backgroundColor:'#fff'
