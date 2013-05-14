@@ -7,7 +7,8 @@ function events_list(args) {
 			title: args.title
 		}),
 		Tizen = require('tizen'),
-		calendar = Tizen.Calendar.getDefaultCalendar('EVENT'),
+		unified = (args.title.indexOf('Unified') != -1),
+		calendar = unified ? Tizen.Calendar.getUnifiedCalendar('EVENT') : Tizen.Calendar.getDefaultCalendar('EVENT'),
 		tableview = Ti.UI.createTableView(),
 		emptyList = Ti.UI.createLabel({
 			text: 'List empty.',
