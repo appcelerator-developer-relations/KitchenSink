@@ -1,9 +1,11 @@
 function tv_set(_args) {
 	//JGH: FIXME - remove HTML
 	
-	var win = Titanium.UI.createWindow({
-		title:_args.title
-	});
+	var isTizen = Ti.Platform.osname === 'tizen',
+		win = Titanium.UI.createWindow({
+			title:_args.title
+		}),
+		animationStyle;
 	
 	var data = [
 		{title:'Set 1 (no animation)', header:'Section 0'},
@@ -42,8 +44,13 @@ function tv_set(_args) {
 					row.backgroundColor = '#aaa';
 					data[c]=row;
 				}
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});				
+
+				// Exclude iOS-specific stuff from being tested on Tizen
+				if (!isTizen) {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.NONE;
+					animationStyle = { animationStyle: Titanium.UI.iPhone.RowAnimationStyle.NONE };
+				}
+				tableView.setData(data, animationStyle);				
 				break;
 			case 1:
 				var data = [
@@ -55,9 +62,14 @@ function tv_set(_args) {
 					{title:'Row 7', image:'Mail.png'}
 	
 				];
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
+				
+				// Exclude iOS-specific stuff from being tested on Tizen
+				if (!isTizen) {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
+				 	animationStyle = { animationStyle: Titanium.UI.iPhone.RowAnimationStyle.DOWN };
+				}
 				tableView.separatorColor = null;
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.DOWN});
+				tableView.setData(data, animationStyle);
 				break;
 			case 2:
 				var data = [
@@ -72,9 +84,14 @@ function tv_set(_args) {
 					{title:'Row 9'}
 	
 				];
-				tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
+
+				// Exclude iOS-specific stuff from being tested on Tizen
+				if (!isTizen) {
+					tableView.separatorStyle = Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE;
+			    	animationStyle = { animationStyle: Titanium.UI.iPhone.RowAnimationStyle.UP };
+				}
 				tableView.separatorColor = "red";
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
+				tableView.setData(data, animationStyle);
 				break;
 		}
 			

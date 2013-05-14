@@ -3,12 +3,9 @@ function mapview(_args) {
 		title:_args.title
 	});
 	
-	var isAndroid = false;
-	if (Titanium.Platform.name == 'android') {
-		isAndroid = true;
-	}
-	
-	var isMW = (Ti.Platform.osname === 'mobileweb');
+	var isAndroid = Titanium.Platform.osname === 'android',
+		isMW = Ti.Platform.osname === 'mobileweb',
+		isTizen = Ti.Platform.osname === 'tizen';
 	//
 	// CREATE ANNOTATIONS
 	//
@@ -44,7 +41,7 @@ function mapview(_args) {
 			myid:3 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 		};
 		
-	if (Ti.Platform.osname !== 'mobileweb') {
+	if ( !(isMW || isTizen) ) {
 		atlantaParams.rightButton = Titanium.UI.iPhone.SystemButton.DISCLOSURE;
 	}
 	
@@ -76,7 +73,13 @@ function mapview(_args) {
 	if (!isAndroid) {
 		mapview.addAnnotation(atlanta);
 	}
-	mapview.selectAnnotation(atlanta);
+
+	// the "if" is a work around https://jira.appcelerator.org/browse/TIMOB-12448,
+	// to prevent the immediate crash
+	if ( !(isMW || isTizen) ) {
+    	mapview.selectAnnotation(atlanta);
+    }
+	
 	win.add(mapview);
 	
 	//
@@ -145,7 +148,7 @@ function mapview(_args) {
 		});
 	};
 	
-	if (!isAndroid) {
+	if ( !(isAndroid || isMW || isTizen) ) {
 		removeAll = Titanium.UI.createButton({
 			style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED,
 			title:'Remove All'
@@ -208,7 +211,7 @@ function mapview(_args) {
 		wireClickHandlers();
 		
 		win.setToolbar([flexSpace,std,flexSpace,hyb,flexSpace,sat,flexSpace,atl,flexSpace,sv,flexSpace,zoomin,flexSpace,zoomout,flexSpace]);
-	} else {
+	} else if(isAndroid) {
 		var activity = Ti.Android.currentActivity;
 		activity.onCreateOptionsMenu = function(e) {
 			var menu = e.menu;
@@ -224,7 +227,7 @@ function mapview(_args) {
 			
 			wireClickHandlers();
 		};
-	}
+	} 
 	
 	//
 	// EVENT LISTENERS

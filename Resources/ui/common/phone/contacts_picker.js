@@ -5,7 +5,7 @@ function contacts_picker(_args) {
 	
 	var values = {cancel:function() {info.text = 'Cancelled';}};
 	
-	if (Ti.Platform.osname === 'android') {
+	if (Ti.Platform.osname === 'android' || Ti.Platform.osname === 'tizen') {
 		// android doesn't have the selectedProperty support, so go ahead and force selectedPerson
 		values.selectedPerson = function(e) {info.text = e.person.fullName;};
 	}
@@ -36,7 +36,7 @@ function contacts_picker(_args) {
 		left:10
 	});
 	
-	if (Ti.Platform.osname !== 'android') {
+	if (Ti.Platform.osname !== 'android' && Ti.Platform.osname !== 'tizen') {
 		var l1 = Ti.UI.createLabel({
 			text:'Animated:',
 			left:0
