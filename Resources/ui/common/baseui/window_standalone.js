@@ -3,7 +3,7 @@
 	//  the current window or the current tab group.  These examples show you different ways
 	//  to open windows outside of tab groups.
 	//
-function win_standalone(_args) {	
+function win_standalone(_args) {
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
 		win = Titanium.UI.createWindow({
@@ -74,7 +74,7 @@ function win_standalone(_args) {
 		});
 		b3.addEventListener('click', function() {
 			var Win = require('ui/common/phone/vibrate'),
-				w = new Win(),
+				w = new Win({title: 'Modal Window'}),
 				b = Titanium.UI.createButton( {title: 'Close'} );
 
 			isTizen || (b.style = Titanium.UI.iPhone.SystemButtonStyle.PLAIN);
