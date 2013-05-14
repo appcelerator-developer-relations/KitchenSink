@@ -1,7 +1,10 @@
 function sound_file(_args) {
 	var win = Titanium.UI.createWindow({
-		title:_args.title
-	});
+			title:_args.title
+		}),
+		isTizen = Ti.Platform.osname === 'tizen';
+	
+
 	var timob7502fix = ((Ti.version >= '3.0.0') && (Titanium.Platform.name == 'iPhone OS'));
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory,'etc/cricket.wav');
 	
@@ -165,16 +168,19 @@ function sound_file(_args) {
 	//
 	//  PROGRESS BAR TO TRACK SOUND DURATION
 	//
-	var flexSpace = Titanium.UI.createButton({
-		systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-	});
+	var flexSpace = Titanium.UI.createButton();
+	isTizen || (flexSpace.systemButton = Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE);
+
 	var pb = Titanium.UI.createProgressBar({
 		min:0,
 		value:0,
 		width:200
 	});
-	
-	if (Ti.Platform.name != 'android') {
+
+	if (isTizen) {
+		pb.top = 210;
+		win.add(pb);
+	} else if (Ti.Platform.name != 'android') {
 		win.setToolbar([flexSpace,pb,flexSpace]);
 	}
 	pb.show();
@@ -198,6 +204,7 @@ function sound_file(_args) {
 	win.addEventListener('close', function()
 	{
 		clearInterval(i);
+		isTizen && (sound.release());
 	});
 	
 	return win;

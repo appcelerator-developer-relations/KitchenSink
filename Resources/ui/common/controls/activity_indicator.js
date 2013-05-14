@@ -17,7 +17,8 @@ function activity_indicator(_args) {
 		backgroundColor : '#13386c'
 	});
 
-	var indicatorAdded = false
+
+	var indicatorAdded = false;
 	//
 	// BASE INDICATOR
 	//

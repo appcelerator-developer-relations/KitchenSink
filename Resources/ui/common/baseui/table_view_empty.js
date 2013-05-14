@@ -5,7 +5,8 @@ function tv_empty(_args) {
 	
 	var tableView = Ti.UI.createTableView({top:110,backgroundColor:'yellow'});
 	
-	var isMW = (Ti.Platform.osname === 'mobileweb');
+	var isMW = Ti.Platform.osname === 'mobileweb',
+		isTizen = Ti.Platform.osname === 'tizen';
 	
 	var b1 = Ti.UI.createButton({
 		height:40,
@@ -16,7 +17,7 @@ function tv_empty(_args) {
 	win.add(b1);
 	b1.addEventListener('click',function()
 	{
-		if (isMW) {
+		if (isMW || isTizen) {
 			tableView.appendRow({title:'Foo'});
 		} else {
 			tableView.appendRow({title:'Foo'},{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.LEFT} );
@@ -28,7 +29,7 @@ function tv_empty(_args) {
 		var row = Ti.UI.createTableViewRow({height:50,className:'row'});
 		var label = Ti.UI.createLabel({text:'row 1', color:'#111', width:'auto', height:'auto'});
 		row.add(label);
-		if (isMW) {
+		if (isMW || isTizen) {
 			tableView.appendRow(row);
 		} else {
 			tableView.appendRow(row,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.LEFT});
@@ -50,7 +51,7 @@ function tv_empty(_args) {
 			{title:'Row 3'},
 			{title:'Row 4'}
 		];
-		if (isMW) {
+		if (isMW || isTizen) {
 			tableView.setData(data);
 		} else {
 			tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.LEFT});
