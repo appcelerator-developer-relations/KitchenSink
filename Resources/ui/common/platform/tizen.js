@@ -14,6 +14,8 @@ function tizen(_args) {
 			{title: 'Bluetooth', hasChild: true, test: 'ui/handheld/tizen/platform/bluetooth'},
 			{title: 'Messaging', hasChild: true, test: 'ui/handheld/tizen/platform/messaging/messaging'},
 			{title: 'Alarm', hasChild: true, test: 'ui/handheld/tizen/platform/alarm'},
+			// {title: 'Bookmarks', hasChild: true, test: 'ui/handheld/tizen/platform/bookmarks'},
+			{title: 'Packages', hasChild: true, test: 'ui/handheld/tizen/platform/packages'},
 			{title: 'Notification', hasChild: true, test: 'ui/handheld/tizen/platform/notification'},
 			{title: 'Calendar', hasChild: true, test: 'ui/handheld/tizen/platform/calendar'}
         ],
