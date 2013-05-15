@@ -41,6 +41,7 @@ function PhoneWindow(title) {
 	if (isTizen) {
 		data.push({title: 'Screenshot', hasChild: true, test: 'ui/handheld/tizen/phone/screenshot'});
 		data.push({title: 'Save to Gallery', hasChild: true, test: 'ui/handheld/tizen/phone/photo_gallery_save'});
+		data.push({title:'Music', hasChild:true, test:'ui/handheld/tizen/phone/music'});
 	}
 
 	if (Titanium.Platform.name !== 'android') {
