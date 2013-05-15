@@ -16,6 +16,8 @@ function list_views(_args) {
 	var isValidVersion = (Ti.version >= '3.1.0');
 	var isValidPlatform = isAndroid || isIOS;
 	
+	var validV2Version = (Ti.version >= '3.2.0');
+	
 	var listViewDefined = true;
 	try {
 		var isdefined = (Ti.UI.LIST_ACCESSORY_TYPE_DETAIL);
@@ -95,6 +97,24 @@ function list_views(_args) {
 		]
 		performanceSection.setItems(performanceDataSet);
 		sections.push(performanceSection);
+		
+		//See the validV2Version flag above
+		if (validV2Version) {
+			if (isIOS) {
+				var uienhancementsSection = Ti.UI.createListSection({ headerTitle: 'V2 UI Enhancements'});
+				var uienhancementsdataset = [
+				{properties: { title: 'Item Separators', itemId: 'list_v2_custom_separator', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+				{properties: { title: 'Custom Headers & Footers', itemId: 'list_v2_custom_header_footer', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+				{properties: { title: 'Custom Backgrounds', itemId: 'list_v2_custom_backgrounds', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+				{properties: { title: 'Select & Deselect Item', itemId: 'list_v2_select_deselect', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+				{properties: { title: 'Misc UI', itemId: 'list_v2_ui_misc', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+				]
+				uienhancementsSection.setItems(uienhancementsdataset);
+				sections.push(uienhancementsSection);
+			} else {
+				//TODO Android Specific or remove above check
+			}
+		}
 
 		listView.setSections(sections);
 
