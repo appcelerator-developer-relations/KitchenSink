@@ -6,6 +6,7 @@ function tizen_calendar(args) {
 		}),
 		data = [
 			{ title: 'Events list', test: 'ui/handheld/tizen/platform/calendar_events_list' },
+			{ title: 'Events list (Unified)', test: 'ui/handheld/tizen/platform/calendar_events_list' },
 			{ title: 'Add event', test: 'ui/handheld/tizen/platform/calendar_add_event' },
 			{ title: 'Batch', test: 'ui/handheld/tizen/platform/calendar_events_batch' }
 		],

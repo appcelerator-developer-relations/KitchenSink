@@ -22,7 +22,7 @@ function vibrate(_args) {
 	{
 		if(Ti.Platform.model != 'Kindle Fire'){
 			//vibrate require a parameter
-			Titanium.Media.vibrate([0, 1000]);
+			Titanium.Media.vibrate(1000);
 		}
 		
 	});
