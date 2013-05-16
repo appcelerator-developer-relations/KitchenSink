@@ -46,14 +46,13 @@ function tizenPackage(title) {
 	// this callbeck accepts array of PackageInformation as property informationArray of response object 
 	function onListInstalledPackages(response) {
 		if (response.success) {
-			console.log('lsls');
 			var dictionary = [],
 				packages = response.informationArray,
 				i = 0,
 				l = packages.length;
 			for (; i < l; i++) {
 
-				// clone objcect is need for using it after callback execute, 
+				// clone the package info object, it needed for using it after callback execute,
 				// because returned array ceases to exist
 				var clon = {};
 				clon.name = packages[i].name;
