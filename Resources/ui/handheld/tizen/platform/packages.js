@@ -1,5 +1,8 @@
+// this test demonstrates work with Tizen.Package module
+
 function tizenPackage(title) {
-	var win = Ti.UI.createWindow({
+	var Tizen = require('tizen'); 
+	win = Ti.UI.createWindow({
 		layout: 'vertical',
 		bakgroundColor: '#ffffff'
 	}),
@@ -34,47 +37,43 @@ function tizenPackage(title) {
 	
 	return win;
 	
+	// get info about all installed pakages
 	function getPackagesInfo() {
-		tizen.package.getPackagesInfo(onListInstalledPackages);
+		Tizen.Package.getPackagesInfo(onListInstalledPackages);
 	}
 	
-//	function clone(obj) {
-//		var clon = {};
-//		if (obj === null || typeof obj !== 'object') {
-//			return obj;
-//		}
-//		for (var i in obj) {
-//			if (obj[i] instanceof Array) {
-//				var a = [],
-//				j = 0,
-//				len = obj[i].length;
-//				for (; j < len; j++) {
-//					a.push(clone(obj[i][j]));
-//				}
-//			}
-//			clon[i] = clone(obj[i]);
-//		}
-//		return clon;
-//	}
-	
-	function onListInstalledPackages(packages) {
-		var dictionary = [],
-			i = 0,
-			l = packages.length;
-		for (; i < l; i++) {
-			var clon = {};
-			clon.name = packages[i].name;
-			clon.iconPath = packages[i].iconPath;
-			clon.id = packages[i].id;
-			clon.version = packages[i].versoin;
-			clon.totalSize = packages[i].totalSize;
-			clon.appIds = packages[i].appIds.join(', ');
-			dictionary.push(createRow(clon));
-	    	
+
+	// this callbeck accepts array of PackageInformation as property informationArray of response object 
+	function onListInstalledPackages(response) {
+		if (response.success) {
+			console.log('lsls');
+			var dictionary = [],
+				packages = response.informationArray,
+				i = 0,
+				l = packages.length;
+			for (; i < l; i++) {
+
+				// clone objcect is need for using it after callback execute, 
+				// because returned array ceases to exist
+				var clon = {};
+				clon.name = packages[i].name;
+				clon.iconPath = packages[i].iconPath;
+				clon.id = packages[i].id;
+				clon.version = packages[i].versoin;
+				clon.totalSize = packages[i].totalSize;
+				clon.appIds = packages[i].appIds.join(', ');
+
+				// creating row for tableView
+				dictionary.push(createRow(clon));
+			}
+			tabView.setData(dictionary);
+		} else {
+			alert(response.error);
 		}
-		tabView.setData(dictionary);
+		
 	}
 	
+	// this function creates row for table view
 	function createRow(package) {
 		var row = Ti.UI.createTableViewRow({
 			touchEnabled: true,
@@ -91,8 +90,12 @@ function tizenPackage(title) {
 			width: 46,
 			height: 46,
 		});
+
+		// folowing cod check if iconPath valid
 		var regexp = new RegExp('^\/[A-Za-z0-9\/_\.-]*\.(jpe?g|png|gif)$');
 		var test = regexp.test(package.iconPath);
+
+		// image package icon
 		if(test) {
 			var im = document.createElement('img');
 			im.width = 46;
@@ -112,6 +115,7 @@ function tizenPackage(title) {
 		return row;
 	}
 	
+	// this function shows window with basic package information
 	function showPackageInfo(package) {
 		var wind1 = Ti.UI.createWindow({
 			backgroundColor: '#ffffff',
@@ -165,26 +169,7 @@ function tizenPackage(title) {
 			width: '100%',
 			text: 'totalSize : ' + package.totalSize
 		});
-//		dataSize = Ti.UI.createLabel({
-//			top: 2,
-//			width: '100%',
-//			text: 'dataSize : ' + package.dataSize
-//		}),
-//		lastModified = Ti.UI.createLabel({
-//			top: 2,
-//			width: '100%',
-//			text: 'lastModified : ' + package.lastModified
-//		}),
-//		author = Ti.UI.createLabel({
-//			top: 2,
-//			width: '100%',
-//			text: 'author : ' + package.author
-//		}),
-//		description = Ti.UI.createLabel({
-//			top: 2,
-//			width: '100%',
-//			text: ' : description' + package.description
-//		}),
+
 		var appIds = Ti.UI.createLabel({
 			backgroundColor: '#cccccc',
 			top: 2,
@@ -197,10 +182,6 @@ function tizenPackage(title) {
 		scrollView.add(iconPath);
 		scrollView.add(version);
 		scrollView.add(totalSize);
-//		scrollView.add(dataSize);
-//		scrollView.add(lastModified);
-//		scrollView.add(author);
-//		scrollView.add(description);
 		scrollView.add(appIds);
 		
 		wind1.open();
