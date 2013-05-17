@@ -19,7 +19,8 @@ function tizen(_args) {
 			{title: 'Notification', hasChild: true, test: 'ui/handheld/tizen/platform/notification'},
 			{title: 'Calendar', hasChild: true, test: 'ui/handheld/tizen/platform/calendar'},
 			{title: 'DataControl', hasChild: true, test: 'ui/handheld/tizen/platform/data_control'},
-			{title: 'Message Port', hasChild: true, test: 'ui/handheld/tizen/platform/message_port'}
+			{title: 'Message Port', hasChild: true, test: 'ui/handheld/tizen/platform/message_port'},
+			{title: 'Data Synchronization', hasChild: true, test: 'ui/handheld/tizen/platform/data_sync'}
         ],
 		tableview = Ti.UI.createTableView({
 			data: data
