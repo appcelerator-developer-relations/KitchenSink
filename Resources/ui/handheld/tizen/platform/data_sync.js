@@ -69,8 +69,8 @@ function data_sync() {
 		
 		hint.text += '\nCreating test profiles...';
 
-		var syncInfo = new tizen.SyncInfo("http://example.com/sync", "myId", "myPassword", "MANUAL", "ONE_WAY_FROM_CLIENT");
-		var contactInfo = new tizen.SyncServiceInfo(true, "CONTACT", "serverContact1");
+		var syncInfo = new tizen.SyncInfo("http://sync.o-sync.com", "kitchensink2013", "klgR8AngREhsr", "MANUAL", "ONE_WAY_FROM_CLIENT");
+		var contactInfo = new tizen.SyncServiceInfo(true, "CONTACT", "./contact");
 		var serviceInfo = [contactInfo];
 		var profile = new tizen.SyncProfileInfo("MyProfile", syncInfo, serviceInfo);
 		try {
@@ -82,10 +82,10 @@ function data_sync() {
 		var profileId = profile.profileId;
 		hint.text += '\nCreated client->server profile (id=' + profileId + ')';
 
-		syncInfo = new tizen.SyncInfo("http://example.com/sync", "myId2", "myPassword2", "MANUAL", "ONE_WAY_FROM_SERVER");
-		contactInfo = new tizen.SyncServiceInfo(true, "CONTACT", "serverContact2");
+		syncInfo = new tizen.SyncInfo("http://sync.o-sync.com", "kitchensink2013", "klgR8AngREhsr", "MANUAL", "ONE_WAY_FROM_SERVER");
+		contactInfo = new tizen.SyncServiceInfo(true, "CONTACT", "./contact");
 		serviceInfo = [contactInfo];
-		profile = new tizen.SyncProfileInfo("MyProfile", syncInfo, serviceInfo);
+		profile = new tizen.SyncProfileInfo("MyProfile2", syncInfo, serviceInfo);
 		try {
 			tizen.datasync.add(profile);
 		} catch(e) {
