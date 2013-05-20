@@ -1,3 +1,5 @@
+// Syncing currently fails due to https://bugs.tizen.org/jira/browse/TWEB-129.
+
 function data_sync() {
 	var win = Titanium.UI.createWindow(),
 		Tizen = require('tizen'),
@@ -19,8 +21,8 @@ function data_sync() {
 		btnSync1,
 		btnSync2;
 	
-	numMaxProfiles = tizen.datasync.getMaxProfilesNum();
-	numProfiles = tizen.datasync.getProfilesNum();
+	numMaxProfiles = Tizen.DataSync.getMaxProfilesNum();
+	numProfiles = Tizen.DataSync.getProfilesNum();
 	hint.text = 'Max profiles: ' + numMaxProfiles + ', used profiles: ' + numProfiles +
 		'\nWarning: Any existing sync profiles will be deleted during the test. Please wait 10-15 seconds after starting the test.\n';
 	btn.addEventListener('click', beginTest);
@@ -36,7 +38,7 @@ function data_sync() {
 			console.log('startsync: ' + id);
 			
 			try {
-				tizen.datasync.startSync(id);
+				Tizen.DataSync.startSync(id);
 				hint.text += '\nSyncing profile ' + id + ': OK';
 			} catch(e) {
 				hint.text += '\nError syncing profile ' + id + ': ' + e.message;
@@ -48,7 +50,7 @@ function data_sync() {
 		{
 			hint.text += '\nErasing existing profiles...';
 			try {
-				var allProfiles = tizen.datasync.getAll();
+				var allProfiles = Tizen.DataSync.getAll();
 			} catch(e) {
 				hint.text += '\nError getting profiles: ' + e.message;
 				return;			
@@ -56,7 +58,7 @@ function data_sync() {
 			
 			for(i=0; i<allProfiles.length; ++i) {
 				try {
-					tizen.datasync.remove(allProfiles[i].profileId);
+					Tizen.DataSync.remove(allProfiles[i].profileId);
 				} catch(e) {
 					hint.text += '\nError removing profile: ' + e.message;
 					return;
@@ -68,13 +70,27 @@ function data_sync() {
 		}
 		
 		hint.text += '\nCreating test profiles...';
-
-		var syncInfo = new tizen.SyncInfo("http://sync.o-sync.com", "kitchensink2013", "klgR8AngREhsr", "MANUAL", "ONE_WAY_FROM_CLIENT");
-		var contactInfo = new tizen.SyncServiceInfo(true, "CONTACT", "./contact");
+	
+		var syncInfo = Tizen.DataSync.createSyncInfo({
+			url: "http://sync.o-sync.com", 
+			id: "kitchensink2013", 
+			password: "klgR8AngREhsr", 
+			mode: "MANUAL", 
+			type: "ONE_WAY_FROM_CLIENT"
+		});
+		var contactInfo = new Tizen.DataSync.createSyncServiceInfo({
+			enable: true, 
+			serviceType: "CONTACT", 
+			serverDatabaseUri: "./contact"
+		});
 		var serviceInfo = [contactInfo];
-		var profile = new tizen.SyncProfileInfo("MyProfile", syncInfo, serviceInfo);
+		var profile = new Tizen.DataSync.createSyncProfileInfo({
+			profileName: "MyProfile", 
+			syncInfo: syncInfo, 
+			serviceInfo: serviceInfo
+		});
 		try {
-			tizen.datasync.add(profile);
+			Tizen.DataSync.add(profile);
 		} catch(e) {
 			hint.text += '\nError creating profile: ' + e.message;
 			return;
@@ -82,12 +98,26 @@ function data_sync() {
 		var profileId = profile.profileId;
 		hint.text += '\nCreated client->server profile (id=' + profileId + ')';
 
-		syncInfo = new tizen.SyncInfo("http://sync.o-sync.com", "kitchensink2013", "klgR8AngREhsr", "MANUAL", "ONE_WAY_FROM_SERVER");
-		contactInfo = new tizen.SyncServiceInfo(true, "CONTACT", "./contact");
+		syncInfo = Tizen.DataSync.createSyncInfo({
+			url: "http://sync.o-sync.com", 
+			id: "kitchensink2013", 
+			password: "klgR8AngREhsr", 
+			mode: "MANUAL", 
+			type: "ONE_WAY_FROM_SERVER"
+		});
+		contactInfo = new Tizen.DataSync.createSyncServiceInfo({
+			enable: true, 
+			serviceType: "CONTACT", 
+			serverDatabaseUri: "./contact"
+		});
 		serviceInfo = [contactInfo];
-		profile = new tizen.SyncProfileInfo("MyProfile2", syncInfo, serviceInfo);
+		profile = new Tizen.DataSync.createSyncProfileInfo({
+			profileName: "MyProfile2", 
+			syncInfo: syncInfo, 
+			serviceInfo: serviceInfo
+		});
 		try {
-			tizen.datasync.add(profile);
+			Tizen.DataSync.add(profile);
 		} catch(e) {
 			hint.text += '\nError creating profile: ' + e.message;
 			return;
