@@ -53,8 +53,13 @@ function tizen_alarm() {
 			statusType: Tizen.Notification.STATUS_NOTIFICATION_TYPE_SIMPLE,
 			title: 'Simple notification',
 			notificationInitDict: notificationDict
+		}),
+		detailInfo = Tizen.Notification.createNotificationDetailInfo({
+			mainText: 'Missed Call from James',
+			subText: 'Feb 11 2013'
 		});
 
+		notification.detailInfo = [detailInfo];
 		Tizen.Notification.postNotification(notification);
 		titleInput.value = '';
 	}
