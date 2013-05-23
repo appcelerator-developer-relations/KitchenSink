@@ -21,7 +21,9 @@ function tizenSystemInfo(title) {
 			{ title: 'Storage information', propertyName: Tizen.SystemInfo.SYSTEM_INFO_PROPERTY_ID_STORAGE, propertyCallback: onStorageSuccess },
 			{ title: 'Cpu load', propertyName: Tizen.SystemInfo.SYSTEM_INFO_PROPERTY_ID_CPU, propertyCallback: onCpuInfoSuccess },
 			{ title: 'Cellular network state', propertyName: Tizen.SystemInfo.SYSTEM_INFO_PROPERTY_ID_CELLULAR_NETWORK, propertyCallback: onCellSuccess },
-			{ title: 'SIM information', propertyName: Tizen.SystemInfo.SYSTEM_INFO_PROPERTY_ID_SIM, propertyCallback: onSimSuccess }
+			{ title: 'SIM information', propertyName: Tizen.SystemInfo.SYSTEM_INFO_PROPERTY_ID_SIM, propertyCallback: onSimSuccess },
+			{ title: 'Locale information', propertyName: Tizen.SystemInfo.SYSTEM_INFO_PROPERTY_ID_LOCALE, propertyCallback: onLocaleSuccess },
+			{ title: 'Peripheral information', propertyName: Tizen.SystemInfo.SYSTEM_INFO_PROPERTY_ID_PERIPHERAL, propertyCallback: onPeripheralSuccess }
 		],
 		i = 0,
 		dataLength = data.length,
@@ -39,9 +41,7 @@ function tizenSystemInfo(title) {
 		if (e && e.rowData) {
 			var pName = e.rowData.propertyName;
 			if (pName) {
-				getSystemProperty(pName, e.rowData.propertyCallback, function(er) {
-					showDetailsDialog(pName, '<b>API error:</b><br/>' + er.message);
-				})
+				getSystemProperty(pName, e.rowData.propertyCallback)
 			} else {
 				e.rowData.clickCallback && e.rowData.clickCallback(e);
 			}
@@ -73,7 +73,7 @@ function tizenSystemInfo(title) {
 						'Type: ' + units[i].type,
 						'Capacity: ' + Math.floor(units[i].capacity / 1000000) + ' MB',
 						'Available capacity: ' + Math.floor(units[i].availableCapacity / 1000000) + ' MB',
-						'Removable: ' + (units[i].isRemoveable ? 'Yes' : 'No')
+						'Removable: ' + (units[i].isRemovable ? 'Yes' : 'No')
 					]);
 			}
 
@@ -94,7 +94,9 @@ function tizenSystemInfo(title) {
 				'Mobile Network Code (MNC): ' + cell.mnc,
 				'Cell ID: ' + cell.cellid,
 				'Location Area Code (LAC): ' + cell.lac,
-				'Roaming: ' + (cell.isRoaming ? 'Yes' : 'No')
+				'Roaming: ' + (cell.isRoaming ? 'Yes' : 'No'),
+				'FlightMode: ' + (cell.isFlightMode ? 'Yes' : 'No'),
+				'imei: ' + cell.imei
 			]));
 		} else {
 			ShowDetailsDialog('Error', '<b>API error:</b><br/>' + response.error);
@@ -105,6 +107,7 @@ function tizenSystemInfo(title) {
 		if (response.success) {
 			var sim = response.data;
 			showDetailsDialog('SIM', formatSubLines([
+				'SIM card state: ' + sim.state,
 				'Operator Name String (ONS): ' + sim.operatorName,
 				'SIM card subscriber number: ' + sim.msisdn,
 				'Integrated Circuit Card ID: ' + sim.iccid,
@@ -113,6 +116,25 @@ function tizenSystemInfo(title) {
 				'Mobile Subscription Identification Number (MSIN): ' + sim.msin,
 				'Service Provider Name (SPN): ' + sim.spn
 			]));
+		} else {
+			ShowDetailsDialog('Error', '<b>API error:</b><br/>' + response.error);
+		}
+	}
+
+	function onLocaleSuccess(response) {
+		if (response.success) {
+			showDetailsDialog('Locale', formatSubLines([
+				'Language: ' + response.data.language,
+				'Country: ' + response.data.country
+			]));
+		} else {
+			ShowDetailsDialog('Error', '<b>API error:</b><br/>' + response.error);
+		}
+	}
+
+	function onPeripheralSuccess(response) {
+		if (response.success) {
+			showDetailsDialog('Peripheral', 'VideoOutputOn: ' + (response.data.isVideoOutputOn ? 'Yes': 'No'));
 		} else {
 			ShowDetailsDialog('Error', '<b>API error:</b><br/>' + response.error);
 		}
