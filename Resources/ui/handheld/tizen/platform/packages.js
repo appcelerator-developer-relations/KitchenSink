@@ -69,7 +69,6 @@ function tizenPackage(title) {
 		} else {
 			alert(response.error);
 		}
-		
 	}
 	
 	// this function creates row for table view
