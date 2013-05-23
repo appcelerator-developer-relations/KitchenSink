@@ -6,30 +6,30 @@ function tizen_push() {
 			top: 15,
 			left: 10,
 			width: '40%',
-			title: 'register service'
+			title: 'Register service'
 		}),
 		unregisterButton = Ti.UI.createButton({
 			top: 15,
 			left: '45%',
 			width: '45%',
-			title: 'unregister service'
+			title: 'Unregister service'
 		}),
 		idButton = Ti.UI.createButton({
 			enabled: false,
 			top: 80,
 			left: '70%',
 			width: '25%',
-			title: 'show registration id'
+			title: 'Show registration id'
 		}),
-		recivePushButton = Ti.UI.createButton({
+		receivePushButton = Ti.UI.createButton({
 			left: 10,
 			width: '60%',
 			top: 80,
-			title: 'Recive notification'
+			title: 'Start receiving notifications'
 		}),
 		Tizen = require('tizen');
 
-	recivePushButton.addEventListener('click', recivePushMessage);
+	receivePushButton.addEventListener('click', receivePushMessage);
 
 	idButton.addEventListener('click', showId);
 
@@ -53,7 +53,7 @@ function tizen_push() {
 			uri: 'http://www.google.com'
 		});
 		// Defines the registration success callback
-		function registerSuccessCallback(response) {
+		function registerCallback(response) {
 			if (response.success) {
 				console.log('Registration succeeded with id: ' + response.id);
 				var alert_d = Ti.UI.createAlertDialog({
@@ -69,12 +69,12 @@ function tizen_push() {
 		}
 
 		// Requests registration.
-		Tizen.Push.registerService(service, registerSuccessCallback);
+		Tizen.Push.registerService(service, registerCallback);
 	}
 
 	function unregisterService() {
 		// Defines the unregistration success callback
-		function unregisterSuccessCallback(response) {
+		function unregisterCallback(response) {
 			if (response.success) {
 				console.log('Unregistration succeeded.');
 				var alert_d = Ti.UI.createAlertDialog({
@@ -90,10 +90,10 @@ function tizen_push() {
 		}
 
 		// Requests unregistration
-		Tizen.Push.unregisterService(unregisterSuccessCallback);
+		Tizen.Push.unregisterService(unregisterCallback);
 	}
 
-	function recivePushMessage() {
+	function receivePushMessage() {
 		// Defines the connect success callback
 		function notificationCallback(response) {
 			if (response.success) {
@@ -123,7 +123,7 @@ function tizen_push() {
 		alert_d.show();
 	}
 
-	win.add(recivePushButton);
+	win.add(receivePushButton);
 	win.add(registerButton);
 	win.add(unregisterButton);
 	win.add(idButton);
