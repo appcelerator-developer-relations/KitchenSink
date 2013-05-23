@@ -74,7 +74,7 @@ function win_standalone(_args) {
 		});
 		b3.addEventListener('click', function() {
 			var Win = require('ui/common/phone/vibrate'),
-				w = new Win(),
+				w = new Win({title: 'Modal Window'}),
 				b = Titanium.UI.createButton( {title: 'Close'} );
 
 			isTizen || (b.style = Titanium.UI.iPhone.SystemButtonStyle.PLAIN);
