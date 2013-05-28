@@ -23,7 +23,7 @@ function tizenDownload(title) {
 			downloadRequest && downloadRequest.abort();
 		}),
 		urlTextField = Titanium.UI.createTextField({
-			value: 'http://download.tizen.org/sdk/InstallManager/tizen-sdk-2.0-ubuntu32.bin',
+			value: 'http://download.tizen.org/sdk/InstallManager/tizen-sdk-2.1/tizen-sdk-ubuntu64-v2.1.4.bin',
 			top: 30,
 			backgroundColor: 'white',
 			color: 'black',
