@@ -388,11 +388,11 @@ function tizen_alarm() {
 
 		if (alarm.toString() ==  '[object TizenAlarmAlarmAbsolute]') {
 			remaining = alarm.getNextScheduledDate();
-			text1 = remaining.toDateString();
-			text2 = 'Absolute alarm (Period ' + alarm.period + ')';
+			text1 = remaining ? remaining.toDateString() : 'Expired';
+			text2 = 'Absolute alarm (Period ' + (alarm.period ? alarm.period : 0) + ')'; 
 		} else if (alarm.toString() == '[object TizenAlarmAlarmRelative]') {
 			text1 = alarm.delay + ' sec';
-			text2 = 'Relative alarm (Period ' + alarm.period + ')';
+			text2 = 'Relative alarm (Period ' + (alarm.period ? alarm.period : 0) + ')';
 		}
 
 		label2.text = text2;
