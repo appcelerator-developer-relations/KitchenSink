@@ -3,7 +3,7 @@
 	//  the current window or the current tab group.  These examples show you different ways
 	//  to open windows outside of tab groups.
 	//
-function win_standalone(_args) {	
+function win_standalone(_args) {
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
 		win = Titanium.UI.createWindow({
