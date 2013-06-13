@@ -62,12 +62,13 @@ function tv_api_search(_args) {
 	hide.addEventListener('click', function(e)
 	{
 		Ti.API.info("search hidden = "+tableview.searchHidden);
-		if (e.index === 0)
+		if (e.index === 0 && tableview.searchHidden == false)
 		{
 			tableview.searchHidden = true;
 		}
-		else if (e.index === 1)
+		else if (e.index === 1 && tableview.searchHidden === true)
 		{
+			tableview.searchHidden = false
 			tableview.scrollToTop(0,{animated:true});
 		}
 	});
