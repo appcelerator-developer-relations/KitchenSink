@@ -111,6 +111,14 @@ function list_views(_args) {
 				]
 				uienhancementsSection.setItems(uienhancementsdataset);
 				sections.push(uienhancementsSection);
+
+				var editingSection = Ti.UI.createListSection({ headerTitle: 'V2 Editing Support'});
+				var editingdataset = [
+				{properties: { title: 'Delete Rows', itemId: 'list_v2_delete_rows', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+				{properties: { title: 'Reorder Rows', itemId: 'list_v2_move_rows', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
+				]
+				editingSection.setItems(editingdataset);
+				sections.push(editingSection);
 			} else {
 				//TODO Android Specific or remove above check
 			}
