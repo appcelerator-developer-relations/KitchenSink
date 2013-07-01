@@ -72,7 +72,7 @@ function genTest(win) {
 		height:40,
 		top:0,
 		right:30
-	})
+	});
 	var tf = Ti.UI.createTextField({
 	    borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	    color: '#336699',
