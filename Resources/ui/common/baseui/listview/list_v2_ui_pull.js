@@ -161,7 +161,7 @@ function genTest(win){
 	    text: 'Event data will show here',
 	    bottom:0,
 	    height:'10%'
-	})
+	});
  
 	win.add(listView);
 	win.add(eventStatus);
@@ -181,21 +181,21 @@ function list_v2_ui_pull(_args) {
 		'The pull event is fired whenever the user drags the listView past the top edge of the pullView.\n\n'+
 		'The pull event has a single custom argument active (boolean) which is true when the pullView is fully visible and false when it is partially visible\n\n'+
 		'The pullend event fires when the user stops dragging the ListView and the pullView is completely visible.\n\n'
-	})
+	});
 	
 	scrollView.add(desc);
 	
 	var button = Ti.UI.createButton({
 		top:10,
 		title:'I understand'
-	})
+	});
 	
 	scrollView.add(button);
 	
 	button.addEventListener('click',function(){
 		win.remove(scrollView);
 		genTest(win);
-	})
+	});
 	
 	win.add(scrollView);
 

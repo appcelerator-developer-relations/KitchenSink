@@ -105,21 +105,21 @@ function list_v2_search_searchtext(_args) {
 		'This property can not be used when the searchView property is set.\n\n'+
 		'This example searches using a TextField which is set as a headerView on the ListView\n\n'+
 		'The searchableText in the following example is set to headerTitle+ +title.\n\n'
-	})
+	});
 	
 	scrollView.add(desc);
 	
 	var button = Ti.UI.createButton({
 		top:10,
 		title:'I understand'
-	})
+	});
 	
 	scrollView.add(button);
 	
 	button.addEventListener('click',function(){
 		win.remove(scrollView);
 		genTest(win);
-	})
+	});
 	
 	win.add(scrollView);
 

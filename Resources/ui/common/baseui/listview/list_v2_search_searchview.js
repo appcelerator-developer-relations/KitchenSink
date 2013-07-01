@@ -93,21 +93,21 @@ function list_v2_search_searchview(_args) {
 		'The searchable content is defined by the searchableText property of the ListItem.\n\n'+
 		'The caseInsensitiveSearch property (default true) of ListView controls if the search is case sensitive or not.\n\n'+
 		'The searchableText in the following example is set to headerTitle+ +title.\n\n'
-	})
+	});
 	
 	scrollView.add(desc);
 	
 	var button = Ti.UI.createButton({
 		top:10,
 		title:'I understand'
-	})
+	});
 	
 	scrollView.add(button);
 	
 	button.addEventListener('click',function(){
 		win.remove(scrollView);
 		genTest(win);
-	})
+	});
 	
 	win.add(scrollView);
 

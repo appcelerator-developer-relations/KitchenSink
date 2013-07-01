@@ -109,7 +109,7 @@ function list_views(_args) {
 				{properties: { title: 'Select & Deselect Item', itemId: 'list_v2_select_deselect', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
 				{properties: { title: 'Misc UI', itemId: 'list_v2_ui_misc', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
 				{properties: { title: 'Pull View', itemId: 'list_v2_ui_pull', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
-				]
+				];
 				uienhancementsSection.setItems(uienhancementsdataset);
 				sections.push(uienhancementsSection);
 
@@ -117,7 +117,7 @@ function list_views(_args) {
 				var editingdataset = [
 				{properties: { title: 'Delete Rows', itemId: 'list_v2_delete_rows', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
 				{properties: { title: 'Reorder Rows', itemId: 'list_v2_move_rows', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
-				]
+				];
 				editingSection.setItems(editingdataset);
 				sections.push(editingSection);
 				
@@ -127,7 +127,7 @@ function list_views(_args) {
 				{properties: { title: 'Basic Search (searchView)', itemId: 'list_v2_search_searchview', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
 				{properties: { title: 'New Search API (searchText) ', itemId: 'list_v2_search_searchtext', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
 				{properties: { title: 'Fun with searchText ', itemId: 'list_v2_search_searchtext2', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL, height:44}},
-				]
+				];
 				searchSection.setItems(searchDataSet);
 				sections.push(searchSection);
 				

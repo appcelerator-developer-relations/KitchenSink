@@ -64,7 +64,7 @@ function genTest(win) {
 	sections.push(animalsSection);
 
 	var listView = Ti.UI.createListView();
-	listView.style=Ti.UI.iPhone.ListViewStyle.GROUPED
+	listView.style=Ti.UI.iPhone.ListViewStyle.GROUPED;
 	listView.sections = sections;
 	listView.keepSectionsInSearch = true;
 	
@@ -81,11 +81,11 @@ function genTest(win) {
 	    left:5,
 	    font:{fontSize:20,fontWeight:'bold'},
 	    hintText: 'Search'
-	})
+	});
 	
 	tf.addEventListener('change',function(e){
 	    listView.searchText = e.value;
-	})
+	});
 	
 	container.add(tf);
 	
@@ -125,21 +125,21 @@ function list_v2_search_searchtext(_args) {
 		'When set to true the search results retain section headers and footers.\n\n'+
 		'Also notice the index bar which is automatically updated with search results.\n\n'+
 		'The searchableText in the following example is set to headerTitle+ +title.\n\n'
-	})
+	});
 	
 	scrollView.add(desc);
 	
 	var button = Ti.UI.createButton({
 		top:10,
 		title:'I understand'
-	})
+	});
 	
 	scrollView.add(button);
 	
 	button.addEventListener('click',function(){
 		win.remove(scrollView);
 		genTest(win);
-	})
+	});
 	
 	win.add(scrollView);
 
