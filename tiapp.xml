@@ -8,6 +8,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
+    <property name="ti.android.useLegacyWindow" type="bool">true</property>
     <sdk-version>3.1.0.GA</sdk-version>
     <id>com.appcelerator.kitchensink</id>
     <name>KitchenSink</name>
