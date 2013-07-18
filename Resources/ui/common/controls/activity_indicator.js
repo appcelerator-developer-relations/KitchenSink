@@ -16,6 +16,9 @@ function activity_indicator(_args) {
 		title:_args.title,
 		backgroundColor : '#13386c'
 	});
+	
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
 
 	var indicatorAdded = false
 	//
@@ -174,6 +177,13 @@ function activity_indicator(_args) {
 	// ACTIVITY INDICATOR (TOOLBAR)
 	//
 	var toolActInd = Titanium.UI.createActivityIndicator();
+	if (ActivityIndicatorStyle) {
+		if (isIOS7) {
+			toolActInd.style = ActivityIndicatorStyle.DARK;
+		} else {
+			toolActInd.style = ActivityIndicatorStyle.PLAIN;
+		}
+	}
 
 	var button5 = Titanium.UI.createButton({
 		title : 'Show Indicator (Toolbar)',
@@ -183,9 +193,9 @@ function activity_indicator(_args) {
 	});
 
 	button5.addEventListener('click', function() {
-		toolActInd.style = ActivityIndicatorStyle.PLAIN;
+		toolActInd.style = (isIOS7?ActivityIndicatorStyle.DARK:ActivityIndicatorStyle.PLAIN);
 		toolActInd.font = {fontFamily : 'Helvetica Neue',fontSize : 15,fontWeight : 'bold'};
-		toolActInd.color = 'white';
+		toolActInd.color = (isIOS7?'black':'white');
 		toolActInd.message = 'Loading...';
 		win.setToolbar([toolActInd], {animated : true});
 		toolActInd.show();
@@ -202,6 +212,13 @@ function activity_indicator(_args) {
 	//
 	var navActInd = Titanium.UI.createActivityIndicator();
 
+	if (ActivityIndicatorStyle) {
+		if (isIOS7) {
+			navActInd.style = ActivityIndicatorStyle.DARK;
+		} else {
+			navActInd.style = ActivityIndicatorStyle.PLAIN;
+		}
+	}
 	var button6 = Titanium.UI.createButton({
 		title : 'Show Indicator (Navbar)',
 		height : 35,
@@ -238,6 +255,11 @@ function activity_indicator(_args) {
 			actInd.width = Ti.UI.SIZE;
 			actInd.hide();
 			win.remove(actInd);
+		}
+		if (ActivityIndicatorStyle) {
+			if (isIOS7) {
+				actInd.style = ActivityIndicatorStyle.DARK;
+			}
 		}
 		win.setTitleControl(actInd);
 		actInd.show();
