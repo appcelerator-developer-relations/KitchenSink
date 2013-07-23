@@ -5,7 +5,7 @@ Video.videoObject = null;
 Video.init = function()
 {
 	Video.videoObject = Titanium.Media.createVideoPlayer({
-		contentURL:'/etc/movie.mp4',
+		url:'/etc/movie.mp4',
 		backgroundColor:'#111',
 		mediaControlStyle:Titanium.Media.VIDEO_CONTROL_DEFAULT,
 		scalingMode:Titanium.Media.VIDEO_SCALING_MODE_FILL,
