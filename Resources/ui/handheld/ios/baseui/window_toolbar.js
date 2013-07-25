@@ -4,6 +4,9 @@ function win_tb(_args) {
 		title:_args.title
 	});
 	
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
+
 	//
 	// SINGLE BUTTON ON LEFT
 	//
@@ -161,6 +164,9 @@ function win_tb(_args) {
 			color:'#fff',
 			font:{fontSize:14}
 		});
+		if(isIOS7) {
+			l.color = '#000';
+		}
 		var flexSpace = Titanium.UI.createButton({
 			systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
 		});
