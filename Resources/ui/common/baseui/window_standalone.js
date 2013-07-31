@@ -65,14 +65,15 @@ function win_standalone(_args) {
 		b2.addEventListener('click', function()
 		{
 			var options = {
-					height:0,
-					width:0,
 					backgroundColor:'#336699',
 					bottom:0,
 					right:0
 				};
 			if (Ti.Platform.name == 'android') {
 				options.navBarHidden = true;
+			} else {
+				options.height = 0;
+				options.width = 0;
 			}
 			var w = Titanium.UI.createWindow(options);
 			var a = Titanium.UI.createAnimation();
