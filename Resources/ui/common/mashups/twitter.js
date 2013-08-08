@@ -213,7 +213,10 @@ function getTweets() {
 
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.timeout = 1000000;
-	xhr.open("GET","http://api.twitter.com/1/statuses/user_timeline.json?screen_name="+screen_name);
+
+	var bearerToken = "AAAAAAAAAAAAAAAAAAAAAEHKSgAAAAAAKzh8n7rBx8SsTJECCkRlVHW%2FlG8%3DvVgRTmoK6wDp1DEw9GZMShZcdCgDcd4CgwvBbzrgbk";
+	xhr.open("GET","https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name="+screen_name);
+	xhr.setRequestHeader("Authorization", "Bearer " + bearerToken);
 
 	xhr.onload = function() {
 		try {
