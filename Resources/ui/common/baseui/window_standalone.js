@@ -80,7 +80,7 @@ function win_standalone(_args) {
 			isTizen || (b.style = Titanium.UI.iPhone.SystemButtonStyle.PLAIN);
 			w.title = 'Modal Window';
 			w.barColor = 'black';
-			isTizen ? w.add(b) : w.setLeftNavButton(b);
+			w.add(b);
 			b.addEventListener('click',function() {
 				w.close();
 			});
