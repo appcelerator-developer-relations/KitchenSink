@@ -7,10 +7,10 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.1.1.GA</sdk-version>
+    <sdk-version>3.1.2.GA</sdk-version>
     <id>com.appcelerator.kitchensink</id>
     <name>KitchenSink</name>
-    <version>3.1.1.GA</version>
+    <version>3.1.2.GA</version>
     <publisher>appcelerator</publisher>
     <url>http://appcelerator.com</url>
     <description>not specified</description>
