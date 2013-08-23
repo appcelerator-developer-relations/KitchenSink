@@ -6,6 +6,7 @@
 function win_standalone(_args) {
 	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen',
+		isIOS = (Ti.Platform.osname == 'iphone' || Ti.Platform.osname == 'ipad');
 		win = Titanium.UI.createWindow({
 			title:_args.title
 		});
@@ -143,8 +144,13 @@ function win_standalone(_args) {
 
 				// NOTE: good example of making dynamic platform height / width values
 				// iPad vs. iPhone vs Android etc.
-				a.height = Titanium.Platform.displayCaps.platformHeight;
-				a.width = Titanium.Platform.displayCaps.platformWidth;
+				if (isIOS) {
+					a.height = Ti.UI.FILL;
+					a.width = Ti.UI.FILL;
+				} else {
+					a.height = Titanium.Platform.displayCaps.platformHeight;
+					a.width = Titanium.Platform.displayCaps.platformWidth;
+				}
 				a.duration = 300;
 
 				// create a button to close window
