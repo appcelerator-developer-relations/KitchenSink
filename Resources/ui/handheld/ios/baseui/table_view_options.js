@@ -54,7 +54,6 @@ function tv_options(_args) {
 	// add table view to the window
 	win.add(tableview);
 	
-	win.open();
 	return win;
 };
 
