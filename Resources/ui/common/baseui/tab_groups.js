@@ -25,7 +25,7 @@ function tab_group(_args) {
 			var newtab = Titanium.UI.createTab({  
 				icon:'/images/tabs/KS_nav_mashup.png',
 				title:'New Tab',
-				win:win
+				window:win
 			});
 			tabGroup.addTab(newtab);
 		}
