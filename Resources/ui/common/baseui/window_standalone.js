@@ -4,6 +4,8 @@
 	//  to open windows outside of tab groups.
 	//
 function win_standalone(_args) {	
+	var isIOS = (Ti.Platform.osname == 'iphone' || Ti.Platform.osname == 'ipad');
+	
 	var win = Titanium.UI.createWindow({
 		title:_args.title
 	});
@@ -80,8 +82,13 @@ function win_standalone(_args) {
 		
 			// NOTE: good example of making dynamic platform height / width values
 			// iPad vs. iPhone vs Android etc.
-			a.height = Titanium.Platform.displayCaps.platformHeight;
-			a.width = Titanium.Platform.displayCaps.platformWidth;
+			if (isIOS) {
+				a.height = Ti.UI.FILL;
+				a.width = Ti.UI.FILL;
+			}else {
+				a.height = Titanium.Platform.displayCaps.platformHeight;
+				a.width = Titanium.Platform.displayCaps.platformWidth;
+			}
 			a.duration = 300;
 		
 			// create a button to close window
@@ -121,7 +128,7 @@ function win_standalone(_args) {
 				title:'Close',
 				style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN
 			});
-			w.setLeftNavButton(b);
+			w.add(b);
 			b.addEventListener('click',function()
 			{
 				w.close();
@@ -287,6 +294,9 @@ function win_standalone(_args) {
 		top:310
 	});
 	
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
+	
 	b7.addEventListener('click', function()
 	{
 		var label = Titanium.UI.createButton({
@@ -317,10 +327,16 @@ function win_standalone(_args) {
 			w.close();
 		});
 	
+		if(isIOS7) {
+			theTop = 20;
+		} else {
+			theTop = 0;
+		}
+		
 		// create and add toolbar
 		var toolbar = Titanium.UI.iOS.createToolbar({
 			items:[hello,flexSpace,label, flexSpace,close],
-			top:0,
+			top:theTop,
 			borderTop:false,
 			borderBottom:true
 		});
@@ -335,7 +351,11 @@ function win_standalone(_args) {
 	
 		move.addEventListener('click', function()
 		{
-			toolbar.animate({top:20,duration:500});
+			if(isIOS7) {
+				toolbar.animate({top:40,duration:500});
+			} else {
+				toolbar.animate({top:20,duration:500});
+			}
 		});
 	
 		w.open();
