@@ -221,7 +221,7 @@ function system_buttons(_args) {
 	b.addEventListener('click', function()
 	{
 		win.rightNavButton = camera;
-		win.toolbar = [action,flexSpace,compose,fixedSpace,bookmarks,flexSpace,search];
+		win.setToolbar([action,flexSpace,compose,fixedSpace,bookmarks,flexSpace,search],{tintColor:'red'});
 	});
 	win.add(b);
 	
@@ -235,7 +235,7 @@ function system_buttons(_args) {
 	b2.addEventListener('click', function()
 	{
 		win.rightNavButton = add;
-		win.toolbar = [trash,flexSpace,reply,fixedSpace,stop,flexSpace,refresh];
+		win.setToolbar([trash,flexSpace,reply,fixedSpace,stop,flexSpace,refresh],{tintColor:'green'});
 	});
 	win.add(b2);
 	
@@ -249,7 +249,7 @@ function system_buttons(_args) {
 	b3.addEventListener('click', function()
 	{
 		win.rightNavButton = play;
-		win.toolbar = [pause,flexSpace,fastforward,fixedSpace,rewind,flexSpace,edit];
+		win.setToolbar([pause,flexSpace,fastforward,fixedSpace,rewind,flexSpace,edit],{tintColor:'blue'});
 	});
 	win.add(b3);
 	
@@ -263,7 +263,7 @@ function system_buttons(_args) {
 	b4.addEventListener('click', function()
 	{
 		win.rightNavButton = cancel;
-		win.toolbar = [save,flexSpace,organize,fixedSpace,done,flexSpace,disclosure];
+		win.setToolbar([save,flexSpace,organize,fixedSpace,done,flexSpace,disclosure],{tintColor:'pink'});
 	});
 	win.add(b4);
 	
@@ -277,7 +277,7 @@ function system_buttons(_args) {
 	b5.addEventListener('click', function()
 	{
 		win.rightNavButton = contactadd;
-		win.toolbar = [nativespinner,flexSpace,infolight,flexSpace,infodark];
+		win.setToolbar([nativespinner,flexSpace,infolight,flexSpace,infodark],{barColor:'blue'});
 	});
 	win.add(b5);
 	
