@@ -78,6 +78,10 @@ function BaseUIWindow(title) {
 			{
 				if (Ti.Platform.name == "iPhone OS") {
 					win.hideTabBar();
+					//IOS7 has a weird bug where it will not resize the ViewController correctly when the tabbar is hidden.
+					//TIMOB-14998
+					win.extendEdges = [Ti.UI.EXTEND_EDGE_BOTTOM];
+					win.includeOpaqueBars = true;
 				}
 			}
 			if (Ti.Platform.name==='android' && e.rowData.test.indexOf('window_properties') >= 0) {
