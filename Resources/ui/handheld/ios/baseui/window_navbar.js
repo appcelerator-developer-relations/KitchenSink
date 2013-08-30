@@ -345,7 +345,7 @@ function win_nav(_args) {
 	{
 		var l = Ti.UI.createLabel({
 			text:'Hello',
-			color:'#fff',
+			color:'#0f0',
 			font:{fontSize:14}
 		});
 		win.rightNavButton = l;
