@@ -1,4 +1,7 @@
 function win_nav(_args) {
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
+	
 	// current window
 	var win = Titanium.UI.createWindow({
 		title:_args.title
@@ -348,6 +351,9 @@ function win_nav(_args) {
 			color:'#fff',
 			font:{fontSize:14}
 		});
+		if (isIOS7) {
+			l.color = '#0198E1';
+		}
 		win.rightNavButton = l;
 	});
 	win.add(b13);
