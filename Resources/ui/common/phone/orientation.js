@@ -1,6 +1,7 @@
 function orientation(_args) {
 	var win = Titanium.UI.createWindow({
-		title:_args.title
+		title:_args.title,
+		layout:'vertical'
 	});
 	
 	//
@@ -20,11 +21,11 @@ function orientation(_args) {
 		Titanium.UI.PORTRAIT,
 		Titanium.UI.UPSIDE_PORTRAIT,
 		Titanium.UI.LANDSCAPE_LEFT,
-		Titanium.UI.LANDSCAPE_RIGHT,
-		Titanium.UI.FACE_UP,
-		Titanium.UI.FACE_DOWN
+		Titanium.UI.LANDSCAPE_RIGHT
 	]; 
-	
+	var isIOS = (Titanium.Platform.name == 'iPhone OS');
+	var orientationDeprecated = isIOS && (Ti.version >= '3.1.3');
+
 	
 	//
 	// helper function
@@ -63,11 +64,7 @@ function orientation(_args) {
 	});
 	win.add(l);
 	
-	//
-	// orientation change listener
-	//
-	Ti.Gesture.addEventListener('orientationchange',function(e)
-	{
+	function orientationListener(e){
 		// device orientation
 		l.text = 'Current Orientation: ' + getOrientation(Titanium.Gesture.orientation);
 		
@@ -75,69 +72,84 @@ function orientation(_args) {
 		var orientation = getOrientation(e.orientation);
 		
 		Titanium.API.info("orientation changed = "+orientation+", is portrait?"+e.source.isPortrait()+", orientation = "+Ti.Gesture.orientation + "is landscape?"+e.source.isLandscape());
-	});
-	
-	
-	//
-	// set orientation - landscape 
-	//
-	var b1 = Titanium.UI.createButton({
-		title:'Set Landscape Left',
-		width:200,
-		height:40,
-		top:40
-	});
-	b1.addEventListener('click', function()
-	{
-		win.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
-	});
-	win.add(b1);
+	}
 	
 	//
-	// set orientation - landscape portrait
+	// orientation change listener
 	//
-	var b2 = Titanium.UI.createButton({
-		title:'Set Portrait',
-		width:200,
-		height:40,
-		top:90
-	});
-	b2.addEventListener('click', function()
-	{
-		win.orientationModes = [Titanium.UI.PORTRAIT];
-	});
-	win.add(b2);
+	Ti.Gesture.addEventListener('orientationchange',orientationListener);
 	
-	var b3 = Titanium.UI.createButton({
-		title:'Reset orientation',
-		width:200,
-		height:40,
-		top:140
-	});
-	b3.addEventListener('click', function()
-	{
-		Ti.API.info("resetting orientation modes");
-		win.orientationModes = [];
-	});
-	win.add(b3);
-	
-	if (Titanium.Platform.name == 'iPhone OS')
-	{
-		var landscape = Titanium.UI.createButton({
-			title:'Allow Landscape Only',
+	if (!orientationDeprecated) {
+		//
+		// set orientation - landscape 
+		//
+		var b1 = Titanium.UI.createButton({
+			title:'Set Landscape Left',
 			width:200,
 			height:40,
-			top:190
+			top:5
 		});
-		landscape.addEventListener('click', function()
+		b1.addEventListener('click', function()
 		{
-			// set and enforce landscape for this window
-			win.orientationModes = [
-				Titanium.UI.LANDSCAPE_LEFT,
-				Titanium.UI.LANDSCAPE_RIGHT
-			]; 
+			win.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
 		});
-		win.add(landscape);
+		win.add(b1);
+		
+		//
+		// set orientation - landscape portrait
+		//
+		var b2 = Titanium.UI.createButton({
+			title:'Set Portrait',
+			width:200,
+			height:40,
+			top:5
+		});
+		b2.addEventListener('click', function()
+		{
+			win.orientationModes = [Titanium.UI.PORTRAIT];
+		});
+		win.add(b2);
+		
+		var b3 = Titanium.UI.createButton({
+			title:'Reset orientation',
+			width:200,
+			height:40,
+			top:5
+		});
+		b3.addEventListener('click', function()
+		{
+			Ti.API.info("resetting orientation modes");
+			win.orientationModes = [];
+		});
+		win.add(b3);
+		
+		if (isIOS)
+		{
+			var landscape = Titanium.UI.createButton({
+				title:'Allow Landscape Only',
+				width:200,
+				height:40,
+				top:5
+			});
+			landscape.addEventListener('click', function()
+			{
+				// set and enforce landscape for this window
+				win.orientationModes = [
+					Titanium.UI.LANDSCAPE_LEFT,
+					Titanium.UI.LANDSCAPE_RIGHT
+				]; 
+			});
+			win.add(landscape);
+		}
+	} else {
+		var l1 = Ti.UI.createLabel({
+			top:10,
+			left:5,
+			right:5,
+			color:'red',
+			text:'Changing orientationModes after window has opened no longer works on IOS (since 3.1.3).'
+		})
+		win.add(l1);
 	}
 	
 	//
@@ -147,7 +159,7 @@ function orientation(_args) {
 		title:'Open A Window',
 		width:200,
 		height:40,
-		top:240
+		top:5
 	});
 	b4.addEventListener('click', function()
 	{
@@ -182,6 +194,10 @@ function orientation(_args) {
 		subwin.open();
 	});
 	win.add(b4);
+	
+	win.addEventListener('close',function(){
+		Ti.Gesture.removeEventListener('orientationchange',orientationListener);
+	})
 	return win;
 };
 
