@@ -72,11 +72,28 @@ function mapview(_args) {
 		userLocation:true,
 		annotations:[atlanta,apple]
 	});
-	
+
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
+
 	if (!isAndroid) {
 		mapview.addAnnotation(atlanta);
 	}
-	mapview.selectAnnotation(atlanta);
+	//TIMOB-15042. UI Glitch
+	
+	var selected = false;
+	if(isIOS7) {
+		win.addEventListener('focus',function(){
+			if(!selected) {
+				selected = true;
+				setTimeout(function(){
+					mapview.selectAnnotation(atlanta);
+				},500);
+			}
+		})
+  	} else {
+		mapview.selectAnnotation(atlanta);
+	} 	
 	win.add(mapview);
 	
 	//
@@ -162,7 +179,9 @@ function mapview(_args) {
 			title:'ATL'
 		});
 		// activate annotation
-		mapview.selectAnnotation(mapview.annotations[0].title,true);
+		if (!isIOS7) {
+			mapview.selectAnnotation(mapview.annotations[0].title,true);
+		}
 		
 		// button to change to SV	
 		sv = Titanium.UI.createButton({
