@@ -74,13 +74,28 @@ function mapview(_args) {
 		mapview.addAnnotation(atlanta);
 	}
 
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
+
 	// the "if" is a work around https://jira.appcelerator.org/browse/TIMOB-12448,
 	// to prevent the immediate crash
-	if ( !(isMW || isTizen) ) {
+	if ( !(isMW || isTizen || isIOS7) ) {
     	mapview.selectAnnotation(atlanta);
     }
 	
+	//TIMOB-15042. UI Glitch
 	win.add(mapview);
+	var selected = false;
+	if (isIOS7) {
+		win.addEventListener('focus',function(){
+			if (!selected) {
+				selected = true;
+				setTimeout(function(){
+					mapview.selectAnnotation(atlanta);
+				},500);
+			}
+		})	
+	} 
 	
 	//
 	// NAVBAR BUTTONS
@@ -165,7 +180,9 @@ function mapview(_args) {
 			title:'ATL'
 		});
 		// activate annotation
-		mapview.selectAnnotation(mapview.annotations[0].title,true);
+		if (!isIOS7) {
+			mapview.selectAnnotation(mapview.annotations[0].title,true);
+		}
 		
 		// button to change to SV	
 		sv = Titanium.UI.createButton({
