@@ -65,7 +65,7 @@ function genTest(win) {
 
 	var listView = Ti.UI.createListView();
 	listView.sections = sections;
-	listView.headerTitle = 'ListView on iOS can now show searchView and headerTitle (or headerView) together';
+	listView.headerTitle = 'ListView can now show searchView and headerTitle (or headerView) together';
 	
 	var sv = Titanium.UI.createSearchBar({
 	        barColor:'#385292',
@@ -82,6 +82,7 @@ function genTest(win) {
 }
 
 function list_v2_search_searchview(_args) {
+
 	var win = Ti.UI.createWindow({
 		title:'Basic Search',
 	});

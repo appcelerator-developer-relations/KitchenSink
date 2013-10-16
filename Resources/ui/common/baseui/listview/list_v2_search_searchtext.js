@@ -63,9 +63,6 @@ function genTest(win) {
 	animalsSection.setItems(animalsDataSet);
 	sections.push(animalsSection);
 
-	var listView = Ti.UI.createListView();
-	listView.sections = sections;
-
 	var tf = Ti.UI.createTextField({
 	    borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	    color: '#336699',
@@ -76,15 +73,16 @@ function genTest(win) {
 	    right:10,
 	    font:{fontSize:20,fontWeight:'bold'},
 	    hintText: 'Search'
-	})
+	});
 	
 	tf.addEventListener('change',function(e){
 	    listView.searchText = e.value;
-	})
+	});
 	
 	//The textfield must be a subview of the tableView to 
 	//calculate correct contentInsets when keyboard is visible. 
-	listView.headerView = tf;
+	var listView = Ti.UI.createListView({headerView: tf});
+	listView.sections = sections;
 	
 	win.add(listView);
 	
@@ -93,8 +91,15 @@ function genTest(win) {
 }
 
 function list_v2_search_searchtext(_args) {
+	
+	var softInput = 'none';
+	if (Titanium.Platform.osname == 'android') {
+		softInput = Ti.UI.Android.SOFT_INPUT_ADJUST_PAN;
+	}
+
 	var win = Ti.UI.createWindow({
 		title:'New Search API',
+		windowSoftInputMode: softInput
 	});
 
 	var scrollView = Ti.UI.createScrollView({layout:'vertical'});

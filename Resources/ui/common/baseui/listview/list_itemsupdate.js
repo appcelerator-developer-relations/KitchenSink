@@ -14,7 +14,7 @@ function handleKBUpdate(e){
 			e.section.updateItemAt(e.itemIndex,item);
 		}
 	} catch (err) {
-		Ti.API.error('Error in handleKBUpdate. Window closing ? '+err.message)
+		Ti.API.error('Error in handleKBUpdate. Window closing ? '+err.message);
 	}
 }
 
@@ -35,10 +35,10 @@ function handleSwitchChangeEvent(e){
 		item.taskSwitch.value = newVal;
 		if (newVal == true) {
 			item.taskLabel.color = '#00cc00';
-			item.taskLabel.text = 'Event '+e.itemIndex+' is GO'
+			item.taskLabel.text = 'Event '+e.itemIndex+' is GO';
 		} else {
-			item.taskLabel.color = '#ff0000'
-			item.taskLabel.text = 'Event '+e.itemIndex+' is NOGO'
+			item.taskLabel.color = '#ff0000';
+			item.taskLabel.text = 'Event '+e.itemIndex+' is NOGO';
 		}
 		e.section.updateItemAt(e.itemIndex,item);
 	}
@@ -47,15 +47,15 @@ function handleSwitchChangeEvent(e){
 function handleSliderUpdate(e){
 	var item = e.section.getItemAt(e.itemIndex);
 	if (e.value > 0.99) {
-		e.section.updateItemAt(e.itemIndex,{properties:{title:item.taskLabel.text+' is done', color:'#00cc00',accessoryType:Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK}})
+		e.section.updateItemAt(e.itemIndex,{properties:{title:item.taskLabel.text+' is done', color:'#00cc00',accessoryType:Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK}});
 	} else {
 		item.taskTrack.value = e.value;
 		if(e.value < 0.33){
-			item.taskLabel.color = '#ff0000'
+			item.taskLabel.color = '#ff0000';
 		} else if (e.value < 0.66) {
-			item.taskLabel.color = '#ffcc00'
+			item.taskLabel.color = '#ffcc00';
 		} else {
-			item.taskLabel.color = '#00cc00'
+			item.taskLabel.color = '#00cc00';
 		}
 		e.section.updateItemAt(e.itemIndex,item);
 	}
@@ -66,23 +66,23 @@ function setupTest(win){
 	var data0 = [
 	{template:'myCell1',taskLabel:{text:'Name'},bindField:{keyboardType:Ti.UI.KEYBOARD_DEFAULT}},
 	{template:'myCell1',taskLabel:{text:'Phone'},bindField:{keyboardType:Ti.UI.KEYBOARD_NAMEPHONE_PAD}},
-	]
+	];
 		
 	var data1 = [
 	{properties:{title:'Mark Me Done',height:50,itemId:'0',font:{fontWeight:'normal'}}},
 	{properties:{title:'Mark Me Critical',height:50,itemId:'1',font:{fontWeight:'normal'}}},
-	]
+	];
 
 	var data2 = [
 	{template:'myCell',taskLabel:{text:'Task 1',color:'#ff0000'},taskTrack:{value:0.2}},
 	{template:'myCell',taskLabel:{text:'Task 2',color:'#ffcc00'},taskTrack:{value:0.5}},
 	{template:'myCell',taskLabel:{text:'Task 3',color:'#00cc00'},taskTrack:{value:0.8}},
-	]
+	];
 
 	var data3 = [
 	{template:'myCell2',taskLabel:{text:'Event 0 is NOGO',color:'#ff0000'},taskSwitch:{value:false}},
 	{template:'myCell2',taskLabel:{text:'Event 1 is GO',color:'#00cc00'},taskSwitch:{value:true}},
-	]
+	];
 
 	var myTemplate = {
 		properties: {height: 50},
@@ -101,7 +101,7 @@ function setupTest(win){
 			}
 		}
 		]
-	}
+	};
 	
 	var myTemplate2 = {
 		properties: {height: 50},
@@ -120,7 +120,7 @@ function setupTest(win){
 			}
 		}
 		]
-	}
+	};
 
 	var myTemplate1 = {
 		properties: {height: 50},
@@ -140,7 +140,7 @@ function setupTest(win){
 			}
 		}
 		]
-	}
+	};
 
 	var section0 = Ti.UI.createListSection({headerTitle:'DATA ENTRY'});
 	section0.setItems(data0);
@@ -158,7 +158,7 @@ function setupTest(win){
 	var listView = Ti.UI.createListView({
 		templates:{'myCell':myTemplate, 'myCell1':myTemplate1, 'myCell2':myTemplate2},
 		sections:[section0,section1,section2,section3]
-	})
+	});
 	
 	listView.addEventListener('itemclick',function(e){
 		if(e.itemId == '0'){
@@ -172,15 +172,15 @@ function setupTest(win){
 			item.properties.font = {fontWeight:'bold'};
 			e.section.updateItemAt(e.itemIndex,item);
 		}
-	})
+	});
 	
 	win.add(listView);
 }
 
 function list_updateitems(_args) {
-	var softInput = 'none'
+	var softInput = 'none';
 	if (Titanium.Platform.osname == 'android') {
-		softInput = Ti.UI.Android.SOFT_INPUT_ADJUST_PAN
+		softInput = Ti.UI.Android.SOFT_INPUT_ADJUST_PAN;
 	}
 	var win = Ti.UI.createWindow({
 		title:'Update Items',
