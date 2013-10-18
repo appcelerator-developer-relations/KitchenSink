@@ -133,7 +133,7 @@ function list_views(_args) {
 			];
 	
 			if (isAndroid) {
-				searchDataSet.splice(3,1);
+				searchDataSet.splice(2,2);
 			}
 			searchSection.setItems(searchDataSet);
 			sections.push(searchSection);	

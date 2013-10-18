@@ -16,7 +16,7 @@ function clickHandler(e){
     alert(message);
 }
 
-function genTest(win, isIOS) {
+function genTest(win) {
 	var sections = [];
 
 	var fruitSection = Ti.UI.createListSection({ headerTitle: 'Fruits'});
@@ -63,9 +63,8 @@ function genTest(win, isIOS) {
 	animalsSection.setItems(animalsDataSet);
 	sections.push(animalsSection);
 	var listView = Ti.UI.createListView({top: '50dp'});
-	if (isIOS) {
-		listView.style=Ti.UI.iPhone.ListViewStyle.GROUPED;
-	}
+	listView.style=Ti.UI.iPhone.ListViewStyle.GROUPED;
+	
 	listView.sections = sections;
 	listView.keepSectionsInSearch = true;
 	
@@ -87,15 +86,14 @@ function genTest(win, isIOS) {
 	win.add(tf);
 	
 	
-	if (isIOS) {
-		var indices = [
-		{index:0,title:'Fru'},
-		{index:1,title:'Veg'},
-		{index:2,title:'Fis'},
-		{index:3,title:'Ani'}
-		];
-		listView.sectionIndexTitles = indices;
-	}
+	var indices = [
+	{index:0,title:'Fru'},
+	{index:1,title:'Veg'},
+	{index:2,title:'Fis'},
+	{index:3,title:'Ani'}
+	];
+	listView.sectionIndexTitles = indices;
+	
 	
 	win.add(listView);
 	
@@ -107,21 +105,15 @@ function list_v2_search_searchtext(_args) {
 	var win = Ti.UI.createWindow({
 		title:'Search API',
 	});
-	var platformName = Titanium.Platform.osname;
-	var isIOS = (platformName == 'iphone' || platformName == 'ipad');
 	var scrollView = Ti.UI.createScrollView({layout:'vertical'});
-	var groupText = '';
-	var indexText = '';
-	if (isIOS) {
-		groupText = 'The ListView has its style set to Grouped.';
-		indexText = 'Also notice the index bar which is automatically updated with search results.\n\n';
-	}
+	
 	var desc = Ti.UI.createLabel({
-		text:'This is an extension to the previous example.' + groupText + '\n\n'+
+		text:'This is an extension to the previous example.' + 'The ListView has its style set to Grouped.\n\n'+
 		'The textField is added on top of the ListView. '+
 		'This keeps the textField visible at all times.\n\n'+
 		'This example also shows the functionality of the property keepSectionsInSearch (boolean default is false).\n\n'+
-		'When set to true the search results retain section headers and footers.\n\n'+ indexText +
+		'When set to true the search results retain section headers and footers.\n\n'+ 
+		'Also notice the index bar which is automatically updated with search results.\n\n'+
 		'The searchableText in the following example is set to headerTitle+ +title.\n\n'
 	});
 	
@@ -136,7 +128,7 @@ function list_v2_search_searchtext(_args) {
 	
 	button.addEventListener('click',function(){
 		win.remove(scrollView);
-		genTest(win, isIOS);
+		genTest(win);
 	});
 	
 	win.add(scrollView);
