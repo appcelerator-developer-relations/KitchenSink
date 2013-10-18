@@ -16,9 +16,9 @@ function clickHandler(e){
     alert(message);
 }
 
-function genTest(win) {
+function genTest(win, isIOS) {
 	var sections = [];
-	 
+
 	var fruitSection = Ti.UI.createListSection({ headerTitle: 'Fruits'});
 	var fruitDataSet = [
 	    {properties: { title: 'Apple', searchableText:' Fruits Apple', itemId:'0 0'}},
@@ -62,23 +62,20 @@ function genTest(win) {
 	];
 	animalsSection.setItems(animalsDataSet);
 	sections.push(animalsSection);
-
-	var listView = Ti.UI.createListView();
-	listView.style=Ti.UI.iPhone.ListViewStyle.GROUPED;
+	var listView = Ti.UI.createListView({top: '50dp'});
+	if (isIOS) {
+		listView.style=Ti.UI.iPhone.ListViewStyle.GROUPED;
+	}
 	listView.sections = sections;
 	listView.keepSectionsInSearch = true;
 	
-	var container = Ti.UI.createView({
-		height:40,
-		top:0,
-		right:30
-	});
 	var tf = Ti.UI.createTextField({
 	    borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	    color: '#336699',
-	    height:Ti.UI.FILL,
+	    height: '40dp',
 	    width:Ti.UI.FILL,
 	    left:5,
+	    top: 5,
 	    font:{fontSize:20,fontWeight:'bold'},
 	    hintText: 'Search'
 	});
@@ -87,22 +84,18 @@ function genTest(win) {
 	    listView.searchText = e.value;
 	});
 	
-	container.add(tf);
+	win.add(tf);
 	
-	//The textfield must be a subview of the tableView to 
-	//calculate correct contentInsets when keyboard is visible. 
-	listView.add(container);
 	
-	listView.headerView = Ti.UI.createView({height:40});
-	
-	var indices = [
-	{index:0,title:'Fru'},
-	{index:1,title:'Veg'},
-	{index:2,title:'Fis'},
-	{index:3,title:'Ani'}
-	];
-	
-	listView.sectionIndexTitles = indices;
+	if (isIOS) {
+		var indices = [
+		{index:0,title:'Fru'},
+		{index:1,title:'Veg'},
+		{index:2,title:'Fis'},
+		{index:3,title:'Ani'}
+		];
+		listView.sectionIndexTitles = indices;
+	}
 	
 	win.add(listView);
 	
@@ -114,16 +107,21 @@ function list_v2_search_searchtext(_args) {
 	var win = Ti.UI.createWindow({
 		title:'Search API',
 	});
-
+	var platformName = Titanium.Platform.osname;
+	var isIOS = (platformName == 'iphone' || platformName == 'ipad');
 	var scrollView = Ti.UI.createScrollView({layout:'vertical'});
-	
+	var groupText = '';
+	var indexText = '';
+	if (isIOS) {
+		groupText = 'The ListView has its style set to Grouped.';
+		indexText = 'Also notice the index bar which is automatically updated with search results.\n\n';
+	}
 	var desc = Ti.UI.createLabel({
-		text:'This is an extension to the previous example. The ListView has its style set to Grouped.\n\n'+
-		'The textField is added as a child of the ListView with the listView headerView set to an dummy container of the same height as the textField.'+
+		text:'This is an extension to the previous example.' + groupText + '\n\n'+
+		'The textField is added on top of the ListView. '+
 		'This keeps the textField visible at all times.\n\n'+
 		'This example also shows the functionality of the property keepSectionsInSearch (boolean default is false).\n\n'+
-		'When set to true the search results retain section headers and footers.\n\n'+
-		'Also notice the index bar which is automatically updated with search results.\n\n'+
+		'When set to true the search results retain section headers and footers.\n\n'+ indexText +
 		'The searchableText in the following example is set to headerTitle+ +title.\n\n'
 	});
 	
@@ -138,7 +136,7 @@ function list_v2_search_searchtext(_args) {
 	
 	button.addEventListener('click',function(){
 		win.remove(scrollView);
-		genTest(win);
+		genTest(win, isIOS);
 	});
 	
 	win.add(scrollView);
