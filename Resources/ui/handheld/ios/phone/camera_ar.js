@@ -18,9 +18,9 @@ function cam_ar(_args) {
 	
 	container.button.addEventListener('click',function()
 	{
-		alert("Camera closed.");
 		Ti.Media.hideCamera();
 		container.close();
+		alert("Camera closed.");
 	});
 	
 	container.messageView = Titanium.UI.createView({
@@ -101,35 +101,37 @@ function cam_ar(_args) {
 	};
 
 	
-	
-	Titanium.Media.showCamera({
-	
-		success:function(event)
-		{
-		},
-		cancel:function()
-		{
-		},
-		error:function(error)
-		{
-			var a = Titanium.UI.createAlertDialog({title:'Camera'});
-			if (error.code == Titanium.Media.NO_CAMERA)
+	container.showCamera = function(){
+		Titanium.Media.showCamera({
+		
+			success:function(event)
 			{
-				a.setMessage('Please run this test on device');
-			}
-			else
+			},
+			cancel:function()
 			{
-				a.setMessage('Unexpected error: ' + error.code);
-			}
-			a.show();
-		},
-		overlay:container.overlay,
-		showControls:false,	// don't show system controls
-		mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
-		autohide:false	// tell the system not to auto-hide and we'll do it ourself
-	});
+			},
+			error:function(error)
+			{
+				var a = Titanium.UI.createAlertDialog({title:'Camera'});
+				if (error.code == Titanium.Media.NO_CAMERA)
+				{
+					a.setMessage('Please run this test on device');
+				}
+				else
+				{
+					a.setMessage('Unexpected error: ' + error.code);
+				}
+				a.show();
+			},
+			overlay:container.overlay,
+			showControls:false,	// don't show system controls
+			mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
+			autohide:false	// tell the system not to auto-hide and we'll do it ourself
+		});
+	}
 		
 	container.win.addEventListener('open',function(){
+		container.showCamera();
 		Titanium.Geolocation.addEventListener('location',container.locationUpdate);
 		Titanium.Geolocation.addEventListener('heading',container.updateHeadingLabel);
 
