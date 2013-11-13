@@ -27,7 +27,9 @@ function BaseUIWindow(title) {
 		data.push({title:'Window Toolbar', hasChild:true, test:'ui/handheld/ios/baseui/window_toolbar'});
 		data.push({title:'Window Constructor', hasChild:true, test:'ui/handheld/ios/baseui/window_constructor'});
 		data.push({title:'Animation', hasChild:true, test:'ui/handheld/ios/baseui/animation'});
-		data.push({title:'Nav Group', hasChild:true, test:'ui/handheld/ios/baseui/navgroup'});
+		if (Ti.version < '3.2.0') {
+			data.push({title:'Nav Group', hasChild:true, test:'ui/handheld/ios/baseui/navgroup'});
+		}
 	
 		Ti.include("/etc/version.js");
 	
