@@ -2,19 +2,29 @@ function Navigation_controller(_args){
 
 	NavController = {};
 
-	NavController.mainWindow = Ti.UI.createWindow({
-		title:_args.title
-	});
-
-	// WINDOWS
-	NavController.win = Ti.UI.createWindow({title:'Navigation Group',backgroundColor:'#336699'});
-
-	// NAV GROUP
-	NavController.navGroup = Ti.UI.iPhone.createNavigationGroup({
-		window:NavController.win
-	});
-
-	NavController.mainWindow.add(NavController.navGroup)
+	var useNavWindow = (Ti.version >= '3.2.0');
+	
+	if(useNavWindow == true) {
+		NavController.win = Ti.UI.createWindow({title:'Navigation Group',backgroundColor:'#336699'});
+		NavController.mainWindow = Ti.UI.iOS.createNavigationWindow({
+			window:NavController.win
+		});
+	} else {
+		NavController.mainWindow = Ti.UI.createWindow({
+			title:_args.title
+		});
+	
+		// WINDOWS
+		NavController.win = Ti.UI.createWindow({title:'Navigation Group',backgroundColor:'#336699'});
+	
+		// NAV GROUP
+		NavController.navGroup = Ti.UI.iPhone.createNavigationGroup({
+			window:NavController.win
+		});
+	
+		NavController.mainWindow.add(NavController.navGroup);
+	}
+	
 
 	// BUTTON
 	NavController.button = Ti.UI.createButton({
@@ -32,8 +42,12 @@ function Navigation_controller(_args){
 		var l = Ti.UI.createLabel({
 			textAlign:'center',
 			text:'New Window'
-		})
-		NavController.navGroup.open(w,{animated:true});
+		});
+		if (useNavWindow == true) {
+			NavController.mainWindow.openWindow(w,{animated:true});
+		} else {
+			NavController.navGroup.open(w,{animated:true});
+		}
 	});
 	NavController.win.add(NavController.button);
 
@@ -52,7 +66,7 @@ function Navigation_controller(_args){
 
 	NavController.open = function()
 	{
-		Ti.API.info('IN OPEN')
+		Ti.API.info('IN OPEN');
 		NavController.mainWindow.open();	
 	};
 	
