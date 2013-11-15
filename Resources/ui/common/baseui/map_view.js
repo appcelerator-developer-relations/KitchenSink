@@ -4,28 +4,42 @@ function mapview(_args) {
 	});
 	
 	var isAndroid = Titanium.Platform.osname === 'android',
+		isIOS = (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad'),
 		isMW = Ti.Platform.osname === 'mobileweb',
 		isTizen = Ti.Platform.osname === 'tizen';
+		
+	var Map;
+	if (isIOS && !Ti.Map) {
+		try {
+			Map = require('ti.map');
+		} catch(e) {
+			alert("Add the `ti.map` module in the `tiapp.xml` file when running on TiSDK 3.2.0.GA and later.");
+			return win;
+		}
+	} else {
+		Map = Ti.Map;
+	}
+		
 	//
 	// CREATE ANNOTATIONS
 	//
-	var mountainView = Titanium.Map.createAnnotation({
+	var mountainView = Map.createAnnotation({
 		latitude:37.390749,
 		longitude:-122.081651,
 		title:"Appcelerator Headquarters",
 		subtitle:'Mountain View, CA',
-		pincolor: isAndroid ? "orange" : Titanium.Map.ANNOTATION_RED,
+		pincolor: isAndroid ? "orange" : Map.ANNOTATION_RED,
 		animate:true,
 		leftButton: '/images/appcelerator_small.png',
 		myid:1 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 	});
 	
-	var apple = Titanium.Map.createAnnotation({
+	var apple = Map.createAnnotation({
 		latitude:37.33168900,
 		longitude:-122.03073100,
 		title:"Steve Jobs",
 		subtitle:'Cupertino, CA',
-		pincolor:Titanium.Map.ANNOTATION_GREEN,
+		pincolor:Map.ANNOTATION_GREEN,
 		animate:true,
 		rightButton: '/images/apple_logo.jpg',
 		myid:2 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
@@ -46,11 +60,11 @@ function mapview(_args) {
 	}
 	
 	if (!isAndroid) {
-		atlantaParams.pincolor = Titanium.Map.ANNOTATION_PURPLE;
+		atlantaParams.pincolor = Map.ANNOTATION_PURPLE;
 	} else {
 		atlantaParams.pinImage = "/images/map-pin.png";
 	}
-	var atlanta = Titanium.Map.createAnnotation(atlantaParams);
+	var atlanta = Map.createAnnotation(atlantaParams);
 	
 	//
 	// PRE-DEFINED REGIONS
@@ -61,8 +75,8 @@ function mapview(_args) {
 	//
 	// CREATE MAP VIEW
 	//
-	var mapview = Titanium.Map.createView({
-		mapType: Titanium.Map.STANDARD_TYPE,
+	var mapview = Map.createView({
+		mapType: Map.STANDARD_TYPE,
 		region:{latitude:33.74511, longitude:-84.38993, latitudeDelta:0.5, longitudeDelta:0.5},
 		animate:true,
 		regionFit:true,
@@ -141,17 +155,17 @@ function mapview(_args) {
 		
 		sat.addEventListener('click',function() {
 			// set map type to satellite
-			mapview.setMapType(Titanium.Map.SATELLITE_TYPE);
+			mapview.setMapType(Map.SATELLITE_TYPE);
 		});
 		
 		std.addEventListener('click',function() {
 			// set map type to standard
-			mapview.setMapType(Titanium.Map.STANDARD_TYPE);
+			mapview.setMapType(Map.STANDARD_TYPE);
 		});
 		
 		hyb.addEventListener('click',function() {
 			// set map type to hybrid
-			mapview.setMapType(Titanium.Map.HYBRID_TYPE);
+			mapview.setMapType(Map.HYBRID_TYPE);
 		});
 		
 		zoomin.addEventListener('click',function() {
@@ -291,7 +305,7 @@ function mapview(_args) {
 			evt.annotation.rightView = Titanium.UI.createView({width:20,height:20,backgroundColor:'red'});
 			evt.annotation.leftView = Titanium.UI.createView({width:20,height:20,backgroundColor:'#336699'});
 			evt.annotation.title = "Atlanta?";
-			evt.annotation.pincolor = Titanium.Map.ANNOTATION_GREEN;
+			evt.annotation.pincolor = Map.ANNOTATION_GREEN;
 			evt.annotation.subtitle = 'Appcelerator used to be near here';
 			evt.annotation.leftButton = 'images/appcelerator_small.png';
 	
