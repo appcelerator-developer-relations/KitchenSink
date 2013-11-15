@@ -18,6 +18,8 @@ function mapview(_args) {
 		}
 	} else {
 		Map = Ti.Map;
+		// Forcing the Android build scripts to include Ti.Map
+		Ti.Map.createView;
 	}
 		
 	//
