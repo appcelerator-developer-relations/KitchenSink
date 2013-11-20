@@ -3,6 +3,19 @@ function mix_views(_args) {
 		title:_args.title
 	});
 	
+	var isIOS = (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad');
+	var Map;
+	if (isIOS && !Ti.Map) {
+		try {
+			Map = require('ti.map');
+		} catch(e) {
+			alert("Add the `ti.map` module in the `tiapp.xml` file when running on TiSDK 3.2.0.GA and later.");
+			return win;
+		}
+	} else {
+		Map = Ti.Map;
+	}
+	
 	// simple inline web view that triggers an event
 	var html = '<html><body style=";color:#bbb;font-family:Helvetica Neue;text-align:center;">';
 	html += '<div style="font-size:20;font-weight:bold;">I am a web view</div>';
@@ -39,34 +52,34 @@ function mix_views(_args) {
 	//
 	// CREATE ANNOTATIONS
 	//
-	var mountainView = Titanium.Map.createAnnotation({
+	var mountainView = Map.createAnnotation({
 		latitude:37.390749,
 		longitude:-122.081651,
 		title:"Appcelerator Headquarters",
 		subtitle:'Mountain View, CA',
-		pincolor:Titanium.Map.ANNOTATION_RED,
+		pincolor:Map.ANNOTATION_RED,
 		animate:true,
 		leftButton: '/images/appcelerator_small.png',
 		myid:1 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 	});
 	
-	var apple = Titanium.Map.createAnnotation({
+	var apple = Map.createAnnotation({
 		latitude:37.33168900,
 		longitude:-122.03073100,
 		title:"Steve Jobs",
 		subtitle:'Cupertino, CA',
-		pincolor:Titanium.Map.ANNOTATION_GREEN,
+		pincolor:Map.ANNOTATION_GREEN,
 		animate:true,
 		rightButton: '/images/apple_logo.jpg',
 		myid:2 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 	});
 	
-	var atlanta = Titanium.Map.createAnnotation({
+	var atlanta = Map.createAnnotation({
 		latitude:33.74511,
 		longitude:-84.38993,
 		title:"Atlanta, GA",
 		subtitle:'Atlanta Braves Stadium',
-		pincolor:Titanium.Map.ANNOTATION_PURPLE,
+		pincolor:Map.ANNOTATION_PURPLE,
 		animate:true,
 		leftButton:'/images/atlanta.jpg',
 		rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
@@ -76,8 +89,8 @@ function mix_views(_args) {
 	//
 	// CREATE MAP VIEW
 	//
-	var mapview = Titanium.Map.createView({
-		mapType: Titanium.Map.STANDARD_TYPE,
+	var mapview = Map.createView({
+		mapType: Map.STANDARD_TYPE,
 		region: {latitude:33.74511, longitude:-84.38993, latitudeDelta:0.01, longitudeDelta:0.01},
 		animate:true,
 		regionFit:true,
