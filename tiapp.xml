@@ -9,6 +9,7 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <property name="ti.android.useLegacyWindow" type="bool">true</property>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
     <sdk-version>3.3.0</sdk-version>
     <id>com.appcelerator.kitchensink</id>
     <name>KitchenSink</name>
@@ -39,7 +40,6 @@
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest>
-            <supports-screens android:anyDensity="false"/>
             <application>
                 <activity android:alwaysRetainTaskState="true"
                     android:configChanges="keyboardHidden|orientation"

@@ -21,6 +21,8 @@ function win_standalone(_args) {
 		Ti.API.info('FOCUSED EVENT RECEIVED');
 	});
 
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
 	
 	//
 	//  OPEN WINDOW OUTSIDE OF TAB GROUP
@@ -115,8 +117,8 @@ function win_standalone(_args) {
 				{
 					a.transform = t;
 					a.addEventListener('complete', function(){
-						w.close()
-					})
+						w.close();
+					});
 					w.animate(a);
 				});
 
@@ -251,7 +253,12 @@ function win_standalone(_args) {
 	
 		// create window open animation
 		var a = Titanium.UI.createAnimation();
-		a.top = 32;
+		
+		if (isIOS7) {
+			a.top = Ti.Platform.displayCaps.platformHeight - win.size.height;
+		} else {
+			a.top = Ti.Platform.displayCaps.platformHeight - win.size.height - 20;
+		}
 		a.duration = 300;
 	
 		// create a button to close window
@@ -267,17 +274,25 @@ function win_standalone(_args) {
 			w.close(a);
 		});
 		
-		Ti.App.addEventListener('nav_back', function() {
-			w.close();
-		});
 		
-		Ti.Gesture.addEventListener('orientationchange', function(e) {
-			if (e.orientation == Ti.UI.LANDSCAPE_LEFT || e.orientation == Ti.UI.LANDSCAPE_RIGHT) {
-				w.top = 32;
-			} 
-			else if (e.orientation == Ti.UI.PORTRAIT) {
-				w.top = 37;
+		
+		function nav_back_handler(e){
+			w.close();
+		}
+		
+		function gestureHandler(e) {
+			if (isIOS7) {
+				w.top = Ti.Platform.displayCaps.platformHeight - win.size.height;
+			} else {
+				w.top = Ti.Platform.displayCaps.platformHeight - win.size.height - 20;
 			}
+		}
+		
+		Ti.Gesture.addEventListener('orientationchange', gestureHandler);
+		Ti.App.addEventListener('nav_back', nav_back_handler);
+		w.addEventListener('close',function(e){
+			Ti.Gesture.removeEventListener('orientationchange', gestureHandler);
+			Ti.App.removeEventListener('nav_back', nav_back_handler);
 		});
 	
 		w.open(a);
@@ -327,9 +342,6 @@ function win_standalone(_args) {
 		top:310
 	});
 	
-	Ti.include("/etc/version.js");
-	var isIOS7 = isiOS7Plus();
-
 	b7.addEventListener('click', function()
 	{
 		var label = Titanium.UI.createButton({
@@ -503,6 +515,10 @@ function win_standalone(_args) {
 		});
 	
 		win.setToolbar([flexSpace,b8,flexSpace,b9,flexSpace],{translucent:true});
+		
+		win.addEventListener('close',function(e){
+			Ti.App.fireEvent('nav_back',{});
+		});
 	}
 	else
 	{
