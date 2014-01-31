@@ -43,6 +43,82 @@ function tizenBluetooth(title) {
 			top: 220,
 			enabled: btAdapter.powered,
 			title: 'Search for nearby bluetooth devices'
+		}),
+		newAdapterNameText = Ti.UI.createTextField({
+			top: '35%',
+			width: '85%'
+		}),
+		newAdapterNemeDialog = Ti.UI.createWindow({
+			modal: true,
+			backgroundColor: '#ffffff',
+			title: 'Enter new adapter name',
+			height: 150
+		}),
+		cancelButton = Ti.UI.createButton({
+			bottom: 10,
+			right: 30,
+			title: 'Cancel'
+		}),
+		setNewNameButton = Ti.UI.createButton({
+			title: 'Set new name',
+			bottom: 10,
+			left: 30,
+		}),
+		knownAdapterlist = Titanium.UI.createTableView({
+			height: 350,
+			data: []
+		}),
+		knownAdapterListDialog = Ti.UI.createWindow({
+			height: 500,
+			bottom: 0,
+			modal: true,
+			backgroundColor: '#ffffff',
+			title: 'List of known devices \n click on adapter to unbound',
+		}),
+		knownAdapterListOkButton = Ti.UI.createButton({
+			title: 'OK',
+			bottom: 10
+		});
+		
+		knownAdapterListDialog.add(knownAdapterListOkButton);
+		knownAdapterListDialog.add(knownAdapterlist);
+
+		knownAdapterListOkButton.addEventListener('click', function() {
+			knownAdapterListDialog.close();
+		});
+		knownAdapterlist.addEventListener('click', onTableViewItemClick);
+
+		cancelButton.addEventListener('click', function() {
+			newAdapterNemeDialog.close();
+		});
+
+		newAdapterNemeDialog.add(newAdapterNameText);
+		newAdapterNemeDialog.add(setNewNameButton);
+		newAdapterNemeDialog.add(cancelButton);
+
+		// set focus to editBox to show keyboard.
+		newAdapterNameText.addEventListener('postlayout', function() {
+			newAdapterNameText.focus();
+		});
+
+		setNewNameButton.addEventListener('click', function(e) {
+			if (btAdapter.name != newAdapterNameText.value) {
+				// initiate change name
+				btAdapter.setName(newAdapterNameText.value,
+					function(response) {
+						if (response.success) {
+							setInfoLabelText('Adapter name changed to ' + btAdapter.name);
+							adapterInfoLabel.text = formatAdapterInfoLabelText();
+						} else {
+							setInfoLabelText('Failed to change name: ' + response.error);
+							adapterInfoLabel.text = formatAdapterInfoLabelText();
+						}
+					}
+				);
+			}
+			// blurring the text box helps to hide the onscreen keyboard  
+			newAdapterNameText.blur();
+			newAdapterNemeDialog.close();
 		});
 
 	// Enable/disable BT adapter.
@@ -70,40 +146,7 @@ function tizenBluetooth(title) {
 
 	// Asks user (via input box) for a new name for the Bluetooth adapter.
 	setNameButton.addEventListener('click', function(e) {
-		var newAdapterNameText = Ti.UI.createTextField({
-				width: Ti.UI.FILL
-			}),
-			dialog = Ti.UI.createOptionDialog({
-				cancel: 0,
-				destructive: 1,
-				title: 'Enter new adapter name',
-				tizenView: newAdapterNameText,
-				options: ['Cancel', 'Set new name']
-			});
-
-		// set focus to editBox to show keyboard.
-		newAdapterNameText.addEventListener('postlayout', function() {
-			newAdapterNameText.focus()
-		});
-
-		dialog.addEventListener('click', function(e) {
-			if ((e.index == 1) && (btAdapter.name != newAdapterNameText.value)) {
-				// initiate change name
-				btAdapter.setName(newAdapterNameText.value,
-					function(response) {
-						if (response.success) {
-							setInfoLabelText('Adapter name changed to ' + btAdapter.name);
-							adapterInfoLabel.text = formatAdapterInfoLabelText();
-						} else {
-							setInfoLabelText('Failed to change name: ' + response.error);
-							adapterInfoLabel.text = formatAdapterInfoLabelText();
-						}
-					});
-			}
-			// blurring the text box helps to hide the onscreen keyboard  
-			newAdapterNameText.blur();
-		});
-		dialog.show();
+		newAdapterNemeDialog.open();
 	});
 
 	// UI helper
@@ -126,7 +169,7 @@ function tizenBluetooth(title) {
 			clearTimeout(infoLabel.cleanupTimeoutId);
 		}
 		infoLabel.cleanupTimeoutId = setTimeout(function() {
-			infoLabel.text = ''
+			infoLabel.text = '';
 		}, 7500);
 	}
 
@@ -141,14 +184,25 @@ function tizenBluetooth(title) {
 				isBonded: deviceInfo.isBonded,
 				name: deviceInfo.name
 			}
-		}
-	};
+		};
+	}
 
 	// Changes the "isBonded" status of the clicked item.
 	// If device was bonded, try to undbond it.
 	function onTableViewItemClick(e) {
 		// Each item in tableView has "rowData.deviceInfo" with information about corrsponding bluetooth device 
 		var dInfo = e.rowData.deviceInfo;
+
+		function onBondingSuccessCallback(device) {
+			setInfoLabelText('A bonding is created ? name: ' + device.name);
+			var di = deviceInfoToTableViewItem(device);
+			e.rowData.deviceInfo = di.deviceInfo;
+			e.row.title = di.title;
+		}
+
+		function onBondingErrorCallback(e) {
+			setInfoLabelText('Cannot create a bonding, reason: ' + e);
+		}
 
 		if (dInfo && dInfo.address) {
 			if (dInfo.isBonded) {
@@ -157,27 +211,16 @@ function tizenBluetooth(title) {
 				dInfo.isBonded = false;
 				e.row.title = formatTableViewItemTitle(dInfo);
 			} else {
-				function onBondingSuccessCallback(device) {
-					setInfoLabelText('A bonding is created ? name: ' + device.name);
-					di = deviceInfoToTableViewItem(device);
-					e.rowData.deviceInfo = di.deviceInfo;
-					e.row.title = di.title;
-				}
-
-				function onBondingErrorCallback(e) {
-					setInfoLabelText('Cannot create a bonding, reason: ' + e);
-				}
-
 				btAdapter.createBonding(dInfo.address, function(response) {
 						if (response.success) {
 							onBondingSuccessCallback(response.device);
 						} else {
-							onBondingErrorCallback(response.error)
+							onBondingErrorCallback(response.error);
 						}
 					});
 			}
 		}
-	};
+	}
 
 	// Show in a tableView all "known" BlueTooth devices (all bonded devices).
 	getKnownDevicesButton.addEventListener('click', function(e) {
@@ -188,20 +231,8 @@ function tizenBluetooth(title) {
 					data.push(deviceInfoToTableViewItem(response.devices[i]));
 				}
 
-				// we are using OptionDialog with custom "tizenView" as modal popup window.
-				var knownAdapterlist = Titanium.UI.createTableView({
-						height: 350,
-						data: data
-					}),
-					dialog = Ti.UI.createOptionDialog({
-						cancel: 0,
-						title: 'List of known devices \n click on adapter to unbond',
-						tizenView: knownAdapterlist,
-						options: ['OK']
-					});
-				knownAdapterlist.addEventListener('click', onTableViewItemClick);
-
-				dialog.show();
+				knownAdapterlist.setData(data);
+				knownAdapterListDialog.open();
 			} else {
 				setInfoLabelText('Failed to get known devices: ' + e.message + '(' + e.name + ')');
 			}
@@ -212,36 +243,46 @@ function tizenBluetooth(title) {
 	// Results are shown in tableView.
 	searchButton.addEventListener('click', function(e) {
 		var itemsList = {},
-			tizenView = Titanium.UI.createView({
-				width: Ti.UI.FILL,
-				height: 400
-			}),
-			visibleDevices = Titanium.UI.createTableView({
-				width: Ti.UI.FILL,
-				height: 350,
-				top: 50,
-				data: []
-			}),
-			stopSearchButton = Titanium.UI.createButton({
-				height: 50,
-				top: 0,
-				title: 'Stop searhing BT devices.'
-			});
-
-		tizenView.add(stopSearchButton);
-		tizenView.add(visibleDevices);
-
-		// we are using OptionDialog with custom "tizenView" as modal popup window.
-		var dialog = Ti.UI.createOptionDialog({
-			cancel: 1,
+		searchView = Titanium.UI.createView({
+			width: Ti.UI.FILL,
+			height: 400
+		}),
+		visibleDevices = Titanium.UI.createTableView({
+			width: Ti.UI.FILL,
+			height: 350,
+			top: 50,
+			data: []
+		}),
+		stopSearchButton = Titanium.UI.createButton({
+			height: 50,
+			top: 0,
+			title: 'Stop searhing BT devices.'
+		}),
+		searchDialog = Ti.UI.createWindow({
+			modal: true,
+			height: 450,
+			bottom: 0,
+			backgroundColor: '#ffffff',
 			title: 'List of visible devices',
-			tizenView: tizenView,
-			options: ['Close']
+		}),
+		searchCloseButton = Ti.UI.createButton({
+			title: 'Close',
+			bottom: 10
+		});
+
+		searchView.add(stopSearchButton);
+		searchView.add(visibleDevices);
+
+		searchDialog.add(searchCloseButton);
+		searchDialog.add(searchView);
+
+		searchCloseButton.addEventListener('click', function() {
+			searchDialog.close();
 		});
 
 		// we adding click handler to table view when device searching process is finished.
 		function setTableViewClickHandler() {
-			dialog.title = 'List of visible devices \n click on adapter to bond it';
+			searchDialog.title = 'List of visible devices \n click on adapter to bond it';
 			// now we can hide button as device searching is finished. 
 			stopSearchButton.hide();
 			visibleDevices.top = 0;
@@ -265,13 +306,13 @@ function tizenBluetooth(title) {
 		// recreates all items in tableView from itemsList as a source
 		function updateList() {
 			var newData = [];
-			for (deviceName in itemsList) {
+			for (var deviceName in itemsList) {
 				newData.push(deviceInfoToTableViewItem(itemsList[deviceName]));
-			};
+			}
 			visibleDevices.setData(newData);
-		};
+		}
 
-		dialog.show();
+		searchDialog.open();
 
 		// object with callbacks for startDiscovery() method
 		btAdapter.removeEventListener('discoverystarted');
@@ -288,7 +329,7 @@ function tizenBluetooth(title) {
 				name: event.device.name,
 				address: event.device.address,
 				isBonded: event.device.isBonded
-			}
+			};
 			updateList();
 		});
 
@@ -296,7 +337,7 @@ function tizenBluetooth(title) {
 		btAdapter.addEventListener('devicedisappeared', function(event) {
 			Ti.API.info('devicedisappeared');
 			setInfoLabelText('Device disappeared: ' + event.address);
-			itemsList[event.address] = undefined;
+			delete itemsList[event.address];
 			updateList();
 		});
 
@@ -311,7 +352,7 @@ function tizenBluetooth(title) {
 					name: event.devices[i].name,
 					address: event.devices[i].address,
 					isBonded: event.devices[i].isBonded
-				}
+				};
 			}
 			updateList();
 		});
@@ -332,6 +373,6 @@ function tizenBluetooth(title) {
 	self.add(searchButton);
 
 	return win;
-};
+}
 
 module.exports = tizenBluetooth;

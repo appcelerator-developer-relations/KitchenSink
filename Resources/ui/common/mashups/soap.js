@@ -30,7 +30,7 @@ function soap(_args) {
 	        var results = xmlDoc.documentElement.getElementsByTagName('ConversionRateResult');
 	        if (results && results.length>0) {
 	            var result = results.item(0);
-	            label.text = '1 Euro buys you ' + results.item(0).text + ' U.S. Dollars.';
+	            label.text = '1 Euro buys you ' + results.item(0).textContent + ' U.S. Dollars.';
 	        } else {
 	            label.text = 'Oops, could not determine result of SOAP call.';
 	        }

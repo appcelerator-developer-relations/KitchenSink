@@ -101,9 +101,7 @@ function tizen_alarm() {
 			top: 10,
 			left: 20
 		}),
-		dateTimePicker = createPicker({
-			value: new Date()
-		}),
+		dateTimePicker = createPicker(),
 		periodView = Ti.UI.createView({
 			backgroundColor: '#ffffff',
 			borderColor: '#333333',
@@ -158,7 +156,15 @@ function tizen_alarm() {
 		});
 
 		saveButton.addEventListener('click', function(){
-			addAbsoluteAlarm(dateTimePicker.value, slider.value);
+			console.log(dateTimePicker.value);
+			setTimeout(function() {
+				// Tizen browser will execute this button handler before removing focus
+				// from the date-time picker. Since data synchronization in the picker happens
+				// when blurring, this would result in accessing the old value of the picker.
+				// This timeout ensures that first the picker is blurred, and then its data
+				// is used.
+				addAbsoluteAlarm(dateTimePicker.value, slider.value);
+			}, 0)
 			win.close();
 		});
 
@@ -388,11 +394,11 @@ function tizen_alarm() {
 
 		if (alarm.toString() ==  '[object TizenAlarmAlarmAbsolute]') {
 			remaining = alarm.getNextScheduledDate();
-			text1 = remaining.toDateString();
-			text2 = 'Absolute alarm (Period ' + alarm.period + ')';
+			text1 = remaining ? remaining.toDateString() : 'Expired';
+			text2 = 'Absolute alarm (Period ' + (alarm.period ? alarm.period : 0) + ')'; 
 		} else if (alarm.toString() == '[object TizenAlarmAlarmRelative]') {
 			text1 = alarm.delay + ' sec';
-			text2 = 'Relative alarm (Period ' + alarm.period + ')';
+			text2 = 'Relative alarm (Period ' + (alarm.period ? alarm.period : 0) + ')';
 		}
 
 		label2.text = text2;

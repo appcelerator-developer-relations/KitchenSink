@@ -1,5 +1,5 @@
 function tv_row_insert(_args) {
-	var isTizen = Titanium.Platform.name === 'tizen',
+	var isTizen = Titanium.Platform.osname === 'tizen',
 		win = Titanium.UI.createWindow({
 			title:_args.title
 		});

@@ -1,6 +1,6 @@
 function tizen_exit_hide_launch(_args) {
 	var win = Ti.UI.createWindow(),
-		memoAppId = 'org.tizen.memo',
+		clockAppId = 'org.tizen.clock', // memo app is N/A in Tizen 2.1
 		butttonHeightOffset = 10, 
 		butttonHeight = 40,
 		butttonWidth = 200,
@@ -46,7 +46,7 @@ function tizen_exit_hide_launch(_args) {
 
 	// Create button for Launch
 	var buttonLaunch = Titanium.UI.createButton({
-		title: 'Launch Text Editor',
+		title: 'Launch Clock',
 		height: butttonHeight,
 		width: butttonWidth,
 		top: 3 * butttonHeightOffset + 2 * butttonHeight
@@ -55,9 +55,13 @@ function tizen_exit_hide_launch(_args) {
 	// Call tizen.application.exit when button has been pressed
 	buttonLaunch.addEventListener('click', function() {
 		try {
-			Tizen.Apps.launch(memoAppId);
+			Tizen.Apps.launch(clockAppId, function(e) { 
+				if(e.success != true) {
+					alert(e.error); 
+				}
+			})
 		} catch (e) {
-			helper.showErrorDialog(e, 'Could not Launch Calculator');
+			alert(e.message);
 		}
 	});
 	win.add(buttonLaunch);

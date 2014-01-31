@@ -19,7 +19,7 @@ function tizen_appscontext(_args) {
 			for (; i < contextsCount; i++) {
 				data.push({
 					// AlertDialog title
-					title: contexts[i].appId + '\n<b>' + contexts[i].id + '</b>',
+					title: contexts[i].appId + ' (' + contexts[i].id + ')\n<small>' + Tizen.Apps.getAppSharedURI(contexts[i].appId) + '</small>',
 					app_id: contexts[i].appId,
 					id: contexts[i].id
 				});
