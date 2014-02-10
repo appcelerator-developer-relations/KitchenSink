@@ -51,10 +51,15 @@ function views(_args) {
 		}
 		data.push({title:'Hi-Res Image remote', wintitle:"Remote dog", hasChild:true, test:'ui/handheld/ios/baseui/hi_res_image_remote'});
 	}
-	
+
+	if (Titanium.Platform.osname === 'tizen') {
+		data.push({title: 'SMS Dialog', hasChild: true, test: 'ui/common/baseui/sms_dialog'});
+	}
+
 	// create table view
 	for (var i = 0; i < data.length; i++ ) {
 		var d = data[i];
+
 		if (i == 2) {
 			d.color='#00cc00'
 		}

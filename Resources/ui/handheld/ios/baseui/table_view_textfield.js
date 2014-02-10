@@ -11,7 +11,9 @@ function tv_textfield(_args) {
 		{
 			tf1 = Titanium.UI.createTextArea({
 				color:'#336699',
-				width:250
+				top:10,
+				left:10,
+				right:10,
 			});
 	
 		}
@@ -22,7 +24,7 @@ function tv_textfield(_args) {
 				height:35,
 				top:10,
 				left:10,
-				width:250,
+				right:10,
 				hintText:'hint',
 				borderStyle:Titanium.UI.INPUT_BORDERSTYLE_NONE
 			});

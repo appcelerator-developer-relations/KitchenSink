@@ -1,4 +1,4 @@
-function cam_popover() {
+function cam_popover(_args) {
 	var win = Titanium.UI.createWindow({
 		title:_args.title
 	});

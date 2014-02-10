@@ -199,6 +199,17 @@ function switch_control(_args) {
 		win.add(checkBox);
 		win.add(titleSwitch);
 	}
+
+	if (Titanium.Platform.osname == 'tizen') {
+		var titleSwitch = Titanium.UI.createSwitch({
+			titleOff:"LO",
+			titleOn:"HI",
+			value:false,
+			top:240
+		});
+
+		win.add(titleSwitch);
+	}
 	
 	return win;
 }

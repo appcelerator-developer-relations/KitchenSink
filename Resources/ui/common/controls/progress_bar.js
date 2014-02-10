@@ -46,7 +46,7 @@ function progressbar(_args) {
 			max : 10,
 			value : 0,
 			height : 70,
-			color : '#888',
+			color : 'black',
 			message : 'Downloading 0 of 10',
 			font : {
 				fontSize : 14,
@@ -72,7 +72,7 @@ function progressbar(_args) {
 				max : 10,
 				value : 0,
 				height : 70,
-				color : '#888',
+				color : 'black',
 				message : 'Downloading 0 of 10',
 				font : {
 					fontSize : 14,
@@ -90,7 +90,7 @@ function progressbar(_args) {
 				min : 0,
 				max : 10,
 				value : 0,
-				color : '#fff',
+				color : 'black',
 				message : 'Downloading 0 of 10',
 				font : {
 					fontSize : 14,
@@ -107,7 +107,7 @@ function progressbar(_args) {
 				min : 0,
 				max : 10,
 				value : 0,
-				color : '#fff',
+				color : 'black',
 				message : 'Downloading 0 of 10',
 				font : {
 					fontSize : 14,

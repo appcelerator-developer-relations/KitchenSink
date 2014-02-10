@@ -81,7 +81,6 @@ function navgroup(_args) {
 	});
 	
 	modal.add(nav);
-	modal.open({modal:true});
 	return win;
 };
 
