@@ -82,6 +82,7 @@ function actionbar_demo(_args) {
 	var iconSet = false;
 	b3.addEventListener('click',function(){
 		if (theActionBar != undefined) {
+			if (Ti.version >= "3.3.0" || Ti.Platform.Android.API_LEVEL > 13) {
 				if (iconSet == false) {
 					theActionBar.setIcon('images/camera.png');	
 				}
@@ -89,6 +90,9 @@ function actionbar_demo(_args) {
 					theActionBar.setIcon('appicon.png');
 				}
 				iconSet = !iconSet;
+			} else {
+				alert('FEATURE REQUIRES API LEVEL >= 14 or SDK 3.3.0+');
+			}
 		}
 		else {
 			alert('NO ACTION BAR');

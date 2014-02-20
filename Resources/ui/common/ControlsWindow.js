@@ -17,8 +17,9 @@ function ControlsWindow(title) {
 	];
 	
 	if (Titanium.Platform.name == 'android') {
-		data.push({title:'Action Bar', hasChild:true, test:'ui/handheld/android/controls/actionbar'});
-		
+		if (Ti.version >= "3.3.0" || Ti.Platform.Android.API_LEVEL > 10) {
+			data.push({title:'Action Bar', hasChild:true, test:'ui/handheld/android/controls/actionbar'});
+		}
 	}
 
 	if (Ti.Platform.osname !== 'mobileweb') {
