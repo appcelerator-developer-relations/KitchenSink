@@ -10,7 +10,7 @@ function views(_args) {
 	var data = [
 		{title:'Events Propagation', hasChild:true, test:'ui/common/baseui/view_event_propagation'},
 		{title:'Events Interaction', hasChild:true, test:'ui/common/baseui/view_event_interaction'},
-		{title:'List View (NEW)', hasChild:true, test:'ui/common/baseui/list_views'},
+		{title:'List View', hasChild:true, test:'ui/common/baseui/list_views'},
 		{title:'Image Views', hasChild:true, test:'ui/common/baseui/image_views'},
 		{title:'Scroll Views', hasChild:true, test:'ui/common/baseui/scroll_views'},
 		{title:'Table Views', hasChild:true, test:'ui/common/baseui/table_views'},
@@ -27,6 +27,9 @@ function views(_args) {
 	
 	if (Titanium.Platform.name == 'iPhone OS')
 	{
+		if (Ti.version >= '3.3.0') {
+			data.push({title:'Shadows & Clipping (NEW)', hasChild:true, test:'ui/handheld/ios/baseui/view_shadows'});
+		}
 		// Android team, implement the following then move this entry above
 		data.push({title:'View Gestures', hasChild:true, test:'ui/handheld/ios/baseui/view_gestures'});
 		//
@@ -60,8 +63,8 @@ function views(_args) {
 	for (var i = 0; i < data.length; i++ ) {
 		var d = data[i];
 
-		if (i == 2) {
-			d.color='#00cc00'
+		if ( (Ti.version >= '3.3.0') && (i == 15)) {
+			d.color='#00cc00';
 		}
 		// On Android, if touchEnabled is not set explicitly, its value is undefined.
 		else if (d.touchEnabled !== false) {
