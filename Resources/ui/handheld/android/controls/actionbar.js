@@ -13,19 +13,19 @@ function actionbar_demo(_args) {
 			font:{fontSize:'20dp',fontWeight:'bold'}
 		});
 		return title;
-	}
+	};
 	
 	var getButtonView = function(theTitle){
 		var btn = Ti.UI.createButton({
 			title:theTitle,
 			top:'10dp'
-		})
+		});
 		return btn;
-	}
+	};
 
 	var sv = Ti.UI.createScrollView({
 		layout:'vertical'
-	})
+	});
 	var theActionBar = null;
 	
 	var title1 = getTitleView('APPEARANCE OPTIONS');
@@ -43,7 +43,7 @@ function actionbar_demo(_args) {
 		color:'white',
 		font:{fontSize:'14dp',fontWeight:'normal'},
 		top:'10dp'
-	})
+	});
 	
 	var barHidden = false;
 	b1.addEventListener('click',function(){
@@ -59,7 +59,7 @@ function actionbar_demo(_args) {
 		else {
 			alert('NO ACTION BAR');
 		}
-	})
+	});
 	
 	var barTitle = '';
 	var switched = false;
@@ -77,28 +77,27 @@ function actionbar_demo(_args) {
 		else {
 			alert('NO ACTION BAR');
 		}
-	})
+	});
 	
 	var iconSet = false;
 	b3.addEventListener('click',function(){
 		if (theActionBar != undefined) {
-			if (Ti.Platform.Android.API_LEVEL > 13) {
+			if (Ti.version >= "3.3.0" || Ti.Platform.Android.API_LEVEL > 13) {
 				if (iconSet == false) {
 					theActionBar.setIcon('images/camera.png');	
 				}
 				else {
-					theActionBar.setIcon('appicon.png')
+					theActionBar.setIcon('appicon.png');
 				}
 				iconSet = !iconSet;
-			}
-			else {
-				alert('FEATURE REQUIRES API LEVEL >= 14');
+			} else {
+				alert('FEATURE REQUIRES API LEVEL >= 14 or SDK 3.3.0+');
 			}
 		}
 		else {
 			alert('NO ACTION BAR');
 		}
-	})
+	});
 	
 	var homeEnabled = true;
 	b4.addEventListener('click',function(){
@@ -109,21 +108,21 @@ function actionbar_demo(_args) {
 		else {
 			alert('NO ACTION BAR');
 		}
-	})
+	});
 	
 	var theAction = Ti.Android.SHOW_AS_ACTION_NEVER;
 	b5.addEventListener('click',function(){
 		theAction = Ti.Android.SHOW_AS_ACTION_ALWAYS;
 		win.activity.invalidateOptionsMenu();
-	})
+	});
 	b6.addEventListener('click',function(){
 		theAction = Ti.Android.SHOW_AS_ACTION_IF_ROOM;
 		win.activity.invalidateOptionsMenu();
-	})
+	});
 	b7.addEventListener('click',function(){
 		theAction = Ti.Android.SHOW_AS_ACTION_NEVER;
 		win.activity.invalidateOptionsMenu();
-	})
+	});
 	
 	sv.add(title1);
 	sv.add(b1);
