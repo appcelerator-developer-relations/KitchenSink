@@ -10,7 +10,6 @@ function MashupsWindow(title) {
 	// create table view data object
 	var data = [
 		{title:'Twitter', hasChild:!isMobileWeb, test:'ui/common/mashups/twitter', title_image:'/images/twitter_logo_header.png', touchEnabled:!isMobileWeb, color:isMobileWeb?"#aaa":"#000"},
-		{title:'Foursquare', hasChild:!(isMobileWeb || isTizen), test:'ui/common/mashups/foursquare', title_image:'/images/light-poweredby-foursquare.png', touchEnabled:!(isMobileWeb || isTizen), color:isMobileWeb?"#aaa":"#000"},
 		{title:'Facebook', hasChild:!isTizen, test:'ui/common/mashups/facebook_test', touchEnabled: !isTizen},
 		//{title:'Dojo Mobile', hasChild:true, test:'ui/common/mashups/dojomobile'},
 		//{title:'Sencha Touch', hasChild:true, test:'ui/common/mashups/senchatouch'},
