@@ -3,10 +3,13 @@
 	//  the current window or the current tab group.  These examples show you different ways
 	//  to open windows outside of tab groups.
 	//
-function win_standalone(_args) {	
-	var win = Titanium.UI.createWindow({
-		title:_args.title
-	});
+function win_standalone(_args) {
+	var isMobileWeb = Ti.Platform.osname === 'mobileweb',
+		isTizen = Ti.Platform.osname === 'tizen',
+		isIOS = (Ti.Platform.osname == 'iphone' || Ti.Platform.osname == 'ipad');
+		win = Titanium.UI.createWindow({
+			title:_args.title
+		});
 	
 	win.orientationModes = [
 		Titanium.UI.PORTRAIT,
@@ -18,6 +21,8 @@ function win_standalone(_args) {
 		Ti.API.info('FOCUSED EVENT RECEIVED');
 	});
 
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
 	
 	//
 	//  OPEN WINDOW OUTSIDE OF TAB GROUP
@@ -51,84 +56,122 @@ function win_standalone(_args) {
 		w.open();
 	});
 
-	if (Ti.Platform.osname !== 'mobileweb') {	
+	if (!isMobileWeb) {
 		//
 		//  OPEN (ANIMATE FROM BOTTOM RIGHT)
 		//
 		var b2 = Titanium.UI.createButton({
-			title:'Open (Nav Bar Covered)',
-			width:200,
-			height:40,
-			top:60
+			title: 'Open (Nav Bar Covered)',
+			width: 200,
+			height: 40,
+			top: 60
 		});
-		
-		b2.addEventListener('click', function()
-		{
-			var options = {
-					height:0,
-					width:0,
-					backgroundColor:'#336699',
-					bottom:0,
-					right:0
-				};
-			if (Ti.Platform.name == 'android') {
-				options.navBarHidden = true;
-			}
-			var w = Titanium.UI.createWindow(options);
-			var a = Titanium.UI.createAnimation();
-		
-			// NOTE: good example of making dynamic platform height / width values
-			// iPad vs. iPhone vs Android etc.
-			a.height = Titanium.Platform.displayCaps.platformHeight;
-			a.width = Titanium.Platform.displayCaps.platformWidth;
-			a.duration = 300;
-		
-			// create a button to close window
-			var b = Titanium.UI.createButton({
-				title:'Close',
-				height:30,
-				width:150
-			});
-			w.add(b);
-			b.addEventListener('click', function()
-			{
-				a.height = 0;
-				a.width = 0;
-				w.close(a);
-			});
-		
-			w.open(a);
-		});
-		
 		//
 		//  TRADITIONAL MODAL (FROM 0.8.x)
 		//
 		var b3 = Titanium.UI.createButton({
-			title:'Traditional Modal',
-			width:200,
-			height:40,
-			top:110
+			title: 'Traditional Modal',
+			width: 200,
+			height: 40,
+			top: 110
 		});
-		
-		b3.addEventListener('click', function()
-		{
+		b3.addEventListener('click', function() {
 			var Win = require('ui/common/phone/vibrate'),
-				w = new Win({title: 'Modal Window'});
-				w.barColor = 'black';
-	
-			var b = Titanium.UI.createButton({
-				title:'Close',
-				style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN
-			});
-			w.setLeftNavButton(b);
-			b.addEventListener('click',function()
-			{
+				w = new Win({title: 'Modal Window'}),
+				b = Titanium.UI.createButton( {title: 'Close'} );
+
+			isTizen || (b.style = Titanium.UI.iPhone.SystemButtonStyle.PLAIN);
+			w.title = 'Modal Window';
+			w.barColor = 'black';
+			w.add(b);
+			b.addEventListener('click',function() {
 				w.close();
 			});
-			w.open({modal:true});
+			w.open({ modal: true });
 		});
+		if (isTizen) {
+			b2.addEventListener('click', function()
+			{
+				var t = Titanium.UI.create2DMatrix().scale(0),
+					options = {
+						height: Titanium.Platform.displayCaps.platformHeight,
+						width: Titanium.Platform.displayCaps.platformWidth,
+						backgroundColor: '#336699',
+						transform: t
+					},
+					t1 = Titanium.UI.create2DMatrix().scale(1),
+					w = Titanium.UI.createWindow(options),
+					a = Titanium.UI.createAnimation();
+			
+				a.transform = t1;
+				a.duration = 300;
+			
+				// create a button to close window
+				var b = Titanium.UI.createButton({
+					title: 'Close',
+					height: 30,
+					width: 150
+				});
+				w.add(b);
+				b.addEventListener('click', function()
+				{
+					a.transform = t;
+					a.addEventListener('complete', function(){
+						w.close();
+					});
+					w.animate(a);
+				});
+
+				w.addEventListener('postlayout', function(){
+					w.animate(a);
+				});
+
+				w.open();
+			});
+		} else {
+			b2.addEventListener('click', function() {
+				var options = {
+					backgroundColor: '#336699',
+					bottom: 0,
+					right: 0
+				};
+				if (Ti.Platform.name === 'android') {
+					options.navBarHidden = true;
+				} else {
+					options.height = 0;
+					options.width = 0;
+				}
+				var w = Titanium.UI.createWindow(options);
+				var a = Titanium.UI.createAnimation();
+
+				// NOTE: good example of making dynamic platform height / width values
+				// iPad vs. iPhone vs Android etc.
+				if (isIOS) {
+					a.height = Ti.UI.FILL;
+					a.width = Ti.UI.FILL;
+				} else {
+					a.height = Titanium.Platform.displayCaps.platformHeight;
+					a.width = Titanium.Platform.displayCaps.platformWidth;
+				}
+				a.duration = 300;
+
+				// create a button to close window
+				var b = Titanium.UI.createButton({
+					title: 'Close',
+					height: 30,
+					width: 150
+				});
+				w.add(b);
+				b.addEventListener('click', function() {
+					a.height = 0;
+					a.width = 0;
+					w.close(a);
+				});
+
+				w.open(a);
+			});
+		}
 	}
-	
 	//
 	//  OPEN (WITH ANIMATED WOBBLE)
 	//
@@ -210,7 +253,12 @@ function win_standalone(_args) {
 	
 		// create window open animation
 		var a = Titanium.UI.createAnimation();
-		a.top = 32;
+		
+		if (isIOS7) {
+			a.top = Ti.Platform.displayCaps.platformHeight - win.size.height;
+		} else {
+			a.top = Ti.Platform.displayCaps.platformHeight - win.size.height - 20;
+		}
 		a.duration = 300;
 	
 		// create a button to close window
@@ -226,17 +274,25 @@ function win_standalone(_args) {
 			w.close(a);
 		});
 		
-		Ti.App.addEventListener('nav_back', function() {
-			w.close();
-		});
 		
-		Ti.Gesture.addEventListener('orientationchange', function(e) {
-			if (e.orientation == Ti.UI.LANDSCAPE_LEFT || e.orientation == Ti.UI.LANDSCAPE_RIGHT) {
-				w.top = 32;
-			} 
-			else if (e.orientation == Ti.UI.PORTRAIT) {
-				w.top = 37;
+		
+		function nav_back_handler(e){
+			w.close();
+		}
+		
+		function gestureHandler(e) {
+			if (isIOS7) {
+				w.top = Ti.Platform.displayCaps.platformHeight - win.size.height;
+			} else {
+				w.top = Ti.Platform.displayCaps.platformHeight - win.size.height - 20;
 			}
+		}
+		
+		Ti.Gesture.addEventListener('orientationchange', gestureHandler);
+		Ti.App.addEventListener('nav_back', nav_back_handler);
+		w.addEventListener('close',function(e){
+			Ti.Gesture.removeEventListener('orientationchange', gestureHandler);
+			Ti.App.removeEventListener('nav_back', nav_back_handler);
 		});
 	
 		w.open(a);
@@ -315,11 +371,17 @@ function win_standalone(_args) {
 			Ti.API.info('IN HERE');
 			w.close();
 		});
-	
+		
+		if(isIOS7) {
+			theTop = 20;
+		} else {
+			theTop = 0;
+		}
+		
 		// create and add toolbar
 		var toolbar = Titanium.UI.iOS.createToolbar({
 			items:[hello,flexSpace,label, flexSpace,close],
-			top:0,
+			top:theTop,
 			borderTop:false,
 			borderBottom:true
 		});
@@ -334,7 +396,11 @@ function win_standalone(_args) {
 	
 		move.addEventListener('click', function()
 		{
-			toolbar.animate({top:20,duration:500});
+			if(isIOS7) {
+				toolbar.animate({top:40,duration:500});
+			} else {
+				toolbar.animate({top:20,duration:500});
+			}
 		});
 	
 		w.open();
@@ -389,7 +455,7 @@ function win_standalone(_args) {
 	
 	
 	win.add(b1);
-	if (Ti.Platform.osname !== 'mobileweb') {
+	if (!isMobileWeb) {
 		win.add(b2);
 		win.add(b3);
 	}
@@ -449,6 +515,10 @@ function win_standalone(_args) {
 		});
 	
 		win.setToolbar([flexSpace,b8,flexSpace,b9,flexSpace],{translucent:true});
+		
+		win.addEventListener('close',function(e){
+			Ti.App.fireEvent('nav_back',{});
+		});
 	}
 	else
 	{

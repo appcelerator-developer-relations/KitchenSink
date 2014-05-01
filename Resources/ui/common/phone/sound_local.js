@@ -1,5 +1,9 @@
 function sound_local(_args) {
-	if (Titanium.Media.audioPlaying) {
+	var isTizen = Ti.Platform.osname === 'tizen',
+		isAndroid = Ti.Platform.name === 'android';
+
+	// audioSessionMode unsupported in Tizen
+	if (!isTizen && Titanium.Media.audioPlaying) {
 		Titanium.Media.audioSessionMode = Titanium.Media.AUDIO_SESSION_MODE_AMBIENT;
 	}
 	
@@ -168,16 +172,20 @@ function sound_local(_args) {
 	//
 	//  PROGRESS BAR TO TRACK SOUND DURATION
 	//
-	var flexSpace = Titanium.UI.createButton({
-		systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-	});
+	var flexSpace = Titanium.UI.createButton();
+	isTizen || (flexSpace.systemButton = Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE); 
+	
 	var pb = Titanium.UI.createProgressBar({
 		min:0,
 		value:0,
 		width:200
 	});
 	
-	if (Ti.Platform.name != 'android') {
+	if(isTizen) {
+		// setToolbar is not supported on Tizen; simply add the progress bar to the window
+		pb.top = 210;
+		win.add(pb);
+	} else if (!isAndroid) {
 		win.setToolbar([flexSpace,pb,flexSpace]);
 	}
 	pb.show();
@@ -201,6 +209,7 @@ function sound_local(_args) {
 	win.addEventListener('close', function()
 	{
 		clearInterval(i);
+		isTizen && sound.release();   // stop playing the audio and release the resources
 	});
 	return win;
 };

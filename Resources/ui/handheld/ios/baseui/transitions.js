@@ -71,17 +71,19 @@ function transition(_args) {
 	
 	b2.addEventListener('click', function()
 	{
-		// create close button for our window
-		var b = Ti.UI.createButton({title:'Close Me',width:200,height:40});
-		b.addEventListener('click',function()
-		{
-			win.animate({view:view,transition:Ti.UI.iPhone.AnimationStyle.CURL_UP});
-		});
-		view2.add(b);
-		
 		// transition to view
 		win.animate({view:view2, transition:Ti.UI.iPhone.AnimationStyle.CURL_DOWN});
 	});
+	
+	// create close button for our window
+	var b = Ti.UI.createButton({title:'Close Me',width:200,height:40});
+	b.addEventListener('click',function()
+	{
+		win.animate({view:view,transition:Ti.UI.iPhone.AnimationStyle.CURL_UP});
+	});
+	view2.add(b);
+		
+
 	// 
 	//
 	// SUB VIEWS
@@ -127,8 +129,8 @@ function transition(_args) {
 	
 	view.add(imageView);
 	
-	imageView.add(image3);
-	imageView.add(image2);
+	//imageView.add(image3);
+	//imageView.add(image2);
 	imageView.add(image1);
 	
 	//
@@ -175,8 +177,8 @@ function transition(_args) {
 		controlView.animate({view:bb1,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	});
 	
-	controlView.add(bb3);
-	controlView.add(bb2);
+	//controlView.add(bb3);
+	//controlView.add(bb2);
 	controlView.add(bb1);
 	
 	
@@ -243,8 +245,8 @@ function transition(_args) {
 		toolbarView.animate({view:toolbar,transition:Ti.UI.iPhone.AnimationStyle.CURL_DOWN});
 	});
 	
-	toolbarView.add(toolbar3);
-	toolbarView.add(toolbar2);
+	//toolbarView.add(toolbar3);
+	//toolbarView.add(toolbar2);
 	toolbarView.add(toolbar);
 	
 	
@@ -293,7 +295,7 @@ function transition(_args) {
 	b2.add(bViewLabel);
 	
 	
-	funView.add(b2);
+	//funView.add(b2);
 	funView.add(b);
 	return win;
 };

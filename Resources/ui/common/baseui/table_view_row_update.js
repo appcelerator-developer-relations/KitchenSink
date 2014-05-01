@@ -21,7 +21,8 @@ function tv_row_update(_args) {
 		{title:'Row15'}
 	];
 	
-	var isMW = (Ti.Platform.osname === 'mobileweb');
+	var isMW = Ti.Platform.osname === 'mobileweb',
+		isTizen = Ti.Platform.osname === 'tizen';
 	
 	//
 	// Create table view
@@ -37,7 +38,7 @@ function tv_row_update(_args) {
 				break;
 			case 1:
 				data = {title:'New Row2',name:'row2'};
-				if (isMW) {
+				if (isMW || isTizen) {
 					tableView.updateRow(1,data);
 				} else {
 					var row = tableView.getIndexByName('row2');
@@ -46,7 +47,7 @@ function tv_row_update(_args) {
 				break;
 			case 2:
 				data = {title:'New Row3'};
-				if (isMW) {
+				if (isMW || isTizen) {
 					tableView.updateRow(2,data);
 				} else {
 					tableView.updateRow(2,data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.LEFT});
@@ -54,7 +55,7 @@ function tv_row_update(_args) {
 				break;
 			case 3:
 				data = {title:'New Row4'};
-				if (isMW) {
+				if (isMW || isTizen) {
 					tableView.updateRow(3,data);
 				} else {
 					tableView.updateRow(3,data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.DOWN});
@@ -62,7 +63,7 @@ function tv_row_update(_args) {
 				break;
 			case 4:
 				data = {title:'I am a title'};
-				if (isMW) {
+				if (isMW || isTizen) {
 					tableView.updateRow(4,data);
 				} else {
 					tableView.updateRow(4,data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.DOWN});

@@ -53,7 +53,7 @@ Popover.init = function()
 			height:300
 		});
 
-		popover.add(searchBar)
+		popover.add(searchBar);
 		popover.add(tableView);
 
 		popover.show({
@@ -93,7 +93,7 @@ Popover.init = function()
 		picker.add(data);
 		picker.selectionIndicator = true;
 
-		popover.add(picker)
+		popover.add(picker);
 		// TEST: #1282
 		picker.setSelectedRow(0,1,true);
 		popover.show({
@@ -163,11 +163,11 @@ Popover.init = function()
 			pagingControlHeight:30,
 		});
 
-		popover.add(scrollView)
+		popover.add(scrollView);
 
 		popover.show({
 			view:b3,
 		}); 
 
 	});	
-}
+};

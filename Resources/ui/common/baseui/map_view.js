@@ -3,32 +3,45 @@ function mapview(_args) {
 		title:_args.title
 	});
 	
-	var isAndroid = false;
-	if (Titanium.Platform.name == 'android') {
-		isAndroid = true;
+	var isAndroid = Titanium.Platform.osname === 'android',
+		isIOS = (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad'),
+		isMW = Ti.Platform.osname === 'mobileweb',
+		isTizen = Ti.Platform.osname === 'tizen';
+		
+	var Map;
+	if (isIOS && !Ti.Map) {
+		try {
+			Map = require('ti.map');
+		} catch(e) {
+			alert("Add the `ti.map` module in the `tiapp.xml` file when running on TiSDK 3.2.0.GA and later.");
+			return win;
+		}
+	} else {
+		Map = Ti.Map;
+		// Forcing the Android build scripts to include Ti.Map
+		Ti.Map.createView;
 	}
-	
-	var isMW = (Ti.Platform.osname === 'mobileweb');
+		
 	//
 	// CREATE ANNOTATIONS
 	//
-	var mountainView = Titanium.Map.createAnnotation({
+	var mountainView = Map.createAnnotation({
 		latitude:37.390749,
 		longitude:-122.081651,
 		title:"Appcelerator Headquarters",
 		subtitle:'Mountain View, CA',
-		pincolor: isAndroid ? "orange" : Titanium.Map.ANNOTATION_RED,
+		pincolor: isAndroid ? "orange" : Map.ANNOTATION_RED,
 		animate:true,
 		leftButton: '/images/appcelerator_small.png',
 		myid:1 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 	});
 	
-	var apple = Titanium.Map.createAnnotation({
+	var apple = Map.createAnnotation({
 		latitude:37.33168900,
 		longitude:-122.03073100,
 		title:"Steve Jobs",
 		subtitle:'Cupertino, CA',
-		pincolor:Titanium.Map.ANNOTATION_GREEN,
+		pincolor:Map.ANNOTATION_GREEN,
 		animate:true,
 		rightButton: '/images/apple_logo.jpg',
 		myid:2 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
@@ -44,16 +57,16 @@ function mapview(_args) {
 			myid:3 // CUSTOM ATTRIBUTE THAT IS PASSED INTO EVENT OBJECTS
 		};
 		
-	if (Ti.Platform.osname !== 'mobileweb') {
+	if ( !(isMW || isTizen) ) {
 		atlantaParams.rightButton = Titanium.UI.iPhone.SystemButton.DISCLOSURE;
 	}
 	
 	if (!isAndroid) {
-		atlantaParams.pincolor = Titanium.Map.ANNOTATION_PURPLE;
+		atlantaParams.pincolor = Map.ANNOTATION_PURPLE;
 	} else {
 		atlantaParams.pinImage = "/images/map-pin.png";
 	}
-	var atlanta = Titanium.Map.createAnnotation(atlantaParams);
+	var atlanta = Map.createAnnotation(atlantaParams);
 	
 	//
 	// PRE-DEFINED REGIONS
@@ -64,8 +77,8 @@ function mapview(_args) {
 	//
 	// CREATE MAP VIEW
 	//
-	var mapview = Titanium.Map.createView({
-		mapType: Titanium.Map.STANDARD_TYPE,
+	var mapview = Map.createView({
+		mapType: Map.STANDARD_TYPE,
 		region:{latitude:33.74511, longitude:-84.38993, latitudeDelta:0.5, longitudeDelta:0.5},
 		animate:true,
 		regionFit:true,
@@ -76,8 +89,29 @@ function mapview(_args) {
 	if (!isAndroid) {
 		mapview.addAnnotation(atlanta);
 	}
-	mapview.selectAnnotation(atlanta);
+
+	Ti.include("/etc/version.js");
+	var isIOS7 = isiOS7Plus();
+
+	// the "if" is a work around https://jira.appcelerator.org/browse/TIMOB-12448,
+	// to prevent the immediate crash
+	if ( !(isMW || isTizen || isIOS7) ) {
+    	mapview.selectAnnotation(atlanta);
+    }
+	
+	//TIMOB-15042. UI Glitch
 	win.add(mapview);
+	var selected = false;
+	if (isIOS7) {
+		win.addEventListener('focus',function(){
+			if (!selected) {
+				selected = true;
+				setTimeout(function(){
+					mapview.selectAnnotation(atlanta);
+				},500);
+			}
+		})	
+	} 
 	
 	//
 	// NAVBAR BUTTONS
@@ -123,17 +157,17 @@ function mapview(_args) {
 		
 		sat.addEventListener('click',function() {
 			// set map type to satellite
-			mapview.setMapType(Titanium.Map.SATELLITE_TYPE);
+			mapview.setMapType(Map.SATELLITE_TYPE);
 		});
 		
 		std.addEventListener('click',function() {
 			// set map type to standard
-			mapview.setMapType(Titanium.Map.STANDARD_TYPE);
+			mapview.setMapType(Map.STANDARD_TYPE);
 		});
 		
 		hyb.addEventListener('click',function() {
 			// set map type to hybrid
-			mapview.setMapType(Titanium.Map.HYBRID_TYPE);
+			mapview.setMapType(Map.HYBRID_TYPE);
 		});
 		
 		zoomin.addEventListener('click',function() {
@@ -145,7 +179,7 @@ function mapview(_args) {
 		});
 	};
 	
-	if (!isAndroid) {
+	if ( !(isAndroid || isMW || isTizen) ) {
 		removeAll = Titanium.UI.createButton({
 			style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED,
 			title:'Remove All'
@@ -162,7 +196,9 @@ function mapview(_args) {
 			title:'ATL'
 		});
 		// activate annotation
-		mapview.selectAnnotation(mapview.annotations[0].title,true);
+		if (!isIOS7) {
+			mapview.selectAnnotation(mapview.annotations[0].title,true);
+		}
 		
 		// button to change to SV	
 		sv = Titanium.UI.createButton({
@@ -208,7 +244,7 @@ function mapview(_args) {
 		wireClickHandlers();
 		
 		win.setToolbar([flexSpace,std,flexSpace,hyb,flexSpace,sat,flexSpace,atl,flexSpace,sv,flexSpace,zoomin,flexSpace,zoomout,flexSpace]);
-	} else {
+	} else if(isAndroid) {
 		var activity = Ti.Android.currentActivity;
 		activity.onCreateOptionsMenu = function(e) {
 			var menu = e.menu;
@@ -224,7 +260,7 @@ function mapview(_args) {
 			
 			wireClickHandlers();
 		};
-	}
+	} 
 	
 	//
 	// EVENT LISTENERS
@@ -271,7 +307,7 @@ function mapview(_args) {
 			evt.annotation.rightView = Titanium.UI.createView({width:20,height:20,backgroundColor:'red'});
 			evt.annotation.leftView = Titanium.UI.createView({width:20,height:20,backgroundColor:'#336699'});
 			evt.annotation.title = "Atlanta?";
-			evt.annotation.pincolor = Titanium.Map.ANNOTATION_GREEN;
+			evt.annotation.pincolor = Map.ANNOTATION_GREEN;
 			evt.annotation.subtitle = 'Appcelerator used to be near here';
 			evt.annotation.leftButton = 'images/appcelerator_small.png';
 	

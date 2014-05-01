@@ -3,7 +3,20 @@ function mapview2(_args) {
 		title:_args.title
 	});
 	
-	var annotation = Titanium.Map.createAnnotation({
+	var isIOS = (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad');
+	var Map;
+	if (isIOS && !Ti.Map) {
+		try {
+			Map = require('ti.map');
+		} catch(e) {
+			alert("Add the `ti.map` module in the `tiapp.xml` file when running on TiSDK 3.2.0.GA and later.");
+			return win;
+		}
+	} else {
+		Map = Ti.Map;
+	}
+	
+	var annotation = Map.createAnnotation({
 		latitude:42.334537,
 		longitude:-71.170101,
 		title:"Boston College",
@@ -18,8 +31,8 @@ function mapview2(_args) {
 	//
 	// CREATE MAP VIEW
 	//
-	var mapview = Titanium.Map.createView({
-		mapType: Titanium.Map.STANDARD_TYPE,
+	var mapview = Map.createView({
+		mapType: Map.STANDARD_TYPE,
 		region: boston,
 		animate:true,
 		regionFit:true,
@@ -46,12 +59,12 @@ function mapview2(_args) {
 	}
 	
 	// route object
-	var route = {
+	var route = Map.createRoute({
 		name:"boston",
 		points:points,
 		color:"red",
 		width:4
-	};
+	});
 	
 	// add a route
 	mapview.addRoute(route);

@@ -17,17 +17,20 @@ function ControlsWindow(title) {
 	];
 	
 	if (Titanium.Platform.name == 'android') {
-		if (Ti.Platform.Android.API_LEVEL > 10) {
+		if (Ti.version >= "3.3.0" || Ti.Platform.Android.API_LEVEL > 10) {
 			data.push({title:'Action Bar', hasChild:true, test:'ui/handheld/android/controls/actionbar'});
 		}
 	}
 
 	if (Ti.Platform.osname !== 'mobileweb') {
 		data.push({title:'Button States', hasChild:true, test:'ui/common/controls/button_state'});
-		data.push({title:'Search Bar', hasChild:true, test:'ui/common/controls/searchbar'});
 		data.push({title:'Picker', hasChild:true, test:'ui/common/controls/picker'});
 	}
 	
+	if( !(Ti.Platform.osname === 'mobileweb' || Ti.Platform.osname === 'tizen') ) {
+		data.push({title:'Search Bar', hasChild:true, test:'ui/common/controls/searchbar'})
+	}
+
 	// add iphone specific tests
 	if (Titanium.Platform.name == 'iPhone OS') {
 		data.push({title:'Button Bar', hasChild:true, test:'ui/handheld/ios/controls/buttonbar'});

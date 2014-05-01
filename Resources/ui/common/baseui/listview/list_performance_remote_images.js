@@ -14,7 +14,7 @@ function genData (){
 
 function setupTest(win){
 	var myTemplate = {
-		properties: {height:60},
+		properties: {height:60, backgroundColor:'black'},
 		childTemplates: [
 		{
 			type: 'Ti.UI.ImageView',

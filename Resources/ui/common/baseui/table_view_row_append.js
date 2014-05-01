@@ -8,8 +8,6 @@ function tv_row_append(_args) {
 		{title:'Row 2', hasDetail:true},
 		{title:'Append Row with Header'},
 		{title:'Append Row & height=100'}
-	
-	
 	];
 	
 	// create table view
@@ -54,7 +52,11 @@ function tv_row_append(_args) {
 			}
 			else
 			{
-				tableview.appendRow(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.LEFT});
+				if (Ti.Platform.osname !== 'tizen') {
+					tableview.appendRow(data, {animationStyle: Titanium.UI.iPhone.RowAnimationStyle.LEFT});	
+				} else {
+					tableview.appendRow(data);
+				}
 			}
 			newRowCount++;
 		}

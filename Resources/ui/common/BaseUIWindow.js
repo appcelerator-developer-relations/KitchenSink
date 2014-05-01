@@ -27,7 +27,9 @@ function BaseUIWindow(title) {
 		data.push({title:'Window Toolbar', hasChild:true, test:'ui/handheld/ios/baseui/window_toolbar'});
 		data.push({title:'Window Constructor', hasChild:true, test:'ui/handheld/ios/baseui/window_constructor'});
 		data.push({title:'Animation', hasChild:true, test:'ui/handheld/ios/baseui/animation'});
-		data.push({title:'Nav Group', hasChild:true, test:'ui/handheld/ios/baseui/navgroup'});
+		if (Ti.version < '3.2.0') {
+			data.push({title:'Nav Group', hasChild:true, test:'ui/handheld/ios/baseui/navgroup'});
+		}
 	
 		Ti.include("/etc/version.js");
 	
@@ -78,6 +80,10 @@ function BaseUIWindow(title) {
 			{
 				if (Ti.Platform.name == "iPhone OS") {
 					win.hideTabBar();
+					//IOS7 has a weird bug where it will not resize the ViewController correctly when the tabbar is hidden.
+					//TIMOB-14998
+					win.extendEdges = [Ti.UI.EXTEND_EDGE_BOTTOM];
+					win.includeOpaqueBars = true;
 				}
 			}
 			if (Ti.Platform.name==='android' && e.rowData.test.indexOf('window_properties') >= 0) {
@@ -101,7 +107,7 @@ function BaseUIWindow(title) {
 		Ti.API.info('FOCUS RECEIVED IN base_ui');
 		Ti.App.fireEvent('nav_back');
 		
-		if (Ti.Platform.osname !== 'mobileweb') {
+		if (!(Ti.Platform.osname === 'mobileweb' || Ti.Platform.osname === 'tizen')) {
 			Ti.API.info(Ti.dumpCoverage());
 		}
 	});

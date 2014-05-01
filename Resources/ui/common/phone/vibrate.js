@@ -21,7 +21,8 @@ function vibrate(_args) {
 	b1.addEventListener('click', function()
 	{
 		if(Ti.Platform.model != 'Kindle Fire'){
-			Titanium.Media.vibrate();		
+			//vibrate require a parameter
+			Titanium.Media.vibrate([0, 1000]);
 		}
 		
 	});

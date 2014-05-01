@@ -1,21 +1,35 @@
 function Split_View_Nav(){
 
 	SplitViewNav = {};
+	
+	var useNavWindow = (Ti.version >= '3.2.0');
 
 	// WINDOWS
 	SplitViewNav.masterWindow = Ti.UI.createWindow({title:'Master',backgroundColor:'red'});
 	SplitViewNav.detailWindow = Ti.UI.createWindow({title:'Detail',backgroundColor:'#336699'});
+	
+	if (useNavWindow == true) {
+		// MASTER NAV GROUP
+		SplitViewNav.masterNav = Ti.UI.iOS.createNavigationWindow({
+			window:SplitViewNav.masterWindow
+		});
+	
+		// DETAIL NAV GROUP
+		SplitViewNav.detailNav = Ti.UI.iOS.createNavigationWindow({
+			window:SplitViewNav.detailWindow
+		});
+	} else {
+		// MASTER NAV GROUP
+		SplitViewNav.masterNav = Ti.UI.iPhone.createNavigationGroup({
+			window:SplitViewNav.masterWindow
+		});
+	
+		// DETAIL NAV GROUP
+		SplitViewNav.detailNav = Ti.UI.iPhone.createNavigationGroup({
+			window:SplitViewNav.detailWindow
+		});
 
-	// MASTER NAV GROUP
-	SplitViewNav.masterNav = Ti.UI.iPhone.createNavigationGroup({
-		window:SplitViewNav.masterWindow
-	});
-
-	// DETAIL NAV GROUP
-	SplitViewNav.detailNav = Ti.UI.iPhone.createNavigationGroup({
-		window:SplitViewNav.detailWindow
-	});
-
+	}
 	// SPLIT VIEW
 	SplitViewNav.splitView = Titanium.UI.iPad.createSplitWindow({
 		masterView:SplitViewNav.masterNav,
@@ -37,14 +51,18 @@ function Split_View_Nav(){
 			color:'white',
 			textAlign:'center'
 		});
-		w.add(l)
+		w.add(l);
 		w.addEventListener('blur', function() {
 			Titanium.UI.createAlertDialog({
 				title:'Master blur',
 				message:'You blurred the master window!'
 			}).show();
 		});
-		SplitViewNav.masterNav.open(w,{animated:true});
+		if (useNavWindow == true) {
+			SplitViewNav.masterNav.openWindow(w,{animated:true});
+		} else {
+			SplitViewNav.masterNav.open(w,{animated:true});
+		}
 	});
 	SplitViewNav.masterWindow.add(SplitViewNav.masterButton);
 
@@ -91,7 +109,11 @@ function Split_View_Nav(){
 				message:'You blurred the detail window!'
 			}).show();
 		});
-		SplitViewNav.detailNav.open(w,{animated:true});
+		if (useNavWindow == true) {
+			SplitViewNav.detailNav.openWindow(w,{animated:true});
+		} else {
+			SplitViewNav.detailNav.open(w,{animated:true});
+		}
 	});
 	SplitViewNav.detailWindow.add(SplitViewNav.detailButton);
 
@@ -112,7 +134,7 @@ function Split_View_Nav(){
 
 	SplitViewNav.open = function()
 	{
-		Ti.API.info('in open for split view nav')
+		Ti.API.info('in open for split view nav');
 		SplitViewNav.splitView.open();	
 	};
 

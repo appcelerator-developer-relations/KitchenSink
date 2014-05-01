@@ -39,7 +39,7 @@ function main_Test(){
 	// SPLIT VIEW EVENT LISTENER
 	MainTests.splitView.addEventListener('visible',function(e)
 	{
-		Ti.API.info('HERE ' + e.view  + ' button ' + e.button)
+		Ti.API.info('HERE ' + e.view  + ' button ' + e.button);
 		// show master list when in detail mode via left nav button
 		if (e.view == 'detail')
 		{

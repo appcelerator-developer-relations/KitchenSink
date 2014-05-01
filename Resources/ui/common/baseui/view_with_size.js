@@ -35,7 +35,13 @@ function viewsize(_args) {
 	win.add(button);
 	
 	button.addEventListener('click',function() {
-	    view.updateLayout({width:150,height:150});
+		if(Ti.Platform.osname !== 'tizen') {
+	    	view.updateLayout({width:150,height:150});
+	    } else {
+	    	// It is impossible to use "updateLayout",
+			// because there is a bug (https://jira.appcelerator.org/browse/TIMOB-10427)
+	    	view.width = view.height = 150;
+	    }
 	    label.text = "Box should now be 150x150";
 	});
 	return win;
