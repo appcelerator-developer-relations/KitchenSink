@@ -10,10 +10,10 @@
     </deployment-targets>
     <property name="ti.android.useLegacyWindow" type="bool">true</property>
     <property name="ti.ui.defaultunit" type="string">dp</property>
-    <sdk-version>3.2.2.GA</sdk-version>
+    <sdk-version>3.2.3.GA</sdk-version>
     <id>com.appcelerator.kitchensink</id>
     <name>KitchenSink</name>
-    <version>3.2.2</version>
+    <version>3.2.3</version>
     <publisher>appcelerator</publisher>
     <url>http://appcelerator.com</url>
     <description>not specified</description>
