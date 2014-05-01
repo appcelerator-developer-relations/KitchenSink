@@ -1,3 +1,5 @@
+# THIS REPO IS OUT OF DATE. USE https://github.com/appcelerator/KitchenSink INSTEAD
+
 Welcome to your Appcelerator Titanium Mobile Project
 
 This is tabbed application, consisting of multiple stacks of windows associated with tabs in a tab group.  A starting point for tab-based application with multiple top-level windows. Requires Titanium Mobile SDK 2.1.0+.
