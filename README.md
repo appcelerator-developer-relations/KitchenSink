@@ -1,4 +1,4 @@
-# THIS REPO IS OUT OF DATE. USE https://github.com/appcelerator/KitchenSink INSTEAD
+### ⚠️ THIS REPO IS OUT OF DATE. USE https://github.com/appcelerator/kitchensink-v2 INSTEAD
 
 Welcome to your Appcelerator Titanium Mobile Project
 
