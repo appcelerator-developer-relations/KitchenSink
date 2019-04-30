@@ -27,6 +27,7 @@ function slider_basic(_args) {
 		height:'auto',
 		top:30,
 		selectedThumbImage:'/images/slider_thumb.png',
+		thumbImage:'/images/slider_thumb.png',
 		highlightedThumbImage:'/images/chat.png'
 	});
 	basicSlider.addEventListener('change',function(e)
